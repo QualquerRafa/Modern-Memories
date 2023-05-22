@@ -1,0 +1,1407 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://_resources/scene_deck_building/back_button.png" type="Texture" id=1]
+[ext_resource path="res://_resources/scene_duel/top_info_box.png" type="Texture" id=2]
+[ext_resource path="res://_resources/fonts/BankGothic Md BT.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://_scenes/card_info_box.tscn" type="PackedScene" id=4]
+[ext_resource path="res://_scenes/scene_transitioner.tscn" type="PackedScene" id=5]
+[ext_resource path="res://_resources/scene_deck_building/panel_right.png" type="Texture" id=12]
+[ext_resource path="res://_scenes/rarity_card.tscn" type="PackedScene" id=13]
+[ext_resource path="res://_resources/scene_deck_building/panel_left.png" type="Texture" id=14]
+[ext_resource path="res://_resources/scene_deck_building/scroll_base.png" type="Texture" id=15]
+[ext_resource path="res://_resources/scene_deck_building/big_button.png" type="Texture" id=17]
+[ext_resource path="res://_scripts/free_duel.gd" type="Script" id=18]
+[ext_resource path="res://_scripts/npc_decks.gd" type="Script" id=19]
+
+[sub_resource type="DynamicFont" id=12]
+size = 24
+outline_size = 2
+font_data = ExtResource( 3 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.0313726, 0.0862745, 0.117647, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0.356863, 0.407843, 0.435294, 1 )
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0.0313726, 0.0862745, 0.117647, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0.356863, 0.407843, 0.435294, 1 )
+
+[sub_resource type="StyleBoxFlat" id=9]
+bg_color = Color( 0.0313726, 0.0862745, 0.117647, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0.356863, 0.407843, 0.435294, 1 )
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0.356863, 0.407843, 0.435294, 1 )
+border_width_left = 14
+border_width_right = 14
+border_color = Color( 0.356863, 0.407843, 0.435294, 1 )
+
+[sub_resource type="Theme" id=10]
+VScrollBar/styles/grabber = SubResource( 6 )
+VScrollBar/styles/grabber_highlight = SubResource( 8 )
+VScrollBar/styles/grabber_pressed = SubResource( 9 )
+VScrollBar/styles/scroll = SubResource( 7 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 68
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+use_mipmaps = true
+use_filter = true
+extra_spacing_char = -4
+font_data = ExtResource( 3 )
+
+[node name="free_duel" type="Node2D"]
+script = ExtResource( 18 )
+
+[node name="npc_decks_gd" type="Node" parent="."]
+script = ExtResource( 19 )
+
+[node name="panel_left" type="Node2D" parent="."]
+
+[node name="PanelLeft" type="Sprite" parent="panel_left"]
+texture = ExtResource( 14 )
+centered = false
+
+[node name="ScrollBase" type="Sprite" parent="panel_left/PanelLeft"]
+position = Vector2( 394, 284.5 )
+texture = ExtResource( 15 )
+
+[node name="go_duel" type="Button" parent="panel_left"]
+margin_left = 151.0
+margin_top = 520.0
+margin_right = 264.0
+margin_bottom = 571.0
+rect_pivot_offset = Vector2( 56, 25 )
+focus_mode = 0
+enabled_focus_mode = 0
+icon = ExtResource( 17 )
+flat = true
+
+[node name="label" type="Label" parent="panel_left/go_duel"]
+margin_left = 6.0
+margin_top = 3.0
+margin_right = 107.0
+margin_bottom = 47.0
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+custom_fonts/font = SubResource( 12 )
+text = "Duel"
+align = 1
+valign = 1
+
+[node name="duelist_buttons" type="ScrollContainer" parent="panel_left"]
+margin_left = 4.0
+margin_top = 63.0
+margin_right = 408.0
+margin_bottom = 506.0
+rect_min_size = Vector2( 0, 443 )
+theme = SubResource( 10 )
+scroll_horizontal_enabled = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="panel_left/duelist_buttons"]
+
+[node name="panel_right" type="Node2D" parent="."]
+
+[node name="PanelRight" type="Sprite" parent="panel_right"]
+position = Vector2( 1281.55, 0 )
+scale = Vector2( -0.351331, 1 )
+texture = ExtResource( 12 )
+centered = false
+region_rect = Rect2( 180.129, 0, 461.871, 720 )
+
+[node name="ScrollBase" type="Sprite" parent="panel_right/PanelRight"]
+position = Vector2( 72.7231, 319.95 )
+rotation = 3.14159
+scale = Vector2( 2.84632, -1.16005 )
+texture = ExtResource( 15 )
+
+[node name="PanelRight_extension" type="Sprite" parent="panel_right"]
+position = Vector2( 414, 0 )
+texture = ExtResource( 12 )
+centered = false
+
+[node name="duelist_cards" type="ScrollContainer" parent="panel_right"]
+margin_left = 388.0
+margin_top = 63.0
+margin_right = 1270.0
+margin_bottom = 577.0
+rect_min_size = Vector2( 0, 443 )
+theme = SubResource( 10 )
+scroll_horizontal_enabled = false
+
+[node name="MarginContainer" type="MarginContainer" parent="panel_right/duelist_cards"]
+margin_right = 854.0
+margin_bottom = 1696.0
+custom_constants/margin_right = 12
+custom_constants/margin_top = 30
+custom_constants/margin_left = 40
+custom_constants/margin_bottom = 22
+
+[node name="GridContainer" type="GridContainer" parent="panel_right/duelist_cards/MarginContainer"]
+margin_left = 40.0
+margin_top = 30.0
+margin_right = 842.0
+margin_bottom = 1674.0
+size_flags_vertical = 3
+custom_constants/vseparation = 20
+custom_constants/hseparation = 4
+columns = 13
+
+[node name="rarity_card" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 58.0
+margin_bottom = 84.0
+
+[node name="rarity_card2" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 62.0
+margin_top = 0.0
+margin_right = 120.0
+margin_bottom = 84.0
+
+[node name="rarity_card3" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 124.0
+margin_top = 0.0
+margin_right = 182.0
+margin_bottom = 84.0
+
+[node name="rarity_card4" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 186.0
+margin_top = 0.0
+margin_right = 244.0
+margin_bottom = 84.0
+
+[node name="rarity_card5" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 248.0
+margin_top = 0.0
+margin_right = 306.0
+margin_bottom = 84.0
+
+[node name="rarity_card6" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 310.0
+margin_top = 0.0
+margin_right = 368.0
+margin_bottom = 84.0
+
+[node name="rarity_card7" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 372.0
+margin_top = 0.0
+margin_right = 430.0
+margin_bottom = 84.0
+
+[node name="rarity_card8" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 434.0
+margin_top = 0.0
+margin_right = 492.0
+margin_bottom = 84.0
+
+[node name="rarity_card9" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 496.0
+margin_top = 0.0
+margin_right = 554.0
+margin_bottom = 84.0
+
+[node name="rarity_card10" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 558.0
+margin_top = 0.0
+margin_right = 616.0
+margin_bottom = 84.0
+
+[node name="rarity_card11" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 620.0
+margin_top = 0.0
+margin_right = 678.0
+margin_bottom = 84.0
+
+[node name="rarity_card12" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 682.0
+margin_top = 0.0
+margin_right = 740.0
+margin_bottom = 84.0
+
+[node name="rarity_card13" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 744.0
+margin_top = 0.0
+margin_right = 802.0
+margin_bottom = 84.0
+
+[node name="rarity_card14" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 0.0
+margin_top = 104.0
+margin_right = 58.0
+margin_bottom = 188.0
+
+[node name="rarity_card15" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 62.0
+margin_top = 104.0
+margin_right = 120.0
+margin_bottom = 188.0
+
+[node name="rarity_card16" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 124.0
+margin_top = 104.0
+margin_right = 182.0
+margin_bottom = 188.0
+
+[node name="rarity_card17" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 186.0
+margin_top = 104.0
+margin_right = 244.0
+margin_bottom = 188.0
+
+[node name="rarity_card18" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 248.0
+margin_top = 104.0
+margin_right = 306.0
+margin_bottom = 188.0
+
+[node name="rarity_card19" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 310.0
+margin_top = 104.0
+margin_right = 368.0
+margin_bottom = 188.0
+
+[node name="rarity_card20" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 372.0
+margin_top = 104.0
+margin_right = 430.0
+margin_bottom = 188.0
+
+[node name="rarity_card21" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 434.0
+margin_top = 104.0
+margin_right = 492.0
+margin_bottom = 188.0
+
+[node name="rarity_card22" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 496.0
+margin_top = 104.0
+margin_right = 554.0
+margin_bottom = 188.0
+
+[node name="rarity_card23" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 558.0
+margin_top = 104.0
+margin_right = 616.0
+margin_bottom = 188.0
+
+[node name="rarity_card24" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 620.0
+margin_top = 104.0
+margin_right = 678.0
+margin_bottom = 188.0
+
+[node name="rarity_card25" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 682.0
+margin_top = 104.0
+margin_right = 740.0
+margin_bottom = 188.0
+
+[node name="rarity_card26" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 744.0
+margin_top = 104.0
+margin_right = 802.0
+margin_bottom = 188.0
+
+[node name="rarity_card27" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 0.0
+margin_top = 208.0
+margin_right = 58.0
+margin_bottom = 292.0
+
+[node name="rarity_card28" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 62.0
+margin_top = 208.0
+margin_right = 120.0
+margin_bottom = 292.0
+
+[node name="rarity_card29" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 124.0
+margin_top = 208.0
+margin_right = 182.0
+margin_bottom = 292.0
+
+[node name="rarity_card30" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 186.0
+margin_top = 208.0
+margin_right = 244.0
+margin_bottom = 292.0
+
+[node name="rarity_card31" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 248.0
+margin_top = 208.0
+margin_right = 306.0
+margin_bottom = 292.0
+
+[node name="rarity_card32" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 310.0
+margin_top = 208.0
+margin_right = 368.0
+margin_bottom = 292.0
+
+[node name="rarity_card33" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 372.0
+margin_top = 208.0
+margin_right = 430.0
+margin_bottom = 292.0
+
+[node name="rarity_card34" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 434.0
+margin_top = 208.0
+margin_right = 492.0
+margin_bottom = 292.0
+
+[node name="rarity_card35" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 496.0
+margin_top = 208.0
+margin_right = 554.0
+margin_bottom = 292.0
+
+[node name="rarity_card36" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 558.0
+margin_top = 208.0
+margin_right = 616.0
+margin_bottom = 292.0
+
+[node name="rarity_card37" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 620.0
+margin_top = 208.0
+margin_right = 678.0
+margin_bottom = 292.0
+
+[node name="rarity_card38" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 682.0
+margin_top = 208.0
+margin_right = 740.0
+margin_bottom = 292.0
+
+[node name="rarity_card39" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 744.0
+margin_top = 208.0
+margin_right = 802.0
+margin_bottom = 292.0
+
+[node name="rarity_card40" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 0.0
+margin_top = 312.0
+margin_right = 58.0
+margin_bottom = 396.0
+
+[node name="rarity_card41" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 62.0
+margin_top = 312.0
+margin_right = 120.0
+margin_bottom = 396.0
+
+[node name="rarity_card42" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 124.0
+margin_top = 312.0
+margin_right = 182.0
+margin_bottom = 396.0
+
+[node name="rarity_card43" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 186.0
+margin_top = 312.0
+margin_right = 244.0
+margin_bottom = 396.0
+
+[node name="rarity_card44" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 248.0
+margin_top = 312.0
+margin_right = 306.0
+margin_bottom = 396.0
+
+[node name="rarity_card45" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 310.0
+margin_top = 312.0
+margin_right = 368.0
+margin_bottom = 396.0
+
+[node name="rarity_card46" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 372.0
+margin_top = 312.0
+margin_right = 430.0
+margin_bottom = 396.0
+
+[node name="rarity_card47" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 434.0
+margin_top = 312.0
+margin_right = 492.0
+margin_bottom = 396.0
+
+[node name="rarity_card48" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 496.0
+margin_top = 312.0
+margin_right = 554.0
+margin_bottom = 396.0
+
+[node name="rarity_card49" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 558.0
+margin_top = 312.0
+margin_right = 616.0
+margin_bottom = 396.0
+
+[node name="rarity_card50" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 620.0
+margin_top = 312.0
+margin_right = 678.0
+margin_bottom = 396.0
+
+[node name="rarity_card51" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 682.0
+margin_top = 312.0
+margin_right = 740.0
+margin_bottom = 396.0
+
+[node name="rarity_card52" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 744.0
+margin_top = 312.0
+margin_right = 802.0
+margin_bottom = 396.0
+
+[node name="rarity_card53" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 0.0
+margin_top = 416.0
+margin_right = 58.0
+margin_bottom = 500.0
+
+[node name="rarity_card54" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 62.0
+margin_top = 416.0
+margin_right = 120.0
+margin_bottom = 500.0
+
+[node name="rarity_card55" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 124.0
+margin_top = 416.0
+margin_right = 182.0
+margin_bottom = 500.0
+
+[node name="rarity_card56" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 186.0
+margin_top = 416.0
+margin_right = 244.0
+margin_bottom = 500.0
+
+[node name="rarity_card57" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 248.0
+margin_top = 416.0
+margin_right = 306.0
+margin_bottom = 500.0
+
+[node name="rarity_card58" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 310.0
+margin_top = 416.0
+margin_right = 368.0
+margin_bottom = 500.0
+
+[node name="rarity_card59" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 372.0
+margin_top = 416.0
+margin_right = 430.0
+margin_bottom = 500.0
+
+[node name="rarity_card60" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 434.0
+margin_top = 416.0
+margin_right = 492.0
+margin_bottom = 500.0
+
+[node name="rarity_card61" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 496.0
+margin_top = 416.0
+margin_right = 554.0
+margin_bottom = 500.0
+
+[node name="rarity_card62" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 558.0
+margin_top = 416.0
+margin_right = 616.0
+margin_bottom = 500.0
+
+[node name="rarity_card63" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 620.0
+margin_top = 416.0
+margin_right = 678.0
+margin_bottom = 500.0
+
+[node name="rarity_card64" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 682.0
+margin_top = 416.0
+margin_right = 740.0
+margin_bottom = 500.0
+
+[node name="rarity_card65" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 744.0
+margin_top = 416.0
+margin_right = 802.0
+margin_bottom = 500.0
+
+[node name="rarity_card66" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 0.0
+margin_top = 520.0
+margin_right = 58.0
+margin_bottom = 604.0
+
+[node name="rarity_card67" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 62.0
+margin_top = 520.0
+margin_right = 120.0
+margin_bottom = 604.0
+
+[node name="rarity_card68" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 124.0
+margin_top = 520.0
+margin_right = 182.0
+margin_bottom = 604.0
+
+[node name="rarity_card69" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 186.0
+margin_top = 520.0
+margin_right = 244.0
+margin_bottom = 604.0
+
+[node name="rarity_card70" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 248.0
+margin_top = 520.0
+margin_right = 306.0
+margin_bottom = 604.0
+
+[node name="rarity_card71" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 310.0
+margin_top = 520.0
+margin_right = 368.0
+margin_bottom = 604.0
+
+[node name="rarity_card72" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 372.0
+margin_top = 520.0
+margin_right = 430.0
+margin_bottom = 604.0
+
+[node name="rarity_card73" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 434.0
+margin_top = 520.0
+margin_right = 492.0
+margin_bottom = 604.0
+
+[node name="rarity_card74" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 496.0
+margin_top = 520.0
+margin_right = 554.0
+margin_bottom = 604.0
+
+[node name="rarity_card75" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 558.0
+margin_top = 520.0
+margin_right = 616.0
+margin_bottom = 604.0
+
+[node name="rarity_card76" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 620.0
+margin_top = 520.0
+margin_right = 678.0
+margin_bottom = 604.0
+
+[node name="rarity_card77" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 682.0
+margin_top = 520.0
+margin_right = 740.0
+margin_bottom = 604.0
+
+[node name="rarity_card78" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 744.0
+margin_top = 520.0
+margin_right = 802.0
+margin_bottom = 604.0
+
+[node name="rarity_card79" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 0.0
+margin_top = 624.0
+margin_right = 58.0
+margin_bottom = 708.0
+
+[node name="rarity_card80" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 62.0
+margin_top = 624.0
+margin_right = 120.0
+margin_bottom = 708.0
+
+[node name="rarity_card81" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 124.0
+margin_top = 624.0
+margin_right = 182.0
+margin_bottom = 708.0
+
+[node name="rarity_card82" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 186.0
+margin_top = 624.0
+margin_right = 244.0
+margin_bottom = 708.0
+
+[node name="rarity_card83" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 248.0
+margin_top = 624.0
+margin_right = 306.0
+margin_bottom = 708.0
+
+[node name="rarity_card84" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 310.0
+margin_top = 624.0
+margin_right = 368.0
+margin_bottom = 708.0
+
+[node name="rarity_card85" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 372.0
+margin_top = 624.0
+margin_right = 430.0
+margin_bottom = 708.0
+
+[node name="rarity_card86" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 434.0
+margin_top = 624.0
+margin_right = 492.0
+margin_bottom = 708.0
+
+[node name="rarity_card87" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 496.0
+margin_top = 624.0
+margin_right = 554.0
+margin_bottom = 708.0
+
+[node name="rarity_card88" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 558.0
+margin_top = 624.0
+margin_right = 616.0
+margin_bottom = 708.0
+
+[node name="rarity_card89" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 620.0
+margin_top = 624.0
+margin_right = 678.0
+margin_bottom = 708.0
+
+[node name="rarity_card90" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 682.0
+margin_top = 624.0
+margin_right = 740.0
+margin_bottom = 708.0
+
+[node name="rarity_card91" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 744.0
+margin_top = 624.0
+margin_right = 802.0
+margin_bottom = 708.0
+
+[node name="rarity_card92" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 0.0
+margin_top = 728.0
+margin_right = 58.0
+margin_bottom = 812.0
+
+[node name="rarity_card93" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 62.0
+margin_top = 728.0
+margin_right = 120.0
+margin_bottom = 812.0
+
+[node name="rarity_card94" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 124.0
+margin_top = 728.0
+margin_right = 182.0
+margin_bottom = 812.0
+
+[node name="rarity_card95" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 186.0
+margin_top = 728.0
+margin_right = 244.0
+margin_bottom = 812.0
+
+[node name="rarity_card96" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 248.0
+margin_top = 728.0
+margin_right = 306.0
+margin_bottom = 812.0
+
+[node name="rarity_card97" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 310.0
+margin_top = 728.0
+margin_right = 368.0
+margin_bottom = 812.0
+
+[node name="rarity_card98" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 372.0
+margin_top = 728.0
+margin_right = 430.0
+margin_bottom = 812.0
+
+[node name="rarity_card99" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 434.0
+margin_top = 728.0
+margin_right = 492.0
+margin_bottom = 812.0
+
+[node name="rarity_card100" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 496.0
+margin_top = 728.0
+margin_right = 554.0
+margin_bottom = 812.0
+
+[node name="rarity_card101" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 558.0
+margin_top = 728.0
+margin_right = 616.0
+margin_bottom = 812.0
+
+[node name="rarity_card102" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 620.0
+margin_top = 728.0
+margin_right = 678.0
+margin_bottom = 812.0
+
+[node name="rarity_card103" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 682.0
+margin_top = 728.0
+margin_right = 740.0
+margin_bottom = 812.0
+
+[node name="rarity_card104" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 744.0
+margin_top = 728.0
+margin_right = 802.0
+margin_bottom = 812.0
+
+[node name="rarity_card105" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 0.0
+margin_top = 832.0
+margin_right = 58.0
+margin_bottom = 916.0
+
+[node name="rarity_card106" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 62.0
+margin_top = 832.0
+margin_right = 120.0
+margin_bottom = 916.0
+
+[node name="rarity_card107" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 124.0
+margin_top = 832.0
+margin_right = 182.0
+margin_bottom = 916.0
+
+[node name="rarity_card108" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 186.0
+margin_top = 832.0
+margin_right = 244.0
+margin_bottom = 916.0
+
+[node name="rarity_card109" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 248.0
+margin_top = 832.0
+margin_right = 306.0
+margin_bottom = 916.0
+
+[node name="rarity_card110" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 310.0
+margin_top = 832.0
+margin_right = 368.0
+margin_bottom = 916.0
+
+[node name="rarity_card111" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 372.0
+margin_top = 832.0
+margin_right = 430.0
+margin_bottom = 916.0
+
+[node name="rarity_card112" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 434.0
+margin_top = 832.0
+margin_right = 492.0
+margin_bottom = 916.0
+
+[node name="rarity_card113" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 496.0
+margin_top = 832.0
+margin_right = 554.0
+margin_bottom = 916.0
+
+[node name="rarity_card114" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 558.0
+margin_top = 832.0
+margin_right = 616.0
+margin_bottom = 916.0
+
+[node name="rarity_card115" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 620.0
+margin_top = 832.0
+margin_right = 678.0
+margin_bottom = 916.0
+
+[node name="rarity_card116" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 682.0
+margin_top = 832.0
+margin_right = 740.0
+margin_bottom = 916.0
+
+[node name="rarity_card117" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 744.0
+margin_top = 832.0
+margin_right = 802.0
+margin_bottom = 916.0
+
+[node name="rarity_card118" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 0.0
+margin_top = 936.0
+margin_right = 58.0
+margin_bottom = 1020.0
+
+[node name="rarity_card119" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 62.0
+margin_top = 936.0
+margin_right = 120.0
+margin_bottom = 1020.0
+
+[node name="rarity_card120" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 124.0
+margin_top = 936.0
+margin_right = 182.0
+margin_bottom = 1020.0
+
+[node name="rarity_card121" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 186.0
+margin_top = 936.0
+margin_right = 244.0
+margin_bottom = 1020.0
+
+[node name="rarity_card122" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 248.0
+margin_top = 936.0
+margin_right = 306.0
+margin_bottom = 1020.0
+
+[node name="rarity_card123" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 310.0
+margin_top = 936.0
+margin_right = 368.0
+margin_bottom = 1020.0
+
+[node name="rarity_card124" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 372.0
+margin_top = 936.0
+margin_right = 430.0
+margin_bottom = 1020.0
+
+[node name="rarity_card125" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 434.0
+margin_top = 936.0
+margin_right = 492.0
+margin_bottom = 1020.0
+
+[node name="rarity_card126" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 496.0
+margin_top = 936.0
+margin_right = 554.0
+margin_bottom = 1020.0
+
+[node name="rarity_card127" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 558.0
+margin_top = 936.0
+margin_right = 616.0
+margin_bottom = 1020.0
+
+[node name="rarity_card128" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 620.0
+margin_top = 936.0
+margin_right = 678.0
+margin_bottom = 1020.0
+
+[node name="rarity_card129" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 682.0
+margin_top = 936.0
+margin_right = 740.0
+margin_bottom = 1020.0
+
+[node name="rarity_card130" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 744.0
+margin_top = 936.0
+margin_right = 802.0
+margin_bottom = 1020.0
+
+[node name="rarity_card131" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 0.0
+margin_top = 1040.0
+margin_right = 58.0
+margin_bottom = 1124.0
+
+[node name="rarity_card132" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 62.0
+margin_top = 1040.0
+margin_right = 120.0
+margin_bottom = 1124.0
+
+[node name="rarity_card133" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 124.0
+margin_top = 1040.0
+margin_right = 182.0
+margin_bottom = 1124.0
+
+[node name="rarity_card134" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 186.0
+margin_top = 1040.0
+margin_right = 244.0
+margin_bottom = 1124.0
+
+[node name="rarity_card135" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 248.0
+margin_top = 1040.0
+margin_right = 306.0
+margin_bottom = 1124.0
+
+[node name="rarity_card136" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 310.0
+margin_top = 1040.0
+margin_right = 368.0
+margin_bottom = 1124.0
+
+[node name="rarity_card137" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 372.0
+margin_top = 1040.0
+margin_right = 430.0
+margin_bottom = 1124.0
+
+[node name="rarity_card138" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 434.0
+margin_top = 1040.0
+margin_right = 492.0
+margin_bottom = 1124.0
+
+[node name="rarity_card139" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 496.0
+margin_top = 1040.0
+margin_right = 554.0
+margin_bottom = 1124.0
+
+[node name="rarity_card140" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 558.0
+margin_top = 1040.0
+margin_right = 616.0
+margin_bottom = 1124.0
+
+[node name="rarity_card141" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 620.0
+margin_top = 1040.0
+margin_right = 678.0
+margin_bottom = 1124.0
+
+[node name="rarity_card142" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 682.0
+margin_top = 1040.0
+margin_right = 740.0
+margin_bottom = 1124.0
+
+[node name="rarity_card143" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 744.0
+margin_top = 1040.0
+margin_right = 802.0
+margin_bottom = 1124.0
+
+[node name="rarity_card144" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 0.0
+margin_top = 1144.0
+margin_right = 58.0
+margin_bottom = 1228.0
+
+[node name="rarity_card145" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 62.0
+margin_top = 1144.0
+margin_right = 120.0
+margin_bottom = 1228.0
+
+[node name="rarity_card146" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 124.0
+margin_top = 1144.0
+margin_right = 182.0
+margin_bottom = 1228.0
+
+[node name="rarity_card147" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 186.0
+margin_top = 1144.0
+margin_right = 244.0
+margin_bottom = 1228.0
+
+[node name="rarity_card148" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 248.0
+margin_top = 1144.0
+margin_right = 306.0
+margin_bottom = 1228.0
+
+[node name="rarity_card149" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 310.0
+margin_top = 1144.0
+margin_right = 368.0
+margin_bottom = 1228.0
+
+[node name="rarity_card150" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 372.0
+margin_top = 1144.0
+margin_right = 430.0
+margin_bottom = 1228.0
+
+[node name="rarity_card151" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 434.0
+margin_top = 1144.0
+margin_right = 492.0
+margin_bottom = 1228.0
+
+[node name="rarity_card152" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 496.0
+margin_top = 1144.0
+margin_right = 554.0
+margin_bottom = 1228.0
+
+[node name="rarity_card153" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 558.0
+margin_top = 1144.0
+margin_right = 616.0
+margin_bottom = 1228.0
+
+[node name="rarity_card154" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 620.0
+margin_top = 1144.0
+margin_right = 678.0
+margin_bottom = 1228.0
+
+[node name="rarity_card155" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 682.0
+margin_top = 1144.0
+margin_right = 740.0
+margin_bottom = 1228.0
+
+[node name="rarity_card156" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 744.0
+margin_top = 1144.0
+margin_right = 802.0
+margin_bottom = 1228.0
+
+[node name="rarity_card157" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 0.0
+margin_top = 1248.0
+margin_right = 58.0
+margin_bottom = 1332.0
+
+[node name="rarity_card158" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 62.0
+margin_top = 1248.0
+margin_right = 120.0
+margin_bottom = 1332.0
+
+[node name="rarity_card159" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 124.0
+margin_top = 1248.0
+margin_right = 182.0
+margin_bottom = 1332.0
+
+[node name="rarity_card160" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 186.0
+margin_top = 1248.0
+margin_right = 244.0
+margin_bottom = 1332.0
+
+[node name="rarity_card161" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 248.0
+margin_top = 1248.0
+margin_right = 306.0
+margin_bottom = 1332.0
+
+[node name="rarity_card162" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 310.0
+margin_top = 1248.0
+margin_right = 368.0
+margin_bottom = 1332.0
+
+[node name="rarity_card163" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 372.0
+margin_top = 1248.0
+margin_right = 430.0
+margin_bottom = 1332.0
+
+[node name="rarity_card164" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 434.0
+margin_top = 1248.0
+margin_right = 492.0
+margin_bottom = 1332.0
+
+[node name="rarity_card165" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 496.0
+margin_top = 1248.0
+margin_right = 554.0
+margin_bottom = 1332.0
+
+[node name="rarity_card166" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 558.0
+margin_top = 1248.0
+margin_right = 616.0
+margin_bottom = 1332.0
+
+[node name="rarity_card167" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 620.0
+margin_top = 1248.0
+margin_right = 678.0
+margin_bottom = 1332.0
+
+[node name="rarity_card168" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 682.0
+margin_top = 1248.0
+margin_right = 740.0
+margin_bottom = 1332.0
+
+[node name="rarity_card169" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 744.0
+margin_top = 1248.0
+margin_right = 802.0
+margin_bottom = 1332.0
+
+[node name="rarity_card170" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 0.0
+margin_top = 1352.0
+margin_right = 58.0
+margin_bottom = 1436.0
+
+[node name="rarity_card171" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 62.0
+margin_top = 1352.0
+margin_right = 120.0
+margin_bottom = 1436.0
+
+[node name="rarity_card172" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 124.0
+margin_top = 1352.0
+margin_right = 182.0
+margin_bottom = 1436.0
+
+[node name="rarity_card173" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 186.0
+margin_top = 1352.0
+margin_right = 244.0
+margin_bottom = 1436.0
+
+[node name="rarity_card174" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 248.0
+margin_top = 1352.0
+margin_right = 306.0
+margin_bottom = 1436.0
+
+[node name="rarity_card175" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 310.0
+margin_top = 1352.0
+margin_right = 368.0
+margin_bottom = 1436.0
+
+[node name="rarity_card176" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 372.0
+margin_top = 1352.0
+margin_right = 430.0
+margin_bottom = 1436.0
+
+[node name="rarity_card177" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 434.0
+margin_top = 1352.0
+margin_right = 492.0
+margin_bottom = 1436.0
+
+[node name="rarity_card178" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 496.0
+margin_top = 1352.0
+margin_right = 554.0
+margin_bottom = 1436.0
+
+[node name="rarity_card179" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 558.0
+margin_top = 1352.0
+margin_right = 616.0
+margin_bottom = 1436.0
+
+[node name="rarity_card180" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 620.0
+margin_top = 1352.0
+margin_right = 678.0
+margin_bottom = 1436.0
+
+[node name="rarity_card181" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 682.0
+margin_top = 1352.0
+margin_right = 740.0
+margin_bottom = 1436.0
+
+[node name="rarity_card182" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 744.0
+margin_top = 1352.0
+margin_right = 802.0
+margin_bottom = 1436.0
+
+[node name="rarity_card183" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 0.0
+margin_top = 1456.0
+margin_right = 58.0
+margin_bottom = 1540.0
+
+[node name="rarity_card184" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 62.0
+margin_top = 1456.0
+margin_right = 120.0
+margin_bottom = 1540.0
+
+[node name="rarity_card185" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 124.0
+margin_top = 1456.0
+margin_right = 182.0
+margin_bottom = 1540.0
+
+[node name="rarity_card186" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 186.0
+margin_top = 1456.0
+margin_right = 244.0
+margin_bottom = 1540.0
+
+[node name="rarity_card187" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 248.0
+margin_top = 1456.0
+margin_right = 306.0
+margin_bottom = 1540.0
+
+[node name="rarity_card188" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 310.0
+margin_top = 1456.0
+margin_right = 368.0
+margin_bottom = 1540.0
+
+[node name="rarity_card189" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 372.0
+margin_top = 1456.0
+margin_right = 430.0
+margin_bottom = 1540.0
+
+[node name="rarity_card190" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 434.0
+margin_top = 1456.0
+margin_right = 492.0
+margin_bottom = 1540.0
+
+[node name="rarity_card191" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 496.0
+margin_top = 1456.0
+margin_right = 554.0
+margin_bottom = 1540.0
+
+[node name="rarity_card192" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 558.0
+margin_top = 1456.0
+margin_right = 616.0
+margin_bottom = 1540.0
+
+[node name="rarity_card193" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 620.0
+margin_top = 1456.0
+margin_right = 678.0
+margin_bottom = 1540.0
+
+[node name="rarity_card194" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 682.0
+margin_top = 1456.0
+margin_right = 740.0
+margin_bottom = 1540.0
+
+[node name="rarity_card195" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 744.0
+margin_top = 1456.0
+margin_right = 802.0
+margin_bottom = 1540.0
+
+[node name="rarity_card196" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 0.0
+margin_top = 1560.0
+margin_right = 58.0
+margin_bottom = 1644.0
+
+[node name="rarity_card197" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 62.0
+margin_top = 1560.0
+margin_right = 120.0
+margin_bottom = 1644.0
+
+[node name="rarity_card198" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 124.0
+margin_top = 1560.0
+margin_right = 182.0
+margin_bottom = 1644.0
+
+[node name="rarity_card199" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 186.0
+margin_top = 1560.0
+margin_right = 244.0
+margin_bottom = 1644.0
+
+[node name="rarity_card200" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 248.0
+margin_top = 1560.0
+margin_right = 306.0
+margin_bottom = 1644.0
+
+[node name="rarity_card201" parent="panel_right/duelist_cards/MarginContainer/GridContainer" instance=ExtResource( 13 )]
+margin_left = 310.0
+margin_top = 1560.0
+margin_right = 368.0
+margin_bottom = 1644.0
+
+[node name="user_interface" type="Node2D" parent="."]
+
+[node name="top_info_box" type="Sprite" parent="user_interface"]
+texture = ExtResource( 2 )
+centered = false
+
+[node name="window_title" type="Label" parent="user_interface/top_info_box"]
+margin_top = -15.0
+margin_right = 1280.0
+margin_bottom = 58.0
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+custom_fonts/font = SubResource( 3 )
+text = "Free Duel"
+align = 1
+valign = 1
+
+[node name="back_button" type="Button" parent="user_interface"]
+margin_right = 12.0
+margin_bottom = 20.0
+rect_pivot_offset = Vector2( 28, 25 )
+focus_mode = 0
+enabled_focus_mode = 0
+icon = ExtResource( 1 )
+flat = true
+
+[node name="card_info_box" parent="user_interface" instance=ExtResource( 4 )]
+
+[node name="UI_tween" type="Tween" parent="user_interface"]
+
+[node name="scene_transitioner" parent="." instance=ExtResource( 5 )]
+visible = false
+
+[connection signal="button_up" from="panel_left/go_duel" to="." method="_on_go_duel_button_up"]
+[connection signal="button_up" from="user_interface/back_button" to="." method="_on_back_button_button_up"]

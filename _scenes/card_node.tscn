@@ -1,0 +1,442 @@
+[gd_scene load_steps=23 format=2]
+
+[ext_resource path="res://_resources/card_design/frame_monster.png" type="Texture" id=1]
+[ext_resource path="res://_resources/card_design/texture_yellow.png" type="Texture" id=2]
+[ext_resource path="res://_resources/card_design/star_level.png" type="Texture" id=3]
+[ext_resource path="res://_resources/_attributes/divine.png" type="Texture" id=4]
+[ext_resource path="res://_resources/_card_artwork/00000.png" type="Texture" id=5]
+[ext_resource path="res://_resources/fonts/kaiu.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://_resources/fonts/Yu-Gi-Oh! Matrix Regular Small Caps 2.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://_scripts/card_node.gd" type="Script" id=8]
+[ext_resource path="res://_resources/scene_duel/button_border.png" type="Texture" id=9]
+[ext_resource path="res://_resources/scene_duel/button_fusion.png" type="Texture" id=10]
+[ext_resource path="res://_resources/scene_duel/button_facedown.png" type="Texture" id=11]
+[ext_resource path="res://_resources/fonts/BankGothic Md BT.ttf" type="DynamicFontData" id=12]
+[ext_resource path="res://_resources/card_design/texture_back.png" type="Texture" id=13]
+[ext_resource path="res://_resources/scene_duel/button_combat.png" type="Texture" id=14]
+[ext_resource path="res://_resources/scene_duel/button_def.png" type="Texture" id=15]
+[ext_resource path="res://_resources/scene_duel/button_activate.png" type="Texture" id=16]
+
+[sub_resource type="DynamicFont" id=2]
+size = 44
+outline_size = 1
+outline_color = Color( 0, 0, 0, 0.0980392 )
+use_mipmaps = true
+use_filter = true
+extra_spacing_char = -1
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=1]
+size = 26
+outline_size = 1
+outline_color = Color( 0, 0, 0, 0.152941 )
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 28
+use_filter = true
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 55
+outline_size = 2
+use_filter = true
+font_data = ExtResource( 12 )
+
+[sub_resource type="Shader" id=4]
+code = "shader_type canvas_item;
+
+uniform float amt:hint_range(0.0, 1.0);
+void fragment(){
+	if (distance(UV, vec2(0.5, 0.5)) > amt/2.5){
+		COLOR = vec4(0.0);
+	} else {
+		COLOR = texture(TEXTURE,UV);
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = SubResource( 4 )
+shader_param/amt = 1.0
+
+[node name="card_node" type="Button"]
+margin_left = -239.0
+margin_top = -240.0
+margin_right = 92.0
+margin_bottom = 240.0
+rect_pivot_offset = Vector2( 239, 240 )
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+script = ExtResource( 8 )
+
+[node name="card_design" type="Control" parent="."]
+margin_right = 331.0
+margin_bottom = 482.0
+rect_pivot_offset = Vector2( 165, 241 )
+mouse_filter = 2
+input_pass_on_modal_close_click = false
+
+[node name="background_texture" type="Sprite" parent="card_design"]
+position = Vector2( 165, 240 )
+texture = ExtResource( 2 )
+
+[node name="artwork" type="Sprite" parent="card_design"]
+position = Vector2( 164, 240 )
+scale = Vector2( 1.02, 1.02 )
+texture = ExtResource( 5 )
+
+[node name="card_frame" type="Sprite" parent="card_design"]
+position = Vector2( 165, 240 )
+scale = Vector2( 1.01, 1.01 )
+texture = ExtResource( 1 )
+
+[node name="card_name" type="Label" parent="card_design"]
+margin_left = 33.0
+margin_top = 23.0
+margin_right = 474.0
+margin_bottom = 68.0
+rect_scale = Vector2( 1, 1.05 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 2 )
+text = "Shiny Black \"C\""
+
+[node name="attribute" type="Sprite" parent="card_design"]
+position = Vector2( 280, 43 )
+scale = Vector2( 0.71, 0.71 )
+texture = ExtResource( 4 )
+
+[node name="monster_features" type="Node2D" parent="card_design"]
+position = Vector2( 165, 240 )
+
+[node name="level" type="Node2D" parent="card_design/monster_features"]
+
+[node name="upto11" type="Node2D" parent="card_design/monster_features/level"]
+visible = false
+
+[node name="level1" type="Sprite" parent="card_design/monster_features/level/upto11"]
+position = Vector2( 125, -156 )
+texture = ExtResource( 3 )
+
+[node name="level2" type="Sprite" parent="card_design/monster_features/level/upto11"]
+position = Vector2( 100, -156 )
+texture = ExtResource( 3 )
+
+[node name="level3" type="Sprite" parent="card_design/monster_features/level/upto11"]
+position = Vector2( 75, -156 )
+texture = ExtResource( 3 )
+
+[node name="level4" type="Sprite" parent="card_design/monster_features/level/upto11"]
+position = Vector2( 50, -156 )
+texture = ExtResource( 3 )
+
+[node name="level5" type="Sprite" parent="card_design/monster_features/level/upto11"]
+position = Vector2( 25, -156 )
+texture = ExtResource( 3 )
+
+[node name="level6" type="Sprite" parent="card_design/monster_features/level/upto11"]
+position = Vector2( 0, -156 )
+texture = ExtResource( 3 )
+
+[node name="level7" type="Sprite" parent="card_design/monster_features/level/upto11"]
+position = Vector2( -25, -156 )
+texture = ExtResource( 3 )
+
+[node name="level8" type="Sprite" parent="card_design/monster_features/level/upto11"]
+position = Vector2( -50, -156 )
+texture = ExtResource( 3 )
+
+[node name="level9" type="Sprite" parent="card_design/monster_features/level/upto11"]
+position = Vector2( -75, -156 )
+texture = ExtResource( 3 )
+
+[node name="level10" type="Sprite" parent="card_design/monster_features/level/upto11"]
+position = Vector2( -100, -156 )
+texture = ExtResource( 3 )
+
+[node name="level11" type="Sprite" parent="card_design/monster_features/level/upto11"]
+position = Vector2( -125, -156 )
+texture = ExtResource( 3 )
+
+[node name="level12" type="Node2D" parent="card_design/monster_features/level"]
+position = Vector2( 2, 0 )
+
+[node name="level1" type="Sprite" parent="card_design/monster_features/level/level12"]
+position = Vector2( 125, -156 )
+texture = ExtResource( 3 )
+
+[node name="level2" type="Sprite" parent="card_design/monster_features/level/level12"]
+position = Vector2( 102, -156 )
+texture = ExtResource( 3 )
+
+[node name="level3" type="Sprite" parent="card_design/monster_features/level/level12"]
+position = Vector2( 79, -156 )
+texture = ExtResource( 3 )
+
+[node name="level4" type="Sprite" parent="card_design/monster_features/level/level12"]
+position = Vector2( 56, -156 )
+texture = ExtResource( 3 )
+
+[node name="level5" type="Sprite" parent="card_design/monster_features/level/level12"]
+position = Vector2( 33, -156 )
+texture = ExtResource( 3 )
+
+[node name="level6" type="Sprite" parent="card_design/monster_features/level/level12"]
+position = Vector2( 10, -156 )
+texture = ExtResource( 3 )
+
+[node name="level7" type="Sprite" parent="card_design/monster_features/level/level12"]
+position = Vector2( -13, -156 )
+texture = ExtResource( 3 )
+
+[node name="level8" type="Sprite" parent="card_design/monster_features/level/level12"]
+position = Vector2( -36, -156 )
+texture = ExtResource( 3 )
+
+[node name="level9" type="Sprite" parent="card_design/monster_features/level/level12"]
+position = Vector2( -59, -156 )
+texture = ExtResource( 3 )
+
+[node name="level10" type="Sprite" parent="card_design/monster_features/level/level12"]
+position = Vector2( -82, -156 )
+texture = ExtResource( 3 )
+
+[node name="level11" type="Sprite" parent="card_design/monster_features/level/level12"]
+position = Vector2( -105, -156 )
+texture = ExtResource( 3 )
+
+[node name="level12" type="Sprite" parent="card_design/monster_features/level/level12"]
+position = Vector2( -128, -156 )
+texture = ExtResource( 3 )
+
+[node name="atk_def" type="Node2D" parent="card_design/monster_features"]
+position = Vector2( 0, 2 )
+
+[node name="atk" type="Label" parent="card_design/monster_features/atk_def"]
+margin_left = 74.0
+margin_top = 157.0
+margin_right = 131.0
+margin_bottom = 184.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 0
+custom_fonts/font = SubResource( 1 )
+text = "2000"
+align = 2
+
+[node name="def" type="Label" parent="card_design/monster_features/atk_def"]
+margin_left = 74.0
+margin_top = 184.0
+margin_right = 131.0
+margin_bottom = 211.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 0
+custom_fonts/font = SubResource( 1 )
+text = "0"
+align = 2
+
+[node name="spelltrap_features" type="Node2D" parent="card_design"]
+visible = false
+
+[node name="type_of_spelltrap" type="Label" parent="card_design/spelltrap_features"]
+margin_left = 29.0
+margin_top = 68.0
+margin_right = 301.0
+margin_bottom = 104.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 0
+custom_fonts/font = SubResource( 3 )
+text = "Normal Spell Card"
+align = 2
+valign = 1
+
+[node name="card_back" type="Sprite" parent="card_design"]
+visible = false
+position = Vector2( 164.75, 239.5 )
+scale = Vector2( 1.01064, 1.01042 )
+texture = ExtResource( 13 )
+
+[node name="card_self_tween" type="Tween" parent="."]
+
+[node name="fusion_indicator" type="Button" parent="."]
+visible = false
+margin_left = -15.0
+margin_top = -16.0
+margin_right = 44.0
+margin_bottom = 43.0
+rect_pivot_offset = Vector2( 29, 29 )
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="indicator_bg" type="Sprite" parent="fusion_indicator"]
+modulate = Color( 0.658824, 0.658824, 0.658824, 1 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 10 )
+centered = false
+
+[node name="fusion_order_no" type="Label" parent="fusion_indicator"]
+margin_left = -1.0
+margin_top = -9.0
+margin_right = 58.0
+margin_bottom = 61.0
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+custom_fonts/font = SubResource( 6 )
+text = "1"
+align = 1
+valign = 1
+
+[node name="summon_controls" type="Node2D" parent="."]
+visible = false
+position = Vector2( -45, 408 )
+
+[node name="fusion_summon" type="Button" parent="summon_controls"]
+margin_right = 130.0
+margin_bottom = 124.0
+rect_pivot_offset = Vector2( 65, 62 )
+focus_mode = 0
+enabled_focus_mode = 0
+icon = ExtResource( 10 )
+flat = true
+
+[node name="shadow" type="Sprite" parent="summon_controls/fusion_summon"]
+modulate = Color( 0, 0, 0, 1 )
+show_behind_parent = true
+position = Vector2( 8, 6 )
+texture = ExtResource( 9 )
+centered = false
+
+[node name="faceup_summon" type="Button" parent="summon_controls"]
+margin_left = 145.0
+margin_right = 275.0
+margin_bottom = 124.0
+rect_pivot_offset = Vector2( 65, 62 )
+focus_mode = 0
+enabled_focus_mode = 0
+icon = ExtResource( 9 )
+flat = true
+
+[node name="shadow" type="Sprite" parent="summon_controls/faceup_summon"]
+modulate = Color( 0, 0, 0, 1 )
+show_behind_parent = true
+position = Vector2( 8, 6 )
+texture = ExtResource( 9 )
+centered = false
+
+[node name="artwork" type="Sprite" parent="summon_controls/faceup_summon"]
+show_behind_parent = true
+material = SubResource( 5 )
+position = Vector2( 66, 65 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 5 )
+region_rect = Rect2( 0, 0, 260, 210 )
+
+[node name="facedown_summon" type="Button" parent="summon_controls"]
+margin_left = 290.0
+margin_right = 420.0
+margin_bottom = 124.0
+rect_pivot_offset = Vector2( 65, 62 )
+focus_mode = 0
+enabled_focus_mode = 0
+icon = ExtResource( 11 )
+flat = true
+
+[node name="shadow" type="Sprite" parent="summon_controls/facedown_summon"]
+modulate = Color( 0, 0, 0, 1 )
+show_behind_parent = true
+position = Vector2( 8, 6 )
+texture = ExtResource( 9 )
+centered = false
+
+[node name="summons_tween" type="Tween" parent="summon_controls"]
+
+[node name="combat_controls" type="Node2D" parent="."]
+visible = false
+position = Vector2( 100, 408 )
+z_index = 1
+
+[node name="attack_button" type="Button" parent="combat_controls"]
+margin_left = -73.0
+margin_right = 57.0
+margin_bottom = 124.0
+rect_pivot_offset = Vector2( 65, 62 )
+focus_mode = 0
+enabled_focus_mode = 0
+icon = ExtResource( 14 )
+flat = true
+
+[node name="shadow" type="Sprite" parent="combat_controls/attack_button"]
+modulate = Color( 0, 0, 0, 1 )
+show_behind_parent = true
+position = Vector2( 8, 6 )
+texture = ExtResource( 9 )
+centered = false
+
+[node name="defense_button" type="Button" parent="combat_controls"]
+margin_left = 73.0
+margin_right = 203.0
+margin_bottom = 124.0
+rect_pivot_offset = Vector2( 65, 62 )
+focus_mode = 0
+enabled_focus_mode = 0
+icon = ExtResource( 15 )
+flat = true
+
+[node name="shadow" type="Sprite" parent="combat_controls/defense_button"]
+modulate = Color( 0, 0, 0, 1 )
+show_behind_parent = true
+position = Vector2( 8, 6 )
+texture = ExtResource( 9 )
+centered = false
+
+[node name="activate_button" type="Button" parent="combat_controls"]
+visible = false
+margin_left = -2.0
+margin_top = -464.0
+margin_right = 128.0
+margin_bottom = -340.0
+rect_pivot_offset = Vector2( 65, 62 )
+focus_mode = 0
+enabled_focus_mode = 0
+icon = ExtResource( 16 )
+flat = true
+
+[node name="shadow" type="Sprite" parent="combat_controls/activate_button"]
+modulate = Color( 0, 0, 0, 1 )
+show_behind_parent = true
+position = Vector2( 8, 6 )
+texture = ExtResource( 9 )
+centered = false
+
+[node name="combat_tween" type="Tween" parent="combat_controls"]
+
+[connection signal="button_up" from="." to="." method="_on_card_node_button_up"]
+[connection signal="mouse_entered" from="." to="." method="_on_card_node_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_card_node_mouse_exited"]
+[connection signal="button_up" from="fusion_indicator" to="." method="_on_fusion_indicator_button_up"]
+[connection signal="mouse_entered" from="fusion_indicator" to="." method="_on_fusion_indicator_mouse_entered"]
+[connection signal="mouse_exited" from="fusion_indicator" to="." method="_on_fusion_indicator_mouse_exited"]
+[connection signal="button_up" from="summon_controls/fusion_summon" to="." method="_on_fusion_summon_button_up"]
+[connection signal="mouse_entered" from="summon_controls/fusion_summon" to="." method="_on_fusion_summon_mouse_entered"]
+[connection signal="mouse_exited" from="summon_controls/fusion_summon" to="." method="_on_fusion_summon_mouse_exited"]
+[connection signal="button_up" from="summon_controls/faceup_summon" to="." method="_on_faceup_summon_button_up"]
+[connection signal="mouse_entered" from="summon_controls/faceup_summon" to="." method="_on_faceup_summon_mouse_entered"]
+[connection signal="mouse_exited" from="summon_controls/faceup_summon" to="." method="_on_faceup_summon_mouse_exited"]
+[connection signal="button_up" from="summon_controls/facedown_summon" to="." method="_on_facedown_summon_button_up"]
+[connection signal="mouse_entered" from="summon_controls/facedown_summon" to="." method="_on_facedown_summon_mouse_entered"]
+[connection signal="mouse_exited" from="summon_controls/facedown_summon" to="." method="_on_facedown_summon_mouse_exited"]
+[connection signal="button_up" from="combat_controls/attack_button" to="." method="_on_attack_button_button_up"]
+[connection signal="mouse_entered" from="combat_controls/attack_button" to="." method="_on_attack_button_mouse_entered"]
+[connection signal="mouse_exited" from="combat_controls/attack_button" to="." method="_on_attack_button_mouse_exited"]
+[connection signal="button_up" from="combat_controls/defense_button" to="." method="_on_defense_button_button_up"]
+[connection signal="mouse_entered" from="combat_controls/defense_button" to="." method="_on_defense_button_mouse_entered"]
+[connection signal="mouse_exited" from="combat_controls/defense_button" to="." method="_on_defense_button_mouse_exited"]
+[connection signal="mouse_entered" from="combat_controls/activate_button" to="." method="_on_defense_button_mouse_entered"]
+[connection signal="mouse_exited" from="combat_controls/activate_button" to="." method="_on_defense_button_mouse_exited"]

@@ -1,0 +1,272 @@
+[gd_scene load_steps=22 format=2]
+
+[ext_resource path="res://_resources/scene_duel/top_info_box.png" type="Texture" id=1]
+[ext_resource path="res://_resources/scene_deck_building/back_button.png" type="Texture" id=2]
+[ext_resource path="res://_resources/scene_deck_building/big_button.png" type="Texture" id=3]
+[ext_resource path="res://_resources/card_shop/card_slot_bg.png" type="Texture" id=4]
+[ext_resource path="res://_resources/card_shop/full_bg.png" type="Texture" id=5]
+[ext_resource path="res://_resources/card_shop/window_code.png" type="Texture" id=6]
+[ext_resource path="res://_resources/card_shop/window_starchips.png" type="Texture" id=7]
+[ext_resource path="res://_resources/card_shop/window_price.png" type="Texture" id=8]
+[ext_resource path="res://_scenes/card_visual_only.tscn" type="PackedScene" id=9]
+[ext_resource path="res://_scenes/card_info_box.tscn" type="PackedScene" id=10]
+[ext_resource path="res://_resources/fonts/BankGothic Md BT.ttf" type="DynamicFontData" id=11]
+[ext_resource path="res://_resources/card_shop/starchip.png" type="Texture" id=12]
+[ext_resource path="res://_scripts/card_shop.gd" type="Script" id=13]
+[ext_resource path="res://_resources/card_design/texture_back.png" type="Texture" id=14]
+[ext_resource path="res://_scenes/scene_transitioner.tscn" type="PackedScene" id=15]
+
+[sub_resource type="DynamicFont" id=1]
+size = 33
+outline_size = 2
+font_data = ExtResource( 11 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 33
+font_data = ExtResource( 11 )
+
+[sub_resource type="StyleBoxEmpty" id=5]
+
+[sub_resource type="StyleBoxEmpty" id=6]
+
+[sub_resource type="DynamicFont" id=2]
+size = 24
+outline_size = 2
+font_data = ExtResource( 11 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 68
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+use_mipmaps = true
+use_filter = true
+extra_spacing_char = -4
+font_data = ExtResource( 11 )
+
+[node name="card_shop" type="Node2D"]
+script = ExtResource( 13 )
+
+[node name="FullBg" type="Sprite" parent="."]
+texture = ExtResource( 5 )
+centered = false
+
+[node name="card_slot" type="Sprite" parent="."]
+position = Vector2( 335, 320 )
+texture = ExtResource( 4 )
+
+[node name="card_centerer" type="Control" parent="card_slot"]
+visible = false
+margin_left = -164.0
+margin_top = -241.0
+margin_right = 165.0
+margin_bottom = 239.0
+rect_pivot_offset = Vector2( 164, 240 )
+
+[node name="card_visual_only" parent="card_slot/card_centerer" instance=ExtResource( 9 )]
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 331.0
+margin_bottom = 480.0
+
+[node name="card_back_shop" type="Sprite" parent="card_slot"]
+position = Vector2( 1, -1 )
+texture = ExtResource( 14 )
+
+[node name="shop_tweener" type="Tween" parent="card_slot"]
+
+[node name="shop_panels" type="Control" parent="."]
+margin_left = 640.0
+margin_top = 51.0
+margin_right = 1206.0
+margin_bottom = 588.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="shop_panels"]
+margin_left = 13.0
+margin_right = 552.0
+margin_bottom = 537.0
+alignment = 1
+
+[node name="starchips" type="Button" parent="shop_panels/VBoxContainer"]
+margin_top = 44.0
+margin_right = 539.0
+margin_bottom = 154.0
+focus_mode = 0
+enabled_focus_mode = 0
+icon = ExtResource( 7 )
+flat = true
+
+[node name="window_title" type="Label" parent="shop_panels/VBoxContainer/starchips"]
+margin_left = 17.0
+margin_top = 6.0
+margin_right = 522.0
+margin_bottom = 44.0
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+custom_fonts/font = SubResource( 1 )
+text = "STARCHIPS"
+valign = 1
+
+[node name="player_starchips" type="Label" parent="shop_panels/VBoxContainer/starchips"]
+margin_left = 61.0
+margin_top = 46.0
+margin_right = 242.0
+margin_bottom = 84.0
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+custom_fonts/font = SubResource( 1 )
+text = "x99999"
+valign = 1
+
+[node name="Starchip" type="Sprite" parent="shop_panels/VBoxContainer/starchips/player_starchips"]
+position = Vector2( -43, -1 )
+scale = Vector2( 0.75, 0.75 )
+texture = ExtResource( 12 )
+centered = false
+
+[node name="code" type="Button" parent="shop_panels/VBoxContainer"]
+margin_top = 158.0
+margin_right = 539.0
+margin_bottom = 288.0
+focus_mode = 0
+enabled_focus_mode = 0
+icon = ExtResource( 6 )
+flat = true
+
+[node name="window_title" type="Label" parent="shop_panels/VBoxContainer/code"]
+margin_left = 16.0
+margin_top = 6.0
+margin_right = 521.0
+margin_bottom = 44.0
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+custom_fonts/font = SubResource( 1 )
+text = "Card Code"
+valign = 1
+
+[node name="player_input" type="LineEdit" parent="shop_panels/VBoxContainer/code"]
+margin_left = 34.0
+margin_top = 66.0
+margin_right = 504.0
+margin_bottom = 104.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 4 )
+custom_styles/focus = SubResource( 5 )
+custom_styles/normal = SubResource( 6 )
+align = 1
+max_length = 8
+clear_button_enabled = true
+shortcut_keys_enabled = false
+middle_mouse_paste_enabled = false
+deselect_on_focus_loss_enabled = false
+placeholder_text = "00000000"
+placeholder_alpha = 0.3
+
+[node name="price" type="Button" parent="shop_panels/VBoxContainer"]
+margin_top = 292.0
+margin_right = 539.0
+margin_bottom = 492.0
+focus_mode = 0
+enabled_focus_mode = 0
+icon = ExtResource( 8 )
+flat = true
+
+[node name="window_title" type="Label" parent="shop_panels/VBoxContainer/price"]
+margin_left = 17.0
+margin_top = 6.0
+margin_right = 522.0
+margin_bottom = 44.0
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+custom_fonts/font = SubResource( 1 )
+text = "Card Price"
+valign = 1
+
+[node name="card_price" type="Label" parent="shop_panels/VBoxContainer/price"]
+margin_left = 61.0
+margin_top = 46.0
+margin_right = 242.0
+margin_bottom = 84.0
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+custom_fonts/font = SubResource( 1 )
+text = "x99999"
+valign = 1
+
+[node name="Starchip" type="Sprite" parent="shop_panels/VBoxContainer/price/card_price"]
+position = Vector2( -43, -1 )
+scale = Vector2( 0.75, 0.75 )
+texture = ExtResource( 12 )
+centered = false
+
+[node name="buy_card" type="Button" parent="shop_panels/VBoxContainer/price"]
+margin_left = 210.0
+margin_top = 137.0
+margin_right = 323.0
+margin_bottom = 188.0
+rect_pivot_offset = Vector2( 56, 25 )
+focus_mode = 0
+enabled_focus_mode = 0
+icon = ExtResource( 3 )
+flat = true
+
+[node name="label" type="Label" parent="shop_panels/VBoxContainer/price/buy_card"]
+margin_left = 6.0
+margin_top = 3.0
+margin_right = 107.0
+margin_bottom = 47.0
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+custom_fonts/font = SubResource( 2 )
+text = "Buy"
+align = 1
+valign = 1
+
+[node name="user_interface" type="Node2D" parent="."]
+
+[node name="top_info_box" type="Sprite" parent="user_interface"]
+texture = ExtResource( 1 )
+centered = false
+
+[node name="window_title" type="Label" parent="user_interface/top_info_box"]
+margin_top = -15.0
+margin_right = 1280.0
+margin_bottom = 58.0
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+custom_fonts/font = SubResource( 3 )
+text = "Card Shop"
+align = 1
+valign = 1
+
+[node name="back_button" type="Button" parent="user_interface"]
+margin_right = 12.0
+margin_bottom = 20.0
+rect_pivot_offset = Vector2( 28, 25 )
+focus_mode = 0
+enabled_focus_mode = 0
+icon = ExtResource( 2 )
+flat = true
+
+[node name="card_info_box" parent="user_interface" instance=ExtResource( 10 )]
+
+[node name="UI_tween" type="Tween" parent="user_interface"]
+
+[node name="scene_transitioner" parent="." instance=ExtResource( 15 )]
+visible = false
+
+[connection signal="text_changed" from="shop_panels/VBoxContainer/code/player_input" to="." method="_on_player_input_text_changed"]
+[connection signal="button_up" from="user_interface/back_button" to="." method="_on_back_button_button_up"]

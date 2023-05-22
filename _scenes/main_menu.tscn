@@ -1,0 +1,289 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://_resources/menu_screen/big_menu_button.png" type="Texture" id=1]
+[ext_resource path="res://_resources/card_shop/full_bg.png" type="Texture" id=2]
+[ext_resource path="res://_resources/fonts/BankGothic Md BT.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://_resources/menu_screen/PermittedMemories-logo.png" type="Texture" id=4]
+[ext_resource path="res://_scripts/main_menu.gd" type="Script" id=5]
+[ext_resource path="res://_resources/menu_screen/gradient.png" type="Texture" id=6]
+[ext_resource path="res://_scenes/scene_transitioner.tscn" type="PackedScene" id=7]
+
+[sub_resource type="DynamicFont" id=1]
+size = 68
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+use_mipmaps = true
+use_filter = true
+extra_spacing_char = -4
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 28
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 3 )
+
+[node name="main_menu" type="Node2D"]
+script = ExtResource( 5 )
+
+[node name="background" type="Sprite" parent="."]
+modulate = Color( 2, 2, 2, 1 )
+texture = ExtResource( 2 )
+centered = false
+
+[node name="Gradient" type="Sprite" parent="background"]
+modulate = Color( 0, 0, 0, 0.392157 )
+position = Vector2( 0, 49 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+centered = false
+
+[node name="small_logo" type="Sprite" parent="."]
+visible = false
+position = Vector2( 339, 149.25 )
+scale = Vector2( 0.333, 0.333 )
+texture = ExtResource( 4 )
+
+[node name="shadow" type="Sprite" parent="small_logo"]
+modulate = Color( 0, 0, 0, 1 )
+show_behind_parent = true
+position = Vector2( 24.024, 0 )
+texture = ExtResource( 4 )
+
+[node name="big_logo" type="Sprite" parent="."]
+modulate = Color( 0.392157, 0.392157, 0.392157, 0.494118 )
+position = Vector2( 640, 360 )
+scale = Vector2( 0.6, 0.6 )
+texture = ExtResource( 4 )
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+margin_right = 1280.0
+margin_bottom = 720.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+margin_left = 371.0
+margin_top = 126.0
+margin_right = 909.0
+margin_bottom = 594.0
+alignment = 1
+
+[node name="btn_campaign" type="Button" parent="CenterContainer/VBoxContainer"]
+modulate = Color( 0.392157, 0.392157, 0.392157, 1 )
+margin_right = 538.0
+margin_bottom = 114.0
+rect_pivot_offset = Vector2( 269, 57 )
+focus_mode = 0
+enabled_focus_mode = 0
+icon = ExtResource( 1 )
+flat = true
+
+[node name="button_text" type="Label" parent="CenterContainer/VBoxContainer/btn_campaign"]
+margin_left = 6.0
+margin_top = 3.0
+margin_right = 532.0
+margin_bottom = 111.0
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+custom_fonts/font = SubResource( 1 )
+text = "Campaign"
+align = 1
+valign = 1
+
+[node name="white_over" type="Sprite" parent="CenterContainer/VBoxContainer/btn_campaign"]
+visible = false
+modulate = Color( 100, 100, 100, 0.00784314 )
+position = Vector2( 6, 3 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="shadow" type="Sprite" parent="CenterContainer/VBoxContainer/btn_campaign"]
+modulate = Color( 0, 0, 0, 1 )
+show_behind_parent = true
+position = Vector2( 13, 10 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="btn_free_duel" type="Button" parent="CenterContainer/VBoxContainer"]
+margin_top = 118.0
+margin_right = 538.0
+margin_bottom = 232.0
+rect_pivot_offset = Vector2( 269, 57 )
+focus_mode = 0
+enabled_focus_mode = 0
+icon = ExtResource( 1 )
+flat = true
+
+[node name="button_text" type="Label" parent="CenterContainer/VBoxContainer/btn_free_duel"]
+margin_left = 6.0
+margin_top = 3.0
+margin_right = 532.0
+margin_bottom = 111.0
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+custom_fonts/font = SubResource( 1 )
+text = "Free Duel"
+align = 1
+valign = 1
+
+[node name="white_over" type="Sprite" parent="CenterContainer/VBoxContainer/btn_free_duel"]
+visible = false
+modulate = Color( 100, 100, 100, 0.00784314 )
+position = Vector2( 6, 3 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="shadow" type="Sprite" parent="CenterContainer/VBoxContainer/btn_free_duel"]
+modulate = Color( 0, 0, 0, 1 )
+show_behind_parent = true
+position = Vector2( 13, 10 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="btn_build_deck" type="Button" parent="CenterContainer/VBoxContainer"]
+margin_top = 236.0
+margin_right = 538.0
+margin_bottom = 350.0
+rect_pivot_offset = Vector2( 269, 57 )
+focus_mode = 0
+enabled_focus_mode = 0
+icon = ExtResource( 1 )
+flat = true
+
+[node name="button_text" type="Label" parent="CenterContainer/VBoxContainer/btn_build_deck"]
+margin_left = 6.0
+margin_top = 3.0
+margin_right = 532.0
+margin_bottom = 111.0
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+custom_fonts/font = SubResource( 1 )
+text = "Build Deck"
+align = 1
+valign = 1
+
+[node name="white_over" type="Sprite" parent="CenterContainer/VBoxContainer/btn_build_deck"]
+visible = false
+modulate = Color( 100, 100, 100, 0.00784314 )
+position = Vector2( 6, 3 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="shadow" type="Sprite" parent="CenterContainer/VBoxContainer/btn_build_deck"]
+modulate = Color( 0, 0, 0, 1 )
+show_behind_parent = true
+position = Vector2( 13, 10 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="btn_library" type="Button" parent="CenterContainer/VBoxContainer"]
+visible = false
+margin_top = 354.0
+margin_right = 538.0
+margin_bottom = 468.0
+rect_pivot_offset = Vector2( 269, 57 )
+focus_mode = 0
+enabled_focus_mode = 0
+icon = ExtResource( 1 )
+flat = true
+
+[node name="button_text" type="Label" parent="CenterContainer/VBoxContainer/btn_library"]
+margin_left = 6.0
+margin_top = 3.0
+margin_right = 532.0
+margin_bottom = 111.0
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+custom_fonts/font = SubResource( 1 )
+text = "library"
+align = 1
+valign = 1
+
+[node name="white_over" type="Sprite" parent="CenterContainer/VBoxContainer/btn_library"]
+visible = false
+modulate = Color( 100, 100, 100, 0.00784314 )
+position = Vector2( 6, 3 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="shadow" type="Sprite" parent="CenterContainer/VBoxContainer/btn_library"]
+modulate = Color( 0, 0, 0, 1 )
+show_behind_parent = true
+position = Vector2( 13, 10 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="btn_password" type="Button" parent="CenterContainer/VBoxContainer"]
+margin_top = 354.0
+margin_right = 538.0
+margin_bottom = 468.0
+rect_pivot_offset = Vector2( 269, 57 )
+focus_mode = 0
+enabled_focus_mode = 0
+icon = ExtResource( 1 )
+flat = true
+
+[node name="button_text" type="Label" parent="CenterContainer/VBoxContainer/btn_password"]
+margin_left = 6.0
+margin_top = 3.0
+margin_right = 532.0
+margin_bottom = 111.0
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+custom_fonts/font = SubResource( 1 )
+text = "Card Shop"
+align = 1
+valign = 1
+
+[node name="white_over" type="Sprite" parent="CenterContainer/VBoxContainer/btn_password"]
+visible = false
+modulate = Color( 100, 100, 100, 0.00784314 )
+position = Vector2( 6, 3 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="shadow" type="Sprite" parent="CenterContainer/VBoxContainer/btn_password"]
+modulate = Color( 0, 0, 0, 1 )
+show_behind_parent = true
+position = Vector2( 13, 10 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="game_version" type="Label" parent="."]
+margin_left = 10.0
+margin_top = 685.0
+margin_right = 646.0
+margin_bottom = 721.0
+custom_fonts/font = SubResource( 2 )
+text = "version 0.1.000"
+autowrap = true
+
+[node name="scene_transitioner" parent="." instance=ExtResource( 7 )]
+visible = false
+
+[node name="button_tweener" type="Tween" parent="."]
+
+[connection signal="button_up" from="CenterContainer/VBoxContainer/btn_campaign" to="." method="_on_btn_campaign_button_up"]
+[connection signal="mouse_entered" from="CenterContainer/VBoxContainer/btn_campaign" to="." method="_on_btn_campaign_mouse_entered"]
+[connection signal="mouse_exited" from="CenterContainer/VBoxContainer/btn_campaign" to="." method="_on_btn_campaign_mouse_exited"]
+[connection signal="button_up" from="CenterContainer/VBoxContainer/btn_free_duel" to="." method="_on_btn_free_duel_button_up"]
+[connection signal="mouse_entered" from="CenterContainer/VBoxContainer/btn_free_duel" to="." method="_on_btn_free_duel_mouse_entered"]
+[connection signal="mouse_exited" from="CenterContainer/VBoxContainer/btn_free_duel" to="." method="_on_btn_free_duel_mouse_exited"]
+[connection signal="button_up" from="CenterContainer/VBoxContainer/btn_build_deck" to="." method="_on_btn_build_deck_button_up"]
+[connection signal="mouse_entered" from="CenterContainer/VBoxContainer/btn_build_deck" to="." method="_on_btn_build_deck_mouse_entered"]
+[connection signal="mouse_exited" from="CenterContainer/VBoxContainer/btn_build_deck" to="." method="_on_btn_build_deck_mouse_exited"]
+[connection signal="button_up" from="CenterContainer/VBoxContainer/btn_library" to="." method="_on_btn_library_button_up"]
+[connection signal="mouse_entered" from="CenterContainer/VBoxContainer/btn_library" to="." method="_on_btn_library_mouse_entered"]
+[connection signal="mouse_exited" from="CenterContainer/VBoxContainer/btn_library" to="." method="_on_btn_library_mouse_exited"]
+[connection signal="button_up" from="CenterContainer/VBoxContainer/btn_password" to="." method="_on_btn_password_button_up"]
+[connection signal="mouse_entered" from="CenterContainer/VBoxContainer/btn_password" to="." method="_on_btn_password_mouse_entered"]
+[connection signal="mouse_exited" from="CenterContainer/VBoxContainer/btn_password" to="." method="_on_btn_password_mouse_exited"]

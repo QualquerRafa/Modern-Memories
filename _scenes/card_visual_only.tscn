@@ -1,0 +1,234 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://_scripts/card_visual_only.gd" type="Script" id=1]
+[ext_resource path="res://_resources/fonts/kaiu.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://_resources/fonts/Yu-Gi-Oh! Matrix Regular Small Caps 2.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://_resources/_attributes/divine.png" type="Texture" id=4]
+[ext_resource path="res://_resources/card_design/frame_monster.png" type="Texture" id=6]
+[ext_resource path="res://_resources/card_design/texture_back.png" type="Texture" id=8]
+[ext_resource path="res://_resources/card_design/star_level.png" type="Texture" id=9]
+[ext_resource path="res://_resources/_card_artwork/00000.png" type="Texture" id=12]
+[ext_resource path="res://_resources/card_design/texture_yellow.png" type="Texture" id=15]
+
+[sub_resource type="DynamicFont" id=2]
+size = 44
+outline_size = 1
+outline_color = Color( 0, 0, 0, 0.0980392 )
+use_mipmaps = true
+use_filter = true
+extra_spacing_char = -1
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=1]
+size = 26
+outline_size = 1
+outline_color = Color( 0, 0, 0, 0.152941 )
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 28
+use_filter = true
+font_data = ExtResource( 3 )
+
+[node name="card_visual_only" type="Button"]
+margin_left = -239.0
+margin_top = -240.0
+margin_right = 92.0
+margin_bottom = 240.0
+rect_pivot_offset = Vector2( 239, 240 )
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+script = ExtResource( 1 )
+
+[node name="card_design" type="Control" parent="."]
+margin_right = 331.0
+margin_bottom = 482.0
+rect_pivot_offset = Vector2( 165, 241 )
+mouse_filter = 2
+input_pass_on_modal_close_click = false
+
+[node name="background_texture" type="Sprite" parent="card_design"]
+position = Vector2( 165, 240 )
+texture = ExtResource( 15 )
+
+[node name="artwork" type="Sprite" parent="card_design"]
+position = Vector2( 164, 240 )
+scale = Vector2( 1.02, 1.02 )
+texture = ExtResource( 12 )
+
+[node name="card_frame" type="Sprite" parent="card_design"]
+position = Vector2( 165, 240 )
+scale = Vector2( 1.01, 1.01 )
+texture = ExtResource( 6 )
+
+[node name="card_name" type="Label" parent="card_design"]
+margin_left = 33.0
+margin_top = 23.0
+margin_right = 474.0
+margin_bottom = 68.0
+rect_scale = Vector2( 1, 1.05 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 2 )
+text = "Shiny Black \"C\""
+
+[node name="attribute" type="Sprite" parent="card_design"]
+position = Vector2( 280, 43 )
+scale = Vector2( 0.71, 0.71 )
+texture = ExtResource( 4 )
+
+[node name="monster_features" type="Node2D" parent="card_design"]
+position = Vector2( 165, 240 )
+
+[node name="level" type="Node2D" parent="card_design/monster_features"]
+
+[node name="upto11" type="Node2D" parent="card_design/monster_features/level"]
+visible = false
+
+[node name="level1" type="Sprite" parent="card_design/monster_features/level/upto11"]
+position = Vector2( 125, -156 )
+texture = ExtResource( 9 )
+
+[node name="level2" type="Sprite" parent="card_design/monster_features/level/upto11"]
+position = Vector2( 100, -156 )
+texture = ExtResource( 9 )
+
+[node name="level3" type="Sprite" parent="card_design/monster_features/level/upto11"]
+position = Vector2( 75, -156 )
+texture = ExtResource( 9 )
+
+[node name="level4" type="Sprite" parent="card_design/monster_features/level/upto11"]
+position = Vector2( 50, -156 )
+texture = ExtResource( 9 )
+
+[node name="level5" type="Sprite" parent="card_design/monster_features/level/upto11"]
+position = Vector2( 25, -156 )
+texture = ExtResource( 9 )
+
+[node name="level6" type="Sprite" parent="card_design/monster_features/level/upto11"]
+position = Vector2( 0, -156 )
+texture = ExtResource( 9 )
+
+[node name="level7" type="Sprite" parent="card_design/monster_features/level/upto11"]
+position = Vector2( -25, -156 )
+texture = ExtResource( 9 )
+
+[node name="level8" type="Sprite" parent="card_design/monster_features/level/upto11"]
+position = Vector2( -50, -156 )
+texture = ExtResource( 9 )
+
+[node name="level9" type="Sprite" parent="card_design/monster_features/level/upto11"]
+position = Vector2( -75, -156 )
+texture = ExtResource( 9 )
+
+[node name="level10" type="Sprite" parent="card_design/monster_features/level/upto11"]
+position = Vector2( -100, -156 )
+texture = ExtResource( 9 )
+
+[node name="level11" type="Sprite" parent="card_design/monster_features/level/upto11"]
+position = Vector2( -125, -156 )
+texture = ExtResource( 9 )
+
+[node name="level12" type="Node2D" parent="card_design/monster_features/level"]
+position = Vector2( 2, 0 )
+
+[node name="level1" type="Sprite" parent="card_design/monster_features/level/level12"]
+position = Vector2( 125, -156 )
+texture = ExtResource( 9 )
+
+[node name="level2" type="Sprite" parent="card_design/monster_features/level/level12"]
+position = Vector2( 102, -156 )
+texture = ExtResource( 9 )
+
+[node name="level3" type="Sprite" parent="card_design/monster_features/level/level12"]
+position = Vector2( 79, -156 )
+texture = ExtResource( 9 )
+
+[node name="level4" type="Sprite" parent="card_design/monster_features/level/level12"]
+position = Vector2( 56, -156 )
+texture = ExtResource( 9 )
+
+[node name="level5" type="Sprite" parent="card_design/monster_features/level/level12"]
+position = Vector2( 33, -156 )
+texture = ExtResource( 9 )
+
+[node name="level6" type="Sprite" parent="card_design/monster_features/level/level12"]
+position = Vector2( 10, -156 )
+texture = ExtResource( 9 )
+
+[node name="level7" type="Sprite" parent="card_design/monster_features/level/level12"]
+position = Vector2( -13, -156 )
+texture = ExtResource( 9 )
+
+[node name="level8" type="Sprite" parent="card_design/monster_features/level/level12"]
+position = Vector2( -36, -156 )
+texture = ExtResource( 9 )
+
+[node name="level9" type="Sprite" parent="card_design/monster_features/level/level12"]
+position = Vector2( -59, -156 )
+texture = ExtResource( 9 )
+
+[node name="level10" type="Sprite" parent="card_design/monster_features/level/level12"]
+position = Vector2( -82, -156 )
+texture = ExtResource( 9 )
+
+[node name="level11" type="Sprite" parent="card_design/monster_features/level/level12"]
+position = Vector2( -105, -156 )
+texture = ExtResource( 9 )
+
+[node name="level12" type="Sprite" parent="card_design/monster_features/level/level12"]
+position = Vector2( -128, -156 )
+texture = ExtResource( 9 )
+
+[node name="atk_def" type="Node2D" parent="card_design/monster_features"]
+position = Vector2( 0, 2 )
+
+[node name="atk" type="Label" parent="card_design/monster_features/atk_def"]
+margin_left = 74.0
+margin_top = 157.0
+margin_right = 131.0
+margin_bottom = 184.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 0
+custom_fonts/font = SubResource( 1 )
+text = "2000"
+align = 2
+
+[node name="def" type="Label" parent="card_design/monster_features/atk_def"]
+margin_left = 74.0
+margin_top = 184.0
+margin_right = 131.0
+margin_bottom = 211.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 0
+custom_fonts/font = SubResource( 1 )
+text = "0"
+align = 2
+
+[node name="spelltrap_features" type="Node2D" parent="card_design"]
+visible = false
+
+[node name="type_of_spelltrap" type="Label" parent="card_design/spelltrap_features"]
+margin_left = 29.0
+margin_top = 68.0
+margin_right = 301.0
+margin_bottom = 104.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 0
+custom_fonts/font = SubResource( 3 )
+text = "Normal Spell Card"
+align = 2
+valign = 1
+
+[node name="card_back" type="Sprite" parent="card_design"]
+visible = false
+position = Vector2( 164.75, 239.5 )
+scale = Vector2( 1.01064, 1.01042 )
+texture = ExtResource( 8 )
+
+[node name="card_self_tween" type="Tween" parent="."]
