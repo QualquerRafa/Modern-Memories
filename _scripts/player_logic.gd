@@ -33,6 +33,7 @@ func _ready():
 func start_player_turn():
 	#Increment the turn counter
 	turn_count += 1
+	print("------------------------------- TURN ", turn_count," -------------------------------")
 	
 	#Start player turn with hand hidden
 	get_node("../../player_hand").hide()

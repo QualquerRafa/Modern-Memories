@@ -106,3 +106,6 @@ func animate_button_click(button):
 	
 	$sortables_tween.interpolate_property(button, "rect_scale", button.rect_scale, Vector2(1, 1), 0.1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$sortables_tween.start()
+	
+	#Set the scroll back to the TOP
+	var _set_scroll_0 = get_node("../ScrollContainer").set_v_scroll(0)

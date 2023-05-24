@@ -54,6 +54,9 @@ var card_ready_to_defend : Node #passed by a card node when player is in the pha
 func do_battle(attacking_card : Node, defending_card : Node):
 	if attacking_card.this_card_flags.has_battled == true:
 		return #failsafe to prevent cards from battling more than once
+	if defending_card.is_visible() == false:
+		print("do_battle() caught a timming mismatch. This should be safe.")
+		return #failsafe to prevent multiple attacks on an already destroyed monster in case of timming mismatches
 	
 	var battle_timer_node = $battle_visuals/battle_timer_node
 	var battle_timer : float = 0.2 #in seconds
@@ -61,7 +64,9 @@ func do_battle(attacking_card : Node, defending_card : Node):
 	#Set the attacker and defender flags
 	attacking_card.this_card_flags.has_battled = true
 	attacking_card.this_card_flags.is_facedown = false
+	attacking_card.update_card_information(attacking_card.this_card_id)
 	defending_card.this_card_flags.is_facedown = false
+	defending_card.update_card_information(defending_card.this_card_id)
 	
 	#First thing is to update the cards involved in battle so I can use them as references for calculations and stuff
 	$battle_visuals/visual_cardA.this_card_flags = attacking_card.this_card_flags
@@ -73,7 +78,7 @@ func do_battle(attacking_card : Node, defending_card : Node):
 	var attacker_stats : int = int($battle_visuals/visual_cardA.get_node("card_design/monster_features/atk_def/atk").get_text())
 	var defender_stats : int = int($battle_visuals/visual_cardB.get_node("card_design/monster_features/atk_def/atk").get_text())
 	if defending_card.this_card_flags.is_defense_position:
-		defender_stats = int($battle_visuals/visual_cardB.get_node("monster_features/atk_def/def").get_text())
+		defender_stats = int($battle_visuals/visual_cardB.get_node("card_design/monster_features/atk_def/def").get_text())
 	
 	var battle_loser_anim_path : Node = null
 	var LP_damage : int = 0
@@ -100,6 +105,7 @@ func do_battle(attacking_card : Node, defending_card : Node):
 	#Do all the animations of this battle
 	$battle_visuals/visual_cardA/card_design/card_back.show()
 	$battle_visuals/visual_cardB/card_design/card_back.show()
+	$battle_visuals/visual_cardB/card_design.show() #this is to make sure the card B is visible even after it's hidden by a direct attack
 	$battle_visuals.show()
 	
 	#First the black background fade in
@@ -145,21 +151,21 @@ func do_battle(attacking_card : Node, defending_card : Node):
 	#Figure out which card should be destroyed (Placed here to be visually hidden by the animations of battle)
 	if attacker_stats > defender_stats:
 		#Destroy defender
-		destroy_a_card(card_ready_to_defend)
+		destroy_a_card(defending_card)
 	elif attacker_stats == defender_stats:
 		#If the stats are equal, destroy neither or both, depending on defender battle position
-		if card_ready_to_defend.this_card_flags.is_defense_position == false: #atk pos, destroy both
+		if defending_card.this_card_flags.is_defense_position == false: #atk pos, destroy both
 			destroy_a_card(card_ready_to_attack)
-			destroy_a_card(card_ready_to_defend)
+			destroy_a_card(defending_card)
 		else: #just flip defense card face up
-			card_ready_to_defend.this_card_flags.is_facedown = false
-			card_ready_to_defend.get_node("card_design/card_back").hide()
+			defending_card.this_card_flags.is_facedown = false
+			defending_card.get_node("card_design/card_back").hide()
 	elif attacker_stats < defender_stats:
 		#If attacker lost, only destroy it if defender is not in defense position
-		if card_ready_to_defend.this_card_flags.is_defense_position == false:
+		if defending_card.this_card_flags.is_defense_position == false:
 			destroy_a_card(card_ready_to_attack)
-		card_ready_to_defend.this_card_flags.is_facedown = false
-		card_ready_to_defend.get_node("card_design/card_back").hide()
+		defending_card.this_card_flags.is_facedown = false
+		defending_card.get_node("card_design/card_back").hide()
 	
 	#Get rid of the Battle Loser
 	if battle_loser_anim_path != null:
@@ -205,7 +211,11 @@ func do_battle(attacking_card : Node, defending_card : Node):
 		else: #Reduce from COM LP
 			change_lifepoints("enemy", LP_damage)
 	else:
-		print("Back to Enemy's Main Phase")
+		#Reduce LP as intended
+		if defender_stats > attacker_stats: #Reduce from player LP
+			change_lifepoints("enemy", LP_damage)
+		else: #Reduce from COM LP
+			change_lifepoints("player", LP_damage)
 
 func _on_direct_attack_area_button_up():
 	#prevent direct attacks on first turn
@@ -234,6 +244,7 @@ func do_direct_attack(attacking_card):
 	#Set the attacker flags
 	attacking_card.this_card_flags.has_battled = true
 	attacking_card.this_card_flags.is_facedown = false
+	attacking_card.update_card_information(attacking_card.this_card_id)
 	
 	#First thing is to update the cards involved in battle so I can use them as references for calculations and stuff
 	$battle_visuals/visual_cardA.this_card_flags = attacking_card.this_card_flags
@@ -241,14 +252,12 @@ func do_direct_attack(attacking_card):
 	
 	#Calculation and logic
 	var attacker_stats : int = int($battle_visuals/visual_cardA.get_node("card_design/monster_features/atk_def/atk").get_text())
-	var battle_loser_anim_path : Node = $battle_visuals/visual_cardB
 	var LP_damage : int = attacker_stats
 	var LP_position : Vector2 = Vector2(696, 21)
 	
 	#RESET ANIMATION STUFF BEFORE STARTING
 	$battle_visuals.modulate = Color(1,1,1,1)
 	$battle_visuals/visual_cardA.modulate = Color(1,1,1,1)
-	$battle_visuals/visual_cardB.modulate = Color(1,1,1,1)
 	$battle_visuals/darken_screen.modulate  = Color(1,1,1,1)
 	$battle_visuals/LP_damage.modulate = Color(1,1,1,1)
 	
@@ -303,12 +312,13 @@ func do_direct_attack(attacking_card):
 	if attacking_card.get_parent().get_name().find("player") != -1: #it's players turn
 		print("Back to Player's Main Phase")
 		attacking_card.cancel_all_combat_controls() #hide the combat controls for the card that already attacked
-		get_node("../").change_field_view() #return back to player's side of the field
+		get_node("../").change_field_view() #return back to the other side of the field
 		GAME_PHASE = "main_phase"
 		change_lifepoints("enemy", LP_damage)
 	else:
 		print("Back to Enemy's Main Phase")
-
+		GAME_PHASE = "enemy_main_phase"
+		change_lifepoints("player", LP_damage)
 
 #---------------------------------------------------------------------------------------------------
 var LP_info_node : Node
@@ -317,7 +327,7 @@ func change_lifepoints(target : String, LP_damage : int):
 		return
 	
 	var tween_LP : Node = get_node("../user_interface/top_info_box/tween_LP")
-	var constant_timer : float = clamp(LP_damage * 0.05, 0.2, 1.2)
+	var constant_timer : float = clamp(LP_damage * 0.05, 0.2, 0.8)
 	match target:
 		"player": LP_info_node = get_node("../user_interface/top_info_box/player_info/lifepoints")
 		"enemy": LP_info_node = get_node("../user_interface/top_info_box/com_info/lifepoints")
@@ -327,6 +337,4 @@ func change_lifepoints(target : String, LP_damage : int):
 
 func LP_method_for_tween(value : int):
 	LP_info_node.text = String(value)
-
-
 

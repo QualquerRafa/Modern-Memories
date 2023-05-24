@@ -23,14 +23,24 @@ func enemy_draw_phase():
 		for _i in range(cards_to_pull):
 			enemy_hand.append(enemy_deck[0]) #add to the hand the first card from deck
 			enemy_deck.remove(0) #remove that same card from deck
+			
+			#Update visual counter for deck size
+			get_node("../../user_interface/top_info_box/com_info/deck").text = String(enemy_deck.size())
+			$enemy_timer.start(0.2); yield($enemy_timer, "timeout")
 	else:
 		print("Enemy deck run out")
 	
 	#Fixed Hand for testing purposes
 	#enemy_hand = []
 	
+	#Reset the 'has_battled' for all monsters on the field
+	for i in range(5):
+		var this_i_monster : Node = get_node("../../duel_field/enemy_side_zones/monster_" + String(i))
+		if this_i_monster.is_visible():
+			this_i_monster.this_card_flags.has_battled = false
+	
 	#Wait some time during draw_phase for better game flow
-	$enemy_timer.start(1); yield($enemy_timer, "timeout")
+	$enemy_timer.start(0.5); yield($enemy_timer, "timeout")
 	
 	#Move to enemy's next phase
 	enemy_choosing_card_to_play()
@@ -69,14 +79,14 @@ func enemy_choosing_card_to_play():
 	
 	var choose_a_spelltrap : String = "" #card_id
 	if enemy_monsters_on_field > player_monsters_sorted_by_atk.size():
-		print("Enemy try a spell")
+		#print("Enemy try a spell")
 		choose_a_spelltrap = enemy_try_to_choose_spelltrap() #If enemy has more monsters than the player, it can try to play a Spell or Trap Card
 		if choose_a_spelltrap != "":
 			final_card_to_play = ["spelltrap", choose_a_spelltrap]
 	
 	var choose_a_monster : Array = [] #card_id, [cards_to_fuse...]
 	if final_card_to_play[0] != "spelltrap": #If the Enemy hasn't already chosen a spell/trap to play, try to play a monster (most usual case)
-		print("Enemy try a monster")
+		#print("Enemy try a monster")
 		choose_a_monster = enemy_try_to_choose_monster(player_monsters_sorted_by_atk)
 		if choose_a_monster.size() != 0:
 			final_card_to_play = ["monster", choose_a_monster[0], choose_a_monster[1]]
@@ -190,9 +200,173 @@ func enemy_play_that_card(card_to_play_array : Array):
 
 #-------------------------------------------------------------------------------
 func enemy_main_phase():
+	GAME_LOGIC.GAME_PHASE = "enemy_main_phase"
 	
-	#Move to enemy's next phase
+	#Get monster count
+	var enemy_monsters_on_field : int = 0
+	for i in range(5):
+		if get_node("../../duel_field/enemy_side_zones/monster_" + String(i)).is_visible():
+			enemy_monsters_on_field += 1
+	
+	#Tries ideally once for each monster on COM's side
+	for _loop_count in range(enemy_monsters_on_field):#+1):
+		print("---- Start of loop ", _loop_count, " ----")
+		#Get the currently strongest monster and figure out what to do with it
+		var current_strongest_monster = get_com_strongest_monster()
+		var player_monsters_array = get_player_monsters_array()
+		
+		#Catch the case where COM doesn't have a monster to attack
+		if current_strongest_monster == null:
+			print("COM doesn't have an available monster, ending main_phase")
+			enemy_end_turn()
+			return
+		
+		#Do the fake thinking when Player only has facedown monsters
+		#TODO
+		#not attack, go to the next loop interaction
+		#will attack, just pass and execute code as normal
+		
+		#Timer for better workflow before each monster iteraction
+		var battle_timer = 1
+		$enemy_timer.start(battle_timer*0.8); yield($enemy_timer, "timeout")
+		
+		#Try a direct attack
+		if player_monsters_array.size() == 0:
+			print("-try direct attack")
+			#DIRECT ATTACK
+			if current_strongest_monster.this_card_flags.is_defense_position == true:
+				current_strongest_monster.toggle_battle_position()
+				$enemy_timer.start(battle_timer/2); yield($enemy_timer, "timeout")
+			GAME_LOGIC.do_direct_attack(current_strongest_monster)
+			
+			#Battle Timer for better workflow
+			$enemy_timer.start(battle_timer); yield($enemy_timer, "timeout")
+		#Player has monsters, do the appropriate checks for each of COM's cards 
+		else:
+			print("-try regular attack")
+			var com_atk = int(current_strongest_monster.get_node("card_design/monster_features/atk_def/atk").text)
+			var player_atk = int(player_monsters_array[0].get_node("card_design/monster_features/atk_def/atk").text)
+			var player_def = int(player_monsters_array[0].get_node("card_design/monster_features/atk_def/def").text)
+			
+			#Define what status to compare
+			var player_status = player_atk
+			if player_monsters_array[0].this_card_flags.is_defense_position == true:
+				player_status = player_def
+			
+			#Decide between attacking a monster or being set to defense position
+			if com_atk > player_status:
+				print("--com atk")
+				#ATTACK
+				if current_strongest_monster.this_card_flags.is_defense_position == true:
+					current_strongest_monster.toggle_battle_position()
+					$enemy_timer.start(battle_timer/2); yield($enemy_timer, "timeout")
+				GAME_LOGIC.do_battle(current_strongest_monster, player_monsters_array[0])
+				
+				#Battle Timer for better workflow
+				$enemy_timer.start(battle_timer); yield($enemy_timer, "timeout")
+				
+			#If it's a Tie, COM will self destruct for monsters bigger than 3000
+			elif com_atk == player_atk and player_atk >= 3000: #TODO check if COM has more monsters than player, then a suicide attack is OK
+				print("--com tie")
+				if current_strongest_monster.this_card_flags.is_defense_position == true:
+					current_strongest_monster.toggle_battle_position()
+					$enemy_timer.start(battle_timer/2); yield($enemy_timer, "timeout")
+				GAME_LOGIC.do_battle(current_strongest_monster, player_monsters_array[0])
+				
+				#Battle Timer for better workflow
+				$enemy_timer.start(battle_timer); yield($enemy_timer, "timeout")
+				
+			#COM's monster wasn't strong enough to battle
+			else:
+				print("--check for seconds")
+				#Check for the second strongest monster on the field, decide if it's worth to fight it
+				if player_monsters_array.size() > 1:
+					var player_atk2 = int(player_monsters_array[1].get_node("card_design/monster_features/atk_def/atk").text)
+					var player_def2 = int(player_monsters_array[1].get_node("card_design/monster_features/atk_def/def").text)
+					#If COM is stronger than the second monster and won't be vulnerable to lose the duel
+					if com_atk > player_atk2 and player_atk - com_atk <= int(get_node("../../user_interface/top_info_box/com_info/lifepoints").text) + 100 :
+						if current_strongest_monster.this_card_flags.is_defense_position == true:
+							current_strongest_monster.toggle_battle_position()
+							$enemy_timer.start(battle_timer/2); yield($enemy_timer, "timeout")
+						GAME_LOGIC.do_battle(current_strongest_monster, player_monsters_array[1])
+						
+						#Battle Timer for better workflow
+						$enemy_timer.start(battle_timer); yield($enemy_timer, "timeout")
+						
+					#Attack in case the second strongest is in def position
+					elif player_monsters_array[1].this_card_flags.is_defense_position == true:
+						print("---check for second")
+						if com_atk > player_def2:
+							if current_strongest_monster.this_card_flags.is_defense_position == true:
+								current_strongest_monster.toggle_battle_position()
+								$enemy_timer.start(battle_timer/2); yield($enemy_timer, "timeout")
+							GAME_LOGIC.do_battle(current_strongest_monster, player_monsters_array[1])
+							
+							#Battle Timer for better workflow
+							$enemy_timer.start(battle_timer); yield($enemy_timer, "timeout")
+		
+		#Final additional timer before next loop iteration so battles don't overlap
+		if current_strongest_monster.this_card_flags.has_battled:
+			print("is waiting extra timer")
+			$enemy_timer.start(battle_timer); yield($enemy_timer, "timeout")
+	
+	#After all monsters were checked for attack, check them individually to be set in Defense Position if it's worth it
+	for i in range(5):
+		var monster_being_checked = get_node("../../duel_field/enemy_side_zones/monster_" + String(i))
+		if monster_being_checked.is_visible() and monster_being_checked.this_card_flags.has_battled == false and monster_being_checked.this_card_flags.is_defense_position == false:
+			print("-try to put monster in Defense position")
+			var com_atk = int(monster_being_checked.get_node("card_design/monster_features/atk_def/atk").text)
+			var com_def = int(monster_being_checked.get_node("card_design/monster_features/atk_def/def").text)
+			var player_atk = 0
+			var player_monster_array = get_player_monsters_array()
+			if player_monster_array.size() > 0: player_atk = int(player_monster_array[0].get_node("card_design/monster_features/atk_def/atk").text)
+			
+			if com_def >= com_atk or com_def >= player_atk or com_atk <= 1000 or player_atk - com_atk >= int(get_node("../../user_interface/top_info_box/com_info/lifepoints").text):
+				print("--monster was set to defense")
+				monster_being_checked.toggle_battle_position()
+				monster_being_checked.this_card_flags.has_battled = true
+				
+				#Timer for better workflow
+				$enemy_timer.start(1); yield($enemy_timer, "timeout")
+	
+	#After everything, go to End Phase
 	enemy_end_turn()
+
+#---- AUXILIARY FUNCTIONS ----#
+func get_com_strongest_monster():
+	var strongest_monster_node #the node to return at the end
+	
+	var ref_attacking_value = 0
+	for i in range(5):
+		if get_node("../../duel_field/enemy_side_zones/monster_" + String(i)).is_visible():
+			var com_monster = get_node("../../duel_field/enemy_side_zones/monster_" + String(i))
+			if int(com_monster.get_node("card_design/monster_features/atk_def/atk").text) >= ref_attacking_value and com_monster.this_card_flags.has_battled != true:
+				ref_attacking_value = int(com_monster.get_node("card_design/monster_features/atk_def/atk").text) #integer of mini_card ATK text
+				strongest_monster_node = com_monster
+	
+	return strongest_monster_node
+
+func get_player_monsters_array():
+	var initial_player_monster_array = [] #the array to return at the end
+	for i in range(5):
+		if get_node("../../duel_field/player_side_zones/monster_" + String(i)).is_visible():
+			var player_monster_node = get_node("../../duel_field/player_side_zones/monster_" + String(i))
+			initial_player_monster_array.append(player_monster_node)
+	
+	#organize the array order by strongest status
+	var temp_atk_array = []
+	for i in range(initial_player_monster_array.size()):
+		temp_atk_array.append(int(initial_player_monster_array[i].get_node("card_design/monster_features/atk_def/atk").text))
+	temp_atk_array.sort()
+	
+	var player_monsters_array = []
+	for i in range(temp_atk_array.size()):
+		for j in range(initial_player_monster_array.size()):
+			if temp_atk_array[i] == int(initial_player_monster_array[j].get_node("card_design/monster_features/atk_def/atk").text) and !(player_monsters_array.has(initial_player_monster_array[j])):
+				player_monsters_array.append(initial_player_monster_array[j])
+	player_monsters_array.invert() #for some reason that is unclear to me right now, I had to invert to get the expected order from Highest to Lowest
+	
+	return player_monsters_array
 
 #-------------------------------------------------------------------------------
 func enemy_end_turn():
@@ -270,17 +444,20 @@ func enemy_try_to_choose_monster(player_monsters_sorted_by_atk):
 				for j in range(4-i):
 					card_b = enemy_hand[i+j+1]
 					var checking_for_fusion = GAME_LOGIC.fusion_list.check_for_fusion(card_a, card_b)
-					print(checking_for_fusion)
+					#print(checking_for_fusion)
 					#FIX TO-DO TODO: check if [1] is not an array, it is when it's an "equip fusion". Basically fix so this fusion can also result in an equipment
-					if checking_for_fusion[1] == true: 
-						print(CardList.card_list[card_a].card_name, " and ", CardList.card_list[card_b].card_name, " resulting in ", CardList.card_list[checking_for_fusion[0]].card_name)
-						chosen_monster = [card_a, card_b]
-						return chosen_monster
+					if typeof(checking_for_fusion[1]) != TYPE_ARRAY:
+						if checking_for_fusion[1] == true: 
+							#print(CardList.card_list[card_a].card_name, " and ", CardList.card_list[card_b].card_name, " resulting in ", CardList.card_list[checking_for_fusion[0]].card_name)
+							chosen_monster = [card_a, card_b]
+							return chosen_monster
+					else: #it returned an equip array
+						print("EQUIP not correctly implemented. This is just Break prevention.")
 		
 		#Couldn't perform any fusion, fallback and play the highest def found in previous stage of this code
 		if chosen_monster.size() == 0:
 			print("Enemy fallback to highest Def it could use")
 			chosen_monster = [fallback_highest_def_id, []]
 	
-	print("Enemy Hand was: " + CardList.card_list[enemy_hand[0]].card_name, ", " + CardList.card_list[enemy_hand[1]].card_name + ", " + CardList.card_list[enemy_hand[2]].card_name + ", " + CardList.card_list[enemy_hand[3]].card_name + ", " + CardList.card_list[enemy_hand[4]].card_name)
+	#print("Enemy Hand was: " + CardList.card_list[enemy_hand[0]].card_name, ", " + CardList.card_list[enemy_hand[1]].card_name + ", " + CardList.card_list[enemy_hand[2]].card_name + ", " + CardList.card_list[enemy_hand[3]].card_name + ", " + CardList.card_list[enemy_hand[4]].card_name)
 	return chosen_monster #card_id, [cards_to_fuse...]
