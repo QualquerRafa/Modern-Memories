@@ -7938,26 +7938,26 @@ text = "40"
 align = 1
 
 [node name="deck_cards" type="ScrollContainer" parent="panel_right"]
-margin_left = 612.0
+margin_left = 644.0
 margin_top = 107.0
-margin_right = 1308.0
+margin_right = 1278.0
 margin_bottom = 550.0
 rect_min_size = Vector2( 0, 443 )
 theme = SubResource( 5 )
 scroll_horizontal_enabled = false
 
 [node name="MarginContainer" type="MarginContainer" parent="panel_right/deck_cards"]
-margin_right = 696.0
+margin_right = 632.0
 margin_bottom = 428.0
-custom_constants/margin_right = 40
+custom_constants/margin_right = 8
 custom_constants/margin_top = 40
-custom_constants/margin_left = 40
+custom_constants/margin_left = 8
 custom_constants/margin_bottom = 40
 
 [node name="GridContainer" type="GridContainer" parent="panel_right/deck_cards/MarginContainer"]
-margin_left = 40.0
+margin_left = 8.0
 margin_top = 40.0
-margin_right = 656.0
+margin_right = 624.0
 margin_bottom = 388.0
 size_flags_vertical = 3
 custom_constants/vseparation = 4
@@ -8203,6 +8203,138 @@ margin_left = 558.0
 margin_top = 264.0
 margin_right = 616.0
 margin_bottom = 348.0
+
+[node name="deck_buttons" type="HBoxContainer" parent="panel_right"]
+modulate = Color( 1, 1, 1, 0.0941176 )
+margin_left = 642.0
+margin_top = 498.0
+margin_right = 1279.0
+margin_bottom = 588.0
+alignment = 1
+
+[node name="button4" type="Control" parent="panel_right/deck_buttons"]
+margin_left = 72.0
+margin_right = 192.0
+margin_bottom = 90.0
+rect_min_size = Vector2( 120, 0 )
+
+[node name="auto_deck" type="Button" parent="panel_right/deck_buttons/button4"]
+margin_left = 4.0
+margin_right = 117.0
+margin_bottom = 84.0
+rect_scale = Vector2( 1.1, 1 )
+rect_pivot_offset = Vector2( 56, 25 )
+focus_mode = 0
+enabled_focus_mode = 0
+icon = ExtResource( 15 )
+flat = true
+
+[node name="label" type="Label" parent="panel_right/deck_buttons/button4"]
+margin_left = 10.0
+margin_top = 17.0
+margin_right = 111.0
+margin_bottom = 61.0
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+custom_fonts/font = SubResource( 4 )
+text = "Auto"
+align = 1
+valign = 1
+
+[node name="button1" type="Control" parent="panel_right/deck_buttons"]
+margin_left = 196.0
+margin_right = 316.0
+margin_bottom = 90.0
+rect_min_size = Vector2( 120, 0 )
+
+[node name="clear_deck" type="Button" parent="panel_right/deck_buttons/button1"]
+margin_left = 4.0
+margin_right = 117.0
+margin_bottom = 84.0
+rect_scale = Vector2( 1.1, 1 )
+rect_pivot_offset = Vector2( 56, 25 )
+focus_mode = 0
+enabled_focus_mode = 0
+icon = ExtResource( 15 )
+flat = true
+
+[node name="label" type="Label" parent="panel_right/deck_buttons/button1"]
+margin_left = 10.0
+margin_top = 17.0
+margin_right = 111.0
+margin_bottom = 61.0
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+custom_fonts/font = SubResource( 4 )
+text = "Clear"
+align = 1
+valign = 1
+
+[node name="button2" type="Control" parent="panel_right/deck_buttons"]
+margin_left = 320.0
+margin_right = 440.0
+margin_bottom = 90.0
+rect_min_size = Vector2( 120, 0 )
+
+[node name="import_deck" type="Button" parent="panel_right/deck_buttons/button2"]
+margin_left = 4.0
+margin_right = 117.0
+margin_bottom = 84.0
+rect_scale = Vector2( 1.1, 1 )
+rect_pivot_offset = Vector2( 56, 25 )
+focus_mode = 0
+enabled_focus_mode = 0
+icon = ExtResource( 15 )
+flat = true
+
+[node name="label" type="Label" parent="panel_right/deck_buttons/button2"]
+margin_left = 10.0
+margin_top = 17.0
+margin_right = 111.0
+margin_bottom = 61.0
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+custom_fonts/font = SubResource( 4 )
+text = "Import"
+align = 1
+valign = 1
+
+[node name="button3" type="Control" parent="panel_right/deck_buttons"]
+margin_left = 444.0
+margin_right = 564.0
+margin_bottom = 90.0
+rect_min_size = Vector2( 120, 0 )
+
+[node name="export_deck" type="Button" parent="panel_right/deck_buttons/button3"]
+margin_left = 4.0
+margin_right = 117.0
+margin_bottom = 84.0
+rect_scale = Vector2( 1.1, 1 )
+rect_pivot_offset = Vector2( 56, 25 )
+focus_mode = 0
+enabled_focus_mode = 0
+icon = ExtResource( 15 )
+flat = true
+
+[node name="label" type="Label" parent="panel_right/deck_buttons/button3"]
+margin_left = 10.0
+margin_top = 17.0
+margin_right = 111.0
+margin_bottom = 61.0
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+custom_fonts/font = SubResource( 4 )
+text = "Export"
+align = 1
+valign = 1
 
 [node name="user_interface" type="Node2D" parent="."]
 

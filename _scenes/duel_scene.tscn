@@ -2083,6 +2083,13 @@ margin_bottom = 107.0
 rect_min_size = Vector2( 100, 33 )
 text = "print phase"
 
+[node name="change_field_view" type="Button" parent="Debug Menu/VBoxContainer"]
+margin_top = 111.0
+margin_right = 100.0
+margin_bottom = 144.0
+rect_min_size = Vector2( 100, 33 )
+text = "change field"
+
 [node name="scene_transitioner" parent="." instance=ExtResource( 24 )]
 visible = false
 
@@ -2107,3 +2114,4 @@ visible = false
 [connection signal="button_up" from="Debug Menu/VBoxContainer/reset_scene_button" to="Debug Menu" method="_on_reset_scene_button_button_up"]
 [connection signal="button_up" from="Debug Menu/VBoxContainer/change_card_id" to="Debug Menu" method="_on_change_card_id_button_up"]
 [connection signal="button_up" from="Debug Menu/VBoxContainer/print_phase" to="Debug Menu" method="_on_print_phase_button_up"]
+[connection signal="button_up" from="Debug Menu/VBoxContainer/change_field_view" to="Debug Menu" method="_on_change_field_view_button_up"]

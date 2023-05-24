@@ -136,7 +136,7 @@ texture = ExtResource( 12 )
 centered = false
 
 [node name="duelist_cards" type="ScrollContainer" parent="panel_right"]
-margin_left = 388.0
+margin_left = 416.0
 margin_top = 63.0
 margin_right = 1270.0
 margin_bottom = 577.0
@@ -145,17 +145,17 @@ theme = SubResource( 10 )
 scroll_horizontal_enabled = false
 
 [node name="MarginContainer" type="MarginContainer" parent="panel_right/duelist_cards"]
-margin_right = 854.0
+margin_right = 826.0
 margin_bottom = 1696.0
 custom_constants/margin_right = 12
 custom_constants/margin_top = 30
-custom_constants/margin_left = 40
+custom_constants/margin_left = 12
 custom_constants/margin_bottom = 22
 
 [node name="GridContainer" type="GridContainer" parent="panel_right/duelist_cards/MarginContainer"]
-margin_left = 40.0
+margin_left = 12.0
 margin_top = 30.0
-margin_right = 842.0
+margin_right = 814.0
 margin_bottom = 1674.0
 size_flags_vertical = 3
 custom_constants/vseparation = 20
