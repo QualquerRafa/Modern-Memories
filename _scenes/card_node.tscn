@@ -438,5 +438,6 @@ centered = false
 [connection signal="button_up" from="combat_controls/defense_button" to="." method="_on_defense_button_button_up"]
 [connection signal="mouse_entered" from="combat_controls/defense_button" to="." method="_on_defense_button_mouse_entered"]
 [connection signal="mouse_exited" from="combat_controls/defense_button" to="." method="_on_defense_button_mouse_exited"]
+[connection signal="button_up" from="combat_controls/activate_button" to="." method="_on_activate_button_button_up"]
 [connection signal="mouse_entered" from="combat_controls/activate_button" to="." method="_on_defense_button_mouse_entered"]
 [connection signal="mouse_exited" from="combat_controls/activate_button" to="." method="_on_defense_button_mouse_exited"]
