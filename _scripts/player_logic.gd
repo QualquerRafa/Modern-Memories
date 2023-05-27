@@ -33,7 +33,8 @@ func _ready():
 func start_player_turn():
 	#Increment the turn counter
 	turn_count += 1
-	print("------------------------------- TURN ", turn_count," -------------------------------")
+	get_node("../../user_interface/top_info_box/field_info/turn").text = "Turn " + String(turn_count)
+	#print("------------------------------- TURN ", turn_count," -------------------------------")
 	
 	#Start player turn with hand hidden
 	get_node("../../player_hand").hide()
@@ -140,11 +141,12 @@ func get_field_slot_for_new_card(passed_card_to_summon):
 					return
 		
 		#If it's equip and player has at least one monster on the field, show top row
-		if CardList.card_list[card_to_summon.this_card_id].type == "equip":
-			for i in range(5):
-				if get_node("../../duel_field/player_side_zones/monster_" + String(i)).is_visible():
-					show_player_field_slots("monster_field_slots")
-					return
+		#if CardList.card_list[card_to_summon.this_card_id].type == "equip":
+			#for i in range(5):
+				#if get_node("../../duel_field/player_side_zones/monster_" + String(i)).is_visible():
+					#show_player_field_slots("monster_field_slots")
+					#show_player_field_slots("spelltrap_field_slots")
+					#return
 		
 		#If there wasn't any reason to show top row, just show bottom row then
 		show_player_field_slots("spelltrap_field_slots")
@@ -216,9 +218,9 @@ func player_try_to_summon(field_slot_to_summon : int):
 	if CardList.card_list[card_to_summon.this_card_id].attribute in ["spell", "trap"]: kind_of_card = "spelltrap"
 	
 	#If there is a card on the selected 'field_slot_to_summon', add it to the beginning of 'fusion_order' list
-	if kind_of_card == "spelltrap" and CardList.card_list[card_to_summon.this_card_id].type == "equip":
+	#if kind_of_card == "spelltrap" and CardList.card_list[card_to_summon.this_card_id].type == "equip":
 		#If it's an equip, FORCE IT to be placed on the top row if it's on the same column as a monster
-		kind_of_card = "monster"
+		#kind_of_card = "monster"
 	if get_node("../../duel_field/player_side_zones/" + kind_of_card + "_" + String(field_slot_to_summon)).is_visible():
 		card_on_slot = get_node("../../duel_field/player_side_zones/" + kind_of_card + "_" + String(field_slot_to_summon))
 		if !(fusion_order.has(card_on_slot)):
@@ -235,7 +237,8 @@ func player_try_to_summon(field_slot_to_summon : int):
 			final_card_to_summon = card_to_summon
 			
 			#remove that card from player's hand
-			player_hand.remove(player_hand.find(card_to_summon.this_card_id))
+			if player_hand.find(card_to_summon.this_card_id) != -1:
+				player_hand.remove(player_hand.find(card_to_summon.this_card_id))
 			
 			summon_final_card(final_card_to_summon, field_slot_to_summon)
 		
@@ -337,9 +340,13 @@ func call_fusion_logic(passing_field_slot_to_summon):
 				fusion_result.this_card_flags.is_defense_position = false #Force fusion results to be in ATK
 			
 		_: 
-			#print("type of fusion_information_array[1] didn't match anything: " , fusion_information_array)
 			#Safeguard reset fusion_type after any failed fusion
 			fusion_result.this_card_flags.fusion_type = null
+			
+			#Correction to keep the colored border when a sucessfull Fusion Monster fails to fuse with a spell
+			if $fusion_animation/fusion_order_0.this_card_flags.fusion_type != null or $fusion_animation/fusion_order_1.this_card_flags.fusion_type != null:
+				if CardList.card_list[$fusion_animation/fusion_order_0.this_card_id].attribute in ["spell", "trap"] or CardList.card_list[$fusion_animation/fusion_order_1.this_card_id].attribute in ["spell", "trap"]:
+					fusion_result.this_card_flags.fusion_type = "fusion"
 	
 	#Animate the showing of the result
 	var fusion_result_start_size : Vector2 = Vector2(0.7, 0.7)
@@ -381,6 +388,10 @@ func summon_final_card(final_card_to_summon, field_slot_to_summon):
 	node_slot_to_change.update_card_information(final_card_to_summon.this_card_id)
 	node_slot_to_change.show()
 	
+	#Check if the monster will get a Field Bonus
+	var field_name_attribute = GAME_LOGIC.get_parent().get_node("user_interface/top_info_box/field_info/field_name").text.split(" ", true)[0]
+	GAME_LOGIC.get_node("effects").field_bonus(field_name_attribute)
+	
 	#Clear the Dummy 'fusion_result' node after it's information was already used
 	GAME_LOGIC.reset_a_card_node_properties($fusion_animation/fusion_result_card)
 	
@@ -404,16 +415,26 @@ func summon_final_card(final_card_to_summon, field_slot_to_summon):
 	tween_field_cards.start()
 	$player_timer.start(summon_animation_time); yield($player_timer, "timeout")
 	#yield(get_tree().create_timer(summon_animation_time), "timeout")
-
+	
+	#Check if this card will get a field bonus
+	var field_name = GAME_LOGIC.get_parent().get_node("user_interface/top_info_box/field_info/field_name").text.split(" ", true)[0]
+	get_node("../effects").field_bonus(field_name)
+	
 	#If it's facedown, do an extra animation of card back transparency toggling
 	if node_slot_to_change.this_card_flags.is_facedown == true:
 		node_slot_to_change.facedown_transparency_animation("make_transparent")
+	#If it's not facedown, check if it has an effect to activate
+	else:
+		if CardList.card_list[final_card_to_summon.this_card_id].effect.size() > 0:
+			GAME_LOGIC.effect_activation(node_slot_to_change, "on_summon") #important to pass 'node_slot_to_change' so effects can target the exact card on the field
+			yield(get_node("../effects"), "effect_fully_executed")
 	
 	#Show again the button to look at the other side of the field, and end player's turn
 	get_node("../../").toggle_visibility_of_change_field_view_button()
 	get_node("../../").toggle_visibility_of_turn_end_button()
 	
-	#Automatically update User Interface with the fusion result information
-	get_node("../../").update_user_interface(node_slot_to_change)
+	#Automatically update User Interface with the resulting card information (if it's still visible)
+	if node_slot_to_change.is_visible():
+		get_node("../../").update_user_interface(node_slot_to_change)
 	
 	GAME_LOGIC.GAME_PHASE = "main_phase" #finished summoning, FINALLY lmao

@@ -10,6 +10,7 @@ var this_card_flags : Dictionary = {
 	"fusion_type" : null,
 	"atk_up" : 0,
 	"def_up" : 0,
+	"has_activated_effect" : false,
 }
 
 #-------------------------------------------------------------------------------
@@ -163,7 +164,7 @@ func _on_card_node_button_up():
 				card_self_tween.start()
 			
 			#What to do with a clicked card if it's on a card on the field
-			if GAME_LOGIC.GAME_PHASE == "main_phase" or GAME_LOGIC.GAME_PHASE == "choosing_combat_options":
+			elif GAME_LOGIC.GAME_PHASE == "main_phase" or GAME_LOGIC.GAME_PHASE == "choosing_combat_options":
 				#Make sure the player can't call the combat controls for enemy cards
 				if self.get_parent().get_name().find("enemy") != -1:
 					return
@@ -175,12 +176,18 @@ func _on_card_node_button_up():
 					show_card_combat_controls()
 			
 			#What to do with a card if the player is choosing a enemy target to battle
-			if GAME_LOGIC.GAME_PHASE == "selecting_combat_target":
+			elif GAME_LOGIC.GAME_PHASE == "selecting_combat_target":
 				if self.get_parent().get_name().find("enemy") != -1:
 					GAME_LOGIC.card_ready_to_defend = self
 					
 					#Call battle phase now that both cards are defined
 					GAME_LOGIC.do_battle(GAME_LOGIC.card_ready_to_attack, GAME_LOGIC.card_ready_to_defend)
+			
+			#What to do when effects.gd activated an equip card from the field and is waiting for the player to pick it's target
+			elif GAME_LOGIC.GAME_PHASE == "activating_equip_from_field":
+				if self.get_parent().get_name().find("player") != -1: #can only click on your own card
+					print(CardList.card_list[self.this_card_id].card_name)
+					GAME_LOGIC.get_node("effects").equip_from_field_to_target(self) #pass itself as the target_node to continue the effect
 		
 		_: #No scene defined
 			print("No defined function for this Scene")
@@ -492,3 +499,7 @@ func _on_attack_button_button_up():
 	#Show enemy field and button to go back and cancel battle phase
 	get_node("../../../").change_field_view()
 	get_node("../../../").toggle_visibility_of_change_field_view_button()
+
+func _on_activate_button_button_up():
+	#This calls for the activation of a facedown spell/trap card on the field
+	GAME_LOGIC.effect_activation(self, "on_flip")

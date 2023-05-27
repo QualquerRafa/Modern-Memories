@@ -9,6 +9,12 @@ const atk_orientation_y_scale : float = 0.517
 const def_orientation_y_scale : float = 0.517 #when in def position, shorten it just a little
 
 #------------------------------------------------------------------------------
+#EFFECTS LOGIC
+func effect_activation(card_node : Node, type_of_activation : String):
+	#pass this exactly as is to the effects script
+	$effects.call_effect(card_node, type_of_activation)
+
+#------------------------------------------------------------------------------
 #FUSION LOGIC
 const fusion_list_gd = preload("res://_scripts/fusions.gd")
 var fusion_list = fusion_list_gd.new()
@@ -34,6 +40,7 @@ func reset_a_card_node_properties(card_node_to_reset):
 	"fusion_type" : null,
 	"atk_up" : 0,
 	"def_up" : 0,
+	"has_activated_effect" : false,
 	}
 
 func destroy_a_card(card_node_to_destroy):
@@ -99,8 +106,8 @@ func do_battle(attacking_card : Node, defending_card : Node):
 	$battle_visuals.modulate = Color(1,1,1,1)
 	$battle_visuals/visual_cardA.modulate = Color(1,1,1,1)
 	$battle_visuals/visual_cardB.modulate = Color(1,1,1,1)
-	$battle_visuals/darken_screen.modulate  = Color(1,1,1,1)
-	$battle_visuals/LP_damage.modulate = Color(1,1,1,1)
+	$battle_visuals/darken_screen.modulate  = Color(1,1,1,0)
+	$battle_visuals/LP_damage.modulate = Color(1,1,1,0)
 	
 	#Do all the animations of this battle
 	$battle_visuals/visual_cardA/card_design/card_back.show()
@@ -200,7 +207,7 @@ func do_battle(attacking_card : Node, defending_card : Node):
 	
 	#Finish Battle phase in different ways depending on whose turn it is
 	if attacking_card.get_parent().get_name().find("player") != -1: #it's players turn
-		print("Back to Player's Main Phase")
+		#print("Back to Player's Main Phase")
 		attacking_card.cancel_all_combat_controls() #hide the combat controls for the card that already attacked
 		get_node("../").change_field_view() #return back to player's side of the field
 		GAME_PHASE = "main_phase"
@@ -258,8 +265,8 @@ func do_direct_attack(attacking_card):
 	#RESET ANIMATION STUFF BEFORE STARTING
 	$battle_visuals.modulate = Color(1,1,1,1)
 	$battle_visuals/visual_cardA.modulate = Color(1,1,1,1)
-	$battle_visuals/darken_screen.modulate  = Color(1,1,1,1)
-	$battle_visuals/LP_damage.modulate = Color(1,1,1,1)
+	$battle_visuals/darken_screen.modulate  = Color(1,1,1,0)
+	$battle_visuals/LP_damage.modulate = Color(1,1,1,0)
 	
 	#Do all the animations of this battle
 	$battle_visuals/visual_cardA/card_design/card_back.show()
