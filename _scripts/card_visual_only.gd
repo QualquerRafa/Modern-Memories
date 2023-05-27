@@ -75,6 +75,8 @@ func update_card_information(card_id : String):
 				$card_design/background_texture.texture = load("res://_resources/card_design/texture_orange.png")
 			if this_card_flags.fusion_type == "fusion":
 				$card_design/background_texture.texture = load("res://_resources/card_design/texture_purple.png")
+			if this_card_flags.fusion_type == "ritual":
+				$card_design/background_texture.texture = load("res://_resources/card_design/texture_blue.png")
 	
 	#Determine if it will show 'monster_features' or 'spelltrap_features' on the design
 	match this_card.attribute:
@@ -107,8 +109,8 @@ func update_card_information(card_id : String):
 					get_node("card_design/monster_features/level/upto11/level" + String(i+1)).show()
 			
 			#Show ATK and DEF
-			$card_design/monster_features/atk_def/atk.text = String(this_card.atk + this_card_flags.atk_up)
-			$card_design/monster_features/atk_def/def.text = String(this_card.def + this_card_flags.def_up)
+			$card_design/monster_features/atk_def/atk.text = String(clamp(this_card.atk + this_card_flags.atk_up, 0, 9999))
+			$card_design/monster_features/atk_def/def.text = String(clamp(this_card.def + this_card_flags.def_up, 0, 9999))
 	
 	#Show or hide card_back based on 'is_facedown' flag
 	if this_card_flags.is_facedown == true:

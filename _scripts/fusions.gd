@@ -403,6 +403,8 @@ var specific_fusion_list = {
 	"00571_00582" : "00572",                                                        #Toon World + Masked Sorcerer = Toon Masked Sorcerer
 	"00574_00582" : "00573",                                                        #Toon World + Cannon Soldier = Toon Cannon Soldier
 	"00582_00593" : "00576",                                                        #Toon World + Harpie Lady = Toon Harpie Lady
+	"00582_00823" : "00565",                                                        #Toon World + Cyber Dragon = Toon Cyber Dragon
+	
 }
 
 #Fusions that consider a Keyworded card + correct attribute

@@ -53,8 +53,8 @@ func update_user_interface(card_node):
 			else:
 				$user_interface/card_info_box/atk_def.rect_position = atk_def_base_x_position
 			
-			$user_interface/card_info_box/atk_def/atk.text = String(this_card.atk + card_node.this_card_flags.atk_up)
-			$user_interface/card_info_box/atk_def/def.text = String(this_card.def + card_node.this_card_flags.def_up)
+			$user_interface/card_info_box/atk_def/atk.text = String(clamp(this_card.atk + card_node.this_card_flags.atk_up, 0, 9999))
+			$user_interface/card_info_box/atk_def/def.text = String(clamp(this_card.def + card_node.this_card_flags.def_up, 0, 9999))
 			
 			$user_interface/card_info_box/extra_icons/level_indicator.show()
 			$user_interface/card_info_box/extra_icons/level.show()

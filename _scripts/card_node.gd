@@ -81,6 +81,8 @@ func update_card_information(card_id : String):
 				$card_design/background_texture.texture = load("res://_resources/card_design/texture_orange.png")
 			if this_card_flags.fusion_type == "fusion":
 				$card_design/background_texture.texture = load("res://_resources/card_design/texture_purple.png")
+			if this_card_flags.fusion_type == "ritual":
+				$card_design/background_texture.texture = load("res://_resources/card_design/texture_blue.png")
 	
 	#Determine if it will show 'monster_features' or 'spelltrap_features' on the design
 	match this_card.attribute:
@@ -113,8 +115,8 @@ func update_card_information(card_id : String):
 					get_node("card_design/monster_features/level/upto11/level" + String(i+1)).show()
 			
 			#Show ATK and DEF
-			$card_design/monster_features/atk_def/atk.text = String(this_card.atk + this_card_flags.atk_up)
-			$card_design/monster_features/atk_def/def.text = String(this_card.def + this_card_flags.def_up)
+			$card_design/monster_features/atk_def/atk.text = String(clamp(this_card.atk + this_card_flags.atk_up, 0, 9999))
+			$card_design/monster_features/atk_def/def.text = String(clamp(this_card.def + this_card_flags.def_up, 0, 9999))
 	
 	#Show or hide card_back based on 'is_facedown' flag
 	if this_card_flags.is_facedown == true:
@@ -141,7 +143,11 @@ func _on_card_node_button_up():
 			#When Clicking on any card, update the user interface with this card's information
 			var dont_update_card_info_phases = ["choosing_combat_options", "card_options", "checking_for_fusions"]
 			if !(GAME_LOGIC.GAME_PHASE in dont_update_card_info_phases):
-				scene_root.update_user_interface(self)
+				#prevent the click on a facedown enemy card of showing the info on bottom bar
+				if self.get_parent().get_name().find("enemy") != -1 and self.this_card_flags.is_facedown:
+					pass
+				else:
+					scene_root.update_user_interface(self)
 			
 			#What to do with a clicked card if it's GAME_PHASE "looking_at_hand" and it's a card in "player_hand"
 			if GAME_LOGIC.GAME_PHASE == "looking_at_hand" and self.get_parent().get_name() == "player_hand":

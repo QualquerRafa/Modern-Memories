@@ -31,12 +31,14 @@ func call_effect(card_node : Node, type_of_activation : String): #The 'card_node
 				"field":
 					#Get as the return value the element of the field that was activated
 					extra_return_information = activate_spell_field(card_node)
-				
 				"equip":
 					#Get as the return value true or false that just means if the card missed (false) or tried to work (true)
 					var _discard = activate_spell_equip(card_node)
 					extra_return_information = "equip"
-				
+				"spell": #general spells that activate generic actions
+					extra_return_information = activate_spell_generic(card_node)
+				"ritual":
+					extra_return_information = activate_spell_ritual(card_node)
 				_:
 					print("Undefined type of Spell card.")
 		
@@ -140,7 +142,7 @@ func clear_card_after_activation(card_node : Node):
 	
 	return null
 
-func get_caller_and_target(card_node : Node):
+func get_caller_and_target(card_node : Node): #returns 'player', 'enemy'
 	#Check which field it will use ([VAR]_side_zones)
 	var who_activated_this_effect = "player"
 	var target_of_effect = "enemy"
@@ -150,7 +152,7 @@ func get_caller_and_target(card_node : Node):
 	
 	return [who_activated_this_effect, target_of_effect]
 
-func show_field_slots(kind_of_slots : String):
+func show_field_slots():
 	$just_visual_field_slots.show()
 	recursive_slot_animation()
 
@@ -253,8 +255,8 @@ func field_bonus(field_element : String):
 		for side_of_the_field in ["player_side_zones", "enemy_side_zones"]:
 			var monster_being_checked = GAME_LOGIC.get_parent().get_node("duel_field/"+ side_of_the_field +"/monster_" + String(i))
 			
-			#A visible monster that matches the attribute will have it's field boost applied
-			if monster_being_checked.is_visible() and CardList.card_list[monster_being_checked.this_card_id].attribute == field_element:
+			#A visible monster that matches the attribute will have it's field boost applied if it doesn't have it already
+			if monster_being_checked.is_visible() and CardList.card_list[monster_being_checked.this_card_id].attribute == field_element and monster_being_checked.this_card_flags.has_field_boost == false:
 				monster_being_checked.this_card_flags.has_field_boost = true
 				monster_being_checked.this_card_flags.atk_up += 500
 				monster_being_checked.this_card_flags.def_up -= 400
@@ -295,7 +297,7 @@ func activate_spell_equip(card_node : Node): #Activating an equip on the field (
 		GAME_LOGIC.GAME_PHASE = "activating_equip_from_field"
 		
 		#Show the indicators that the player has to click on a monster
-		show_field_slots("monster_field_slots")
+		show_field_slots()
 	else:
 		#Player didn't have any monsters, the equip card will just miss
 		emit_signal("effect_fully_executed") #Big Exception: Emit the signal here since so the game phases can keep going
@@ -336,6 +338,228 @@ func equip_from_field_to_target(target_card_node : Node):
 	GAME_LOGIC.GAME_PHASE = "main_phase"
 	
 	return typeof(equip_result[1]) == TYPE_ARRAY #returns TRUE for equip sucess, FALSE for equip failure
+
+func activate_spell_generic(card_node : Node):
+	var caller_and_target = get_caller_and_target(card_node)
+	var type_of_effect = CardList.card_list[card_node.this_card_id].effect[0]
+	
+	match type_of_effect:
+		"destroy_card":
+			#The target is always an opposing card of some specific type
+			var target_side_of_field = GAME_LOGIC.get_parent().get_node("duel_field/" + caller_and_target[1] + "_side_zones")
+			var target_type_of_destruction = CardList.card_list[card_node.this_card_id].effect[1]
+			
+			match target_type_of_destruction:
+				"enemy_monsters", "enemy_spelltraps": #all of the opposing cards of that type
+					var get_keyword = target_type_of_destruction.split("_")[1].trim_suffix("s") #returns 'monster' or 'spelltrap
+					for i in range(5):
+						var card_being_checked = target_side_of_field.get_node(get_keyword + "_" + String(i))
+						if card_being_checked.is_visible():
+							GAME_LOGIC.destroy_a_card(card_being_checked)
+					return target_type_of_destruction + "destroyed."
+					
+				"fusion", "ritual": #Based on the color border
+					#Get a list of possible targets to be randomly selected for destruction
+					var list_of_possible_targets : Array = []
+					for i in range(5):
+						var card_being_checked = target_side_of_field.get_node("monster_" + String(i))
+						if card_being_checked.is_visible() and card_being_checked.this_card_flags.fusion_type == target_type_of_destruction:
+							list_of_possible_targets.append(card_being_checked)
+					
+					if list_of_possible_targets.size() < 1:
+						return "FAIL"
+					else:
+						randomize()
+						var index_to_destroy = randi()%list_of_possible_targets.size()
+						GAME_LOGIC.destroy_a_card(list_of_possible_targets[index_to_destroy])
+						return CardList.card_list[list_of_possible_targets[index_to_destroy].this_card_id].card_name + " was destroyed."
+					
+				_: #Destroys all Monsters on opposing side based on it's types, i.e. Dragon, Zombie, Warrior, etc
+					for i in range(5):
+						var card_being_checked = target_side_of_field.get_node("monster_" + String(i))
+						if card_being_checked.is_visible() and card_being_checked.this_card_flags.is_facedown == false and CardList.card_list[card_being_checked.this_card_id].type == target_type_of_destruction:
+							GAME_LOGIC.destroy_a_card(card_being_checked)
+					return target_type_of_destruction + "destroyed."
+			
+		"atk_down", "atk_up":
+			#Currently we only have Skull Dice and Gracefull Dice for this kind of effects, so the value is actually random * +/-100
+			randomize()
+			var value_change : int = 1 + randi()%6 #returns between 1+0 and 1+5
+			
+			#ATK_DOWN targets the enemy monsters, ATK_UP targets the caller monsters
+			var target_side_of_field : Node
+			var dice_100s_multiplier : int #positive or negative 100 depending on effect
+			if type_of_effect == "atk_down":
+				target_side_of_field = GAME_LOGIC.get_parent().get_node("duel_field/" + caller_and_target[1] + "_side_zones")
+				dice_100s_multiplier = -100
+			elif type_of_effect == "atk_up":
+				target_side_of_field = GAME_LOGIC.get_parent().get_node("duel_field/" + caller_and_target[0] + "_side_zones")
+				dice_100s_multiplier = 100
+			
+			#Do the actual changes of stats for the monsters
+			for i in range(5):
+				var monster_being_checked = target_side_of_field.get_node("monster_" + String(i))
+				if monster_being_checked.is_visible():
+					monster_being_checked.this_card_flags.atk_up += value_change * dice_100s_multiplier
+					monster_being_checked.update_card_information(monster_being_checked.this_card_id)
+			
+			#print(value_change * dice_100s_multiplier)
+			return String(value_change * dice_100s_multiplier)
+			
+		"power_bond": #Double the ATK of your strongest Fusion Machine, at the cost of the same amount of life points
+			#Get the target
+			var target_side_of_field = GAME_LOGIC.get_parent().get_node("duel_field/" + caller_and_target[0] + "_side_zones")
+			var target_monster_node : Node = null
+			var previous_highest_atk = 0
+			
+			for i in range(5):
+				var card_being_checked = target_side_of_field.get_node("monster_" + String(i))
+				if card_being_checked.is_visible() and card_being_checked.this_card_flags.fusion_type == "fusion" and CardList.card_list[card_being_checked.this_card_id].type == "machine":
+					if int(card_being_checked.get_node("card_design/monster_features/atk_def/atk").text) >= previous_highest_atk:
+						target_monster_node = card_being_checked
+						previous_highest_atk = int(card_being_checked.get_node("card_design/monster_features/atk_def/atk").text)
+			
+			#If it finds a monster that matches the requirements, do the effect
+			if target_monster_node != null:
+				target_monster_node.this_card_flags.atk_up += previous_highest_atk
+				target_monster_node.update_card_information(target_monster_node.this_card_id)
+				
+				#LP Cost
+				GAME_LOGIC.change_lifepoints(caller_and_target[0], previous_highest_atk)
+				
+				return target_monster_node.get_node("card_design/monster_features/atk_def/atk").text
+				
+			else:
+				return "FAIL"
+			
+		"block_attack", "stop_defense":
+			#Always targets the opposing side of the field
+			var target_side_of_field = GAME_LOGIC.get_parent().get_node("duel_field/" + caller_and_target[1] + "_side_zones")
+			
+			#Do the changes on the targets
+			for i in range(5):
+				var monster_being_checked = target_side_of_field.get_node("monster_" + String(i))
+				
+				if monster_being_checked.is_visible():
+					if type_of_effect == "block_attack" and monster_being_checked.this_card_flags.is_defense_position == false:
+						monster_being_checked.toggle_battle_position() #handles the setting of the flag and the rotation
+					elif type_of_effect == "stop_defense" and monster_being_checked.this_card_flags.is_defense_position == true:
+						monster_being_checked.toggle_battle_position() #handles the setting of the flag and the rotation
+					else:
+						print(type_of_effect, " does nothing for def position equals to ", monster_being_checked.this_card_flags.is_defense_position)
+			
+			return type_of_effect + "finished."
+			
+		"sword_shield":
+			for both_targets in ["player", "enemy"]:
+				var target_side_of_field = GAME_LOGIC.get_parent().get_node("duel_field/" + both_targets + "_side_zones")
+				
+				for i in range(5):
+					var monster_being_checked = target_side_of_field.get_node("monster_" + String(i))
+					if monster_being_checked.is_visible() and monster_being_checked.this_card_flags.is_facedown == false:
+						var registered_atk = int(monster_being_checked.get_node("card_design/monster_features/atk_def/atk").text)
+						var registered_def = int(monster_being_checked.get_node("card_design/monster_features/atk_def/def").text)
+						
+						if registered_atk > registered_def:
+							monster_being_checked.this_card_flags.atk_up -= registered_atk - registered_def
+							monster_being_checked.this_card_flags.def_up += registered_atk - registered_def
+						else:
+							monster_being_checked.this_card_flags.atk_up += registered_atk - registered_def
+							monster_being_checked.this_card_flags.def_up -= registered_atk - registered_def
+							
+						monster_being_checked.update_card_information(monster_being_checked.this_card_id)
+			
+			return type_of_effect
+			
+		"special_description": #Magic Cards that are supposed to be used only for fusions, i.e. Metalmorph, Level Up, Toon World, Mask Change ...
+			return "nothing"
+
+func activate_spell_ritual(card_node : Node):
+	#Ritual will look for one monster with a specific type, and more monsters to Sum the star level of result
+	var ritual_result_monster_id = String(CardList.card_list[card_node.this_card_id].effect[1]).pad_zeros(5)
+	var ritual_type_restriction = CardList.card_list[ritual_result_monster_id].type
+	var ritual_level_goal = CardList.card_list[ritual_result_monster_id].level
+	
+	#First restriction: caller has a correct type for the sacrifice
+	var caller_and_target = get_caller_and_target(card_node)
+	var monster_with_type_restriction : Node = null
+	for i in range(5):
+		var monster_being_checked = GAME_LOGIC.get_parent().get_node("duel_field/"+ caller_and_target[0] +"_side_zones/monster_" + String(i))
+		if monster_being_checked.is_visible() and CardList.card_list[monster_being_checked.this_card_id].type == ritual_type_restriction:
+			monster_with_type_restriction = monster_being_checked
+			break
+	if monster_with_type_restriction == null:
+		return "FAIL"
+	
+	#Second restriction: caller will have enough monsters to sum the level goal (or more)
+	var temp_level_array : Array = []
+	for i in range(5):
+		if GAME_LOGIC.get_parent().get_node("duel_field/"+ caller_and_target[0] +"_side_zones/monster_" + String(i)).is_visible():
+			var monster_level = CardList.card_list[GAME_LOGIC.get_parent().get_node("duel_field/"+ caller_and_target[0] +"_side_zones/monster_" + String(i)).this_card_id].level
+			temp_level_array.append(monster_level)
+	temp_level_array.sort()
+	
+	#print("temp level array: ", temp_level_array)
+	
+	var monsters_sorted_by_level : Array = []
+	for i in range(temp_level_array.size()):
+		for j in range(5):
+			if temp_level_array[i] == CardList.card_list[GAME_LOGIC.get_parent().get_node("duel_field/"+ caller_and_target[0] +"_side_zones/monster_" + String(j)).this_card_id].level and GAME_LOGIC.get_parent().get_node("duel_field/"+ caller_and_target[0] +"_side_zones/monster_" + String(j)).is_visible():
+				if not monsters_sorted_by_level.has(GAME_LOGIC.get_parent().get_node("duel_field/"+ caller_and_target[0] +"_side_zones/monster_" + String(j))):
+					monsters_sorted_by_level.append(GAME_LOGIC.get_parent().get_node("duel_field/"+ caller_and_target[0] +"_side_zones/monster_" + String(j)))
+	
+	#print("monsters sorted by level: ", monsters_sorted_by_level)
+	
+	#Remove from the sorted array the first sacrificial monster possible
+	var sacrificial_monster : Node
+	for i in range(monsters_sorted_by_level.size()):
+		if CardList.card_list[monsters_sorted_by_level[i].this_card_id].type == ritual_type_restriction:
+			sacrificial_monster = monsters_sorted_by_level[i]
+			monsters_sorted_by_level.erase(monsters_sorted_by_level[i])
+			break
+	
+	#print("sacrificial monster: ", sacrificial_monster)
+	#print("monsters_sorted_by_level removed it: ", monsters_sorted_by_level)
+	
+	var level_reached : int = CardList.card_list[sacrificial_monster.this_card_id].level
+	var level_reached_extended : Array = [] #level_reached, [other, monsters, in, case, used]
+	if level_reached < ritual_level_goal:
+		#look for more monsters until goal is reached
+		level_reached_extended = pick_more_for_ritual(monsters_sorted_by_level, level_reached, ritual_level_goal)
+		level_reached = level_reached_extended[0]
+	
+	#DO THE RITUAL SUMMON FINALLY
+	if level_reached >= ritual_level_goal:
+		#Remove from the field the obligatory sacrificial monsters
+		GAME_LOGIC.destroy_a_card(sacrificial_monster)
+		#Remove from the field any other monsters that were sacrificed with it
+		for i in range(level_reached_extended[1].size()):
+			GAME_LOGIC.destroy_a_card(level_reached_extended[1][i])
+		
+		#Summon the resulting monster on the field
+		sacrificial_monster.this_card_id = ritual_result_monster_id
+		sacrificial_monster.this_card_flags.fusion_type = "ritual"
+		sacrificial_monster.update_card_information(sacrificial_monster.this_card_id)
+		sacrificial_monster.show()
+		
+		return ritual_result_monster_id
+		
+	else:
+		#Couldn't match the level needed, ritual will just fail and card disappears
+		return "FAIL"
+
+var extra_sacrificed : Array = []
+func pick_more_for_ritual(sorted_by_level_array : Array, current_level_reached : int,  level_goal : int):
+	var lowest_level_in_array = CardList.card_list[sorted_by_level_array[0].this_card_id].level
+	current_level_reached += lowest_level_in_array
+	
+	var monster_popped = sorted_by_level_array.pop_front()
+	extra_sacrificed.append(monster_popped)
+	
+	if current_level_reached >= level_goal or sorted_by_level_array.size() == 0:
+		return [current_level_reached, extra_sacrificed]
+	else:
+		pick_more_for_ritual(sorted_by_level_array, current_level_reached, level_goal)
 
 ####################################################################################################
 # MONSTER CARDS

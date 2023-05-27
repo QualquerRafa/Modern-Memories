@@ -388,10 +388,6 @@ func summon_final_card(final_card_to_summon, field_slot_to_summon):
 	node_slot_to_change.update_card_information(final_card_to_summon.this_card_id)
 	node_slot_to_change.show()
 	
-	#Check if the monster will get a Field Bonus
-	var field_name_attribute = GAME_LOGIC.get_parent().get_node("user_interface/top_info_box/field_info/field_name").text.split(" ", true)[0]
-	GAME_LOGIC.get_node("effects").field_bonus(field_name_attribute)
-	
 	#Clear the Dummy 'fusion_result' node after it's information was already used
 	GAME_LOGIC.reset_a_card_node_properties($fusion_animation/fusion_result_card)
 	
@@ -417,7 +413,7 @@ func summon_final_card(final_card_to_summon, field_slot_to_summon):
 	#yield(get_tree().create_timer(summon_animation_time), "timeout")
 	
 	#Check if this card will get a field bonus
-	var field_name = GAME_LOGIC.get_parent().get_node("user_interface/top_info_box/field_info/field_name").text.split(" ", true)[0]
+	var field_name = GAME_LOGIC.get_parent().get_node("user_interface/top_info_box/field_info/field_name").text.split(" ", true)[0].to_lower()
 	get_node("../effects").field_bonus(field_name)
 	
 	#If it's facedown, do an extra animation of card back transparency toggling
