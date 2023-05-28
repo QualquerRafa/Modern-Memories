@@ -261,6 +261,23 @@ func enemy_main_phase():
 			$enemy_timer.start(battle_timer); yield($enemy_timer, "timeout")
 		#Player has monsters, do the appropriate checks for each of COM's cards 
 		else:
+			#Fake thinking for fighting face_down cards
+			if player_monsters_array[0].this_card_flags.is_facedown:
+				var variable_fake_thinking_chance : float
+				if int(current_strongest_monster.get_node("card_design/monster_features/atk_def/atk").text) >= 3000: variable_fake_thinking_chance = 0.9
+				elif int(current_strongest_monster.get_node("card_design/monster_features/atk_def/atk").text) >= 2000: variable_fake_thinking_chance = 0.7
+				elif int(current_strongest_monster.get_node("card_design/monster_features/atk_def/atk").text) >= 1000: variable_fake_thinking_chance = 0.5
+				else: variable_fake_thinking_chance = 0.3
+				
+				randomize()
+				var random_roll = randf()
+				if random_roll >= variable_fake_thinking_chance:
+					#print("COM was afraid of attacking a facedown monster", " random roll: ", random_roll, " fake chance: ", variable_fake_thinking_chance)
+					if player_monsters_array.size() > 1:
+						player_monsters_array.pop_front() #skip the first monster, just so COM doesn't waste an attack
+					else:
+						continue #skip this loop, com was "afraid" of attacking a face_down monster
+			
 			#print("-try regular attack")
 			var com_atk = int(current_strongest_monster.get_node("card_design/monster_features/atk_def/atk").text)
 			var player_atk = int(player_monsters_array[0].get_node("card_design/monster_features/atk_def/atk").text)
@@ -270,20 +287,6 @@ func enemy_main_phase():
 			var player_status = player_atk
 			if player_monsters_array[0].this_card_flags.is_defense_position == true:
 				player_status = player_def
-			
-			#Fake thinking for fighting face_down cards
-			if player_monsters_array[0].this_card_flags.is_facedown:
-				var variable_fake_thinking_chance : float
-				if com_atk >= 3000: variable_fake_thinking_chance = 0.9
-				elif com_atk >= 2000: variable_fake_thinking_chance = 0.7
-				elif com_atk >= 1000: variable_fake_thinking_chance = 0.5
-				else: variable_fake_thinking_chance = 0.3
-				
-				randomize()
-				var random_roll = randf()
-				if random_roll >= variable_fake_thinking_chance:
-					#print("COM was afraid of attacking a facedown monster", " random roll: ", random_roll, " fake chance: ", variable_fake_thinking_chance)
-					continue #skip this loop, com was "afraid" of attacking a face_down monster
 			
 			#Decide between attacking a monster or being set to defense position
 			if com_atk > player_status:

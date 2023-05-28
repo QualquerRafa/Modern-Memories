@@ -6032,7 +6032,8 @@ const card_list = {
 	"type": "trap",
 	"count_as": null,
 	"effect": [
-	  "card_virus"
+	  "destroy_attacker",
+	  1500
 	],
 	"passcode": "57728570"
   },

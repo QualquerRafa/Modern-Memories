@@ -175,6 +175,10 @@ func _on_card_node_button_up():
 				if self.get_parent().get_name().find("enemy") != -1:
 					return
 				
+				#Make sure the player can't even try to activate it's own trap cards by himself
+				if CardList.card_list[self.this_card_id].attribute == "trap":
+					return
+				
 				if $combat_controls.is_visible(): #this card already called it, so cancel everything
 					cancel_all_combat_controls()
 				else:
@@ -218,7 +222,8 @@ func show_card_combat_controls():
 	if CardList.card_list[this_card_id].attribute in ["spell", "trap"]:
 		$combat_controls/attack_button.hide()
 		$combat_controls/defense_button.hide()
-		$combat_controls/activate_button.show()
+		if CardList.card_list[this_card_id].attribute != "trap":
+			$combat_controls/activate_button.show()
 	#If the card has already battled, the Attacking button should have it's oppacity reduced to indicate it can't battle again
 	if this_card_flags.has_battled or this_card_flags.is_defense_position == true:
 		$combat_controls/attack_button.modulate = Color(1,1,1, 0.3)

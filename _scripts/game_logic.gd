@@ -12,7 +12,23 @@ const def_orientation_y_scale : float = 0.517 #when in def position, shorten it 
 #EFFECTS LOGIC
 func effect_activation(card_node : Node, type_of_activation : String):
 	#pass this exactly as is to the effects script
-	$effects.call_effect(card_node, type_of_activation)
+	var effect_return = $effects.call_effect(card_node, type_of_activation)
+	
+	return effect_return
+
+func check_for_trap_cards(attacking_card : Node):
+	#Figure out which side is attacking to check the other side for set trap cards
+	var trap_side : String = "enemy"
+	if attacking_card.get_parent().get_name().find("player") != 0:
+		trap_side = "player"
+	
+	var side_to_check = get_node("../duel_field/" + trap_side + "_side_zones")
+	for i in range(5):
+		var card_to_check = side_to_check.get_node("spelltrap_" + String(i))
+		if card_to_check.is_visible() and CardList.card_list[card_to_check.this_card_id].attribute == "trap":
+			return card_to_check #Node
+	
+	return null
 
 #------------------------------------------------------------------------------
 #FUSION LOGIC
@@ -64,6 +80,19 @@ func do_battle(attacking_card : Node, defending_card : Node):
 	if defending_card.is_visible() == false:
 		print("do_battle() caught a timming mismatch. This should be safe.")
 		return #failsafe to prevent multiple attacks on an already destroyed monster in case of timming mismatches
+	
+	#Check for Trap Card activations before battle
+	var fell_into_trap : Node = check_for_trap_cards(attacking_card)
+	if fell_into_trap != null:
+		card_ready_to_attack = attacking_card
+		effect_activation(fell_into_trap, "on_flip")
+		
+		#Set the attacker flags
+		attacking_card.this_card_flags.has_battled = true
+		attacking_card.this_card_flags.is_facedown = false
+		attacking_card.update_card_information(attacking_card.this_card_id)
+		
+		return #battle logic is stopped, since traps will AT LEAST negate the attack (can do more, but that's on effects.gd to solve)
 	
 	var battle_timer_node = $battle_visuals/battle_timer_node
 	var battle_timer : float = 0.2 #in seconds
@@ -244,6 +273,19 @@ func do_direct_attack(attacking_card):
 	#Basically a clone of do_battle() with all the references to a defending card being invisible
 	if attacking_card.this_card_flags.has_battled == true:
 		return #failsafe to prevent cards from battling more than once
+	
+	#Check for Trap Card activations before battle
+	var fell_into_trap : Node = check_for_trap_cards(attacking_card)
+	if fell_into_trap != null:
+		card_ready_to_attack = attacking_card
+		effect_activation(fell_into_trap, "on_flip")
+		
+		#Set the attacker flags
+		attacking_card.this_card_flags.has_battled = true
+		attacking_card.this_card_flags.is_facedown = false
+		attacking_card.update_card_information(attacking_card.this_card_id)
+		
+		return #battle logic is stopped, since traps will AT LEAST negate the attack (can do more, but that's on effects.gd to solve)
 	
 	var battle_timer_node = $battle_visuals/battle_timer_node
 	var battle_timer : float = 0.2 #in seconds

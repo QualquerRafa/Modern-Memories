@@ -76,7 +76,7 @@ func get_card_text(card_id : String):
 					"atk_up":
 						line1 = "Roll a dice and power up all your monsters by 100 times the dice result."
 					"atk_down": 
-						line1 = "Roll a dice and power down all your opponent's monsters by 100 times the dice result."
+						line1 = "Roll a dice and power down all your opposing monsters by 100 times the dice result."
 					"power_bond":
 						line1 = "Double the ATK of your Strongest Fusion Machine monster, at the cost of the same amount of Life Points."
 			
@@ -87,11 +87,11 @@ func get_card_text(card_id : String):
 					"magic_cylinder":
 						line1 = "Negates the attack of an opposing monster and causes Life Point damage to your opponent equal to the ATK of that monster."
 					"destroy_attacker":
-						line1 = "Destroys the opponent's attacking monster."
-					"card_virus":
-						line1 = "Destroys the opposing attacking monster if it has more than 1500 ATK points."
+						line1 = "Destroys the opposing attacking monster."
+						if card_on_CardList.effect[1] != 9999:
+							line1 = "Destroys the opposing attacking monster if it has less than " + String(card_on_CardList.effect[1]) + " ATK points."
 					"mirror_force":
-						line1 = "Destroys all of the opponent's Attack position monsters."
+						line1 = "Destroys all of the opposing Attack position monsters."
 					"ring_of_destruction":
 						line1 = "Destroys the opposing attacking monster and causes Life Point damage to both players equal to the ATK of said monster."
 			

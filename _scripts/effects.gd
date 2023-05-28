@@ -43,8 +43,8 @@ func call_effect(card_node : Node, type_of_activation : String): #The 'card_node
 					print("Undefined type of Spell card.")
 		
 		"trap":
-			extra_return_information = "trap effect"
-			print(extra_return_information)
+			#Trap cards can't be placed face up neither activated from the field, this function will only be called during battles
+			extra_return_information = activate_trap(card_node)
 		
 		_: #Monsters
 			match type_of_activation:
@@ -560,6 +560,46 @@ func pick_more_for_ritual(sorted_by_level_array : Array, current_level_reached :
 		return [current_level_reached, extra_sacrificed]
 	else:
 		pick_more_for_ritual(sorted_by_level_array, current_level_reached, level_goal)
+
+####################################################################################################
+# TRAP CARDS
+####################################################################################################
+func activate_trap(card_node : Node):
+	var caller_and_target = get_caller_and_target(card_node)
+	var type_of_effect = CardList.card_list[card_node.this_card_id].effect[0]
+	var current_attacker = GAME_LOGIC.card_ready_to_attack
+	
+	match type_of_effect:
+		"negate_attacker": #just negate the attack
+			pass #The very logic of just activating a trap card already stops the attack, this does nothing else
+		
+		"magic_cylinder": #negate the attack and damage LP of attacker
+			var attacker_attack = int(current_attacker.get_node("card_design/monster_features/atk_def/atk").text)
+			GAME_LOGIC.change_lifepoints(caller_and_target[1], attacker_attack)
+		
+		"destroy_attacker": #destroy the attacker if it has less or equal than effect[1] atk points
+			var attacker_attack = int(current_attacker.get_node("card_design/monster_features/atk_def/atk").text)
+			
+			if attacker_attack <= CardList.card_list[card_node.this_card_id].effect[1]:
+				GAME_LOGIC.destroy_a_card(current_attacker)
+		
+		"ring_of_destruction": #destroy the attacker and damage it's ATK on attackers LP
+			var attacker_attack = int(current_attacker.get_node("card_design/monster_features/atk_def/atk").text)
+			
+			var COM_LP = get_node("../../user_interface/top_info_box/com_info/lifepoints").get_text()
+			get_node("../../user_interface/top_info_box/com_info/lifepoints").text = String( clamp(int(COM_LP) - attacker_attack, 0, 9999) )
+			GAME_LOGIC.change_lifepoints(caller_and_target[0], attacker_attack)
+			
+			GAME_LOGIC.destroy_a_card(current_attacker)
+		
+		"mirror_force": #destroy all monsters from attacker
+			var target_side_of_field = GAME_LOGIC.get_parent().get_node("duel_field/" + caller_and_target[1] + "_side_zones")
+			for i in range(5):
+				var monster_being_checked = target_side_of_field.get_node("monster_" + String(i))
+				if monster_being_checked.is_visible() and monster_being_checked.this_card_flags.is_defense_position == false:
+					GAME_LOGIC.destroy_a_card(monster_being_checked)
+	
+	return "trapped!"
 
 ####################################################################################################
 # MONSTER CARDS
