@@ -195,6 +195,10 @@ func enemy_play_that_card(card_to_play_array : Array):
 		field_node_to_use.this_card_flags.is_facedown = false
 		field_node_to_use.get_node("card_design/card_back").hide()
 	
+	#Check if this card will get a field bonus
+	var field_name = GAME_LOGIC.get_parent().get_node("user_interface/top_info_box/field_info/field_name").text.split(" ", true)[0].to_lower()
+	get_node("../effects").field_bonus(field_name)
+	
 	#Visual Update of card on field
 	field_node_to_use.this_card_id = card_being_played
 	field_node_to_use.update_card_information(field_node_to_use.this_card_id)
@@ -247,6 +251,24 @@ func enemy_main_phase():
 		#Timer for better workflow before each monster iteraction
 		var battle_timer = 1
 		$enemy_timer.start(battle_timer*0.8); yield($enemy_timer, "timeout")
+		
+		#Check for a chance to attack if the player has a set spelltrap (fearing for traps)
+		var has_spelltrap = false
+		for i in range(5):
+			if get_node("../../duel_field/player_side_zones/spelltrap_" + String(i)).is_visible():
+				has_spelltrap = true
+				break
+		if has_spelltrap:
+			var variable_fake_thinking_chance : float
+			if int(current_strongest_monster.get_node("card_design/monster_features/atk_def/atk").text) >= 3000: variable_fake_thinking_chance = 0.6
+			elif int(current_strongest_monster.get_node("card_design/monster_features/atk_def/atk").text) >= 2000: variable_fake_thinking_chance = 0.4
+			elif int(current_strongest_monster.get_node("card_design/monster_features/atk_def/atk").text) >= 1000: variable_fake_thinking_chance = 0.2
+			else: variable_fake_thinking_chance = 0.1
+			
+			randomize()
+			var random_roll = randf()
+			if random_roll <= variable_fake_thinking_chance:
+				continue #skip this loop, try to attack with the next monster and such
 		
 		#Try a direct attack
 		if player_monsters_array.size() == 0:

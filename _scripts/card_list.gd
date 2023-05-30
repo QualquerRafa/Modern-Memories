@@ -5712,7 +5712,7 @@ const card_list = {
 	"count_as": null,
 	"effect": [
 	  "on_summon",
-	  "maha_vailo"
+	  "equip_boost"
 	],
 	"passcode": "93013676"
   },
@@ -5978,7 +5978,7 @@ const card_list = {
 	"count_as": null,
 	"effect": [
 	  "on_summon",
-	  "white-horned"
+	  "white_horned"
 	],
 	"passcode": "73891874"
   },

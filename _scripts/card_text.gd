@@ -227,7 +227,7 @@ func get_card_text(card_id : String):
 							"count_as_power_up":
 								line1 += "it increases it's own ATK by " + String(card_on_CardList.effect[2]) + " points for each monster in the same Archetype as it on the field."
 							"deck_for_stat":
-								line1 += "by removing 3 cards from the Deck, it increases it's own" + card_on_CardList.effect[2].to_upper() + "by 1500 points."
+								line1 += "by removing 3 cards from the Deck, it increases it's own " + card_on_CardList.effect[2].to_upper() + " by 1500 points."
 							"monster_count_boost":
 								line1 += "it increases it's own ATK by " + String(card_on_CardList.effect[2]) + " points for each monster on the field."
 							"graveyard_power_up":
@@ -252,12 +252,12 @@ func get_card_text(card_id : String):
 								if card_on_CardList.effect[2] == 0:
 									line1 += "it destroys all of opponent's Spell and Trap Cards on the field."
 								else:
-									line1 += "it destroys all of opponent's Spell and Trap Cards on the field and deal " + String(card_on_CardList.effect[2]) + " LP damage for each card destroyed."
-							"maha_vailo":
+									line1 += "it destroys all of opponent's Spell and Trap Cards on the field and deals " + String(card_on_CardList.effect[2]) + " LP damage for each card destroyed."
+							"equip_boost":
 								line1 += "it increases it's own ATK by 500 points for each Equipment used on it."
 							"stop_defense":
 								line1 += "all of your opponent's Defense position monsters are changed to Attack position."
-							"white-horned":
+							"white_horned":
 								line1 += "it destroys all of opponent's Spell and Trap Cards, getting 300 ATK for each card destroyed."
 	
 	#Define the variable to be passed ahead

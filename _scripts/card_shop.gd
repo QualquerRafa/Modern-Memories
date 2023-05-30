@@ -51,7 +51,7 @@ func get_card_price(card_id):
 		
 		"spell": final_price = 20 #20 duels to buy a spell
 		
-		"ritual":final_price = 25 #25 duels to buy a ritual
+		"ritual": final_price = 25 #25 duels to buy a ritual
 		
 		"trap":  final_price = 40 #40 duels to buy a trap
 		

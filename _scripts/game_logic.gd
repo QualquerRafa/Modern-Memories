@@ -371,7 +371,7 @@ func do_direct_attack(attacking_card):
 
 #---------------------------------------------------------------------------------------------------
 var LP_info_node : Node
-func change_lifepoints(target : String, LP_damage : int):
+func change_lifepoints(target : String, LP_damage : int, adding = false):
 	if LP_damage <= 0:
 		return
 	
@@ -381,7 +381,11 @@ func change_lifepoints(target : String, LP_damage : int):
 		"player": LP_info_node = get_node("../user_interface/top_info_box/player_info/lifepoints")
 		"enemy": LP_info_node = get_node("../user_interface/top_info_box/com_info/lifepoints")
 		_: print("no target to change lifepoints.")
-	tween_LP.interpolate_method(self, "LP_method_for_tween", int(LP_info_node.get_text()), clamp(int(LP_info_node.get_text()) - LP_damage, 0, 9999), constant_timer, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	
+	if adding == true: LP_damage = -LP_damage #just inver the signal, math does the rest
+	var LP_result = clamp(int(LP_info_node.get_text()) - LP_damage, 0, 9999)
+	
+	tween_LP.interpolate_method(self, "LP_method_for_tween", int(LP_info_node.get_text()), LP_result, constant_timer, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	tween_LP.start()
 
 func LP_method_for_tween(value : int):
