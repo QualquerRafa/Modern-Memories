@@ -20,7 +20,8 @@ func call_effect(card_node : Node, type_of_activation : String): #The 'card_node
 	var extra_return_information : String #anything else that needs to be returned to be checked by other game functions
 	
 	#Animate the card being activated
-	do_activation_animation(card_node)
+	var was_flipped = type_of_activation == "on_flip"
+	do_activation_animation(card_node, was_flipped)
 	yield(self, "effect_animation_finished")
 	
 	#Handle it accordingly
@@ -51,7 +52,7 @@ func call_effect(card_node : Node, type_of_activation : String): #The 'card_node
 				"on_summon":
 					extra_return_information = monster_on_summon(card_node)
 				"on_flip":
-					extra_return_information = type_of_activation
+					extra_return_information = monster_on_flip(card_node)
 				"on_attack":
 					extra_return_information = type_of_activation
 				"on_defend": 
@@ -77,7 +78,7 @@ func call_effect(card_node : Node, type_of_activation : String): #The 'card_node
 ####################################################################################################
 # AUXILIARY
 ####################################################################################################
-func do_activation_animation(card_node : Node):
+func do_activation_animation(card_node : Node, was_flipped = false):
 	var animation_timer : float = 0.001
 	
 	#Update the visuals of the card that has to be animated
@@ -92,7 +93,8 @@ func do_activation_animation(card_node : Node):
 	#Make the visuals visible right before animating them
 	$effect_visuals/visual_cardA/card_design/card_back.show()
 	#Gambiarra do caralho pra "não animar" e emitir o sinal direitinho no final
-	if not CardList.card_list[card_node.this_card_id].effect[0] in ["on_attack", "on_defend"]:
+	var catch_on_flip = CardList.card_list[card_node.this_card_id].effect[0] == "on_flip" and was_flipped == true
+	if not CardList.card_list[card_node.this_card_id].effect[0] in ["on_attack", "on_defend", "on_flip"] or catch_on_flip == true:
 		animation_timer = 0.2
 		$effect_visuals.show()
 	
@@ -756,7 +758,7 @@ func monster_on_summon(card_node : Node):
 			#Get the remaining cards on the deck when this effect is activated
 			var who_is = caller_and_target[0]
 			if who_is == "enemy":
-				who_is = "COM"
+				who_is = "com"
 			var current_deck_size = get_node("../../user_interface/top_info_box/"+ who_is +"_info/deck").get_text()
 			
 			#Effect was simplified to just be Deck - Out of Deck * value
@@ -775,7 +777,7 @@ func monster_on_summon(card_node : Node):
 			var who_is = caller_and_target[0]
 			var deck : Array = GAME_LOGIC.get_node("player_logic").player_deck
 			if who_is == "enemy":
-				who_is = "COM"
+				who_is = "com"
 				deck = GAME_LOGIC.get_node("enemy_logic").enemy_deck
 			var current_deck_size = int(get_node("../../user_interface/top_info_box/"+ who_is +"_info/deck").get_text())
 			
@@ -948,10 +950,13 @@ func monster_on_summon(card_node : Node):
 						list_of_monsters_sorted_by_ATK.append(list_of_monsters[j])
 			list_of_monsters_sorted_by_ATK.invert() #for some reason that is unclear to me right now, I had to invert to get the expected order from Highest to Lowest
 			
-			#Update the copycat card
-			card_node.this_card_flags.atk_up += int(list_of_monsters_sorted_by_ATK[0].get_node("card_design/monster_features/atk_def/atk").get_text())
-			card_node.this_card_flags.def_up += int(list_of_monsters_sorted_by_ATK[0].get_node("card_design/monster_features/atk_def/def").get_text())
-			card_node.update_card_information(card_node.this_card_id)
+			if list_of_monsters_sorted_by_ATK.size() > 0:
+				#Update the copycat card
+				card_node.this_card_flags.atk_up += int(list_of_monsters_sorted_by_ATK[0].get_node("card_design/monster_features/atk_def/atk").get_text())
+				card_node.this_card_flags.def_up += int(list_of_monsters_sorted_by_ATK[0].get_node("card_design/monster_features/atk_def/def").get_text())
+				card_node.update_card_information(card_node.this_card_id)
+			
+			return "atk copied"
 		
 		"air_neos":
 			var caller = "player"
@@ -997,7 +1002,7 @@ func monster_on_summon(card_node : Node):
 				if caller_and_target[0] == "enemy": deck_fix = "com"
 				GAME_LOGIC.get_parent().get_node("user_interface/top_info_box/"+ deck_fix +"_info/deck").text = String(caller_deck.size())
 			
-			return "Cyber-Stein turned into " + CardList.card_list[highest_attack_card_id].card_name
+			return "Cyber-Stein transformed"
 		
 		"stop_defense":
 			var target_side_of_field = GAME_LOGIC.get_parent().get_node("duel_field/" + caller_and_target[1] + "_side_zones")
@@ -1058,7 +1063,7 @@ func monster_on_summon(card_node : Node):
 				lifepoints = int(GAME_LOGIC.get_parent().get_node("user_interface/top_info_box/com_info/lifepoints").get_text())
 			
 			#Pay half of the LP
-			GAME_LOGIC.change_lifepoints(caller_and_target[0], lifepoints/2)
+			GAME_LOGIC.change_lifepoints(caller_and_target[0], float(lifepoints)/2)
 			
 			#Destroy all Monsters on the field
 			var number_of_cards_destroyed : int = 0
@@ -1121,8 +1126,120 @@ func monster_on_summon(card_node : Node):
 		
 	return card_id #generic return
 
-
-
-
-
+func monster_on_flip(card_node : Node):
+	var type_of_effect = CardList.card_list[card_node.this_card_id].effect[1]
+	
+	#Do an initial check to see if this card isn't triggering it's effect for a second time
+	if card_node.this_card_flags.has_activated_effect == true:
+		return "FAIL"
+	#Set this flag
+	card_node.this_card_flags.has_activated_effect = true
+	
+	#The flipped card has to be forcefully set to face up
+	card_node.this_card_flags.is_facedown = false
+	card_node.update_card_information(card_node.this_card_id)
+	
+	#Get proper keywords to use in the logics bellow
+	var caller_and_target : Array = get_caller_and_target(card_node) #[caller, target]
+	
+	#THE EFFECTS LOGIC
+	match type_of_effect:
+		"destroy_card":
+			var destruction_target = CardList.card_list[card_node.this_card_id].effect[2]
+			match destruction_target:
+				"random_spelltrap", "random_monster":
+					var list_of_targets : Array = []
+					var get_keyword = destruction_target.split("_")[1] #returns 'monster' or 'spelltrap
+					var target_side_of_field = GAME_LOGIC.get_parent().get_node("duel_field/" + caller_and_target[1] + "_side_zones")
+					
+					for i in range(5):
+						var card_being_checked = target_side_of_field.get_node(get_keyword + "_" + String(i))
+						if card_being_checked.is_visible():
+							list_of_targets.append(card_being_checked)
+					
+					if list_of_targets.size() > 0:
+						randomize()
+						var random_target = list_of_targets[randi()%list_of_targets.size()]
+						GAME_LOGIC.destroy_a_card(random_target)
+						
+						return "randomly destroyed"
+					else:
+						return "FAIL , no target to destroy"
+					
+				"level4_enemy_monsters":
+					var list_of_targets : Array = []
+					var target_side_of_field = GAME_LOGIC.get_parent().get_node("duel_field/" + caller_and_target[1] + "_side_zones")
+					
+					for i in range(5):
+						var card_being_checked = target_side_of_field.get_node("monster_" + String(i))
+						if card_being_checked.is_visible() and card_being_checked.this_card_flags.is_facedown == false and CardList.card_list[card_being_checked.this_card_id].level == 4:
+							list_of_targets.append(card_being_checked)
+					
+					for i in range(list_of_targets.size()):
+						GAME_LOGIC.destroy_a_card(list_of_targets[i])
+					
+					return "destroyed all level 4"
+					
+				"all_enemy_monsters":
+					var target_side_of_field = GAME_LOGIC.get_parent().get_node("duel_field/" + caller_and_target[1] + "_side_zones")
+					for i in range(5):
+						var card_being_checked = target_side_of_field.get_node("monster_" + String(i))
+						if card_being_checked.is_visible():
+							GAME_LOGIC.destroy_a_card(card_being_checked)
+					
+					return "destroyed everything"
+		
+		"lifepoint_up":
+			var value : int = CardList.card_list[card_node.this_card_id].effect[2]
+			GAME_LOGIC.change_lifepoints(caller_and_target[0], value, true)
+			
+			return String(value)
+		
+		"mill":
+			var card_quantity = CardList.card_list[card_node.this_card_id].effect[2]
+			
+			#Get the Deck reference
+			var target_is = caller_and_target[1]
+			var deck : Array = GAME_LOGIC.get_node("player_logic").player_deck
+			if target_is == "enemy":
+				target_is = "com"
+				deck = GAME_LOGIC.get_node("enemy_logic").enemy_deck
+			var current_deck_size = int(get_node("../../user_interface/top_info_box/"+ target_is +"_info/deck").get_text())
+			
+			#Remove cards from the deck, if it has enough
+			var cards_removed : int = 0
+			for _i in range(card_quantity):
+				if current_deck_size > 0:
+					deck.remove(0) #remove that same card from deck
+					get_node("../../user_interface/top_info_box/"+ target_is +"_info/deck").text = String(deck.size())
+					cards_removed += 1
+			
+			return String(cards_removed)
+		
+		"jigen_bakudan":
+			var atk_sum : int = 0
+			
+			#Destroys all of caller's monsters and add their atk to the sum
+			var target_side_of_field = GAME_LOGIC.get_parent().get_node("duel_field/" + caller_and_target[0] + "_side_zones")
+			for i in range(5):
+				var card_being_checked = target_side_of_field.get_node("monster_" + String(i))
+				if card_being_checked.is_visible():
+					atk_sum += int(card_being_checked.get_node("card_design/monster_features/atk_def/atk").text)
+					GAME_LOGIC.destroy_a_card(card_being_checked)
+			
+			#Deal half the total sum to opponents LP
+			GAME_LOGIC.change_lifepoints(caller_and_target[1], float(atk_sum)/2)
+			
+			return "jigen bakudan!"
+			
+		"slate_warrior":
+			#Self boosts when flipped
+			var boost_value = 500
+			card_node.this_card_flags.atk_up += boost_value
+			card_node.this_card_flags.def_up += boost_value
+			card_node.update_card_information(card_node.this_card_id)
+			
+			return "slate warrior"
+	
+	return "fip_effect_completed" #generic return
 

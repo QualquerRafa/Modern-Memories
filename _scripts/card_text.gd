@@ -120,10 +120,11 @@ func get_card_text(card_id : String):
 								line1 += "you gain " + String(card_on_CardList.effect[2]) + " points to your own LP."
 							#Happen at the end of combat phase
 							"mill":
-								line1 += "the opponent loses 1 card from their deck."
 								var mill_quantity = card_on_CardList.effect[2]
 								if mill_quantity > 1:
 									line1 += "the opponent loses " + String(mill_quantity) + " cards from their deck." 
+								else:
+									line1 += "the opponent loses 1 card from their deck."
 							"burn":
 								var burn_damage = String(card_on_CardList.effect[2]) + " points."
 								if typeof(card_on_CardList.effect[2]) == TYPE_STRING: burn_damage = "the base ATK of the destroyed monster."
@@ -174,13 +175,14 @@ func get_card_text(card_id : String):
 							"lifepoint_up":
 								line1 += "you gain " + String(card_on_CardList.effect[2]) + " points to your own Life Points."
 							"mill":
-								line1 += "the opponent loses 1 card from their deck."
 								var mill_quantity = card_on_CardList.effect[2]
 								if mill_quantity > 1:
 									line1 += "the opponent loses " + String(mill_quantity) + " cards from their deck." 
+								else:
+									line1 += "the opponent loses 1 card from their deck."
 							"slate_warrior":
 								line1 += "it gains 500 ATK and DEF."
-							"jigen_bakugan":
+							"jigen_bakudan":
 								line1 += "it destroys all of your monsters and deal LP damage to the opponent equal to half the sum of all ATKs."
 					
 					"on_summon": #Effects triggered when a monster is summoned
@@ -234,7 +236,7 @@ func get_card_text(card_id : String):
 								line1 += "it increases it's own Stats by " + String(card_on_CardList.effect[2]) + " points for each card out of your Deck."
 							#Lifepoints changers
 							"damage_monster_count":
-								line1 += " it deals LP damage to your opponent by" + String(card_on_CardList.effect[2]) + " times the number of monsters on the field."
+								line1 += " it deals LP damage to your opponent by " + String(card_on_CardList.effect[2]) + " times the number of monsters on the field."
 							"lifeup_monster_count":
 								line1 += " you gain LP equal to " + String(card_on_CardList.effect[2]) + " times the number of monsters on the field."
 							"lifepoint_up":

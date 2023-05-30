@@ -271,6 +271,7 @@ func enemy_main_phase():
 				continue #skip this loop, try to attack with the next monster and such
 		
 		#Try a direct attack
+		var did_battle = true #starts as true, set to false if it didn't
 		if player_monsters_array.size() == 0:
 			#print("-try direct attack")
 			#DIRECT ATTACK
@@ -361,6 +362,12 @@ func enemy_main_phase():
 							
 							#Battle Timer for better workflow
 							$enemy_timer.start(battle_timer); yield($enemy_timer, "timeout")
+				
+				did_battle = false
+		
+		#Wait for the battle end signal before proceeding
+		if did_battle:
+			yield(get_node("../"), "battle_finished")
 		
 		#Animation of de-scaling the card when it's loop is finished
 		current_strongest_monster.get_node("card_self_tween").interpolate_property(current_strongest_monster, "rect_scale", current_strongest_monster.rect_scale, scaled_back_size, scale_timer, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)

@@ -5749,7 +5749,7 @@ const card_list = {
 	"effect": [
 	  "on_flip",
 	  "destroy_card",
-	  "random_enemy_spelltrap"
+	  "random_spelltrap"
 	],
 	"passcode": "58132856"
   },
@@ -6439,7 +6439,7 @@ const card_list = {
 	"effect": [
 	  "on_flip",
 	  "destroy_card",
-	  "random_enemy_spelltrap"
+	  "random_spelltrap"
 	],
 	"passcode": "46461247"
   },
@@ -7596,7 +7596,7 @@ const card_list = {
 	"effect": [
 	  "on_flip",
 	  "destroy_card",
-	  "random_enemy_spelltrap"
+	  "random_spelltrap"
 	],
 	"passcode": "41872150"
   },
@@ -7611,7 +7611,7 @@ const card_list = {
 	"effect": [
 	  "on_flip",
 	  "destroy_card",
-	  "random_enemy_spelltrap"
+	  "random_spelltrap"
 	],
 	"passcode": "75109441"
   },
@@ -8342,7 +8342,7 @@ const card_list = {
 	"effect": [
 	  "on_flip",
 	  "destroy_card",
-	  "random_enemy_spelltrap"
+	  "random_spelltrap"
 	],
 	"passcode": "09076207"
   },
@@ -13454,7 +13454,7 @@ const card_list = {
 	"effect": [
 	  "on_flip",
 	  "destroy_card",
-	  "random_enemy_spelltrap"
+	  "random_spelltrap"
 	],
 	"passcode": "14618326"
   },
@@ -13513,7 +13513,7 @@ const card_list = {
 	"effect": [
 	  "on_flip",
 	  "destroy_card",
-	  "random_enemy_spelltrap"
+	  "random_spelltrap"
 	],
 	"passcode": "64749612"
   },

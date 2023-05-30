@@ -8,6 +8,8 @@ const atk_orientation_x_scale : float = 0.518
 const atk_orientation_y_scale : float = 0.517
 const def_orientation_y_scale : float = 0.517 #when in def position, shorten it just a little
 
+signal battle_finished
+
 #------------------------------------------------------------------------------
 #EFFECTS LOGIC
 func effect_activation(card_node : Node, type_of_activation : String):
@@ -76,9 +78,11 @@ var card_ready_to_defend : Node #passed by a card node when player is in the pha
 
 func do_battle(attacking_card : Node, defending_card : Node):
 	if attacking_card.this_card_flags.has_battled == true:
+		emit_signal("battle_finished")
 		return #failsafe to prevent cards from battling more than once
 	if defending_card.is_visible() == false:
 		print("do_battle() caught a timming mismatch. This should be safe.")
+		emit_signal("battle_finished")
 		return #failsafe to prevent multiple attacks on an already destroyed monster in case of timming mismatches
 	
 	#Check for Trap Card activations before battle
@@ -92,17 +96,41 @@ func do_battle(attacking_card : Node, defending_card : Node):
 		attacking_card.this_card_flags.is_facedown = false
 		attacking_card.update_card_information(attacking_card.this_card_id)
 		
+		emit_signal("battle_finished")
 		return #battle logic is stopped, since traps will AT LEAST negate the attack (can do more, but that's on effects.gd to solve)
 	
-	var battle_timer_node = $battle_visuals/battle_timer_node
-	var battle_timer : float = 0.2 #in seconds
+	#Check for Flip Effects before battle
+	if CardList.card_list[attacking_card.this_card_id].effect.size() > 0 and CardList.card_list[attacking_card.this_card_id].effect[0] == "on_flip" and attacking_card.this_card_flags.has_activated_effect == false:
+		#Attacker flip effect first
+		effect_activation(attacking_card, "on_flip")
+		yield($effects, "effect_fully_executed")
+		$battle_visuals/battle_timer_node.start(0.3); yield($battle_visuals/battle_timer_node, "timeout")
+	#Catch end of Flip Effect
+	if not attacking_card.is_visible() or not defending_card.is_visible():
+		emit_signal("battle_finished")
+		return #battle logic has to stop since one of the involveds in battle is no longer on the field
 	
-	#Set the attacker and defender flags
+	#Attacker flags
 	attacking_card.this_card_flags.has_battled = true
 	attacking_card.this_card_flags.is_facedown = false
 	attacking_card.update_card_information(attacking_card.this_card_id)
+	
+	if CardList.card_list[defending_card.this_card_id].effect.size() > 0 and CardList.card_list[defending_card.this_card_id].effect[0] == "on_flip" and defending_card.this_card_flags.has_activated_effect == false:
+		#Defending flip effect second
+		effect_activation(defending_card, "on_flip")
+		yield($effects, "effect_fully_executed")
+		$battle_visuals/battle_timer_node.start(0.3); yield($battle_visuals/battle_timer_node, "timeout")
+	#Catch end of Flip Effect
+	if not attacking_card.is_visible() or not defending_card.is_visible():
+		emit_signal("battle_finished")
+		return #battle logic has to stop since one of the involveds in battle is no longer on the field
+	
+	#Defender Flags
 	defending_card.this_card_flags.is_facedown = false
 	defending_card.update_card_information(defending_card.this_card_id)
+	
+	var battle_timer_node = $battle_visuals/battle_timer_node
+	var battle_timer : float = 0.2 #in seconds
 	
 	#First thing is to update the cards involved in battle so I can use them as references for calculations and stuff
 	$battle_visuals/visual_cardA.this_card_flags = attacking_card.this_card_flags
@@ -191,7 +219,7 @@ func do_battle(attacking_card : Node, defending_card : Node):
 	elif attacker_stats == defender_stats:
 		#If the stats are equal, destroy neither or both, depending on defender battle position
 		if defending_card.this_card_flags.is_defense_position == false: #atk pos, destroy both
-			destroy_a_card(card_ready_to_attack)
+			destroy_a_card(attacking_card)
 			destroy_a_card(defending_card)
 		else: #just flip defense card face up
 			defending_card.this_card_flags.is_facedown = false
@@ -199,7 +227,7 @@ func do_battle(attacking_card : Node, defending_card : Node):
 	elif attacker_stats < defender_stats:
 		#If attacker lost, only destroy it if defender is not in defense position
 		if defending_card.this_card_flags.is_defense_position == false:
-			destroy_a_card(card_ready_to_attack)
+			destroy_a_card(attacking_card)
 		defending_card.this_card_flags.is_facedown = false
 		defending_card.get_node("card_design/card_back").hide()
 	
@@ -252,6 +280,9 @@ func do_battle(attacking_card : Node, defending_card : Node):
 			change_lifepoints("enemy", LP_damage)
 		else: #Reduce from COM LP
 			change_lifepoints("player", LP_damage)
+	
+	#Emit signal at the end of battle
+	emit_signal("battle_finished")
 
 func _on_direct_attack_area_button_up():
 	#prevent direct attacks on first turn
@@ -286,6 +317,16 @@ func do_direct_attack(attacking_card):
 		attacking_card.update_card_information(attacking_card.this_card_id)
 		
 		return #battle logic is stopped, since traps will AT LEAST negate the attack (can do more, but that's on effects.gd to solve)
+	
+	#Check for Flip Effects before battle
+	if CardList.card_list[attacking_card.this_card_id].effect.size() > 0 and CardList.card_list[attacking_card.this_card_id].effect[0] == "on_flip" and attacking_card.this_card_flags.has_activated_effect == false:
+		#Attacker flip effect first
+		effect_activation(attacking_card, "on_flip")
+		yield($effects, "effect_fully_executed")
+		$battle_visuals/battle_timer_node.start(0.3); yield($battle_visuals/battle_timer_node, "timeout")
+	#Catch end of Flip Effect
+	if not attacking_card.is_visible():
+		return #battle logic has to stop since one of the involveds in battle is no longer on the field
 	
 	var battle_timer_node = $battle_visuals/battle_timer_node
 	var battle_timer : float = 0.2 #in seconds
@@ -368,6 +409,9 @@ func do_direct_attack(attacking_card):
 		print("Back to Enemy's Main Phase")
 		GAME_PHASE = "enemy_main_phase"
 		change_lifepoints("player", LP_damage)
+	
+	#Emit signal at the end of battle
+	emit_signal("battle_finished")
 
 #---------------------------------------------------------------------------------------------------
 var LP_info_node : Node
