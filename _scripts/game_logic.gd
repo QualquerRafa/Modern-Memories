@@ -15,10 +15,14 @@ signal battle_finished
 func effect_activation(card_node : Node, type_of_activation : String):
 	#pass this exactly as is to the effects script
 	var effect_return = $effects.call_effect(card_node, type_of_activation)
-	
-	return effect_return
+
+	return effect_return 
 
 func check_for_trap_cards(attacking_card : Node):
+	#If the attacking has the ignore_spelltrap effect, return null
+	if CardList.card_list[attacking_card.this_card_id].effect.size() > 0 and CardList.card_list[attacking_card.this_card_id].effect[1] == "ignore_spelltrap":
+		return null
+	
 	#Figure out which side is attacking to check the other side for set trap cards
 	var trap_side : String = "enemy"
 	if attacking_card.get_parent().get_name().find("player") != 0:
@@ -116,10 +120,12 @@ func do_battle(attacking_card : Node, defending_card : Node):
 	attacking_card.update_card_information(attacking_card.this_card_id)
 	
 	if CardList.card_list[defending_card.this_card_id].effect.size() > 0 and CardList.card_list[defending_card.this_card_id].effect[0] == "on_flip" and defending_card.this_card_flags.has_activated_effect == false:
-		#Defending flip effect second
-		effect_activation(defending_card, "on_flip")
-		yield($effects, "effect_fully_executed")
-		$battle_visuals/battle_timer_node.start(0.3); yield($battle_visuals/battle_timer_node, "timeout")
+		#Check for attacker having the "anti_flip" effect
+		if CardList.card_list[attacking_card.this_card_id].effect.size() > 0 and CardList.card_list[attacking_card.this_card_id].effect[1] != "anti_flip":
+			#Defending flip effect second
+			effect_activation(defending_card, "on_flip")
+			yield($effects, "effect_fully_executed")
+			$battle_visuals/battle_timer_node.start(0.3); yield($battle_visuals/battle_timer_node, "timeout")
 	#Catch end of Flip Effect
 	if not attacking_card.is_visible() or not defending_card.is_visible():
 		emit_signal("battle_finished")
@@ -128,6 +134,24 @@ func do_battle(attacking_card : Node, defending_card : Node):
 	#Defender Flags
 	defending_card.this_card_flags.is_facedown = false
 	defending_card.update_card_information(defending_card.this_card_id)
+	
+	#Check for on_attack effects right before battle starts
+	if CardList.card_list[attacking_card.this_card_id].effect.size() > 0 and CardList.card_list[attacking_card.this_card_id].effect[0] == "on_attack":
+		effect_activation(attacking_card, "on_attack")
+		yield($effects, "effect_fully_executed")
+		$battle_visuals/battle_timer_node.start(0.3); yield($battle_visuals/battle_timer_node, "timeout")
+	#Catch end of Attack Effect
+	if not attacking_card.is_visible() or not defending_card.is_visible():
+		emit_signal("battle_finished")
+		return #battle logic has to stop since at least one of the involveds in battle is no longer on the field
+	
+	#Check for SOME on_defend effects that should happen at the start of battle
+	var on_defend_before_battle = ["debuff", "ehero_core"]
+	if CardList.card_list[defending_card.this_card_id].effect.size() > 0 and CardList.card_list[defending_card.this_card_id].effect[0] == "on_defend" and CardList.card_list[defending_card.this_card_id].effect[1] in on_defend_before_battle:
+		card_ready_to_attack = attacking_card
+		effect_activation(defending_card, "on_defend")
+		yield($effects, "effect_fully_executed")
+		$battle_visuals/battle_timer_node.start(0.3); yield($battle_visuals/battle_timer_node, "timeout")
 	
 	var battle_timer_node = $battle_visuals/battle_timer_node
 	var battle_timer : float = 0.2 #in seconds
@@ -154,10 +178,20 @@ func do_battle(attacking_card : Node, defending_card : Node):
 		if defending_card.this_card_flags.is_defense_position == false:
 			LP_damage = attacker_stats - defender_stats
 			LP_position = Vector2(696, 21)
+		#Calculate LP damage in case attacker has piercing effect on a defense position monster
+		else:
+			if CardList.card_list[attacking_card.this_card_id].effect.size() > 0 and CardList.card_list[attacking_card.this_card_id].effect[1] == "piercing":
+				LP_damage = attacker_stats - defender_stats
+				LP_position = Vector2(696, 21)
+		
 	elif defender_stats > attacker_stats:
 		battle_loser_anim_path = $battle_visuals/visual_cardA
 		LP_damage = defender_stats - attacker_stats
 		LP_position = Vector2(120, 21)
+	
+	#Catch and change the LP Damage if the defender has on_defend no_damage
+	if CardList.card_list[defending_card.this_card_id].effect.size() > 0 and CardList.card_list[defending_card.this_card_id].effect[1] == "no_damage":
+		LP_damage = 0
 	
 	#RESET ANIMATION STUFF BEFORE STARTING
 	$battle_visuals.modulate = Color(1,1,1,1)
@@ -214,16 +248,40 @@ func do_battle(attacking_card : Node, defending_card : Node):
 	
 	#Figure out which card should be destroyed (Placed here to be visually hidden by the animations of battle)
 	if attacker_stats > defender_stats:
-		#Destroy defender
-		destroy_a_card(defending_card)
+		#Check for "on_defend" cant_die
+		if CardList.card_list[defending_card.this_card_id].effect.size() > 0 and CardList.card_list[defending_card.this_card_id].effect[1] == "cant_die":
+			#pass
+			
+			#Check for special cases where the monster can die by a fragile attribute
+			if CardList.card_list[defending_card.this_card_id].effect.size() > 2 and CardList.card_list[defending_card.this_card_id].effect[2] == CardList.card_list[attacking_card.this_card_id].attribute:
+				#Destroy defender
+				destroy_a_card(defending_card)
+			
+		else:
+			#Destroy defender
+			destroy_a_card(defending_card)
+		
 	elif attacker_stats == defender_stats:
 		#If the stats are equal, destroy neither or both, depending on defender battle position
 		if defending_card.this_card_flags.is_defense_position == false: #atk pos, destroy both
 			destroy_a_card(attacking_card)
-			destroy_a_card(defending_card)
+			
+			#Check for "on_defend" cant_die
+			if CardList.card_list[defending_card.this_card_id].effect.size() > 0 and CardList.card_list[defending_card.this_card_id].effect[1] == "cant_die":
+				#pass
+				
+				#Check for special cases where the monster can die by a fragile attribute
+				if CardList.card_list[defending_card.this_card_id].effect.size() > 2 and CardList.card_list[defending_card.this_card_id].effect[2] == CardList.card_list[attacking_card.this_card_id].attribute:
+					#Destroy defender
+					destroy_a_card(defending_card)
+				
+			else:
+				destroy_a_card(defending_card)
+			
 		else: #just flip defense card face up
 			defending_card.this_card_flags.is_facedown = false
 			defending_card.get_node("card_design/card_back").hide()
+		
 	elif attacker_stats < defender_stats:
 		#If attacker lost, only destroy it if defender is not in defense position
 		if defending_card.this_card_flags.is_defense_position == false:
@@ -274,12 +332,50 @@ func do_battle(attacking_card : Node, defending_card : Node):
 			change_lifepoints("player", LP_damage)
 		else: #Reduce from COM LP
 			change_lifepoints("enemy", LP_damage)
+			
+			#check for return_damage that Enemy will inflict on the player
+			if CardList.card_list[defending_card.this_card_id].effect.size() > 0 and CardList.card_list[defending_card.this_card_id].effect[1] == "return_damage":
+				$battle_visuals/battle_timer_node.start(0.9); yield($battle_visuals/battle_timer_node, "timeout")
+				change_lifepoints("player", LP_damage)
+			
 	else:
 		#Reduce LP as intended
 		if defender_stats > attacker_stats: #Reduce from player LP
 			change_lifepoints("enemy", LP_damage)
 		else: #Reduce from COM LP
 			change_lifepoints("player", LP_damage)
+			
+			#check for return_damage that player will inflict on the enemy
+			if CardList.card_list[defending_card.this_card_id].effect.size() > 0 and CardList.card_list[defending_card.this_card_id].effect[1] == "return_damage":
+				$battle_visuals/battle_timer_node.start(0.9); yield($battle_visuals/battle_timer_node, "timeout")
+				change_lifepoints("enemy", LP_damage)
+	
+	#Revert some temporary effects
+	if attacking_card.is_visible() and CardList.card_list[attacking_card.this_card_id].effect.size() > 0 and CardList.card_list[attacking_card.this_card_id].effect[1] in ["injection_fairy"]:
+		match CardList.card_list[attacking_card.this_card_id].effect[1]:
+			#Remove the 3000 ATK boost from Injection Fairy Lily
+			"injection_fairy":
+				if attacking_card.this_card_flags.atk_up >= 3000:
+					 attacking_card.this_card_flags.atk_up -= 3000
+					 attacking_card.update_card_information(attacking_card.this_card_id)
+	if defending_card.is_visible() and CardList.card_list[defending_card.this_card_id].effect.size() > 0 and CardList.card_list[defending_card.this_card_id].effect[1] in ["ehero_core"]:
+		match CardList.card_list[defending_card.this_card_id].effect[1]:
+			"ehero_core":
+				#Remove the attack bonus it gets
+				if defending_card.this_card_flags.atk_up >= CardList.card_list[defending_card.this_card_id].atk:
+					defending_card.this_card_flags.atk_up -= CardList.card_list[defending_card.this_card_id].atk
+					defending_card.update_card_information(defending_card.this_card_id)
+	
+	#Check for SOME on_defend effects that should happen at the end of battle
+	var on_defend_after_battle = ["change_position"]
+	if CardList.card_list[defending_card.this_card_id].effect.size() > 0 and CardList.card_list[defending_card.this_card_id].effect[0] == "on_defend" and CardList.card_list[defending_card.this_card_id].effect[1] in on_defend_after_battle:
+		effect_activation(defending_card, "on_defend")
+		yield($effects, "effect_fully_executed")
+		$battle_visuals/battle_timer_node.start(0.3); yield($battle_visuals/battle_timer_node, "timeout")
+	
+	#Reset these to null
+	card_ready_to_attack = null
+	card_ready_to_defend = null
 	
 	#Emit signal at the end of battle
 	emit_signal("battle_finished")
@@ -295,7 +391,9 @@ func _on_direct_attack_area_button_up():
 		if get_node("../duel_field/enemy_side_zones/monster_" + String(i)).is_visible():
 			enemy_monsters_on_field += 1
 	
-	if enemy_monsters_on_field == 0: #TODO: or card_ready_to_attack effect is "can_direct"
+	if enemy_monsters_on_field == 0 or CardList.card_list[card_ready_to_attack.this_card_id].effect.size() > 0 and CardList.card_list[card_ready_to_attack.this_card_id].effect[1] in ["can_direct", "toon"]:
+		if CardList.card_list[card_ready_to_attack.this_card_id].effect[1] == "toon":
+			effect_activation(card_ready_to_attack, "on_attack")
 		do_direct_attack(card_ready_to_attack)
 	else:
 		print("can't direct attack")
@@ -335,6 +433,16 @@ func do_direct_attack(attacking_card):
 	attacking_card.this_card_flags.has_battled = true
 	attacking_card.this_card_flags.is_facedown = false
 	attacking_card.update_card_information(attacking_card.this_card_id)
+	
+	#Check for on_attack effects right before battle starts
+	if CardList.card_list[attacking_card.this_card_id].effect.size() > 0 and CardList.card_list[attacking_card.this_card_id].effect[0] == "on_attack":
+		effect_activation(attacking_card, "on_attack")
+		yield($effects, "effect_fully_executed")
+		$battle_visuals/battle_timer_node.start(0.3); yield($battle_visuals/battle_timer_node, "timeout")
+	#Catch end of Attack Effect
+	if not attacking_card.is_visible():
+		emit_signal("battle_finished")
+		return #battle logic has to stop since at least one of the involveds in battle is no longer on the field
 	
 	#First thing is to update the cards involved in battle so I can use them as references for calculations and stuff
 	$battle_visuals/visual_cardA.this_card_flags = attacking_card.this_card_flags

@@ -50,20 +50,24 @@ func call_effect(card_node : Node, type_of_activation : String): #The 'card_node
 		_: #Monsters
 			match type_of_activation:
 				"on_summon":
-					extra_return_information = monster_on_summon(card_node)
+					if CardList.card_list[card_node.this_card_id].effect[0] == "on_summon":
+						extra_return_information = monster_on_summon(card_node)
 				"on_flip":
-					extra_return_information = monster_on_flip(card_node)
+					if CardList.card_list[card_node.this_card_id].effect[0] == "on_flip":
+						extra_return_information = monster_on_flip(card_node)
 				"on_attack":
-					extra_return_information = type_of_activation
+					if CardList.card_list[card_node.this_card_id].effect[0] == "on_attack":
+						extra_return_information = monster_on_attack(card_node)
 				"on_defend": 
-					extra_return_information = type_of_activation
+					if CardList.card_list[card_node.this_card_id].effect[0] == "on_defend":
+						extra_return_information = monster_on_defend(card_node)
 				_:
 					print("Monster effect of type ", CardList.card_list[card_node.this_card_id].effect[0], " isn't programmed.")
 					extra_return_information = "FAIL"
 			
 			#For monsters, it's important to return the type of it's activation
-			type_of_effect_activated = type_of_activation
-			extra_return_information = "monster effect"
+			#type_of_effect_activated = type_of_activation
+			#extra_return_information = "monster effect"
 	
 	#After a card effect was activated and it's been removed from the field, clear the bottom bar from it's information. Generally happens for Spell and Traps only, since monsters remain.
 	if card_attribute in ["spell", "trap"]:
@@ -73,7 +77,8 @@ func call_effect(card_node : Node, type_of_activation : String): #The 'card_node
 	if card_type != "equip": #equips will emit this signal at it's own moment, since it needs to wait for player input
 		emit_signal("effect_fully_executed")
 	
-	return [type_of_effect_activated, extra_return_information]
+	var final_return = [type_of_effect_activated, extra_return_information]
+	return final_return
 
 ####################################################################################################
 # AUXILIARY
@@ -1243,3 +1248,145 @@ func monster_on_flip(card_node : Node):
 	
 	return "fip_effect_completed" #generic return
 
+func monster_on_attack(card_node : Node):
+	var caller_and_target : Array = get_caller_and_target(card_node) #[caller, target]
+	var type_of_effect = CardList.card_list[card_node.this_card_id].effect[1]
+	
+	match type_of_effect:
+		"anti_flip", "ignore_spelltrap", "piercing", "can_direct":
+			return type_of_effect #these effects are actually part of the logic on GAME_LOGIC.do_battle() and player_logic and enemy_logic
+		
+		"toon":
+			#All the combat checks for this is done in the GAME_LOGIC.do_battle() thingy, this effect will only deduce the 500 LP in case of a direct attack
+			#Since this effect will only be called when checking for a direct attack, the smart way to figure out if it is a direct by effect is by counting monsters on Target field
+			var target_side_of_field = GAME_LOGIC.get_parent().get_node("duel_field/" + caller_and_target[1] + "_side_zones")
+			var target_number_of_monsters : int = 0
+			for i in range(5):
+				var card_being_checked = target_side_of_field.get_node("monster_" + String(i))
+				if card_being_checked.is_visible():
+					target_number_of_monsters += 1
+			
+			if target_number_of_monsters != 0: #there are monsters on the field, so this Direct was by effect and costs 500 LP
+				GAME_LOGIC.change_lifepoints(caller_and_target[0], 500)
+			
+			return "toon"
+		
+		"change_position":
+			#This attacking monster will be changed to DEF position
+			card_node.toggle_battle_position()
+			
+			return "changed to def"
+		
+		"injection_fairy":
+			var lifepoints : int = int(GAME_LOGIC.get_parent().get_node("user_interface/top_info_box/player_info/lifepoints").get_text())
+			if caller_and_target[0] == "enemy":
+				lifepoints = int(GAME_LOGIC.get_parent().get_node("user_interface/top_info_box/com_info/lifepoints").get_text())
+			
+			if lifepoints > 2000:
+				card_node.this_card_flags.atk_up += 3000
+				card_node.update_card_information(card_node.this_card_id)
+				GAME_LOGIC.change_lifepoints(caller_and_target[0], 2000)
+			
+			#This buff is removed at the end of the battle logic
+			return "injection fairy"
+		
+		"rocket_warrior":
+			var get_attacked_monster = GAME_LOGIC.card_ready_to_defend
+			if get_attacked_monster != null:
+				get_attacked_monster.this_card_flags.atk_up -= 500
+				get_attacked_monster.update_card_information(get_attacked_monster.this_card_id)
+			
+			return "rocket warrior"
+		
+		"mutual_banish":
+			#This one REALLY needs an animation
+			var get_attacked_monster = GAME_LOGIC.card_ready_to_defend
+			if get_attacked_monster != null:
+				GAME_LOGIC.destroy_a_card(card_node)
+				GAME_LOGIC.destroy_a_card(get_attacked_monster)
+			
+			return "both monsters removed"
+		
+		"lifepoint_cost", "lifepoint_up":
+			var value : int = CardList.card_list[card_node.this_card_id].effect[2]
+			
+			var get_keyword = type_of_effect.split("_")[1] #returns 'cost' or 'up'
+			var is_up = get_keyword == "up"
+			print(is_up)
+			GAME_LOGIC.change_lifepoints(caller_and_target[0], value, is_up)
+			
+			return "life changed"
+		
+		"burn":
+			var value = CardList.card_list[card_node.this_card_id].effect[2]
+			var final_value : int = 0
+			match value:
+				"enemy_atk":
+					var get_attacked_monster = GAME_LOGIC.card_ready_to_defend
+					if get_attacked_monster != null:
+						final_value = int(get_attacked_monster.get_node("card_design/monster_features/atk_def/atk").text)
+					else:
+						final_value = 0
+				_:
+					final_value = int(value)
+			
+			if final_value > 0:
+				GAME_LOGIC.change_lifepoints(caller_and_target[1], final_value)
+			
+			return "burn damage"
+		
+		"mill":
+			var card_quantity = CardList.card_list[card_node.this_card_id].effect[2]
+			
+			#Get the Deck reference
+			var target_is = caller_and_target[1]
+			var deck : Array = GAME_LOGIC.get_node("player_logic").player_deck
+			if target_is == "enemy":
+				target_is = "com"
+				deck = GAME_LOGIC.get_node("enemy_logic").enemy_deck
+			var current_deck_size = int(get_node("../../user_interface/top_info_box/"+ target_is +"_info/deck").get_text())
+			
+			#Remove cards from the deck, if it has enough
+			var cards_removed : int = 0
+			for _i in range(card_quantity):
+				if current_deck_size > 0:
+					deck.remove(0) #remove that same card from deck
+					get_node("../../user_interface/top_info_box/"+ target_is +"_info/deck").text = String(deck.size())
+					cards_removed += 1
+			
+			return String(cards_removed)
+	
+	return "generic return" #for breaking prevention
+
+func monster_on_defend(card_node : Node):
+	var type_of_effect = CardList.card_list[card_node.this_card_id].effect[1]
+	match type_of_effect:
+		#Effects handled by Battle Logic
+		"cant_die", "no_damage", "return_damage": pass
+		
+		#Effects that happen at the start of battle
+		"debuff":
+			var debuff_value : int = CardList.card_list[card_node.this_card_id].effect[2]
+			
+			var get_attacker_monster = GAME_LOGIC.card_ready_to_attack
+			if get_attacker_monster != null:
+				get_attacker_monster.this_card_flags.atk_up -= debuff_value
+				get_attacker_monster.update_card_information(get_attacker_monster.this_card_id)
+			
+			return "defense debuff"
+		
+		"ehero_core":
+			#When this card is attacked it doubles it's own base atk for this battle
+			card_node.this_card_flags.atk_up += CardList.card_list[card_node.this_card_id].atk
+			card_node.update_card_information(card_node.this_card_id)
+			
+			return "hero core"
+		
+		#Effects that happen at the end of battle
+		"change_position":
+			#This defending monster will be changed to ATK position
+			card_node.toggle_battle_position()
+			
+			return "changed to atk"
+	
+	return "generic return"

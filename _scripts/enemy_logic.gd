@@ -31,7 +31,7 @@ func enemy_draw_phase():
 		print("Enemy deck run out")
 	
 	#Fixed Hand for testing purposes
-	#enemy_hand = ["00119", "00119", "00119", "00119", "00119"]
+	enemy_hand = ["00444", "00444", "00444", "00444", "00444"]
 	
 	#Reset the 'has_battled' for all monsters on the field
 	for i in range(5):
@@ -83,9 +83,9 @@ func enemy_choosing_card_to_play():
 		choose_a_spelltrap = enemy_try_to_choose_spelltrap() #If enemy has more monsters than the player, it can try to play a Spell or Trap Card
 		if choose_a_spelltrap != "":
 			final_card_to_play = ["spelltrap", choose_a_spelltrap]
-	else: #If COM has less monsters than the player it will specifically look for Raigeki on its hand
+	else: #If COM has less monsters than the player it will specifically look for Raigeki or a trap on its hand
 		choose_a_spelltrap = enemy_try_to_choose_spelltrap()
-		if choose_a_spelltrap == "00117": #Raigeki id is 00117
+		if choose_a_spelltrap == "00117" or choose_a_spelltrap != "" and CardList.card_list[choose_a_spelltrap].attribute == "trap": #Raigeki id is 00117
 			final_card_to_play = ["spelltrap", choose_a_spelltrap]
 	
 	var choose_a_monster : Array = [] #card_id, [cards_to_fuse...]
@@ -269,6 +269,11 @@ func enemy_main_phase():
 			var random_roll = randf()
 			if random_roll <= variable_fake_thinking_chance:
 				continue #skip this loop, try to attack with the next monster and such
+		
+		#Shennanigans for direct attacking
+		if CardList.card_list[current_strongest_monster.this_card_id].effect.size() > 0 and CardList.card_list[current_strongest_monster.this_card_id].effect[1] in ["can_direct", "toon"]:
+			#Empty player_monsters_array under certain conditions to force this logic to call for direct_attack
+			print("could attack direct")
 		
 		#Try a direct attack
 		var did_battle = true #starts as true, set to false if it didn't
@@ -495,7 +500,7 @@ func enemy_try_to_choose_spelltrap():
 				if get_node("../../duel_field/player_side_zones/spelltrap_" + String(j)).is_visible():
 					return enemy_hand[i]
 			
-		elif CardList.card_list[enemy_hand[i]].attribute == "trap" and chance_of_spelltrap <= 0.5:
+		elif CardList.card_list[enemy_hand[i]].attribute == "trap" and chance_of_spelltrap <= 0.8:
 			return enemy_hand[i]
 	
 	return chosen_spelltrap

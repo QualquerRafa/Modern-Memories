@@ -16,7 +16,6 @@ var this_card_flags : Dictionary = {
 #-------------------------------------------------------------------------------
 func _ready():
 	this_card_id = generate_random_card()
-	
 	update_card_information(this_card_id)
 
 #var overflow_prevent = 0
