@@ -30,8 +30,8 @@ func enemy_draw_phase():
 	else:
 		print("Enemy deck run out")
 	
-	#Fixed Hand for testing purposes
-	enemy_hand = ["00444", "00444", "00444", "00444", "00444"]
+	#Change enemy Hand for testing purposes
+	enemy_hand = ["00334", "00334", "00334", "00334", "00334"]
 	
 	#Reset the 'has_battled' for all monsters on the field
 	for i in range(5):
@@ -68,7 +68,7 @@ func enemy_choosing_card_to_play():
 			if int(player_monsters_temp[j].get_node("card_design/monster_features/atk_def/atk").get_text()) == player_atk_temp[i]:
 				player_monsters_sorted_by_atk.push_front(player_monsters_temp[j])
 	
-	#Get info from Enemy's Side of the Field
+	#Get info from COM's Side of the Field
 	var enemy_monsters_on_field : int = 0
 	for i in range(5):
 		if get_node("../../duel_field/enemy_side_zones/monster_" + String(i)).is_visible():
@@ -174,7 +174,7 @@ func enemy_play_that_card(card_to_play_array : Array):
 		
 		$fusion_animation/fusion_result_card.modulate = Color(10, 10, 10)
 		$fusion_animation/fusion_result_card.rect_scale = fusion_result_start_size
-		$fusion_animation/fusion_result_card.this_card_flags.fusion_type = field_node_to_use.this_card_flags.fusion_type
+		$fusion_animation/fusion_result_card.this_card_flags = field_node_to_use.this_card_flags
 		$fusion_animation/fusion_result_card.update_card_information(card_being_played)
 		$fusion_animation/fusion_result_card.show()
 		$fusion_animation/tween_fusion.interpolate_property($fusion_animation/fusion_result_card, "modulate", Color(10, 10, 10), Color(1, 1, 1), fusion_timer*0.8, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
@@ -190,7 +190,7 @@ func enemy_play_that_card(card_to_play_array : Array):
 		field_node_to_use.this_card_flags.is_facedown = true
 		field_node_to_use.get_node("card_design/card_back").show()
 	
-	#Special checks for Spells that are activated on placement
+	#Special checks for Spells, they will be forced face up to be instantly activated
 	if CardList.card_list[card_being_played].attribute == "spell":
 		field_node_to_use.this_card_flags.is_facedown = false
 		field_node_to_use.get_node("card_design/card_back").hide()
@@ -213,6 +213,12 @@ func enemy_play_that_card(card_to_play_array : Array):
 		get_node("../../user_interface/card_info_box/atk_def").hide()
 		get_node("../../user_interface/card_info_box/extra_icons").hide()
 		get_node("../../user_interface/card_info_box/card_text").hide()
+	
+	#If it's not facedown, check if it has an effect to activate
+	if field_node_to_use.this_card_flags.is_facedown == false and CardList.card_list[field_node_to_use.this_card_id].effect.size() > 0:
+		print("COM effect?")
+		GAME_LOGIC.effect_activation(field_node_to_use, "on_summon")
+		yield(get_node("../effects"), "effect_fully_executed")
 	
 	#Move to enemy's next phase
 	enemy_main_phase()
@@ -270,10 +276,24 @@ func enemy_main_phase():
 			if random_roll <= variable_fake_thinking_chance:
 				continue #skip this loop, try to attack with the next monster and such
 		
-		#Shennanigans for direct attacking
+		#Shennanigans for effects of direct attacking
 		if CardList.card_list[current_strongest_monster.this_card_id].effect.size() > 0 and CardList.card_list[current_strongest_monster.this_card_id].effect[1] in ["can_direct", "toon"]:
-			#Empty player_monsters_array under certain conditions to force this logic to call for direct_attack
-			print("could attack direct")
+			#clearing the reference array for player monsters will make this logic foce a direct attack
+			var clear_array = false
+			
+			#Monsters with more than 2500 will always direct attack
+			if int(current_strongest_monster.get_node("card_design/monster_features/atk_def/atk").text) >= 2500:
+				clear_array = true
+			#Monsters that could finish the players LP will direct attack
+			elif int(current_strongest_monster.get_node("card_design/monster_features/atk_def/atk").text) >= int(GAME_LOGIC.get_parent().get_node("user_interface/top_info_box/player_info/lifepoints").get_text()):
+				clear_array = true
+			#If the difference between this monster atk and strongest from player isnt too much, direct attack
+			elif abs(int(current_strongest_monster.get_node("card_design/monster_features/atk_def/atk").text) - int(player_monsters_array[0].get_node("card_design/monster_features/atk_def/atk").text)) <= 500:
+				clear_array = true
+			
+			#If any condition matched, cheat around usual logic to make a direct attack
+			if clear_array:
+				player_monsters_array.clear()
 		
 		#Try a direct attack
 		var did_battle = true #starts as true, set to false if it didn't
@@ -563,7 +583,9 @@ func enemy_try_to_choose_monster(player_monsters_sorted_by_atk):
 							chosen_monster = [card_a, card_b]
 							return chosen_monster
 					else: #it returned an equip array
-						print("EQUIP not correctly implemented. This is just Break prevention.")
+						if checking_for_fusion[1].size() < 3:
+							chosen_monster = [card_a, card_b]
+							return chosen_monster
 		
 		#Couldn't perform any fusion, fallback and play the highest def found in previous stage of this code
 		if chosen_monster.size() == 0:

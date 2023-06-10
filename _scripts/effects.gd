@@ -9,6 +9,7 @@ signal effect_animation_finished #emitted by the animation
 signal effect_fully_executed #emitted at the end to progress the duel phase
 
 signal simulated_fusion_animation_finished #emitted by simulate_fusion_animation()
+signal lifepoint_animation_finished
 
 func call_effect(card_node : Node, type_of_activation : String): #The 'card_node' that is passed is already the exact card that's on the field
 	#Easily accessible information about the card
@@ -20,8 +21,15 @@ func call_effect(card_node : Node, type_of_activation : String): #The 'card_node
 	var extra_return_information : String #anything else that needs to be returned to be checked by other game functions
 	
 	#Animate the card being activated
-	var was_flipped = type_of_activation == "on_flip"
-	do_activation_animation(card_node, was_flipped)
+	var force_animation_on_special_cases = false
+	if type_of_activation == "on_flip" and CardList.card_list[card_node.this_card_id].effect[0] == "on_flip":
+		force_animation_on_special_cases = true
+	if type_of_activation == "on_attack" and CardList.card_list[card_node.this_card_id].effect[1] in ["mutual_banish", "injection_fairy", "rocket_warrior", "mill", "toon", "lifepoint_cost", "lifepoint_up"]:
+		force_animation_on_special_cases = true
+	if type_of_activation == "on_defend" and CardList.card_list[card_node.this_card_id].effect[1] in ["debuff", "ehero_core"]:
+		force_animation_on_special_cases = true
+	
+	do_activation_animation(card_node, force_animation_on_special_cases)
 	yield(self, "effect_animation_finished")
 	
 	#Handle it accordingly
@@ -57,17 +65,14 @@ func call_effect(card_node : Node, type_of_activation : String): #The 'card_node
 						extra_return_information = monster_on_flip(card_node)
 				"on_attack":
 					if CardList.card_list[card_node.this_card_id].effect[0] == "on_attack":
-						extra_return_information = monster_on_attack(card_node)
+						var _discard =  monster_on_attack(card_node)
+						extra_return_information = "on_attack"
 				"on_defend": 
 					if CardList.card_list[card_node.this_card_id].effect[0] == "on_defend":
 						extra_return_information = monster_on_defend(card_node)
 				_:
 					print("Monster effect of type ", CardList.card_list[card_node.this_card_id].effect[0], " isn't programmed.")
 					extra_return_information = "FAIL"
-			
-			#For monsters, it's important to return the type of it's activation
-			#type_of_effect_activated = type_of_activation
-			#extra_return_information = "monster effect"
 	
 	#After a card effect was activated and it's been removed from the field, clear the bottom bar from it's information. Generally happens for Spell and Traps only, since monsters remain.
 	if card_attribute in ["spell", "trap"]:
@@ -83,23 +88,23 @@ func call_effect(card_node : Node, type_of_activation : String): #The 'card_node
 ####################################################################################################
 # AUXILIARY
 ####################################################################################################
-func do_activation_animation(card_node : Node, was_flipped = false):
+func do_activation_animation(card_node : Node, force_animation = false):
 	var animation_timer : float = 0.001
-	
-	#Update the visuals of the card that has to be animated
-	$effect_visuals/visual_cardA.this_card_flags = card_node.this_card_flags
-	$effect_visuals/visual_cardA.update_card_information(card_node.this_card_id)
 	
 	#RESET ANIMATION STUFF BEFORE STARTING
 	$effect_visuals.modulate = Color(1,1,1,1)
 	$effect_visuals/visual_cardA.modulate = Color(1,1,1,1)
 	$effect_visuals/darken_screen.modulate  = Color(1,1,1,0)
 	
+	#Update the visuals of the card that has to be animated
+	$effect_visuals/visual_cardA.this_card_flags = card_node.this_card_flags
+	$effect_visuals/visual_cardA.update_card_information(card_node.this_card_id)
+	
 	#Make the visuals visible right before animating them
 	$effect_visuals/visual_cardA/card_design/card_back.show()
 	#Gambiarra do caralho pra "não animar" e emitir o sinal direitinho no final
-	var catch_on_flip = CardList.card_list[card_node.this_card_id].effect[0] == "on_flip" and was_flipped == true
-	if not CardList.card_list[card_node.this_card_id].effect[0] in ["on_attack", "on_defend", "on_flip"] or catch_on_flip == true:
+	#var catch_on_flip = CardList.card_list[card_node.this_card_id].effect[0] == "on_flip" and was_flipped == true
+	if not CardList.card_list[card_node.this_card_id].effect[0] in ["special_description", "on_attack", "on_defend", "on_flip"] or force_animation == true: # or catch_on_flip == true
 		animation_timer = 0.2
 		$effect_visuals.show()
 	
@@ -119,25 +124,19 @@ func do_activation_animation(card_node : Node, was_flipped = false):
 	#Hold the activated card visible for a while
 	$effect_timer_node.start(animation_timer*4); yield($effect_timer_node, "timeout")
 	
-	#Emit the signal to indicate the animation has ended
-	emit_signal("effect_animation_finished")
-	
 	#Animation fade out
 	$tween_effect.interpolate_property($effect_visuals, "modulate", Color(1,1,1, 1), Color(1,1,1, 0), animation_timer, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$tween_effect.start()
 	$effect_timer_node.start(animation_timer*2); yield($effect_timer_node, "timeout")
 	$effect_visuals.hide()
 	
+	#Emit the signal to indicate the animation has ended
+	emit_signal("effect_animation_finished")
+	
 	return true
 
 func clear_card_after_activation(card_node : Node):
 	#Based on the reference passed, find that card on the field and destroy it
-#	for i in range(5):
-#		for side_of_the_field in ["player_side_zones", "enemy_side_zones"]:
-#			var card_being_checked = GAME_LOGIC.get_parent().get_node("duel_field/"+ side_of_the_field +"/spelltrap_" + String(i))
-#			if card_being_checked.is_visible() and card_being_checked.this_card_id == card_node.this_card_id:
-#				GAME_LOGIC.destroy_a_card(card_being_checked)
-#				break
 	GAME_LOGIC.destroy_a_card(card_node)
 	
 	#Clear the bottom bar
@@ -223,6 +222,35 @@ func simulate_fusion_animation_resulting_in_card1(card_1_caller : Node, card_2_m
 	GAME_LOGIC.get_node("player_logic/fusion_animation").hide()
 	
 	emit_signal("simulated_fusion_animation_finished")
+
+func lifepoint_change_animation(signed_lifepoint : String, left_or_right : String):
+	var animation_timer : float = 0.5
+	
+	#Setup the text to be shown on screen
+	$lp_change_visuals/LP_damage.text = signed_lifepoint
+	$lp_change_visuals/LP_damage.modulate  = Color(1,1,1,0)
+	if left_or_right == "left":
+		$lp_change_visuals/LP_damage.rect_position.x = 96
+	elif left_or_right == "right":
+		$lp_change_visuals/LP_damage.rect_position.x = 696
+	
+	#Delay for the start of animation so it syncs up with the battle animation
+	$extra_timer_godot_sucks.start(animation_timer*1.8); yield($extra_timer_godot_sucks, "timeout")
+	
+	#Animate the text being shown
+	$lp_change_visuals.show()
+	$lp_change_visuals/lp_anim_tween.interpolate_property($lp_change_visuals/LP_damage, "modulate", Color(1,1,1, 0), Color(1,1,1, 1), animation_timer, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$lp_change_visuals/lp_anim_tween.start()
+	$effect_timer_node.start(animation_timer*1.5); yield($effect_timer_node, "timeout")
+	
+	#Animate the text fading away
+	$lp_change_visuals/lp_anim_tween.interpolate_property($lp_change_visuals/LP_damage, "modulate", Color(1,1,1, 1), Color(1,1,1, 0), animation_timer, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$lp_change_visuals/lp_anim_tween.start()
+	$effect_timer_node.start(animation_timer*1.5); yield($effect_timer_node, "timeout")
+	$lp_change_visuals.hide()
+	
+	emit_signal("lifepoint_animation_finished")
+	return true
 
 ####################################################################################################
 # SPELL CARDS
@@ -1266,14 +1294,16 @@ func monster_on_attack(card_node : Node):
 				if card_being_checked.is_visible():
 					target_number_of_monsters += 1
 			
-			if target_number_of_monsters != 0: #there are monsters on the field, so this Direct was by effect and costs 500 LP
+			if target_number_of_monsters > 0: #there are monsters on the field, so this Direct was by effect and costs 500 LP
+				lifepoint_change_animation("-500", "left")
 				GAME_LOGIC.change_lifepoints(caller_and_target[0], 500)
 			
 			return "toon"
 		
 		"change_position":
 			#This attacking monster will be changed to DEF position
-			card_node.toggle_battle_position()
+			if card_node.this_card_flags.is_defense_position == false:
+				card_node.toggle_battle_position()
 			
 			return "changed to def"
 		
@@ -1283,6 +1313,8 @@ func monster_on_attack(card_node : Node):
 				lifepoints = int(GAME_LOGIC.get_parent().get_node("user_interface/top_info_box/com_info/lifepoints").get_text())
 			
 			if lifepoints > 2000:
+				lifepoint_change_animation("-2000", "left")
+				
 				card_node.this_card_flags.atk_up += 3000
 				card_node.update_card_information(card_node.this_card_id)
 				GAME_LOGIC.change_lifepoints(caller_and_target[0], 2000)
@@ -1299,7 +1331,6 @@ func monster_on_attack(card_node : Node):
 			return "rocket warrior"
 		
 		"mutual_banish":
-			#This one REALLY needs an animation
 			var get_attacked_monster = GAME_LOGIC.card_ready_to_defend
 			if get_attacked_monster != null:
 				GAME_LOGIC.destroy_a_card(card_node)
@@ -1312,7 +1343,12 @@ func monster_on_attack(card_node : Node):
 			
 			var get_keyword = type_of_effect.split("_")[1] #returns 'cost' or 'up'
 			var is_up = get_keyword == "up"
-			print(is_up)
+			
+			if get_keyword == "up":
+				lifepoint_change_animation("+" + String(value), "left")
+			else:
+				lifepoint_change_animation("-" + String(value), "left")
+			
 			GAME_LOGIC.change_lifepoints(caller_and_target[0], value, is_up)
 			
 			return "life changed"
@@ -1324,13 +1360,14 @@ func monster_on_attack(card_node : Node):
 				"enemy_atk":
 					var get_attacked_monster = GAME_LOGIC.card_ready_to_defend
 					if get_attacked_monster != null:
-						final_value = int(get_attacked_monster.get_node("card_design/monster_features/atk_def/atk").text)
+						final_value = int(CardList.card_list[get_attacked_monster.this_card_id].atk)
 					else:
 						final_value = 0
 				_:
 					final_value = int(value)
 			
 			if final_value > 0:
+				lifepoint_change_animation("-" + String(final_value), "right")
 				GAME_LOGIC.change_lifepoints(caller_and_target[1], final_value)
 			
 			return "burn damage"
@@ -1385,7 +1422,8 @@ func monster_on_defend(card_node : Node):
 		#Effects that happen at the end of battle
 		"change_position":
 			#This defending monster will be changed to ATK position
-			card_node.toggle_battle_position()
+			if card_node.this_card_flags.is_defense_position == true:
+				card_node.toggle_battle_position()
 			
 			return "changed to atk"
 	

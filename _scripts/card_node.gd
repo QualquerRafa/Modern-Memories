@@ -18,14 +18,6 @@ func _ready():
 	this_card_id = generate_random_card()
 	update_card_information(this_card_id)
 
-#var overflow_prevent = 0
-#func _process(_delta):
-#	overflow_prevent += 1
-#	if overflow_prevent > 100:
-#		if self.is_visible() and self.get_parent().get_name() == "player_side_zones":
-#			print(CardList.card_list[this_card_id].card_name, this_card_flags)
-#			overflow_prevent = 0
-
 #-------------------------------------------------------------------------------
 func generate_random_card():
 	var card_id : String
