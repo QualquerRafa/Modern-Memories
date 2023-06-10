@@ -222,9 +222,31 @@ margin_bottom = 603.0
 rect_scale = Vector2( 1.4, 1.4 )
 rect_pivot_offset = Vector2( 165, 240 )
 
+[node name="lp_change_visuals" type="Node2D" parent="game_logic/effects"]
+visible = false
+z_index = 10
+
+[node name="LP_damage" type="Label" parent="game_logic/effects/lp_change_visuals"]
+margin_left = 696.0
+margin_top = 21.0
+margin_right = 1160.0
+margin_bottom = 699.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 5
+custom_constants/shadow_offset_y = 5
+custom_fonts/font = SubResource( 8 )
+text = "8000"
+align = 1
+valign = 1
+uppercase = true
+
+[node name="lp_anim_tween" type="Tween" parent="game_logic/effects/lp_change_visuals"]
+
 [node name="tween_effect" type="Tween" parent="game_logic/effects"]
 
 [node name="effect_timer_node" type="Timer" parent="game_logic/effects"]
+
+[node name="extra_timer_godot_sucks" type="Timer" parent="game_logic/effects"]
 
 [node name="just_visual_field_slots" type="Node2D" parent="game_logic/effects"]
 visible = false
