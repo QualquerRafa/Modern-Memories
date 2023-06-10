@@ -367,9 +367,18 @@ func equip_from_field_to_target(target_card_node : Node):
 	else:
 		print("Failed to equip. Results: ", equip_result)
 	
-	#Go back to regular main phase and toggle back buttons
-	GAME_LOGIC.get_parent().toggle_visibility_of_change_field_view_button()
-	GAME_LOGIC.get_parent().toggle_visibility_of_turn_end_button()
+	#Facedown cards will be forced face up, and probably trigger on_flip/on_summon effects
+	target_card_node.this_card_flags.is_facedown = false
+	target_card_node.update_card_information(target_card_node.this_card_id)
+	
+	if CardList.card_list[target_card_node.this_card_id].effect.size() > 0 and CardList.card_list[target_card_node.this_card_id].effect[0] in ["on_summon", "on_flip"] and target_card_node.this_card_flags.has_activated_effect == false:
+		call_effect(target_card_node, CardList.card_list[target_card_node.this_card_id].effect[0])
+	
+	#Go back to regular main phase and FORCE the buttons to be shown
+	GAME_LOGIC.get_parent().get_node("change_field_view/tween").interpolate_property(GAME_LOGIC.get_parent().get_node("change_field_view"), "rect_position", GAME_LOGIC.get_parent().get_node("change_field_view").rect_position, Vector2(1174, 276), 0.2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	GAME_LOGIC.get_parent().get_node("change_field_view/tween").start()
+	GAME_LOGIC.get_parent().get_node("turn_end_button/tween").interpolate_property(GAME_LOGIC.get_parent().get_node("turn_end_button"), "rect_position", GAME_LOGIC.get_parent().get_node("turn_end_button").rect_position, Vector2(1174, 366), 0.2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	GAME_LOGIC.get_parent().get_node("turn_end_button/tween").start()
 	GAME_LOGIC.GAME_PHASE = "main_phase"
 	
 	return typeof(equip_result[1]) == TYPE_ARRAY #returns TRUE for equip sucess, FALSE for equip failure
@@ -689,7 +698,7 @@ func monster_on_summon(card_node : Node):
 			var target_side_of_field = GAME_LOGIC.get_parent().get_node("duel_field/" + caller_and_target[0] + "_side_zones")
 			for i in range(5):
 				var monster_target = target_side_of_field.get_node("monster_" + String(i))
-				if monster_target.is_visible() and monster_target.this_card_flags.is_facedown == false and CardList.card_list[monster_target.this_card_id].type == friendly_type:
+				if monster_target.is_visible() and monster_target.this_card_flags.is_facedown == false and CardList.card_list[monster_target.this_card_id].type == friendly_type and monster_target != card_node:
 					monster_target.this_card_flags.atk_up += boost_value
 					monster_target.this_card_flags.def_up += boost_value
 					monster_target.update_card_information(monster_target.this_card_id)
@@ -961,32 +970,25 @@ func monster_on_summon(card_node : Node):
 				return "honest failed" #never will, it can target itself lol
 		
 		"copy_atk":
-			var list_of_monsters : Array = []
 			var target_side_of_field = GAME_LOGIC.get_parent().get_node("duel_field/" + caller_and_target[1] + "_side_zones")
 			
 			#List all of the targetable monsters
+			var highest_atk = 0
+			var associated_def = 0
 			for i in range(5):
 				var card_being_checked = target_side_of_field.get_node("monster_" + String(i))
 				if card_being_checked.is_visible() and card_being_checked.this_card_flags.is_facedown == false:
-					list_of_monsters.append(card_being_checked)
+					if int(card_being_checked.get_node("card_design/monster_features/atk_def/atk").text) >= highest_atk:
+						highest_atk = int(card_being_checked.get_node("card_design/monster_features/atk_def/atk").text)
+						associated_def = int(card_being_checked.get_node("card_design/monster_features/atk_def/def").text)
 			
-			#Sort them by ATK
-			var temp_atk_array = []
-			for i in range(list_of_monsters.size()):
-				temp_atk_array.append(int(list_of_monsters[i].get_node("card_design/monster_features/atk_def/atk").text))
-			temp_atk_array.sort()
-			
-			var list_of_monsters_sorted_by_ATK = []
-			for i in range(temp_atk_array.size()):
-				for j in range(list_of_monsters.size()):
-					if temp_atk_array[i] == int(list_of_monsters[j].get_node("card_design/monster_features/atk_def/atk").text) and !(list_of_monsters_sorted_by_ATK.has(list_of_monsters[j])):
-						list_of_monsters_sorted_by_ATK.append(list_of_monsters[j])
-			list_of_monsters_sorted_by_ATK.invert() #for some reason that is unclear to me right now, I had to invert to get the expected order from Highest to Lowest
-			
-			if list_of_monsters_sorted_by_ATK.size() > 0:
-				#Update the copycat card
-				card_node.this_card_flags.atk_up += int(list_of_monsters_sorted_by_ATK[0].get_node("card_design/monster_features/atk_def/atk").get_text())
-				card_node.this_card_flags.def_up += int(list_of_monsters_sorted_by_ATK[0].get_node("card_design/monster_features/atk_def/def").get_text())
+			#Update the copycat card
+			if highest_atk > 0:
+				#I have to subtract the original atk before adding the new one
+				card_node.this_card_flags.atk_up -= int(card_node.get_node("card_design/monster_features/atk_def/atk").text)
+				card_node.this_card_flags.atk_up += highest_atk
+				card_node.this_card_flags.def_up -= int(card_node.get_node("card_design/monster_features/atk_def/def").text)
+				card_node.this_card_flags.def_up += associated_def
 				card_node.update_card_information(card_node.this_card_id)
 			
 			return "atk copied"

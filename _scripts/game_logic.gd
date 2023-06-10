@@ -77,6 +77,7 @@ func destroy_a_card(card_node_to_destroy):
 	card_node_to_destroy.hide()
 	
 	#Clear the bottom bar of it's information
+	get_node("../user_interface/card_info_box/colored_bar").hide()
 	get_node("../user_interface/card_info_box/card_name").hide()
 	get_node("../user_interface/card_info_box/atk_def").hide()
 	get_node("../user_interface/card_info_box/extra_icons").hide()
@@ -99,9 +100,13 @@ func do_battle(attacking_card : Node, defending_card : Node):
 	card_ready_to_defend = defending_card
 	
 	#Check for Flip Effects before battle
-	if attacking_card.this_card_flags.is_facedown == true and CardList.card_list[attacking_card.this_card_id].effect.size() > 0 and CardList.card_list[attacking_card.this_card_id].effect[0] == "on_flip" and attacking_card.this_card_flags.has_activated_effect == false:
-		#Attacker flip effect first
-		effect_activation(attacking_card, "on_flip")
+	if attacking_card.this_card_flags.is_facedown == true and CardList.card_list[attacking_card.this_card_id].effect.size() > 0 and attacking_card.this_card_flags.has_activated_effect == false:
+		match CardList.card_list[attacking_card.this_card_id].effect[0]:
+			"on_flip":
+				effect_activation(attacking_card, "on_flip")
+			"on_summon":
+				attacking_card.this_card_flags.is_facedown = false
+				effect_activation(attacking_card, "on_summon")
 		yield($effects, "effect_fully_executed")
 		$battle_visuals/battle_timer_node.start(0.3); yield($battle_visuals/battle_timer_node, "timeout")
 	
@@ -116,11 +121,15 @@ func do_battle(attacking_card : Node, defending_card : Node):
 		check_for_camera_movement_on_effect_return(attacking_card)
 		return #battle logic has to stop since one of the involveds in battle is no longer on the field
 	
-	if defending_card.this_card_flags.is_facedown == true and CardList.card_list[defending_card.this_card_id].effect.size() > 0 and CardList.card_list[defending_card.this_card_id].effect[0] == "on_flip" and defending_card.this_card_flags.has_activated_effect == false:
+	if defending_card.this_card_flags.is_facedown == true and CardList.card_list[defending_card.this_card_id].effect.size() > 0 and defending_card.this_card_flags.has_activated_effect == false:
 		#Check for attacker having the "anti_flip" effect
 		if CardList.card_list[attacking_card.this_card_id].effect.size() == 0 or CardList.card_list[attacking_card.this_card_id].effect.size() > 1 and CardList.card_list[attacking_card.this_card_id].effect[1] != "anti_flip":
-			#Defending flip effect second
-			effect_activation(defending_card, "on_flip")
+			match CardList.card_list[defending_card.this_card_id].effect[0]:
+				"on_flip":
+					effect_activation(defending_card, "on_flip")
+				"on_summon":
+					attacking_card.this_card_flags.is_facedown = false
+					effect_activation(defending_card, "on_summon")
 			yield($effects, "effect_fully_executed")
 			$battle_visuals/battle_timer_node.start(0.3); yield($battle_visuals/battle_timer_node, "timeout")
 	#Catch end of Flip Effect
@@ -419,11 +428,16 @@ func do_direct_attack(attacking_card):
 		return #failsafe to prevent cards from battling more than once
 	
 	#Check for Flip Effects before battle
-	if attacking_card.this_card_flags.is_facedown == true and CardList.card_list[attacking_card.this_card_id].effect.size() > 0 and CardList.card_list[attacking_card.this_card_id].effect[0] == "on_flip" and attacking_card.this_card_flags.has_activated_effect == false:
-		#Attacker flip effect first
-		effect_activation(attacking_card, "on_flip")
+	if attacking_card.this_card_flags.is_facedown == true and CardList.card_list[attacking_card.this_card_id].effect.size() > 0 and attacking_card.this_card_flags.has_activated_effect == false:
+		match CardList.card_list[attacking_card.this_card_id].effect[0]:
+			"on_flip":
+				effect_activation(attacking_card, "on_flip")
+			"on_summon":
+				attacking_card.this_card_flags.is_facedown = false
+				effect_activation(attacking_card, "on_summon")
 		yield($effects, "effect_fully_executed")
 		$battle_visuals/battle_timer_node.start(0.3); yield($battle_visuals/battle_timer_node, "timeout")
+	
 	#Catch end of Flip Effect
 	if not attacking_card.is_visible():
 		emit_signal("battle_finished")

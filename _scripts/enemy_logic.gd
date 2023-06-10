@@ -31,7 +31,7 @@ func enemy_draw_phase():
 		print("Enemy deck run out")
 	
 	#Change enemy Hand for testing purposes
-	enemy_hand = ["00334", "00334", "00334", "00334", "00334"]
+	enemy_hand = ["00781", "00781", "00781", "00781", "00781"]
 	
 	#Reset the 'has_battled' for all monsters on the field
 	for i in range(5):
@@ -195,6 +195,11 @@ func enemy_play_that_card(card_to_play_array : Array):
 		field_node_to_use.this_card_flags.is_facedown = false
 		field_node_to_use.get_node("card_design/card_back").hide()
 	
+	#Monsters that have on_summon effect will be placed face up already
+	if CardList.card_list[card_being_played].effect.size() > 0 and CardList.card_list[card_being_played].effect[0] == "on_summon":
+		field_node_to_use.this_card_flags.is_facedown = false
+		field_node_to_use.get_node("card_design/card_back").hide()
+	
 	#Check if this card will get a field bonus
 	var field_name = GAME_LOGIC.get_parent().get_node("user_interface/top_info_box/field_info/field_name").text.split(" ", true)[0].to_lower()
 	get_node("../effects").field_bonus(field_name)
@@ -205,7 +210,7 @@ func enemy_play_that_card(card_to_play_array : Array):
 	field_node_to_use.show()
 	
 	#Update UI with the played card information, if card isn't facedown
-	if !field_node_to_use.get_node("card_design/card_back").is_visible():
+	if field_node_to_use.this_card_flags.is_facedown == false:
 		get_node("../../").update_user_interface(field_node_to_use)
 	else: #Put stuff on 'card_info_box' hidden
 		get_node("../../user_interface/card_info_box/colored_bar").hide()
@@ -216,7 +221,6 @@ func enemy_play_that_card(card_to_play_array : Array):
 	
 	#If it's not facedown, check if it has an effect to activate
 	if field_node_to_use.this_card_flags.is_facedown == false and CardList.card_list[field_node_to_use.this_card_id].effect.size() > 0:
-		print("COM effect?")
 		GAME_LOGIC.effect_activation(field_node_to_use, "on_summon")
 		yield(get_node("../effects"), "effect_fully_executed")
 	
@@ -245,6 +249,10 @@ func enemy_main_phase():
 			print("COM doesn't have an available monster, ending main_phase")
 			enemy_end_turn()
 			return
+		
+		#Update bottom bar so it reflects the current "active" monster
+		if current_strongest_monster.this_card_flags.is_facedown == false:
+			get_node("../../").update_user_interface(current_strongest_monster)
 		
 		#Animate the card to indicate which one is being interacted this turn
 		var scaled_back_size = Vector2(GAME_LOGIC.atk_orientation_x_scale, GAME_LOGIC.atk_orientation_y_scale)
