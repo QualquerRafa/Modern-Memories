@@ -220,7 +220,6 @@ margin_top = 123.0
 margin_right = 807.0
 margin_bottom = 603.0
 rect_scale = Vector2( 1.4, 1.4 )
-rect_pivot_offset = Vector2( 165, 240 )
 
 [node name="lp_change_visuals" type="Node2D" parent="game_logic/effects"]
 visible = false
@@ -331,7 +330,6 @@ margin_top = 120.0
 margin_right = 519.0
 margin_bottom = 600.0
 rect_scale = Vector2( 1.4, 1.4 )
-rect_pivot_offset = Vector2( 165, 240 )
 
 [node name="visual_cardB" parent="game_logic/battle_visuals" instance=ExtResource( 22 )]
 margin_left = 763.0
@@ -339,7 +337,6 @@ margin_top = 120.0
 margin_right = 1094.0
 margin_bottom = 600.0
 rect_scale = Vector2( 1.4, 1.4 )
-rect_pivot_offset = Vector2( 165, 240 )
 
 [node name="LP_damage" type="Label" parent="game_logic/battle_visuals"]
 visible = false
@@ -2243,6 +2240,13 @@ margin_bottom = 181.0
 rect_min_size = Vector2( 100, 33 )
 text = "Next turn"
 
+[node name="end_duel" type="Button" parent="Debug Menu/VBoxContainer"]
+margin_top = 185.0
+margin_right = 100.0
+margin_bottom = 218.0
+rect_min_size = Vector2( 100, 33 )
+text = "End Duel"
+
 [node name="scene_transitioner" parent="." instance=ExtResource( 24 )]
 visible = false
 
@@ -2269,3 +2273,4 @@ visible = false
 [connection signal="button_up" from="Debug Menu/VBoxContainer/print_phase" to="Debug Menu" method="_on_print_phase_button_up"]
 [connection signal="button_up" from="Debug Menu/VBoxContainer/change_field_view" to="Debug Menu" method="_on_change_field_view_button_up"]
 [connection signal="button_up" from="Debug Menu/VBoxContainer/phase_rewind" to="Debug Menu" method="_on_phase_rewind_button_up"]
+[connection signal="button_up" from="Debug Menu/VBoxContainer/end_duel" to="Debug Menu" method="_on_end_duel_button_up"]
