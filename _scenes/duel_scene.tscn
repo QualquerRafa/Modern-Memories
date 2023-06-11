@@ -2035,6 +2035,7 @@ custom_constants/shadow_offset_x = 3
 custom_constants/shadow_offset_y = 3
 custom_fonts/font = SubResource( 3 )
 text = "40"
+align = 2
 
 [node name="lifepoints" type="Label" parent="user_interface/top_info_box/player_info"]
 margin_left = 60.0
@@ -2247,6 +2248,13 @@ margin_bottom = 218.0
 rect_min_size = Vector2( 100, 33 )
 text = "End Duel"
 
+[node name="mill_Com" type="Button" parent="Debug Menu/VBoxContainer"]
+margin_top = 222.0
+margin_right = 100.0
+margin_bottom = 255.0
+rect_min_size = Vector2( 100, 33 )
+text = "Mill COM"
+
 [node name="scene_transitioner" parent="." instance=ExtResource( 24 )]
 visible = false
 
@@ -2274,3 +2282,4 @@ visible = false
 [connection signal="button_up" from="Debug Menu/VBoxContainer/change_field_view" to="Debug Menu" method="_on_change_field_view_button_up"]
 [connection signal="button_up" from="Debug Menu/VBoxContainer/phase_rewind" to="Debug Menu" method="_on_phase_rewind_button_up"]
 [connection signal="button_up" from="Debug Menu/VBoxContainer/end_duel" to="Debug Menu" method="_on_end_duel_button_up"]
+[connection signal="button_up" from="Debug Menu/VBoxContainer/mill_Com" to="Debug Menu" method="_on_mill_Com_button_up"]
