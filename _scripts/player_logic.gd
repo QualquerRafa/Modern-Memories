@@ -82,8 +82,13 @@ func player_draw_phase():
 	#Pull the correct number of cards from the Deck to the Player Hand
 	var cards_to_pull : int = 5 - player_hand.size()
 	for _i in range(cards_to_pull):
-		player_hand.append(player_deck[0]) #add to the player_hand the first card from the deck
-		player_deck.remove(0) #remove from the deck that same card
+		if player_deck.size() > 0:
+			player_hand.append(player_deck[0]) #add to the player_hand the first card from the deck
+			player_deck.remove(0) #remove from the deck that same card
+		else:
+			print("player deck out")
+			GAME_LOGIC.check_for_game_end("deck_out")
+			return "exit game"
 	
 	#Update the card_nodes visually to match cards in hand
 	for i in range(5):
@@ -314,8 +319,6 @@ func call_fusion_logic(passing_field_slot_to_summon):
 	#Depending on the Type of 'fusion' that was done, do appropriate changes
 	match typeof(fusion_information_array[1]):
 		TYPE_ARRAY: #equip [monster_card_id, [status, value_change]]
-			effect_count += 1 #for duel reward reasons, counting number of successful effects used
-			
 			#The flags for the result of an Equip are exactly the same as the non-spell/trap card used
 			var monster_is : Node = card_to_fuse_1
 			fusion_result.this_card_flags = card_to_fuse_1.this_card_flags
@@ -330,6 +333,9 @@ func call_fusion_logic(passing_field_slot_to_summon):
 					fusion_result.this_card_flags.atk_up += fusion_information_array[1][1]
 					fusion_result.this_card_flags.def_up += fusion_information_array[1][1]
 			
+			#"Fusing" with an Equip card will actually count as spelltrap activation
+			GAME_LOGIC.get_node("player_logic").spelltrap_count += 1
+			
 			#Safeguard reset of status if the result ISN'T the same monster that was equipped
 			if fusion_result.this_card_id != monster_is.this_card_id:
 				fusion_result.this_card_flags.atk_up = 0
@@ -337,9 +343,11 @@ func call_fusion_logic(passing_field_slot_to_summon):
 			
 		TYPE_BOOL: #regular fusion [monster_card_id, fusion_success : bool]
 			if fusion_information_array[1] == true: #fusion was a success
-				fusion_count += 1 #for duel reward reasons, counting number of successful fusions
 				fusion_result.this_card_flags.fusion_type = "fusion"
 				fusion_result.this_card_flags.is_defense_position = false #Force fusion results to be in ATK
+			
+			#Inrement the counter for Duel Rewards
+			GAME_LOGIC.get_node("player_logic").fusion_count += 1
 			
 		_: 
 			#Safeguard reset fusion_type after any failed fusion

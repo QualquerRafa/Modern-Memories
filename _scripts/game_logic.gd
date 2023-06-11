@@ -100,7 +100,7 @@ func do_battle(attacking_card : Node, defending_card : Node):
 	card_ready_to_defend = defending_card
 	
 	#Check for Flip Effects before battle
-	if attacking_card.this_card_flags.is_facedown == true and CardList.card_list[attacking_card.this_card_id].effect.size() > 0 and attacking_card.this_card_flags.has_activated_effect == false:
+	if attacking_card.this_card_flags.is_facedown == true and CardList.card_list[attacking_card.this_card_id].effect.size() > 0 and CardList.card_list[attacking_card.this_card_id].effect[0] in ["on_flip", "on_summon"] and attacking_card.this_card_flags.has_activated_effect == false:
 		match CardList.card_list[attacking_card.this_card_id].effect[0]:
 			"on_flip":
 				effect_activation(attacking_card, "on_flip")
@@ -121,7 +121,7 @@ func do_battle(attacking_card : Node, defending_card : Node):
 		check_for_camera_movement_on_effect_return(attacking_card)
 		return #battle logic has to stop since one of the involveds in battle is no longer on the field
 	
-	if defending_card.this_card_flags.is_facedown == true and CardList.card_list[defending_card.this_card_id].effect.size() > 0 and defending_card.this_card_flags.has_activated_effect == false:
+	if defending_card.this_card_flags.is_facedown == true and CardList.card_list[defending_card.this_card_id].effect.size() > 0 and CardList.card_list[defending_card.this_card_id].effect[0] in ["on_flip", "on_summon"] and defending_card.this_card_flags.has_activated_effect == false:
 		#Check for attacker having the "anti_flip" effect
 		if CardList.card_list[attacking_card.this_card_id].effect.size() == 0 or CardList.card_list[attacking_card.this_card_id].effect.size() > 1 and CardList.card_list[attacking_card.this_card_id].effect[1] != "anti_flip":
 			match CardList.card_list[defending_card.this_card_id].effect[0]:
@@ -132,6 +132,7 @@ func do_battle(attacking_card : Node, defending_card : Node):
 					effect_activation(defending_card, "on_summon")
 			yield($effects, "effect_fully_executed")
 			$battle_visuals/battle_timer_node.start(0.3); yield($battle_visuals/battle_timer_node, "timeout")
+	
 	#Catch end of Flip Effect
 	if not attacking_card.is_visible() or not defending_card.is_visible():
 		emit_signal("battle_finished")
@@ -409,13 +410,17 @@ func _on_direct_attack_area_button_up():
 	if $player_logic.turn_count <= 1:
 		return
 	
+	#prevent clicking for a direct outside of the battle phase
+	if GAME_PHASE != "selecting_combat_target":
+		return
+	
 	#Check if the player can direct attack the enemy (only when 0 monsters on the field)
 	var enemy_monsters_on_field : int = 0
 	for i in range(5):
 		if get_node("../duel_field/enemy_side_zones/monster_" + String(i)).is_visible():
 			enemy_monsters_on_field += 1
 	
-	if enemy_monsters_on_field == 0 or CardList.card_list[card_ready_to_attack.this_card_id].effect.size() > 0 and CardList.card_list[card_ready_to_attack.this_card_id].effect[1] in ["can_direct", "toon"]:
+	if enemy_monsters_on_field == 0 or CardList.card_list[card_ready_to_attack.this_card_id].effect.size() > 1 and CardList.card_list[card_ready_to_attack.this_card_id].effect[1] in ["can_direct", "toon"]:
 		if CardList.card_list[card_ready_to_attack.this_card_id].effect.size() > 0 and CardList.card_list[card_ready_to_attack.this_card_id].effect[1] == "toon":
 			effect_activation(card_ready_to_attack, "on_attack")
 		do_direct_attack(card_ready_to_attack)
@@ -428,7 +433,7 @@ func do_direct_attack(attacking_card):
 		return #failsafe to prevent cards from battling more than once
 	
 	#Check for Flip Effects before battle
-	if attacking_card.this_card_flags.is_facedown == true and CardList.card_list[attacking_card.this_card_id].effect.size() > 0 and attacking_card.this_card_flags.has_activated_effect == false:
+	if attacking_card.this_card_flags.is_facedown == true and CardList.card_list[attacking_card.this_card_id].effect.size() > 0 and CardList.card_list[attacking_card.this_card_id].effect[0] in ["on_flip", "on_summon"] and attacking_card.this_card_flags.has_activated_effect == false:
 		match CardList.card_list[attacking_card.this_card_id].effect[0]:
 			"on_flip":
 				effect_activation(attacking_card, "on_flip")
@@ -586,7 +591,7 @@ func check_for_camera_movement_on_effect_return(attacking_card : Node):
 #---------------------------------------------------------------------------------------------------
 func check_for_game_end(optional_passed_condition : String = "nothing"):
 	#COM will always have the losing priority over player
-	var game_loser : String #COM or Player
+	var game_loser : String = "" #COM or Player
 	
 	#Basic loss by LifePoints reaching 0
 	if $enemy_logic.enemy_LP == 0:
@@ -606,43 +611,53 @@ func check_for_game_end(optional_passed_condition : String = "nothing"):
 		game_loser = "COM"
 	
 	#Decide what to do next
+	var reward_scene
+	if game_loser != "":
+		reward_scene = preload("res://_scenes/reward_scene.tscn").instance()
+	
 	match game_loser:
 		"COM": #COM lost, go to the rewards screen
 			#Pass ahead the important information for Rewards calculations
-			var reward_scene = preload("res://_scenes/reward_scene.tscn").instance()
-			
+			reward_scene.duel_winner = "player"
 			reward_scene.duel_deck_count = $player_logic.player_deck.size()
 			reward_scene.duel_fusion_count = $player_logic.fusion_count
 			reward_scene.duel_effect_count = $player_logic.effect_count
 			reward_scene.duel_spelltrap_count = $player_logic.spelltrap_count
 			reward_scene.defeated_duelist = PlayerData.going_to_duel
 			
-			#Go to that scene
-			var scene_transitioner = get_node("../scene_transitioner")
-			#get_node("../scene_transitioner").scene_transition(reward_scene)
-			
-			scene_transitioner.show()
-			scene_transitioner.get_node("loading_indicator").show()
-			
-			scene_transitioner.get_node("transitioner_tween").interpolate_property(scene_transitioner.get_node("darker_screen"), "modulate", Color(0,0,0, 0.1), Color(0,0,0, 1), 0.8/1.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-			scene_transitioner.get_node("transitioner_tween").start()
-			yield(scene_transitioner.get_node("transitioner_tween"), "tween_completed")
-			scene_transitioner.hide()
-			
-			#var _scene_change = get_tree().change_scene("res://_scenes/" + scene + ".tscn")
-			get_tree().get_root().add_child(reward_scene)
-			
-			#Important stuff to get removed after the duel ended
-			PlayerData.going_to_duel = ""
-			get_tree().get_root().get_node("duel_scene").queue_free()
-			
-			return "endscreen"
+			reward_scene.final_turn_count = int(self.get_parent().get_node("user_interface/top_info_box/field_info/turn").get_text().split(" ")[1])
+			reward_scene.final_player_LP = int(self.get_parent().get_node("user_interface/top_info_box/player_info/lifepoints").get_text())
+			for i in range(5):
+				var checking_node = self.get_parent().get_node("duel_field/player_side_zones/monster_" + String(i))
+				if checking_node.is_visible():
+					reward_scene.final_field_atk += int(checking_node.get_node("card_design/monster_features/atk_def/atk").get_text())
 		
 		"player": #Player lost, go to game over screen
-			pass
+			reward_scene.duel_winner = "COM"
 		
 		_: #no one lost yet, do nothing
-			return 
+			return
+	
+	#Go to the reward scene
+	var scene_transitioner = get_node("../scene_transitioner")
+	#get_node("../scene_transitioner").scene_transition(reward_scene)
+	
+	scene_transitioner.show()
+	scene_transitioner.get_node("loading_indicator").show()
+	
+	scene_transitioner.get_node("transitioner_tween").interpolate_property(scene_transitioner.get_node("darker_screen"), "modulate", Color(0,0,0, 0.1), Color(0,0,0, 1), 0.8/1.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	scene_transitioner.get_node("transitioner_tween").start()
+	yield(scene_transitioner.get_node("transitioner_tween"), "tween_completed")
+	scene_transitioner.hide()
+	
+	#var _scene_change = get_tree().change_scene("res://_scenes/" + scene + ".tscn")
+	get_tree().get_root().add_child(reward_scene)
+	
+	#Important stuff to get removed after the duel ended
+	PlayerData.going_to_duel = ""
+	get_tree().get_root().get_node("duel_scene").queue_free()
+	
+	return "endscreen"
 
 
 

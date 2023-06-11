@@ -22,3 +22,7 @@ func _on_phase_rewind_button_up():
 
 func _on_end_duel_button_up():
 	get_node("../game_logic").check_for_game_end("DEBUG_END_DUEL")
+
+func _on_mill_Com_button_up():
+	for _i in range(39):
+		get_node("../game_logic/enemy_logic").enemy_deck.remove(0) #remove that same card from deck

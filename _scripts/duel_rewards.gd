@@ -4,15 +4,24 @@ onready var npc_decks_gd_script = preload("res://_scripts/npc_decks.gd")
 onready var npc_decks_gd = npc_decks_gd_script.new()
 
 #These are passed by the Duel Logic
+var duel_winner : String
+
 var duel_deck_count :int #= 33
 var duel_fusion_count :int #= 22
 var duel_effect_count : int #= 22
 var duel_spelltrap_count : int #= 5
 var defeated_duelist : String #= PlayerData.going_to_duel
 
+var final_turn_count : int
+var final_player_LP : int
+var final_field_atk : int
+
 func _ready():
 	#Animate the transition when starting this scene
 	$scene_transitioner.entering_this_scene()
+	
+	#Show the YOU WIN/LOSE first
+	show_big_letters()
 	
 	#Show facedown for reward cards
 	$cards_reward/HBoxContainer/reward_1/card_design/card_back.show()
@@ -50,28 +59,37 @@ func get_duel_rank():
 	var final_duel_score : int = 0
 	
 	#For deck count, the more cards still in the deck the better
-	if duel_deck_count > 30: final_duel_score += 3
-	elif duel_deck_count >= 22: final_duel_score += 2
+	if duel_deck_count > 28: final_duel_score += 3
+	elif duel_deck_count >= 20: final_duel_score += 2
 	else: final_duel_score += 1
 	
 	#For fusion count, the more the better
-	if duel_fusion_count <= 5: final_duel_score += 1
-	elif duel_fusion_count <= 10: final_duel_score += 2
-	elif duel_fusion_count <= 20: final_duel_score += 3
+	if duel_fusion_count <= 2: final_duel_score += 1
+	elif duel_fusion_count <= 5: final_duel_score += 2
+	elif duel_fusion_count <= 12: final_duel_score += 3
 	else: final_duel_score += 4
 	
 	#For effect count, the more the better
-	if duel_effect_count <= 10: final_duel_score += 1
-	elif duel_effect_count <= 20: final_duel_score += 2
+	if duel_effect_count <= 7: final_duel_score += 1
+	elif duel_effect_count <= 14: final_duel_score += 2
 	else: final_duel_score += 3
 	
 	#For spelltrap count, the more the better
 	if duel_spelltrap_count <= 3: final_duel_score += 1
-	elif duel_spelltrap_count <= 10: final_duel_score += 2
+	elif duel_spelltrap_count <= 8: final_duel_score += 2
 	else: final_duel_score += 3
 	
-	#Current lowest score: 4, F
-	#Current highest score: 12, S
+	#Extra points
+	if final_turn_count <= 3: final_duel_score += 2
+	elif final_duel_score <= 5: final_duel_score += 1
+	
+	if final_player_LP > 8000: final_duel_score += 2
+	elif final_player_LP > 4000: final_duel_score += 1
+	
+	if final_field_atk > 9000: final_duel_score += 2
+	if final_field_atk > 5000: final_duel_score += 1
+	
+	#Get a letter from the score
 	var final_rank_letter : String = ""
 	if final_duel_score <= 4: final_rank_letter = "F"
 	elif final_duel_score <= 5: final_rank_letter = "D"
@@ -160,7 +178,8 @@ func get_card_rewards():
 # PLAYER INTERACTION HANDLING
 ####################################################################################################
 func _on_screen_button_button_up():
-	show_duel_info()
+	if !$BIG_LETTERS/tween.is_active():
+		show_duel_info()
 	
 var phase_of_reveal = 0
 func show_duel_info():
@@ -265,3 +284,31 @@ func register_player_rewards(starchips : int, array_of_3 : Array):
 			PlayerData.player_trunk[card_reward] += 1 #register another copy to an already existing 'card_reward' in player's trunk
 		else:
 			PlayerData.player_trunk[card_reward] = 1 #add the first copy as the registering of 'card_reward'
+
+func show_big_letters():
+	if duel_winner == "player":
+		$BIG_LETTERS/YOU.add_color_override("font_color","ff0000") #RED
+		$BIG_LETTERS/win_lose.text = "WIN"
+		$BIG_LETTERS/win_lose.add_color_override("font_color","ff0000") #RED
+	else:
+		$BIG_LETTERS/YOU.add_color_override("font_color","0000ff") #BLUE
+		$BIG_LETTERS/win_lose.text = "LOSE"
+		$BIG_LETTERS/win_lose.add_color_override("font_color","0000ff") #BLUE
+	
+	#Do the animation of the words comming in on the screen
+	var tweener = $BIG_LETTERS/tween
+	var x_position_offset : int = 1280
+	var text_timer : float = 1
+	
+	tweener.interpolate_property($BIG_LETTERS/YOU, "rect_position:x", $BIG_LETTERS/YOU.rect_position.x - x_position_offset, $BIG_LETTERS/YOU.rect_position.x, text_timer, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	tweener.interpolate_property($BIG_LETTERS/win_lose, "rect_position:x", $BIG_LETTERS/win_lose.rect_position.x + x_position_offset, $BIG_LETTERS/win_lose.rect_position.x, text_timer, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	tweener.start()
+	yield(tweener, "tween_completed")
+	
+	$BIG_LETTERS/timer.start(text_timer/2); yield($BIG_LETTERS/timer, "timeout")
+	
+	tweener.interpolate_property($BIG_LETTERS, "modulate", Color(1,1,1, 1), Color(1,1,1, 0), text_timer/2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	tweener.start()
+	yield(tweener, "tween_completed")
+	
+	show_duel_info()

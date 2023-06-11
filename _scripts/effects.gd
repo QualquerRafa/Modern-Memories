@@ -67,12 +67,20 @@ func call_effect(card_node : Node, type_of_activation : String): #The 'card_node
 					if CardList.card_list[card_node.this_card_id].effect[0] == "on_attack":
 						var _discard =  monster_on_attack(card_node)
 						extra_return_information = "on_attack"
-				"on_defend": 
+				"on_defend":
 					if CardList.card_list[card_node.this_card_id].effect[0] == "on_defend":
 						extra_return_information = monster_on_defend(card_node)
 				_:
 					print("Monster effect of type ", CardList.card_list[card_node.this_card_id].effect[0], " isn't programmed.")
 					extra_return_information = "FAIL"
+	
+	#Increment the correct counters for Duel Reward
+	match card_attribute:
+		"spell", "trap":
+			GAME_LOGIC.get_node("player_logic").spelltrap_count += 1
+		_:
+			if type_of_activation == CardList.card_list[card_node.this_card_id].effect[0]:
+				GAME_LOGIC.get_node("player_logic").effect_count += 1
 	
 	#After a card effect was activated and it's been removed from the field, clear the bottom bar from it's information. Generally happens for Spell and Traps only, since monsters remain.
 	if card_attribute in ["spell", "trap"]:

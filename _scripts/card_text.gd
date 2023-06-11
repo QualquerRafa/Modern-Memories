@@ -169,7 +169,7 @@ func get_card_text(card_id : String):
 								match card_on_CardList.effect[2]:
 									"all_enemy_monsters": target_to_destroy = "all of your opponent's monsters"
 									"level4_enemy_monsters": target_to_destroy = "all of your opponent's Level 4 monsters"
-									"random_enemy_spelltrap": target_to_destroy = "a random opponent's Spell or Trap card"
+									"random_spelltrap": target_to_destroy = "a random opponent's Spell or Trap card"
 									"random_monster": target_to_destroy = "a random opponent's monster"
 								line1 += "it destroys " + target_to_destroy + " on the field."
 							"lifepoint_up":

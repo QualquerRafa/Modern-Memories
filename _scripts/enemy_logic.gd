@@ -29,9 +29,11 @@ func enemy_draw_phase():
 			$enemy_timer.start(0.2); yield($enemy_timer, "timeout")
 	else:
 		print("Enemy deck run out")
+		GAME_LOGIC.check_for_game_end("deck_out")
+		return "exit game"
 	
 	#Change enemy Hand for testing purposes
-	#enemy_hand = ["00781", "00781", "00781", "00781", "00781"]
+	#enemy_hand = ["00444", "00444", "00444", "00444", "00444"]
 	
 	#Reset the 'has_battled' for all monsters on the field
 	for i in range(5):
