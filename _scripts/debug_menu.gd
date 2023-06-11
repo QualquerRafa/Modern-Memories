@@ -19,3 +19,6 @@ func _on_change_field_view_button_up():
 
 func _on_phase_rewind_button_up():
 	get_node("../game_logic/player_logic").start_player_turn()
+
+func _on_end_duel_button_up():
+	get_node("../game_logic").check_for_game_end("DEBUG_END_DUEL")

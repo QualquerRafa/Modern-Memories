@@ -714,7 +714,7 @@ func monster_on_summon(card_node : Node):
 					var target_side_of_field = GAME_LOGIC.get_parent().get_node("duel_field/" + caller_and_target[0] + "_side_zones")
 					for i in range(5):
 						var monster_target = target_side_of_field.get_node("monster_" + String(i))
-						if monster_target.is_visible() and monster_target.this_card_flags.is_facedown == false and CardList.card_list[monster_target.this_card_id].attribute == CardList.card_list[card_id].attribute:
+						if monster_target.is_visible() and monster_target.this_card_flags.is_facedown == false and CardList.card_list[monster_target.this_card_id].attribute == CardList.card_list[card_id].attribute and monster_target != card_node:
 							count_attribute_on_field += 1
 					
 					boost_value = 500 * count_attribute_on_field

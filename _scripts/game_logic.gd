@@ -582,3 +582,77 @@ func check_for_camera_movement_on_effect_return(attacking_card : Node):
 		attacking_card.cancel_all_combat_controls() #hide the combat controls for the card that already attacked
 		get_node("../").change_field_view() #return back to the other side of the field
 		GAME_PHASE = "main_phase"
+
+#---------------------------------------------------------------------------------------------------
+func check_for_game_end(optional_passed_condition : String = "nothing"):
+	#COM will always have the losing priority over player
+	var game_loser : String #COM or Player
+	
+	#Basic loss by LifePoints reaching 0
+	if $enemy_logic.enemy_LP == 0:
+		game_loser = "COM"
+	elif $player_logic.player_LP == 0:
+		game_loser = "player"
+	
+	#Loss by decking out
+	if optional_passed_condition == "deck_out":
+		if $enemy_logic.enemy_deck.size() == 0:
+			game_loser = "COM"
+		elif $player_logic.player_deck.size() == 0:
+			game_loser = "player"
+	
+	#DEBUG menu testing stuff
+	if optional_passed_condition == "DEBUG_END_DUEL":
+		game_loser = "COM"
+	
+	#Decide what to do next
+	match game_loser:
+		"COM": #COM lost, go to the rewards screen
+			#Pass ahead the important information for Rewards calculations
+			var reward_scene = preload("res://_scenes/reward_scene.tscn").instance()
+			
+			reward_scene.duel_deck_count = $player_logic.player_deck.size()
+			reward_scene.duel_fusion_count = $player_logic.fusion_count
+			reward_scene.duel_effect_count = $player_logic.effect_count
+			reward_scene.duel_spelltrap_count = $player_logic.spelltrap_count
+			reward_scene.defeated_duelist = PlayerData.going_to_duel
+			
+			#Go to that scene
+			var scene_transitioner = get_node("../scene_transitioner")
+			#get_node("../scene_transitioner").scene_transition(reward_scene)
+			
+			scene_transitioner.show()
+			scene_transitioner.get_node("loading_indicator").show()
+			
+			scene_transitioner.get_node("transitioner_tween").interpolate_property(scene_transitioner.get_node("darker_screen"), "modulate", Color(0,0,0, 0.1), Color(0,0,0, 1), 0.8/1.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+			scene_transitioner.get_node("transitioner_tween").start()
+			yield(scene_transitioner.get_node("transitioner_tween"), "tween_completed")
+			scene_transitioner.hide()
+			
+			#var _scene_change = get_tree().change_scene("res://_scenes/" + scene + ".tscn")
+			get_tree().get_root().add_child(reward_scene)
+			
+			#Important stuff to get removed after the duel ended
+			PlayerData.going_to_duel = ""
+			get_tree().get_root().get_node("duel_scene").queue_free()
+			
+			return "endscreen"
+		
+		"player": #Player lost, go to game over screen
+			pass
+		
+		_: #no one lost yet, do nothing
+			return 
+
+
+
+
+
+
+
+
+
+
+
+
+

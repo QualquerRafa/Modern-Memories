@@ -18,8 +18,10 @@ var player_hand : Array = [] #populated by 'card_id':String
 onready var GAME_LOGIC = get_node("../")
 var fusion_order : Array = [] #populated by 'card_node':Node
 
+#Rewards related variables
 var fusion_count : int = 0
 var effect_count : int = 0
+var spelltrap_count : int = 0
 var turn_count : int = 0
 
 #-------------------------------------------------------------------------------

@@ -31,7 +31,7 @@ func enemy_draw_phase():
 		print("Enemy deck run out")
 	
 	#Change enemy Hand for testing purposes
-	enemy_hand = ["00781", "00781", "00781", "00781", "00781"]
+	#enemy_hand = ["00781", "00781", "00781", "00781", "00781"]
 	
 	#Reset the 'has_battled' for all monsters on the field
 	for i in range(5):
@@ -285,7 +285,7 @@ func enemy_main_phase():
 				continue #skip this loop, try to attack with the next monster and such
 		
 		#Shennanigans for effects of direct attacking
-		if CardList.card_list[current_strongest_monster.this_card_id].effect.size() > 0 and CardList.card_list[current_strongest_monster.this_card_id].effect[1] in ["can_direct", "toon"]:
+		if CardList.card_list[current_strongest_monster.this_card_id].effect.size() > 1 and CardList.card_list[current_strongest_monster.this_card_id].effect[1] in ["can_direct", "toon"]:
 			#clearing the reference array for player monsters will make this logic foce a direct attack
 			var clear_array = false
 			
