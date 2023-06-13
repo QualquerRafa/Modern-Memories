@@ -1,7 +1,8 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://_scenes/card_info_box.tscn" type="PackedScene" id=1]
 [ext_resource path="res://_scenes/scene_transitioner.tscn" type="PackedScene" id=2]
+[ext_resource path="res://_resources/scene_duel/darken_bg.png" type="Texture" id=3]
 [ext_resource path="res://_resources/fonts/BankGothic Md BT.ttf" type="DynamicFontData" id=9]
 [ext_resource path="res://_resources/scene_duel/top_info_box.png" type="Texture" id=10]
 [ext_resource path="res://_resources/scene_deck_building/back_button.png" type="Texture" id=11]
@@ -64,6 +65,49 @@ use_mipmaps = true
 use_filter = true
 extra_spacing_char = -4
 font_data = ExtResource( 9 )
+
+[sub_resource type="StyleBoxFlat" id=12]
+bg_color = Color( 0.0313726, 0.0862745, 0.117647, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.356863, 0.407843, 0.435294, 1 )
+shadow_color = Color( 0, 0, 0, 0 )
+
+[sub_resource type="StyleBoxFlat" id=10]
+bg_color = Color( 0, 0, 0, 1 )
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color( 0, 0, 0, 0 )
+shadow_size = 10
+
+[sub_resource type="DynamicFont" id=13]
+size = 22
+font_data = ExtResource( 9 )
+
+[sub_resource type="DynamicFont" id=11]
+size = 18
+font_data = ExtResource( 9 )
+
+[sub_resource type="DynamicFont" id=14]
+size = 18
+font_data = ExtResource( 9 )
+
+[sub_resource type="DynamicFont" id=15]
+size = 18
+font_data = ExtResource( 9 )
+
+[sub_resource type="StyleBoxEmpty" id=16]
+
+[sub_resource type="StyleBoxEmpty" id=17]
 
 [node name="deck_building" type="Node2D"]
 script = ExtResource( 17 )
@@ -8205,20 +8249,20 @@ margin_right = 616.0
 margin_bottom = 348.0
 
 [node name="deck_buttons" type="HBoxContainer" parent="panel_right"]
-modulate = Color( 1, 1, 1, 0.0941176 )
 margin_left = 642.0
 margin_top = 498.0
 margin_right = 1279.0
 margin_bottom = 588.0
 alignment = 1
 
-[node name="button4" type="Control" parent="panel_right/deck_buttons"]
+[node name="button_auto" type="Control" parent="panel_right/deck_buttons"]
+modulate = Color( 1, 1, 1, 0.0980392 )
 margin_left = 72.0
 margin_right = 192.0
 margin_bottom = 90.0
 rect_min_size = Vector2( 120, 0 )
 
-[node name="auto_deck" type="Button" parent="panel_right/deck_buttons/button4"]
+[node name="auto_deck" type="Button" parent="panel_right/deck_buttons/button_auto"]
 margin_left = 4.0
 margin_right = 117.0
 margin_bottom = 84.0
@@ -8229,7 +8273,7 @@ enabled_focus_mode = 0
 icon = ExtResource( 15 )
 flat = true
 
-[node name="label" type="Label" parent="panel_right/deck_buttons/button4"]
+[node name="label" type="Label" parent="panel_right/deck_buttons/button_auto"]
 margin_left = 10.0
 margin_top = 17.0
 margin_right = 111.0
@@ -8243,13 +8287,13 @@ text = "Auto"
 align = 1
 valign = 1
 
-[node name="button1" type="Control" parent="panel_right/deck_buttons"]
+[node name="button_clear" type="Control" parent="panel_right/deck_buttons"]
 margin_left = 196.0
 margin_right = 316.0
 margin_bottom = 90.0
 rect_min_size = Vector2( 120, 0 )
 
-[node name="clear_deck" type="Button" parent="panel_right/deck_buttons/button1"]
+[node name="clear_deck" type="Button" parent="panel_right/deck_buttons/button_clear"]
 margin_left = 4.0
 margin_right = 117.0
 margin_bottom = 84.0
@@ -8260,7 +8304,7 @@ enabled_focus_mode = 0
 icon = ExtResource( 15 )
 flat = true
 
-[node name="label" type="Label" parent="panel_right/deck_buttons/button1"]
+[node name="label" type="Label" parent="panel_right/deck_buttons/button_clear"]
 margin_left = 10.0
 margin_top = 17.0
 margin_right = 111.0
@@ -8274,13 +8318,13 @@ text = "Clear"
 align = 1
 valign = 1
 
-[node name="button2" type="Control" parent="panel_right/deck_buttons"]
+[node name="button_import" type="Control" parent="panel_right/deck_buttons"]
 margin_left = 320.0
 margin_right = 440.0
 margin_bottom = 90.0
 rect_min_size = Vector2( 120, 0 )
 
-[node name="import_deck" type="Button" parent="panel_right/deck_buttons/button2"]
+[node name="import_deck" type="Button" parent="panel_right/deck_buttons/button_import"]
 margin_left = 4.0
 margin_right = 117.0
 margin_bottom = 84.0
@@ -8291,7 +8335,7 @@ enabled_focus_mode = 0
 icon = ExtResource( 15 )
 flat = true
 
-[node name="label" type="Label" parent="panel_right/deck_buttons/button2"]
+[node name="label" type="Label" parent="panel_right/deck_buttons/button_import"]
 margin_left = 10.0
 margin_top = 17.0
 margin_right = 111.0
@@ -8305,13 +8349,13 @@ text = "Import"
 align = 1
 valign = 1
 
-[node name="button3" type="Control" parent="panel_right/deck_buttons"]
+[node name="button_export" type="Control" parent="panel_right/deck_buttons"]
 margin_left = 444.0
 margin_right = 564.0
 margin_bottom = 90.0
 rect_min_size = Vector2( 120, 0 )
 
-[node name="export_deck" type="Button" parent="panel_right/deck_buttons/button3"]
+[node name="export_deck" type="Button" parent="panel_right/deck_buttons/button_export"]
 margin_left = 4.0
 margin_right = 117.0
 margin_bottom = 84.0
@@ -8322,7 +8366,7 @@ enabled_focus_mode = 0
 icon = ExtResource( 15 )
 flat = true
 
-[node name="label" type="Label" parent="panel_right/deck_buttons/button3"]
+[node name="label" type="Label" parent="panel_right/deck_buttons/button_export"]
 margin_left = 10.0
 margin_top = 17.0
 margin_right = 111.0
@@ -8379,10 +8423,197 @@ script = ExtResource( 20 )
 [node name="scene_transitioner" parent="." instance=ExtResource( 2 )]
 visible = false
 
+[node name="import_export_canvas" type="Panel" parent="."]
+visible = false
+margin_left = 650.0
+margin_top = 199.0
+margin_right = 1270.0
+margin_bottom = 445.0
+custom_styles/panel = SubResource( 12 )
+
+[node name="darken_screen" type="Button" parent="import_export_canvas"]
+show_behind_parent = true
+margin_left = -650.0
+margin_top = -199.0
+margin_right = 630.0
+margin_bottom = 521.0
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="dark_sprite" type="Sprite" parent="import_export_canvas/darken_screen"]
+modulate = Color( 1, 1, 1, 0.65098 )
+position = Vector2( 640, 359.5 )
+scale = Vector2( 10, 5.63281 )
+texture = ExtResource( 3 )
+
+[node name="export_window" type="Panel" parent="import_export_canvas"]
+visible = false
+self_modulate = Color( 1, 1, 1, 0.94902 )
+margin_left = 9.0
+margin_top = 48.0
+margin_right = 613.0
+margin_bottom = 184.0
+rect_min_size = Vector2( 100, 100 )
+custom_styles/panel = SubResource( 10 )
+
+[node name="export_description" type="Label" parent="import_export_canvas/export_window"]
+margin_left = -6.0
+margin_top = -44.0
+margin_right = 608.0
+margin_bottom = -2.0
+custom_fonts/font = SubResource( 13 )
+text = "YOUR DECK CODE WAS GENERATED"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="exported_string" type="RichTextLabel" parent="import_export_canvas/export_window"]
+margin_left = 13.0
+margin_top = 5.0
+margin_right = 591.0
+margin_bottom = 130.0
+focus_mode = 2
+custom_fonts/normal_font = SubResource( 11 )
+text = "000001000001000001000001000001000001000001000001000001000001000001000001000001000001000001000001000001000001000001000001000001000001000001000001000001000001000001000001000001000001000001000001000001000001000001000001000001000001000001000001"
+scroll_active = false
+selection_enabled = true
+
+[node name="button_close" type="Control" parent="import_export_canvas/export_window"]
+margin_left = 245.0
+margin_top = 140.0
+margin_right = 365.0
+margin_bottom = 193.0
+rect_min_size = Vector2( 120, 0 )
+
+[node name="export_close" type="Button" parent="import_export_canvas/export_window/button_close"]
+margin_left = 4.0
+margin_right = 117.0
+margin_bottom = 51.0
+rect_scale = Vector2( 1.1, 1 )
+rect_pivot_offset = Vector2( 56, 25 )
+focus_mode = 0
+enabled_focus_mode = 0
+icon = ExtResource( 15 )
+flat = true
+
+[node name="label" type="Label" parent="import_export_canvas/export_window/button_close"]
+margin_left = 10.0
+margin_top = 2.0
+margin_right = 111.0
+margin_bottom = 46.0
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+custom_fonts/font = SubResource( 4 )
+text = "close"
+align = 1
+valign = 1
+
+[node name="import_window" type="Panel" parent="import_export_canvas"]
+visible = false
+self_modulate = Color( 1, 1, 1, 0.94902 )
+margin_left = 9.0
+margin_top = 48.0
+margin_right = 613.0
+margin_bottom = 184.0
+rect_min_size = Vector2( 100, 100 )
+custom_styles/panel = SubResource( 10 )
+
+[node name="import_description" type="Label" parent="import_export_canvas/import_window"]
+margin_left = -6.0
+margin_top = -43.0
+margin_right = 608.0
+margin_bottom = -19.0
+custom_fonts/font = SubResource( 13 )
+text = "PASTE THE DECK CODE BELLOW"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="import_description2" type="Label" parent="import_export_canvas/import_window/import_description"]
+margin_top = 17.0
+margin_right = 614.0
+margin_bottom = 41.0
+custom_colors/font_color = Color( 0.894118, 0.305882, 0.305882, 1 )
+custom_fonts/font = SubResource( 14 )
+text = "Cards you don't have will be ignored."
+align = 1
+valign = 1
+autowrap = true
+
+[node name="import_string_visual" type="RichTextLabel" parent="import_export_canvas/import_window"]
+margin_left = 13.0
+margin_top = 5.0
+margin_right = 591.0
+margin_bottom = 130.0
+focus_mode = 2
+custom_fonts/normal_font = SubResource( 11 )
+scroll_active = false
+selection_enabled = true
+
+[node name="import_string_input" type="LineEdit" parent="import_export_canvas/import_window"]
+margin_left = 13.0
+margin_top = 5.0
+margin_right = 592.0
+margin_bottom = 129.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 15 )
+custom_styles/focus = SubResource( 16 )
+custom_styles/normal = SubResource( 17 )
+align = 1
+max_length = 240
+secret = true
+secret_character = " "
+context_menu_enabled = false
+middle_mouse_paste_enabled = false
+deselect_on_focus_loss_enabled = false
+placeholder_text = "PASTE CODE HERE"
+placeholder_alpha = 0.3
+
+[node name="button_close" type="Control" parent="import_export_canvas/import_window"]
+margin_left = 245.0
+margin_top = 140.0
+margin_right = 365.0
+margin_bottom = 193.0
+rect_min_size = Vector2( 120, 0 )
+
+[node name="import_close" type="Button" parent="import_export_canvas/import_window/button_close"]
+margin_left = 4.0
+margin_right = 117.0
+margin_bottom = 51.0
+rect_scale = Vector2( 1.1, 1 )
+rect_pivot_offset = Vector2( 56, 25 )
+focus_mode = 0
+enabled_focus_mode = 0
+icon = ExtResource( 15 )
+flat = true
+
+[node name="label" type="Label" parent="import_export_canvas/import_window/button_close"]
+margin_left = 10.0
+margin_top = 2.0
+margin_right = 111.0
+margin_bottom = 46.0
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+custom_fonts/font = SubResource( 4 )
+text = "close"
+align = 1
+valign = 1
+
 [connection signal="button_up" from="panel_left/sortables/HBoxContainer/byNAME" to="panel_left/sortables" method="_on_byNAME_button_up"]
 [connection signal="button_up" from="panel_left/sortables/HBoxContainer/byATK" to="panel_left/sortables" method="_on_byATK_button_up"]
 [connection signal="button_up" from="panel_left/sortables/HBoxContainer/byDEF" to="panel_left/sortables" method="_on_byDEF_button_up"]
 [connection signal="button_up" from="panel_left/sortables/HBoxContainer/byTYPE" to="panel_left/sortables" method="_on_byTYPE_button_up"]
 [connection signal="button_up" from="panel_left/sortables/HBoxContainer/byATTR" to="panel_left/sortables" method="_on_byATTR_button_up"]
+[connection signal="button_up" from="panel_right/deck_buttons/button_clear/clear_deck" to="." method="_on_clear_deck_button_up"]
+[connection signal="button_up" from="panel_right/deck_buttons/button_import/import_deck" to="." method="_on_import_deck_button_up"]
+[connection signal="button_up" from="panel_right/deck_buttons/button_export/export_deck" to="." method="_on_export_deck_button_up"]
 [connection signal="button_up" from="user_interface/back_button" to="." method="_on_back_button_button_up"]
 [connection signal="button_up" from="DebugAddAll" to="DebugAddAll" method="_on_DebugAddAll_button_up"]
+[connection signal="button_up" from="import_export_canvas/export_window/button_close/export_close" to="." method="_on_export_close_button_up"]
+[connection signal="text_changed" from="import_export_canvas/import_window/import_string_input" to="." method="_on_import_string_input_text_changed"]
+[connection signal="button_up" from="import_export_canvas/import_window/button_close/import_close" to="." method="_on_import_close_button_up"]

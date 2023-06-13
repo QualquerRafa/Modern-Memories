@@ -60,6 +60,7 @@ font_data = ExtResource( 3 )
 script = ExtResource( 9 )
 
 [node name="BIG_LETTERS" type="Node2D" parent="."]
+visible = false
 z_index = 1
 
 [node name="bg_dark" type="Sprite" parent="BIG_LETTERS"]
@@ -96,8 +97,8 @@ uppercase = true
 [node name="timer" type="Timer" parent="BIG_LETTERS"]
 
 [node name="bg_dark" type="Sprite" parent="."]
-position = Vector2( 640, 365 )
-scale = Vector2( 10, 5.42187 )
+position = Vector2( 640, 360 )
+scale = Vector2( 10, 5.625 )
 texture = ExtResource( 4 )
 
 [node name="user_interface" type="Node2D" parent="."]

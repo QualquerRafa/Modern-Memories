@@ -1,0 +1,1153 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://_resources/tournament/bg_stadium.png" type="Texture" id=1]
+[ext_resource path="res://_resources/tournament/frame_yellow.png" type="Texture" id=2]
+[ext_resource path="res://_resources/tournament/frame_red.png" type="Texture" id=3]
+[ext_resource path="res://_resources/tournament/frame_purple.png" type="Texture" id=4]
+[ext_resource path="res://_resources/tournament/frame_green.png" type="Texture" id=5]
+[ext_resource path="res://_resources/tournament/frame_blue.png" type="Texture" id=6]
+[ext_resource path="res://_resources/tournament/dark_aura.png" type="Texture" id=7]
+[ext_resource path="res://_scenes/dialogue_scene.tscn" type="PackedScene" id=8]
+[ext_resource path="res://_scripts/tournament.gd" type="Script" id=9]
+[ext_resource path="res://_scenes/scene_transitioner.tscn" type="PackedScene" id=10]
+[ext_resource path="res://_resources/character_faces/yugi0.png" type="Texture" id=11]
+[ext_resource path="res://_resources/character_faces/kaiba0.png" type="Texture" id=12]
+[ext_resource path="res://_resources/character_faces/joey0.png" type="Texture" id=13]
+[ext_resource path="res://_resources/character_faces/jaden0.png" type="Texture" id=14]
+[ext_resource path="res://_resources/character_faces/shadi0.png" type="Texture" id=15]
+[ext_resource path="res://_resources/tournament/bg_stadium_blur.png" type="Texture" id=16]
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 1, 1, 1, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 1, 1, 1, 1 )
+border_width_top = 2
+border_width_bottom = 2
+border_color = Color( 0, 0, 0, 1 )
+
+[node name="tournament_scene" type="Node2D"]
+script = ExtResource( 9 )
+
+[node name="background_art" type="Sprite" parent="."]
+position = Vector2( 0, -52 )
+scale = Vector2( 1.333, 1.32353 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="blurred_bg" type="Sprite" parent="background_art"]
+visible = false
+self_modulate = Color( 0.66, 0.66, 0.66, 1 )
+texture = ExtResource( 16 )
+centered = false
+
+[node name="DarkAura" type="Sprite" parent="background_art"]
+modulate = Color( 1, 1, 1, 0.392157 )
+scale = Vector2( 0.75, 0.752084 )
+texture = ExtResource( 7 )
+centered = false
+
+[node name="background_tween" type="Tween" parent="background_art"]
+
+[node name="tournament_brackets" type="Node2D" parent="."]
+visible = false
+position = Vector2( 640, 255 )
+rotation = -1.5708
+scale = Vector2( 0.7, 0.7 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="golden_tier" type="Control" parent="tournament_brackets"]
+margin_left = 251.0
+margin_top = -46.0
+margin_right = 459.0
+margin_bottom = 49.0
+rect_min_size = Vector2( 208, 95 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="golden_1" type="Control" parent="tournament_brackets/golden_tier"]
+margin_right = 96.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 96, 96 )
+
+[node name="FrameYellow" type="Sprite" parent="tournament_brackets/golden_tier/golden_1"]
+texture = ExtResource( 2 )
+centered = false
+
+[node name="right_side" type="Node2D" parent="tournament_brackets"]
+position = Vector2( -448, -319 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="red_tier" type="Control" parent="tournament_brackets/right_side"]
+margin_left = 560.0
+margin_top = 216.0
+margin_right = 699.0
+margin_bottom = 519.0
+rect_min_size = Vector2( 139, 95 )
+
+[node name="v_connection" type="Panel" parent="tournament_brackets/right_side/red_tier"]
+margin_left = 111.0
+margin_top = -354.0
+margin_right = 123.0
+margin_bottom = 562.0
+rect_min_size = Vector2( 12, 12 )
+custom_styles/panel = SubResource( 2 )
+
+[node name="connection2" type="Panel" parent="tournament_brackets/right_side/red_tier"]
+margin_left = 95.0
+margin_top = 550.0
+margin_right = 113.0
+margin_bottom = 562.0
+rect_min_size = Vector2( 18, 12 )
+custom_styles/panel = SubResource( 1 )
+
+[node name="connection3" type="Panel" parent="tournament_brackets/right_side/red_tier"]
+margin_left = 121.0
+margin_top = 98.0
+margin_right = 139.0
+margin_bottom = 110.0
+rect_min_size = Vector2( 18, 12 )
+custom_styles/panel = SubResource( 1 )
+
+[node name="red_2" type="Control" parent="tournament_brackets/right_side/red_tier"]
+margin_left = -6.10352e-05
+margin_top = 509.0
+margin_right = 95.9999
+margin_bottom = 605.0
+rect_min_size = Vector2( 96, 96 )
+
+[node name="FrameRed" type="Sprite" parent="tournament_brackets/right_side/red_tier/red_2"]
+texture = ExtResource( 3 )
+centered = false
+
+[node name="purple_tier" type="Control" parent="tournament_brackets/right_side"]
+margin_left = 421.0
+margin_top = 103.0
+margin_right = 560.0
+margin_bottom = 536.0
+rect_min_size = Vector2( 139, 95 )
+
+[node name="v_connection2" type="Panel" parent="tournament_brackets/right_side/purple_tier"]
+margin_left = 111.0
+margin_top = 493.0
+margin_right = 123.0
+margin_bottom = 844.0
+rect_min_size = Vector2( 12, 12 )
+custom_styles/panel = SubResource( 2 )
+
+[node name="connection4" type="Panel" parent="tournament_brackets/right_side/purple_tier"]
+margin_left = 95.0
+margin_top = 493.0
+margin_right = 113.0
+margin_bottom = 505.0
+rect_min_size = Vector2( 18, 12 )
+custom_styles/panel = SubResource( 1 )
+
+[node name="connection5" type="Panel" parent="tournament_brackets/right_side/purple_tier"]
+margin_left = 95.0
+margin_top = 832.0
+margin_right = 113.0
+margin_bottom = 844.0
+rect_min_size = Vector2( 18, 12 )
+custom_styles/panel = SubResource( 1 )
+
+[node name="connection6" type="Panel" parent="tournament_brackets/right_side/purple_tier"]
+margin_left = 121.0
+margin_top = 663.0
+margin_right = 139.0
+margin_bottom = 675.0
+rect_min_size = Vector2( 18, 12 )
+custom_styles/panel = SubResource( 1 )
+
+[node name="purple_3" type="Control" parent="tournament_brackets/right_side/purple_tier"]
+margin_top = 452.0
+margin_right = 96.0
+margin_bottom = 548.0
+rect_min_size = Vector2( 96, 96 )
+
+[node name="FramePurple" type="Sprite" parent="tournament_brackets/right_side/purple_tier/purple_3"]
+texture = ExtResource( 4 )
+centered = false
+
+[node name="purple_4" type="Control" parent="tournament_brackets/right_side/purple_tier"]
+margin_top = 791.0
+margin_right = 96.0
+margin_bottom = 887.0
+rect_min_size = Vector2( 96, 96 )
+
+[node name="FramePurple" type="Sprite" parent="tournament_brackets/right_side/purple_tier/purple_4"]
+texture = ExtResource( 4 )
+centered = false
+
+[node name="blue_tier2" type="Control" parent="tournament_brackets/right_side"]
+margin_left = 282.0
+margin_top = 442.0
+margin_right = 421.0
+margin_bottom = 875.0
+rect_min_size = Vector2( 139, 95 )
+
+[node name="v_connection" type="Panel" parent="tournament_brackets/right_side/blue_tier2"]
+margin_left = 111.0
+margin_top = 41.0
+margin_right = 123.0
+margin_bottom = 166.0
+rect_min_size = Vector2( 12, 12 )
+custom_styles/panel = SubResource( 2 )
+
+[node name="connection" type="Panel" parent="tournament_brackets/right_side/blue_tier2"]
+margin_left = 95.0
+margin_top = 41.0
+margin_right = 113.0
+margin_bottom = 53.0
+rect_min_size = Vector2( 18, 12 )
+custom_styles/panel = SubResource( 1 )
+
+[node name="connection2" type="Panel" parent="tournament_brackets/right_side/blue_tier2"]
+margin_left = 95.0
+margin_top = 154.0
+margin_right = 113.0
+margin_bottom = 166.0
+rect_min_size = Vector2( 18, 12 )
+custom_styles/panel = SubResource( 1 )
+
+[node name="connection3" type="Panel" parent="tournament_brackets/right_side/blue_tier2"]
+margin_left = 121.0
+margin_top = 154.0
+margin_right = 139.0
+margin_bottom = 166.0
+rect_min_size = Vector2( 18, 12 )
+custom_styles/panel = SubResource( 1 )
+
+[node name="v_connection2" type="Panel" parent="tournament_brackets/right_side/blue_tier2"]
+margin_left = 111.0
+margin_top = 493.0
+margin_right = 123.0
+margin_bottom = 618.0
+rect_min_size = Vector2( 12, 12 )
+custom_styles/panel = SubResource( 2 )
+
+[node name="connection4" type="Panel" parent="tournament_brackets/right_side/blue_tier2"]
+margin_left = 95.0
+margin_top = 493.0
+margin_right = 113.0
+margin_bottom = 505.0
+rect_min_size = Vector2( 18, 12 )
+custom_styles/panel = SubResource( 1 )
+
+[node name="connection5" type="Panel" parent="tournament_brackets/right_side/blue_tier2"]
+margin_left = 94.9999
+margin_top = 606.0
+margin_right = 113.0
+margin_bottom = 618.0
+rect_min_size = Vector2( 18, 12 )
+custom_styles/panel = SubResource( 1 )
+
+[node name="connection6" type="Panel" parent="tournament_brackets/right_side/blue_tier2"]
+margin_left = 121.0
+margin_top = 493.0
+margin_right = 139.0
+margin_bottom = 505.0
+rect_min_size = Vector2( 18, 12 )
+custom_styles/panel = SubResource( 1 )
+
+[node name="blue_1" type="Control" parent="tournament_brackets/right_side/blue_tier2"]
+margin_right = 96.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 96, 96 )
+
+[node name="FrameBlue" type="Sprite" parent="tournament_brackets/right_side/blue_tier2/blue_1"]
+texture = ExtResource( 6 )
+centered = false
+
+[node name="blue_2" type="Control" parent="tournament_brackets/right_side/blue_tier2"]
+margin_top = 113.0
+margin_right = 96.0
+margin_bottom = 209.0
+rect_min_size = Vector2( 96, 96 )
+
+[node name="FrameBlue" type="Sprite" parent="tournament_brackets/right_side/blue_tier2/blue_2"]
+texture = ExtResource( 6 )
+centered = false
+
+[node name="blue_3" type="Control" parent="tournament_brackets/right_side/blue_tier2"]
+margin_left = -3.05176e-05
+margin_top = 452.0
+margin_right = 96.0
+margin_bottom = 548.0
+rect_min_size = Vector2( 96, 96 )
+
+[node name="FrameBlue" type="Sprite" parent="tournament_brackets/right_side/blue_tier2/blue_3"]
+texture = ExtResource( 6 )
+centered = false
+
+[node name="blue_4" type="Control" parent="tournament_brackets/right_side/blue_tier2"]
+margin_top = 565.0
+margin_right = 96.0
+margin_bottom = 661.0
+rect_min_size = Vector2( 96, 96 )
+
+[node name="FrameBlue" type="Sprite" parent="tournament_brackets/right_side/blue_tier2/blue_4"]
+texture = ExtResource( 6 )
+centered = false
+
+[node name="green_tier" type="Control" parent="tournament_brackets/right_side"]
+margin_left = 143.0
+margin_top = 329.0
+margin_right = 282.0
+margin_bottom = 762.0
+rect_min_size = Vector2( 139, 95 )
+
+[node name="v_connection" type="Panel" parent="tournament_brackets/right_side/green_tier"]
+margin_left = 111.0
+margin_top = 41.0
+margin_right = 123.0
+margin_bottom = 166.0
+rect_min_size = Vector2( 12, 12 )
+custom_styles/panel = SubResource( 2 )
+
+[node name="connection" type="Panel" parent="tournament_brackets/right_side/green_tier"]
+margin_left = 95.0
+margin_top = 41.0
+margin_right = 113.0
+margin_bottom = 53.0
+rect_min_size = Vector2( 18, 12 )
+custom_styles/panel = SubResource( 1 )
+
+[node name="connection2" type="Panel" parent="tournament_brackets/right_side/green_tier"]
+margin_left = 95.0
+margin_top = 154.0
+margin_right = 113.0
+margin_bottom = 166.0
+rect_min_size = Vector2( 18, 12 )
+custom_styles/panel = SubResource( 1 )
+
+[node name="connection3" type="Panel" parent="tournament_brackets/right_side/green_tier"]
+margin_left = 121.0
+margin_top = 154.0
+margin_right = 139.0
+margin_bottom = 166.0
+rect_min_size = Vector2( 18, 12 )
+custom_styles/panel = SubResource( 1 )
+
+[node name="v_connection2" type="Panel" parent="tournament_brackets/right_side/green_tier"]
+margin_left = 111.0
+margin_top = 267.0
+margin_right = 123.0
+margin_bottom = 392.0
+rect_min_size = Vector2( 12, 12 )
+custom_styles/panel = SubResource( 2 )
+
+[node name="connection4" type="Panel" parent="tournament_brackets/right_side/green_tier"]
+margin_left = 95.0
+margin_top = 267.0
+margin_right = 113.0
+margin_bottom = 279.0
+rect_min_size = Vector2( 18, 12 )
+custom_styles/panel = SubResource( 1 )
+
+[node name="connection5" type="Panel" parent="tournament_brackets/right_side/green_tier"]
+margin_left = 95.0
+margin_top = 380.0
+margin_right = 113.0
+margin_bottom = 392.0
+rect_min_size = Vector2( 18, 12 )
+custom_styles/panel = SubResource( 1 )
+
+[node name="connection6" type="Panel" parent="tournament_brackets/right_side/green_tier"]
+margin_left = 121.0
+margin_top = 267.0
+margin_right = 139.0
+margin_bottom = 279.0
+rect_min_size = Vector2( 18, 12 )
+custom_styles/panel = SubResource( 1 )
+
+[node name="green_1" type="Control" parent="tournament_brackets/right_side/green_tier"]
+margin_right = 96.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 96, 96 )
+
+[node name="FrameGreen" type="Sprite" parent="tournament_brackets/right_side/green_tier/green_1"]
+texture = ExtResource( 5 )
+centered = false
+
+[node name="green_2" type="Control" parent="tournament_brackets/right_side/green_tier"]
+margin_top = 113.0
+margin_right = 96.0
+margin_bottom = 209.0
+rect_min_size = Vector2( 96, 96 )
+
+[node name="FrameGreen" type="Sprite" parent="tournament_brackets/right_side/green_tier/green_2"]
+texture = ExtResource( 5 )
+centered = false
+
+[node name="green_3" type="Control" parent="tournament_brackets/right_side/green_tier"]
+margin_top = 226.0
+margin_right = 96.0
+margin_bottom = 322.0
+rect_min_size = Vector2( 96, 96 )
+
+[node name="FrameGreen" type="Sprite" parent="tournament_brackets/right_side/green_tier/green_3"]
+texture = ExtResource( 5 )
+centered = false
+
+[node name="green_4" type="Control" parent="tournament_brackets/right_side/green_tier"]
+margin_top = 339.0
+margin_right = 96.0
+margin_bottom = 435.0
+rect_min_size = Vector2( 96, 96 )
+
+[node name="FrameGreen" type="Sprite" parent="tournament_brackets/right_side/green_tier/green_4"]
+texture = ExtResource( 5 )
+centered = false
+
+[node name="green_tier2" type="Control" parent="tournament_brackets/right_side"]
+margin_left = 143.0
+margin_top = 781.0
+margin_right = 282.0
+margin_bottom = 1214.0
+rect_min_size = Vector2( 139, 95 )
+
+[node name="v_connection" type="Panel" parent="tournament_brackets/right_side/green_tier2"]
+margin_left = 111.0
+margin_top = 41.0
+margin_right = 123.0
+margin_bottom = 166.0
+rect_min_size = Vector2( 12, 12 )
+custom_styles/panel = SubResource( 2 )
+
+[node name="connection" type="Panel" parent="tournament_brackets/right_side/green_tier2"]
+margin_left = 95.0
+margin_top = 41.0
+margin_right = 113.0
+margin_bottom = 53.0
+rect_min_size = Vector2( 18, 12 )
+custom_styles/panel = SubResource( 1 )
+
+[node name="connection2" type="Panel" parent="tournament_brackets/right_side/green_tier2"]
+margin_left = 95.0
+margin_top = 154.0
+margin_right = 113.0
+margin_bottom = 166.0
+rect_min_size = Vector2( 18, 12 )
+custom_styles/panel = SubResource( 1 )
+
+[node name="connection3" type="Panel" parent="tournament_brackets/right_side/green_tier2"]
+margin_left = 121.0
+margin_top = 154.0
+margin_right = 139.0
+margin_bottom = 166.0
+rect_min_size = Vector2( 18, 12 )
+custom_styles/panel = SubResource( 1 )
+
+[node name="v_connection2" type="Panel" parent="tournament_brackets/right_side/green_tier2"]
+margin_left = 111.0
+margin_top = 267.0
+margin_right = 123.0
+margin_bottom = 392.0
+rect_min_size = Vector2( 12, 12 )
+custom_styles/panel = SubResource( 2 )
+
+[node name="connection4" type="Panel" parent="tournament_brackets/right_side/green_tier2"]
+margin_left = 95.0
+margin_top = 267.0
+margin_right = 113.0
+margin_bottom = 279.0
+rect_min_size = Vector2( 18, 12 )
+custom_styles/panel = SubResource( 1 )
+
+[node name="connection5" type="Panel" parent="tournament_brackets/right_side/green_tier2"]
+margin_left = 95.0
+margin_top = 380.0
+margin_right = 113.0
+margin_bottom = 392.0
+rect_min_size = Vector2( 18, 12 )
+custom_styles/panel = SubResource( 1 )
+
+[node name="connection6" type="Panel" parent="tournament_brackets/right_side/green_tier2"]
+margin_left = 121.0
+margin_top = 267.0
+margin_right = 139.0
+margin_bottom = 279.0
+rect_min_size = Vector2( 18, 12 )
+custom_styles/panel = SubResource( 1 )
+
+[node name="green_1" type="Control" parent="tournament_brackets/right_side/green_tier2"]
+margin_right = 96.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 96, 96 )
+
+[node name="FrameGreen" type="Sprite" parent="tournament_brackets/right_side/green_tier2/green_1"]
+texture = ExtResource( 5 )
+centered = false
+
+[node name="green_2" type="Control" parent="tournament_brackets/right_side/green_tier2"]
+margin_top = 113.0
+margin_right = 96.0
+margin_bottom = 209.0
+rect_min_size = Vector2( 96, 96 )
+
+[node name="FrameGreen" type="Sprite" parent="tournament_brackets/right_side/green_tier2/green_2"]
+texture = ExtResource( 5 )
+centered = false
+
+[node name="green_3" type="Control" parent="tournament_brackets/right_side/green_tier2"]
+margin_top = 226.0
+margin_right = 96.0
+margin_bottom = 322.0
+rect_min_size = Vector2( 96, 96 )
+
+[node name="FrameGreen" type="Sprite" parent="tournament_brackets/right_side/green_tier2/green_3"]
+texture = ExtResource( 5 )
+centered = false
+
+[node name="green_4" type="Control" parent="tournament_brackets/right_side/green_tier2"]
+margin_top = 339.0
+margin_right = 96.0
+margin_bottom = 435.0
+rect_min_size = Vector2( 96, 96 )
+
+[node name="FrameGreen" type="Sprite" parent="tournament_brackets/right_side/green_tier2/green_4"]
+texture = ExtResource( 5 )
+centered = false
+
+[node name="left_side" type="Node2D" parent="tournament_brackets"]
+position = Vector2( -448, -319 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="red_tier2" type="Control" parent="tournament_brackets/left_side"]
+margin_left = 560.0
+margin_top = -688.0
+margin_right = 699.0
+margin_bottom = -385.0
+rect_min_size = Vector2( 139, 95 )
+
+[node name="connection2" type="Panel" parent="tournament_brackets/left_side/red_tier2"]
+margin_left = 95.0
+margin_top = 550.0
+margin_right = 113.0
+margin_bottom = 562.0
+rect_min_size = Vector2( 18, 12 )
+custom_styles/panel = SubResource( 1 )
+
+[node name="red_2" type="Control" parent="tournament_brackets/left_side/red_tier2"]
+margin_left = -6.10352e-05
+margin_top = 509.0
+margin_right = 95.9999
+margin_bottom = 605.0
+rect_min_size = Vector2( 96, 96 )
+
+[node name="FrameRed" type="Sprite" parent="tournament_brackets/left_side/red_tier2/red_2"]
+texture = ExtResource( 3 )
+centered = false
+
+[node name="purple_tier2" type="Control" parent="tournament_brackets/left_side"]
+margin_left = 421.0
+margin_top = -801.0
+margin_right = 560.0
+margin_bottom = -368.0
+rect_min_size = Vector2( 139, 95 )
+
+[node name="v_connection2" type="Panel" parent="tournament_brackets/left_side/purple_tier2"]
+margin_left = 111.0
+margin_top = 493.0
+margin_right = 123.0
+margin_bottom = 844.0
+rect_min_size = Vector2( 12, 12 )
+custom_styles/panel = SubResource( 2 )
+
+[node name="connection4" type="Panel" parent="tournament_brackets/left_side/purple_tier2"]
+margin_left = 95.0
+margin_top = 493.0
+margin_right = 113.0
+margin_bottom = 505.0
+rect_min_size = Vector2( 18, 12 )
+custom_styles/panel = SubResource( 1 )
+
+[node name="connection5" type="Panel" parent="tournament_brackets/left_side/purple_tier2"]
+margin_left = 95.0
+margin_top = 832.0
+margin_right = 113.0
+margin_bottom = 844.0
+rect_min_size = Vector2( 18, 12 )
+custom_styles/panel = SubResource( 1 )
+
+[node name="connection6" type="Panel" parent="tournament_brackets/left_side/purple_tier2"]
+margin_left = 121.0
+margin_top = 663.0
+margin_right = 139.0
+margin_bottom = 675.0
+rect_min_size = Vector2( 18, 12 )
+custom_styles/panel = SubResource( 1 )
+
+[node name="purple_3" type="Control" parent="tournament_brackets/left_side/purple_tier2"]
+margin_top = 452.0
+margin_right = 96.0
+margin_bottom = 548.0
+rect_min_size = Vector2( 96, 96 )
+
+[node name="FramePurple" type="Sprite" parent="tournament_brackets/left_side/purple_tier2/purple_3"]
+texture = ExtResource( 4 )
+centered = false
+
+[node name="purple_4" type="Control" parent="tournament_brackets/left_side/purple_tier2"]
+margin_top = 791.0
+margin_right = 96.0
+margin_bottom = 887.0
+rect_min_size = Vector2( 96, 96 )
+
+[node name="FramePurple" type="Sprite" parent="tournament_brackets/left_side/purple_tier2/purple_4"]
+texture = ExtResource( 4 )
+centered = false
+
+[node name="blue_tier3" type="Control" parent="tournament_brackets/left_side"]
+margin_left = 282.0
+margin_top = -462.0
+margin_right = 421.0
+margin_bottom = -29.0
+rect_min_size = Vector2( 139, 95 )
+
+[node name="v_connection" type="Panel" parent="tournament_brackets/left_side/blue_tier3"]
+margin_left = 111.0
+margin_top = 41.0
+margin_right = 123.0
+margin_bottom = 166.0
+rect_min_size = Vector2( 12, 12 )
+custom_styles/panel = SubResource( 2 )
+
+[node name="connection" type="Panel" parent="tournament_brackets/left_side/blue_tier3"]
+margin_left = 95.0
+margin_top = 41.0
+margin_right = 113.0
+margin_bottom = 53.0
+rect_min_size = Vector2( 18, 12 )
+custom_styles/panel = SubResource( 1 )
+
+[node name="connection2" type="Panel" parent="tournament_brackets/left_side/blue_tier3"]
+margin_left = 95.0
+margin_top = 154.0
+margin_right = 113.0
+margin_bottom = 166.0
+rect_min_size = Vector2( 18, 12 )
+custom_styles/panel = SubResource( 1 )
+
+[node name="connection3" type="Panel" parent="tournament_brackets/left_side/blue_tier3"]
+margin_left = 121.0
+margin_top = 154.0
+margin_right = 139.0
+margin_bottom = 166.0
+rect_min_size = Vector2( 18, 12 )
+custom_styles/panel = SubResource( 1 )
+
+[node name="v_connection2" type="Panel" parent="tournament_brackets/left_side/blue_tier3"]
+margin_left = 111.0
+margin_top = 493.0
+margin_right = 123.0
+margin_bottom = 618.0
+rect_min_size = Vector2( 12, 12 )
+custom_styles/panel = SubResource( 2 )
+
+[node name="connection4" type="Panel" parent="tournament_brackets/left_side/blue_tier3"]
+margin_left = 95.0
+margin_top = 493.0
+margin_right = 113.0
+margin_bottom = 505.0
+rect_min_size = Vector2( 18, 12 )
+custom_styles/panel = SubResource( 1 )
+
+[node name="connection5" type="Panel" parent="tournament_brackets/left_side/blue_tier3"]
+margin_left = 94.9999
+margin_top = 606.0
+margin_right = 113.0
+margin_bottom = 618.0
+rect_min_size = Vector2( 18, 12 )
+custom_styles/panel = SubResource( 1 )
+
+[node name="connection6" type="Panel" parent="tournament_brackets/left_side/blue_tier3"]
+margin_left = 121.0
+margin_top = 493.0
+margin_right = 139.0
+margin_bottom = 505.0
+rect_min_size = Vector2( 18, 12 )
+custom_styles/panel = SubResource( 1 )
+
+[node name="blue_1" type="Control" parent="tournament_brackets/left_side/blue_tier3"]
+margin_right = 96.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 96, 96 )
+
+[node name="FrameBlue" type="Sprite" parent="tournament_brackets/left_side/blue_tier3/blue_1"]
+texture = ExtResource( 6 )
+centered = false
+
+[node name="blue_2" type="Control" parent="tournament_brackets/left_side/blue_tier3"]
+margin_top = 113.0
+margin_right = 96.0
+margin_bottom = 209.0
+rect_min_size = Vector2( 96, 96 )
+
+[node name="FrameBlue" type="Sprite" parent="tournament_brackets/left_side/blue_tier3/blue_2"]
+texture = ExtResource( 6 )
+centered = false
+
+[node name="blue_3" type="Control" parent="tournament_brackets/left_side/blue_tier3"]
+margin_left = -3.05176e-05
+margin_top = 452.0
+margin_right = 96.0
+margin_bottom = 548.0
+rect_min_size = Vector2( 96, 96 )
+
+[node name="FrameBlue" type="Sprite" parent="tournament_brackets/left_side/blue_tier3/blue_3"]
+texture = ExtResource( 6 )
+centered = false
+
+[node name="blue_4" type="Control" parent="tournament_brackets/left_side/blue_tier3"]
+margin_top = 565.0
+margin_right = 96.0
+margin_bottom = 661.0
+rect_min_size = Vector2( 96, 96 )
+
+[node name="FrameBlue" type="Sprite" parent="tournament_brackets/left_side/blue_tier3/blue_4"]
+texture = ExtResource( 6 )
+centered = false
+
+[node name="green_tier3" type="Control" parent="tournament_brackets/left_side"]
+margin_left = 143.0
+margin_top = -575.0
+margin_right = 282.0
+margin_bottom = -142.0
+rect_min_size = Vector2( 139, 95 )
+
+[node name="v_connection" type="Panel" parent="tournament_brackets/left_side/green_tier3"]
+margin_left = 111.0
+margin_top = 41.0
+margin_right = 123.0
+margin_bottom = 166.0
+rect_min_size = Vector2( 12, 12 )
+custom_styles/panel = SubResource( 2 )
+
+[node name="connection" type="Panel" parent="tournament_brackets/left_side/green_tier3"]
+margin_left = 95.0
+margin_top = 41.0
+margin_right = 113.0
+margin_bottom = 53.0
+rect_min_size = Vector2( 18, 12 )
+custom_styles/panel = SubResource( 1 )
+
+[node name="connection2" type="Panel" parent="tournament_brackets/left_side/green_tier3"]
+margin_left = 95.0
+margin_top = 154.0
+margin_right = 113.0
+margin_bottom = 166.0
+rect_min_size = Vector2( 18, 12 )
+custom_styles/panel = SubResource( 1 )
+
+[node name="connection3" type="Panel" parent="tournament_brackets/left_side/green_tier3"]
+margin_left = 121.0
+margin_top = 154.0
+margin_right = 139.0
+margin_bottom = 166.0
+rect_min_size = Vector2( 18, 12 )
+custom_styles/panel = SubResource( 1 )
+
+[node name="v_connection2" type="Panel" parent="tournament_brackets/left_side/green_tier3"]
+margin_left = 111.0
+margin_top = 267.0
+margin_right = 123.0
+margin_bottom = 392.0
+rect_min_size = Vector2( 12, 12 )
+custom_styles/panel = SubResource( 2 )
+
+[node name="connection4" type="Panel" parent="tournament_brackets/left_side/green_tier3"]
+margin_left = 95.0
+margin_top = 267.0
+margin_right = 113.0
+margin_bottom = 279.0
+rect_min_size = Vector2( 18, 12 )
+custom_styles/panel = SubResource( 1 )
+
+[node name="connection5" type="Panel" parent="tournament_brackets/left_side/green_tier3"]
+margin_left = 95.0
+margin_top = 380.0
+margin_right = 113.0
+margin_bottom = 392.0
+rect_min_size = Vector2( 18, 12 )
+custom_styles/panel = SubResource( 1 )
+
+[node name="connection6" type="Panel" parent="tournament_brackets/left_side/green_tier3"]
+margin_left = 121.0
+margin_top = 267.0
+margin_right = 139.0
+margin_bottom = 279.0
+rect_min_size = Vector2( 18, 12 )
+custom_styles/panel = SubResource( 1 )
+
+[node name="green_1" type="Control" parent="tournament_brackets/left_side/green_tier3"]
+margin_right = 96.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 96, 96 )
+
+[node name="FrameGreen" type="Sprite" parent="tournament_brackets/left_side/green_tier3/green_1"]
+texture = ExtResource( 5 )
+centered = false
+
+[node name="green_2" type="Control" parent="tournament_brackets/left_side/green_tier3"]
+margin_top = 113.0
+margin_right = 96.0
+margin_bottom = 209.0
+rect_min_size = Vector2( 96, 96 )
+
+[node name="FrameGreen" type="Sprite" parent="tournament_brackets/left_side/green_tier3/green_2"]
+texture = ExtResource( 5 )
+centered = false
+
+[node name="green_3" type="Control" parent="tournament_brackets/left_side/green_tier3"]
+margin_top = 226.0
+margin_right = 96.0
+margin_bottom = 322.0
+rect_min_size = Vector2( 96, 96 )
+
+[node name="FrameGreen" type="Sprite" parent="tournament_brackets/left_side/green_tier3/green_3"]
+texture = ExtResource( 5 )
+centered = false
+
+[node name="green_4" type="Control" parent="tournament_brackets/left_side/green_tier3"]
+margin_top = 339.0
+margin_right = 96.0
+margin_bottom = 435.0
+rect_min_size = Vector2( 96, 96 )
+
+[node name="FrameGreen" type="Sprite" parent="tournament_brackets/left_side/green_tier3/green_4"]
+texture = ExtResource( 5 )
+centered = false
+
+[node name="green_tier4" type="Control" parent="tournament_brackets/left_side"]
+margin_left = 143.0
+margin_top = -123.0
+margin_right = 282.0
+margin_bottom = 310.0
+rect_min_size = Vector2( 139, 95 )
+
+[node name="v_connection" type="Panel" parent="tournament_brackets/left_side/green_tier4"]
+margin_left = 111.0
+margin_top = 41.0
+margin_right = 123.0
+margin_bottom = 166.0
+rect_min_size = Vector2( 12, 12 )
+custom_styles/panel = SubResource( 2 )
+
+[node name="connection" type="Panel" parent="tournament_brackets/left_side/green_tier4"]
+margin_left = 95.0
+margin_top = 41.0
+margin_right = 113.0
+margin_bottom = 53.0
+rect_min_size = Vector2( 18, 12 )
+custom_styles/panel = SubResource( 1 )
+
+[node name="connection2" type="Panel" parent="tournament_brackets/left_side/green_tier4"]
+margin_left = 95.0
+margin_top = 154.0
+margin_right = 113.0
+margin_bottom = 166.0
+rect_min_size = Vector2( 18, 12 )
+custom_styles/panel = SubResource( 1 )
+
+[node name="connection3" type="Panel" parent="tournament_brackets/left_side/green_tier4"]
+margin_left = 121.0
+margin_top = 154.0
+margin_right = 139.0
+margin_bottom = 166.0
+rect_min_size = Vector2( 18, 12 )
+custom_styles/panel = SubResource( 1 )
+
+[node name="v_connection2" type="Panel" parent="tournament_brackets/left_side/green_tier4"]
+margin_left = 111.0
+margin_top = 267.0
+margin_right = 123.0
+margin_bottom = 392.0
+rect_min_size = Vector2( 12, 12 )
+custom_styles/panel = SubResource( 2 )
+
+[node name="connection4" type="Panel" parent="tournament_brackets/left_side/green_tier4"]
+margin_left = 95.0
+margin_top = 267.0
+margin_right = 113.0
+margin_bottom = 279.0
+rect_min_size = Vector2( 18, 12 )
+custom_styles/panel = SubResource( 1 )
+
+[node name="connection5" type="Panel" parent="tournament_brackets/left_side/green_tier4"]
+margin_left = 95.0
+margin_top = 380.0
+margin_right = 113.0
+margin_bottom = 392.0
+rect_min_size = Vector2( 18, 12 )
+custom_styles/panel = SubResource( 1 )
+
+[node name="connection6" type="Panel" parent="tournament_brackets/left_side/green_tier4"]
+margin_left = 121.0
+margin_top = 267.0
+margin_right = 139.0
+margin_bottom = 279.0
+rect_min_size = Vector2( 18, 12 )
+custom_styles/panel = SubResource( 1 )
+
+[node name="green_1" type="Control" parent="tournament_brackets/left_side/green_tier4"]
+margin_right = 96.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 96, 96 )
+
+[node name="FrameGreen" type="Sprite" parent="tournament_brackets/left_side/green_tier4/green_1"]
+texture = ExtResource( 5 )
+centered = false
+
+[node name="green_2" type="Control" parent="tournament_brackets/left_side/green_tier4"]
+margin_top = 113.0
+margin_right = 96.0
+margin_bottom = 209.0
+rect_min_size = Vector2( 96, 96 )
+
+[node name="FrameGreen" type="Sprite" parent="tournament_brackets/left_side/green_tier4/green_2"]
+texture = ExtResource( 5 )
+centered = false
+
+[node name="green_3" type="Control" parent="tournament_brackets/left_side/green_tier4"]
+margin_top = 226.0
+margin_right = 96.0
+margin_bottom = 322.0
+rect_min_size = Vector2( 96, 96 )
+
+[node name="FrameGreen" type="Sprite" parent="tournament_brackets/left_side/green_tier4/green_3"]
+texture = ExtResource( 5 )
+centered = false
+
+[node name="green_4" type="Control" parent="tournament_brackets/left_side/green_tier4"]
+margin_top = 339.0
+margin_right = 96.0
+margin_bottom = 435.0
+rect_min_size = Vector2( 96, 96 )
+
+[node name="FrameGreen" type="Sprite" parent="tournament_brackets/left_side/green_tier4/green_4"]
+texture = ExtResource( 5 )
+centered = false
+
+[node name="duelists_faces" type="Node2D" parent="tournament_brackets"]
+position = Vector2( -448, -319 )
+
+[node name="green" type="Node2D" parent="tournament_brackets/duelists_faces"]
+
+[node name="face1" type="Sprite" parent="tournament_brackets/duelists_faces/green"]
+position = Vector2( 190.5, 1168 )
+rotation = 1.5708
+scale = Vector2( 0.683333, 0.675 )
+texture = ExtResource( 13 )
+
+[node name="face2" type="Sprite" parent="tournament_brackets/duelists_faces/green"]
+position = Vector2( 190.5, 1055 )
+rotation = 1.5708
+scale = Vector2( 0.683333, 0.675 )
+texture = ExtResource( 13 )
+
+[node name="face3" type="Sprite" parent="tournament_brackets/duelists_faces/green"]
+position = Vector2( 190.5, 942 )
+rotation = 1.5708
+scale = Vector2( 0.683333, 0.675 )
+texture = ExtResource( 13 )
+
+[node name="face4" type="Sprite" parent="tournament_brackets/duelists_faces/green"]
+position = Vector2( 190.5, 829 )
+rotation = 1.5708
+scale = Vector2( 0.683333, 0.675 )
+texture = ExtResource( 13 )
+
+[node name="face5" type="Sprite" parent="tournament_brackets/duelists_faces/green"]
+position = Vector2( 190.5, 716 )
+rotation = 1.5708
+scale = Vector2( 0.683333, 0.675 )
+texture = ExtResource( 13 )
+
+[node name="face6" type="Sprite" parent="tournament_brackets/duelists_faces/green"]
+position = Vector2( 190.5, 603 )
+rotation = 1.57079
+scale = Vector2( 0.683333, 0.675 )
+texture = ExtResource( 13 )
+
+[node name="face7" type="Sprite" parent="tournament_brackets/duelists_faces/green"]
+position = Vector2( 190.5, 490 )
+rotation = 1.5708
+scale = Vector2( 0.683333, 0.675 )
+texture = ExtResource( 13 )
+
+[node name="face8" type="Sprite" parent="tournament_brackets/duelists_faces/green"]
+position = Vector2( 190.5, 377 )
+rotation = 1.5708
+scale = Vector2( 0.683333, 0.675 )
+texture = ExtResource( 13 )
+
+[node name="face9" type="Sprite" parent="tournament_brackets/duelists_faces/green"]
+position = Vector2( 190.5, 264 )
+rotation = 1.5708
+scale = Vector2( 0.683333, 0.675 )
+texture = ExtResource( 13 )
+
+[node name="face10" type="Sprite" parent="tournament_brackets/duelists_faces/green"]
+position = Vector2( 190.5, 151 )
+rotation = 1.5708
+scale = Vector2( 0.683333, 0.675 )
+texture = ExtResource( 13 )
+
+[node name="face11" type="Sprite" parent="tournament_brackets/duelists_faces/green"]
+position = Vector2( 190.5, 38 )
+rotation = 1.5708
+scale = Vector2( 0.683333, 0.675 )
+texture = ExtResource( 13 )
+
+[node name="face12" type="Sprite" parent="tournament_brackets/duelists_faces/green"]
+position = Vector2( 190.5, -75 )
+rotation = 1.57079
+scale = Vector2( 0.683333, 0.675 )
+texture = ExtResource( 13 )
+
+[node name="face13" type="Sprite" parent="tournament_brackets/duelists_faces/green"]
+position = Vector2( 190.5, -188 )
+rotation = 1.5708
+scale = Vector2( 0.683333, 0.675 )
+texture = ExtResource( 13 )
+
+[node name="face14" type="Sprite" parent="tournament_brackets/duelists_faces/green"]
+position = Vector2( 190.5, -301 )
+rotation = 1.5708
+scale = Vector2( 0.683333, 0.675 )
+texture = ExtResource( 13 )
+
+[node name="face15" type="Sprite" parent="tournament_brackets/duelists_faces/green"]
+position = Vector2( 190.5, -414 )
+rotation = 1.5708
+scale = Vector2( 0.683333, 0.675 )
+texture = ExtResource( 13 )
+
+[node name="face16" type="Sprite" parent="tournament_brackets/duelists_faces/green"]
+position = Vector2( 190.5, -527 )
+rotation = 1.57079
+scale = Vector2( 0.683333, 0.675 )
+texture = ExtResource( 13 )
+
+[node name="blue" type="Node2D" parent="tournament_brackets/duelists_faces"]
+
+[node name="face1" type="Sprite" parent="tournament_brackets/duelists_faces/blue"]
+position = Vector2( 329.5, 1055 )
+rotation = 1.57079
+scale = Vector2( 0.683333, 0.675 )
+texture = ExtResource( 12 )
+
+[node name="face2" type="Sprite" parent="tournament_brackets/duelists_faces/blue"]
+position = Vector2( 329.5, 942 )
+rotation = 1.57079
+scale = Vector2( 0.683333, 0.675 )
+texture = ExtResource( 12 )
+
+[node name="face3" type="Sprite" parent="tournament_brackets/duelists_faces/blue"]
+position = Vector2( 329.5, 603 )
+rotation = 1.57079
+scale = Vector2( 0.683333, 0.675 )
+texture = ExtResource( 12 )
+
+[node name="face4" type="Sprite" parent="tournament_brackets/duelists_faces/blue"]
+position = Vector2( 329.5, 490 )
+rotation = 1.57079
+scale = Vector2( 0.683333, 0.675 )
+texture = ExtResource( 12 )
+
+[node name="face5" type="Sprite" parent="tournament_brackets/duelists_faces/blue"]
+position = Vector2( 329.5, 151 )
+rotation = 1.57079
+scale = Vector2( 0.683333, 0.675 )
+texture = ExtResource( 12 )
+
+[node name="face6" type="Sprite" parent="tournament_brackets/duelists_faces/blue"]
+position = Vector2( 329.5, 38 )
+rotation = 1.57079
+scale = Vector2( 0.683333, 0.675 )
+texture = ExtResource( 12 )
+
+[node name="face7" type="Sprite" parent="tournament_brackets/duelists_faces/blue"]
+position = Vector2( 329.5, -301 )
+rotation = 1.57079
+scale = Vector2( 0.683333, 0.675 )
+texture = ExtResource( 12 )
+
+[node name="face8" type="Sprite" parent="tournament_brackets/duelists_faces/blue"]
+position = Vector2( 329.5, -414 )
+rotation = 1.57079
+scale = Vector2( 0.683333, 0.675 )
+texture = ExtResource( 12 )
+
+[node name="purple" type="Node2D" parent="tournament_brackets/duelists_faces"]
+
+[node name="face1" type="Sprite" parent="tournament_brackets/duelists_faces/purple"]
+position = Vector2( 468.5, 942 )
+rotation = 1.57079
+scale = Vector2( 0.683333, 0.675 )
+texture = ExtResource( 11 )
+
+[node name="face2" type="Sprite" parent="tournament_brackets/duelists_faces/purple"]
+position = Vector2( 468.5, 603 )
+rotation = 1.57079
+scale = Vector2( 0.683333, 0.675 )
+texture = ExtResource( 11 )
+
+[node name="face3" type="Sprite" parent="tournament_brackets/duelists_faces/purple"]
+position = Vector2( 468.5, 38 )
+rotation = 1.57079
+scale = Vector2( 0.683333, 0.675 )
+texture = ExtResource( 11 )
+
+[node name="face4" type="Sprite" parent="tournament_brackets/duelists_faces/purple"]
+position = Vector2( 468.5, -301 )
+rotation = 1.57079
+scale = Vector2( 0.683333, 0.675 )
+texture = ExtResource( 11 )
+
+[node name="red" type="Node2D" parent="tournament_brackets/duelists_faces"]
+
+[node name="face1" type="Sprite" parent="tournament_brackets/duelists_faces/red"]
+position = Vector2( 607.5, 773 )
+rotation = 1.57079
+scale = Vector2( 0.683333, 0.675 )
+texture = ExtResource( 14 )
+
+[node name="face2" type="Sprite" parent="tournament_brackets/duelists_faces/red"]
+position = Vector2( 607.5, -131 )
+rotation = 1.57079
+scale = Vector2( 0.683333, 0.675 )
+texture = ExtResource( 14 )
+
+[node name="gold" type="Node2D" parent="tournament_brackets/duelists_faces"]
+
+[node name="face1" type="Sprite" parent="tournament_brackets/duelists_faces/gold"]
+position = Vector2( 746.5, 321 )
+rotation = 1.57079
+scale = Vector2( 0.683333, 0.675 )
+texture = ExtResource( 15 )
+
+[node name="dialogue_scene" parent="." instance=ExtResource( 8 )]
+
+[node name="scene_transitioner" parent="." instance=ExtResource( 10 )]
+visible = false
+
+[node name="tournament_timer" type="Timer" parent="."]
+
+[node name="tournament_tween" type="Tween" parent="."]
+
+[connection signal="dialogue_box_clicked" from="dialogue_scene" to="." method="_on_dialogue_scene_dialogue_box_clicked"]
