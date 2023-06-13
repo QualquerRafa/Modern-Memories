@@ -12,6 +12,9 @@ func _ready():
 #CLICKING THE BUTTONS
 func _on_btn_campaign_button_up():
 	pass # Replace with function body.
+func _on_btn_tournament_button_up():
+	animate_button($CenterContainer/VBoxContainer/btn_tournament)
+	change_scene("tournament_scene")
 func _on_btn_free_duel_button_up():
 	animate_button($CenterContainer/VBoxContainer/btn_free_duel)
 	change_scene("free_duel")
@@ -41,6 +44,8 @@ func change_scene(scene_to_go_to : String):
 #HOVERING OVER BUTTONS
 func _on_btn_campaign_mouse_entered():
 	pass #hovering_over_button($CenterContainer/VBoxContainer/btn_campaign)
+func _on_btn_tournament_mouse_entered():
+	hovering_over_button($CenterContainer/VBoxContainer/btn_tournament)
 func _on_btn_free_duel_mouse_entered():
 	hovering_over_button($CenterContainer/VBoxContainer/btn_free_duel)
 func _on_btn_build_deck_mouse_entered():
@@ -52,6 +57,8 @@ func _on_btn_password_mouse_entered():
 
 func _on_btn_campaign_mouse_exited():
 	unhover_button($CenterContainer/VBoxContainer/btn_campaign)
+func _on_btn_tournament_mouse_exited():
+	unhover_button($CenterContainer/VBoxContainer/btn_tournament)
 func _on_btn_free_duel_mouse_exited():
 	unhover_button($CenterContainer/VBoxContainer/btn_free_duel)
 func _on_btn_build_deck_mouse_exited():
@@ -66,6 +73,15 @@ func hovering_over_button(button : Node):
 		get_node(String(button.get_path()) + "/white_over").show()
 func unhover_button(button : Node):
 	get_node(String(button.get_path()) + "/white_over").hide()
+
+
+
+
+
+
+
+
+
 
 
 

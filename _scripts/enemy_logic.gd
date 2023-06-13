@@ -80,7 +80,7 @@ func enemy_choosing_card_to_play():
 	var final_card_to_play : Array = ["", "", []] #["spelltrap" or "monster", card_id, [extra_info] ]
 	
 	var choose_a_spelltrap : String = "" #card_id
-	if enemy_monsters_on_field > player_monsters_sorted_by_atk.size():
+	if enemy_monsters_on_field > player_monsters_sorted_by_atk.size() and player_monsters_sorted_by_atk.size() != 0:
 		#print("Enemy try a spell")
 		choose_a_spelltrap = enemy_try_to_choose_spelltrap() #If enemy has more monsters than the player, it can try to play a Spell or Trap Card
 		if choose_a_spelltrap != "":
@@ -202,14 +202,14 @@ func enemy_play_that_card(card_to_play_array : Array):
 		field_node_to_use.this_card_flags.is_facedown = false
 		field_node_to_use.get_node("card_design/card_back").hide()
 	
-	#Check if this card will get a field bonus
-	var field_name = GAME_LOGIC.get_parent().get_node("user_interface/top_info_box/field_info/field_name").text.split(" ", true)[0].to_lower()
-	get_node("../effects").field_bonus(field_name)
-	
 	#Visual Update of card on field
 	field_node_to_use.this_card_id = card_being_played
 	field_node_to_use.update_card_information(field_node_to_use.this_card_id)
 	field_node_to_use.show()
+	
+	#Check if this card will get a field bonus
+	var field_name = GAME_LOGIC.get_parent().get_node("user_interface/top_info_box/field_info/field_name").text.split(" ", true)[0].to_lower()
+	get_node("../effects").field_bonus(field_name)
 	
 	#Update UI with the played card information, if card isn't facedown
 	if field_node_to_use.this_card_flags.is_facedown == false:

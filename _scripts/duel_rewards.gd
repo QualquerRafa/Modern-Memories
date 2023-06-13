@@ -65,18 +65,18 @@ func get_duel_rank():
 	
 	#For fusion count, the more the better
 	if duel_fusion_count <= 2: final_duel_score += 1
-	elif duel_fusion_count <= 5: final_duel_score += 2
-	elif duel_fusion_count <= 12: final_duel_score += 3
+	elif duel_fusion_count <= 4: final_duel_score += 2
+	elif duel_fusion_count <= 10: final_duel_score += 3
 	else: final_duel_score += 4
 	
 	#For effect count, the more the better
-	if duel_effect_count <= 7: final_duel_score += 1
+	if duel_effect_count <= 6: final_duel_score += 1
 	elif duel_effect_count <= 14: final_duel_score += 2
 	else: final_duel_score += 3
 	
 	#For spelltrap count, the more the better
 	if duel_spelltrap_count <= 3: final_duel_score += 1
-	elif duel_spelltrap_count <= 8: final_duel_score += 2
+	elif duel_spelltrap_count <= 6: final_duel_score += 2
 	else: final_duel_score += 3
 	
 	#Extra points
@@ -84,7 +84,7 @@ func get_duel_rank():
 	elif final_duel_score <= 5: final_duel_score += 1
 	
 	if final_player_LP > 8000: final_duel_score += 2
-	elif final_player_LP > 4000: final_duel_score += 1
+	elif final_player_LP > 6000: final_duel_score += 1
 	
 	if final_field_atk > 9000: final_duel_score += 2
 	if final_field_atk > 5000: final_duel_score += 1
@@ -178,13 +178,43 @@ func get_card_rewards():
 # PLAYER INTERACTION HANDLING
 ####################################################################################################
 func _on_screen_button_button_up():
-	if !$BIG_LETTERS/tween.is_active():
-		show_duel_info()
 	
+	if !$BIG_LETTERS/tween.is_active():
+		if duel_winner == "player":
+			show_duel_info()
+		else:
+			#Only one click
+			if not $BIG_LETTERS.is_visible():
+				return
+			
+			#Hide everything, otherwise scene transition doesn't work ????
+			$user_interface.hide()
+			$cards_reward.hide()
+			$duel_info.hide()
+			$rank_info.hide()
+			$starchip_reward.hide()
+			
+			var tweener = $BIG_LETTERS/tween
+			var text_timer : float = 1
+			tweener.interpolate_property($BIG_LETTERS, "modulate", Color(1,1,1, 1), Color(1,1,1, 0), text_timer/2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+			tweener.start()
+			yield(tweener, "tween_completed")
+			$BIG_LETTERS.hide()
+			
+			$scene_transitioner.scene_transition("main_menu")
+
 var phase_of_reveal = 0
 func show_duel_info():
 	match phase_of_reveal:
 		0:
+			#Hide the YOU WIN text
+			var tweener = $BIG_LETTERS/tween
+			var text_timer : float = 1
+			tweener.interpolate_property($BIG_LETTERS, "modulate", Color(1,1,1, 1), Color(1,1,1, 0), text_timer/2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+			tweener.start()
+			yield(tweener, "tween_completed")
+			$BIG_LETTERS.hide()
+			
 			#Do the counting animation for each category kept track
 			tween_card_count($duel_info/deck_used, duel_deck_count, $tweens/tween_1)
 			tween_card_count($duel_info/fusion_used, duel_fusion_count, $tweens/tween_2)
@@ -295,6 +325,8 @@ func show_big_letters():
 		$BIG_LETTERS/win_lose.text = "LOSE"
 		$BIG_LETTERS/win_lose.add_color_override("font_color","0000ff") #BLUE
 	
+	$BIG_LETTERS.show()
+	
 	#Do the animation of the words comming in on the screen
 	var tweener = $BIG_LETTERS/tween
 	var x_position_offset : int = 1280
@@ -307,8 +339,8 @@ func show_big_letters():
 	
 	$BIG_LETTERS/timer.start(text_timer/2); yield($BIG_LETTERS/timer, "timeout")
 	
-	tweener.interpolate_property($BIG_LETTERS, "modulate", Color(1,1,1, 1), Color(1,1,1, 0), text_timer/2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	tweener.start()
-	yield(tweener, "tween_completed")
+	#tweener.interpolate_property($BIG_LETTERS, "modulate", Color(1,1,1, 1), Color(1,1,1, 0), text_timer/2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	#tweener.start()
+	#yield(tweener, "tween_completed")
 	
-	show_duel_info()
+	#show_duel_info()

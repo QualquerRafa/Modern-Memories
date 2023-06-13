@@ -15,7 +15,10 @@ signal battle_finished
 func effect_activation(card_node : Node, type_of_activation : String):
 	#pass this exactly as is to the effects script
 	var effect_return = $effects.call_effect(card_node, type_of_activation)
-
+	
+	#Check for game End after effect activation (for stuff that burn damage and so)
+	check_for_game_end()
+	
 	return effect_return 
 
 func check_for_trap_cards(attacking_card : Node):
@@ -354,25 +357,37 @@ func do_battle(attacking_card : Node, defending_card : Node):
 		
 		#Reduce LP as intended
 		if defender_stats > attacker_stats: #Reduce from player LP
+			if LP_damage >= int(get_node("../user_interface/top_info_box/player_info/lifepoints").get_text()):
+				check_for_game_end("player_lp_out")
 			change_lifepoints("player", LP_damage)
 		else: #Reduce from COM LP
+			if LP_damage >= int(get_node("../user_interface/top_info_box/com_info/lifepoints").get_text()):
+				check_for_game_end("com_lp_out")
 			change_lifepoints("enemy", LP_damage)
 			
 			#check for return_damage that Enemy will inflict on the player
 			if CardList.card_list[defending_card.this_card_id].effect.size() > 0 and CardList.card_list[defending_card.this_card_id].effect[1] == "return_damage":
 				$battle_visuals/battle_timer_node.start(0.9); yield($battle_visuals/battle_timer_node, "timeout")
+				if LP_damage >= int(get_node("../user_interface/top_info_box/player_info/lifepoints").get_text()):
+					check_for_game_end("player_lp_out")
 				change_lifepoints("player", LP_damage)
 			
 	else:
 		#Reduce LP as intended
 		if defender_stats > attacker_stats: #Reduce from player LP
+			if LP_damage >= int(get_node("../user_interface/top_info_box/com_info/lifepoints").get_text()):
+				check_for_game_end("com_lp_out")
 			change_lifepoints("enemy", LP_damage)
 		else: #Reduce from COM LP
+			if LP_damage >= int(get_node("../user_interface/top_info_box/player_info/lifepoints").get_text()):
+				check_for_game_end("player_lp_out")
 			change_lifepoints("player", LP_damage)
 			
 			#check for return_damage that player will inflict on the enemy
 			if CardList.card_list[defending_card.this_card_id].effect.size() > 0 and CardList.card_list[defending_card.this_card_id].effect[1] == "return_damage":
 				$battle_visuals/battle_timer_node.start(0.9); yield($battle_visuals/battle_timer_node, "timeout")
+				if LP_damage >= int(get_node("../user_interface/top_info_box/com_info/lifepoints").get_text()):
+					check_for_game_end("com_lp_out")
 				change_lifepoints("enemy", LP_damage)
 	
 	#Revert some temporary effects
@@ -421,7 +436,7 @@ func _on_direct_attack_area_button_up():
 			enemy_monsters_on_field += 1
 	
 	if enemy_monsters_on_field == 0 or CardList.card_list[card_ready_to_attack.this_card_id].effect.size() > 1 and CardList.card_list[card_ready_to_attack.this_card_id].effect[1] in ["can_direct", "toon"]:
-		if CardList.card_list[card_ready_to_attack.this_card_id].effect.size() > 0 and CardList.card_list[card_ready_to_attack.this_card_id].effect[1] == "toon":
+		if CardList.card_list[card_ready_to_attack.this_card_id].effect.size() > 1 and CardList.card_list[card_ready_to_attack.this_card_id].effect[1] == "toon":
 			effect_activation(card_ready_to_attack, "on_attack")
 		do_direct_attack(card_ready_to_attack)
 	else:
@@ -546,15 +561,30 @@ func do_direct_attack(attacking_card):
 	
 	#Finish Battle phase in different ways depending on whose turn it is
 	if attacking_card.get_parent().get_name().find("player") != -1: #it's players turn
+		if LP_damage >= int(get_node("../user_interface/top_info_box/com_info/lifepoints").get_text()):
+			check_for_game_end("com_lp_out")
+		change_lifepoints("enemy", LP_damage)
+		
 		print("Back to Player's Main Phase")
 		attacking_card.cancel_all_combat_controls() #hide the combat controls for the card that already attacked
 		get_node("../").change_field_view() #return back to the other side of the field
 		GAME_PHASE = "main_phase"
-		change_lifepoints("enemy", LP_damage)
 	else:
+		if LP_damage >= int(get_node("../user_interface/top_info_box/player_info/lifepoints").get_text()):
+			check_for_game_end("player_lp_out")
+		change_lifepoints("player", LP_damage)
+		
 		print("Back to Enemy's Main Phase")
 		GAME_PHASE = "enemy_main_phase"
-		change_lifepoints("player", LP_damage)
+	
+	#Revert some temporary effects
+	if attacking_card.is_visible() and CardList.card_list[attacking_card.this_card_id].effect.size() > 0 and CardList.card_list[attacking_card.this_card_id].effect[1] in ["injection_fairy"]:
+		match CardList.card_list[attacking_card.this_card_id].effect[1]:
+			#Remove the 3000 ATK boost from Injection Fairy Lily
+			"injection_fairy":
+				if attacking_card.this_card_flags.atk_up >= 3000:
+					 attacking_card.this_card_flags.atk_up -= 3000
+					 attacking_card.update_card_information(attacking_card.this_card_id)
 	
 	#Emit signal at the end of battle
 	emit_signal("battle_finished")
@@ -594,16 +624,16 @@ func check_for_game_end(optional_passed_condition : String = "nothing"):
 	var game_loser : String = "" #COM or Player
 	
 	#Basic loss by LifePoints reaching 0
-	if $enemy_logic.enemy_LP == 0:
+	if int(self.get_parent().get_node("user_interface/top_info_box/com_info/lifepoints").get_text()) == 0 or optional_passed_condition == "com_lp_out":
 		game_loser = "COM"
-	elif $player_logic.player_LP == 0:
+	elif int(self.get_parent().get_node("user_interface/top_info_box/player_info/lifepoints").get_text()) == 0 or optional_passed_condition == "player_lp_out":
 		game_loser = "player"
 	
 	#Loss by decking out
 	if optional_passed_condition == "deck_out":
-		if $enemy_logic.enemy_deck.size() == 0:
+		if int(self.get_parent().get_node("user_interface/top_info_box/com_info/deck").get_text()) == 0:
 			game_loser = "COM"
-		elif $player_logic.player_deck.size() == 0:
+		elif int(self.get_parent().get_node("user_interface/top_info_box/player_info/deck").get_text()) == 0:
 			game_loser = "player"
 	
 	#DEBUG menu testing stuff
@@ -614,50 +644,50 @@ func check_for_game_end(optional_passed_condition : String = "nothing"):
 	var reward_scene
 	if game_loser != "":
 		reward_scene = preload("res://_scenes/reward_scene.tscn").instance()
-	
-	match game_loser:
-		"COM": #COM lost, go to the rewards screen
-			#Pass ahead the important information for Rewards calculations
-			reward_scene.duel_winner = "player"
-			reward_scene.duel_deck_count = $player_logic.player_deck.size()
-			reward_scene.duel_fusion_count = $player_logic.fusion_count
-			reward_scene.duel_effect_count = $player_logic.effect_count
-			reward_scene.duel_spelltrap_count = $player_logic.spelltrap_count
-			reward_scene.defeated_duelist = PlayerData.going_to_duel
+		
+		match game_loser:
+			"COM": #COM lost, go to the rewards screen
+				#Pass ahead the important information for Rewards calculations
+				reward_scene.duel_winner = "player"
+				reward_scene.duel_deck_count = $player_logic.player_deck.size()
+				reward_scene.duel_fusion_count = $player_logic.fusion_count
+				reward_scene.duel_effect_count = $player_logic.effect_count
+				reward_scene.duel_spelltrap_count = $player_logic.spelltrap_count
+				reward_scene.defeated_duelist = PlayerData.going_to_duel
+				
+				reward_scene.final_turn_count = int(self.get_parent().get_node("user_interface/top_info_box/field_info/turn").get_text().split(" ")[1])
+				reward_scene.final_player_LP = int(self.get_parent().get_node("user_interface/top_info_box/player_info/lifepoints").get_text())
+				for i in range(5):
+					var checking_node = self.get_parent().get_node("duel_field/player_side_zones/monster_" + String(i))
+					if checking_node.is_visible():
+						reward_scene.final_field_atk += int(checking_node.get_node("card_design/monster_features/atk_def/atk").get_text())
 			
-			reward_scene.final_turn_count = int(self.get_parent().get_node("user_interface/top_info_box/field_info/turn").get_text().split(" ")[1])
-			reward_scene.final_player_LP = int(self.get_parent().get_node("user_interface/top_info_box/player_info/lifepoints").get_text())
-			for i in range(5):
-				var checking_node = self.get_parent().get_node("duel_field/player_side_zones/monster_" + String(i))
-				if checking_node.is_visible():
-					reward_scene.final_field_atk += int(checking_node.get_node("card_design/monster_features/atk_def/atk").get_text())
+			"player": #Player lost, go to game over screen
+				reward_scene.duel_winner = "COM"
+			
+			_: #no one lost yet, do nothing
+				return
 		
-		"player": #Player lost, go to game over screen
-			reward_scene.duel_winner = "COM"
+		#Go to the reward scene
+		var scene_transitioner = get_node("../scene_transitioner")
+		#get_node("../scene_transitioner").scene_transition(reward_scene)
 		
-		_: #no one lost yet, do nothing
-			return
-	
-	#Go to the reward scene
-	var scene_transitioner = get_node("../scene_transitioner")
-	#get_node("../scene_transitioner").scene_transition(reward_scene)
-	
-	scene_transitioner.show()
-	scene_transitioner.get_node("loading_indicator").show()
-	
-	scene_transitioner.get_node("transitioner_tween").interpolate_property(scene_transitioner.get_node("darker_screen"), "modulate", Color(0,0,0, 0.1), Color(0,0,0, 1), 0.8/1.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	scene_transitioner.get_node("transitioner_tween").start()
-	yield(scene_transitioner.get_node("transitioner_tween"), "tween_completed")
-	scene_transitioner.hide()
-	
-	#var _scene_change = get_tree().change_scene("res://_scenes/" + scene + ".tscn")
-	get_tree().get_root().add_child(reward_scene)
-	
-	#Important stuff to get removed after the duel ended
-	PlayerData.going_to_duel = ""
-	get_tree().get_root().get_node("duel_scene").queue_free()
-	
-	return "endscreen"
+		scene_transitioner.show()
+		scene_transitioner.get_node("loading_indicator").show()
+		
+		scene_transitioner.get_node("transitioner_tween").interpolate_property(scene_transitioner.get_node("darker_screen"), "modulate", Color(0,0,0, 0.1), Color(0,0,0, 1), 0.8/1.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+		scene_transitioner.get_node("transitioner_tween").start()
+		yield(scene_transitioner.get_node("transitioner_tween"), "tween_completed")
+		scene_transitioner.hide()
+		
+		#var _scene_change = get_tree().change_scene("res://_scenes/" + scene + ".tscn")
+		get_tree().get_root().add_child(reward_scene)
+		
+		#Important stuff to get removed after the duel ended
+		PlayerData.going_to_duel = ""
+		get_tree().get_root().get_node("duel_scene").queue_free()
+		
+		return "endscreen"
 
 
 

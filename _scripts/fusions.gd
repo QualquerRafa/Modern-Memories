@@ -94,7 +94,8 @@ func equip_fusion(card_1 : String, card_2 : String):
 		equip_result = [monster_card_id, [CardList.card_list[equip_card_id].effect[0], CardList.card_list[equip_card_id].effect[1]] ]
 	else:
 		print("fusions.gd failed to equip: restriction = ", equip_restriction)
-		equip_result = [monster_card_id, ["stats_up", 0, "equipment failed"]] #if equip fail, add 0 to stats. Failsafe.
+		var special_check_is_ritual = equip_card_id == "00991"
+		equip_result = [monster_card_id, ["stats_up", 0, "equipment failed"], special_check_is_ritual] #if equip fail, add 0 to stats. Failsafe.
 	
 	return equip_result #[monster_card_id, [status, value_change]]
 

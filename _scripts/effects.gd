@@ -367,6 +367,10 @@ func equip_from_field_to_target(target_card_node : Node):
 				target_card_node.this_card_flags.atk_up += equip_result[1][1]
 				target_card_node.this_card_flags.def_up += equip_result[1][1]
 		
+		#Special check for Equiping Ritual Weapon, since it can only be used on a Ritual Monster and those will only be Ritual Summoned (blue border) on the field
+		if equip_result.size() > 2 and equip_result[2] == true and target_card_node.this_card_flags.fusion_type == "ritual":
+			target_card_node.this_card_flags.atk_up += CardList.card_list["00991"].effect[1]
+		
 		#Final update on the card to visually reflect the status up
 		target_card_node.update_card_information(target_card_node.this_card_id)
 		GAME_LOGIC.get_parent().update_user_interface(target_card_node)
@@ -575,6 +579,7 @@ func activate_spell_ritual(card_node : Node):
 	
 	var level_reached : int = CardList.card_list[sacrificial_monster.this_card_id].level
 	var level_reached_extended : Array = [] #level_reached, [other, monsters, in, case, used]
+	
 	if level_reached < ritual_level_goal:
 		#look for more monsters until goal is reached
 		level_reached_extended = pick_more_for_ritual(monsters_sorted_by_level, level_reached, ritual_level_goal)
@@ -593,6 +598,14 @@ func activate_spell_ritual(card_node : Node):
 		sacrificial_monster.this_card_flags.fusion_type = "ritual"
 		sacrificial_monster.update_card_information(sacrificial_monster.this_card_id)
 		sacrificial_monster.show()
+		
+		#Call for monster effects and field bonus
+		var field_name = GAME_LOGIC.get_parent().get_node("user_interface/top_info_box/field_info/field_name").text.split(" ", true)[0].to_lower()
+		field_bonus(field_name)
+		
+		if CardList.card_list[ritual_result_monster_id].effect.size() > 0:
+			GAME_LOGIC.effect_activation(sacrificial_monster, "on_summon")
+			#yield(get_node("../effects"), "effect_fully_executed")
 		
 		return ritual_result_monster_id
 		
@@ -706,7 +719,7 @@ func monster_on_summon(card_node : Node):
 			var target_side_of_field = GAME_LOGIC.get_parent().get_node("duel_field/" + caller_and_target[0] + "_side_zones")
 			for i in range(5):
 				var monster_target = target_side_of_field.get_node("monster_" + String(i))
-				if monster_target.is_visible() and monster_target.this_card_flags.is_facedown == false and CardList.card_list[monster_target.this_card_id].type == friendly_type and monster_target != card_node:
+				if monster_target.is_visible() and monster_target.this_card_flags.is_facedown == false and CardList.card_list[monster_target.this_card_id].type == friendly_type:
 					monster_target.this_card_flags.atk_up += boost_value
 					monster_target.this_card_flags.def_up += boost_value
 					monster_target.update_card_information(monster_target.this_card_id)
@@ -757,7 +770,7 @@ func monster_on_summon(card_node : Node):
 					var target_side_of_field = GAME_LOGIC.get_parent().get_node("duel_field/" + caller_and_target[0] + "_side_zones")
 					for i in range(5):
 						var monster_target = target_side_of_field.get_node("monster_" + String(i))
-						if monster_target.is_visible() and monster_target.this_card_flags.is_facedown == false and CardList.card_list[monster_target.this_card_id].type == CardList.card_list[card_id].type:
+						if monster_target.is_visible() and monster_target.this_card_flags.is_facedown == false and CardList.card_list[monster_target.this_card_id].type == CardList.card_list[card_id].type and monster_target != card_node:
 							count_type_on_field += 1
 					
 					boost_value = CardList.card_list[card_id].effect[2] * count_type_on_field
@@ -777,7 +790,7 @@ func monster_on_summon(card_node : Node):
 			var target_side_of_field = GAME_LOGIC.get_parent().get_node("duel_field/" + caller_and_target[0] + "_side_zones")
 			for i in range(5):
 				var monster_target = target_side_of_field.get_node("monster_" + String(i))
-				if monster_target.is_visible() and monster_target.this_card_flags.is_facedown == false and CardList.card_list[monster_target.this_card_id].count_as == count_as_type:
+				if monster_target.is_visible() and monster_target.this_card_flags.is_facedown == false and CardList.card_list[monster_target.this_card_id].count_as == count_as_type and monster_target != card_node:
 					count_as_on_field += 1
 			
 			boost_value = CardList.card_list[card_id].effect[2] * count_as_on_field
@@ -793,7 +806,7 @@ func monster_on_summon(card_node : Node):
 			var target_side_of_field = GAME_LOGIC.get_parent().get_node("duel_field/" + caller_and_target[0] + "_side_zones")
 			for i in range(5):
 				var monster_target = target_side_of_field.get_node("monster_" + String(i))
-				if monster_target.is_visible():
+				if monster_target.is_visible() and monster_target != card_node:
 					monsters_on_field += 1
 			
 			var boost_value = CardList.card_list[card_id].effect[2] * monsters_on_field

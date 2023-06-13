@@ -108,6 +108,97 @@ func update_left_panel(player_trunk_as_array):
 			$panel_left/ScrollContainer/MarginContainer/GridContainer.get_child(i).modulate = Color(1,1,1,1)
 
 #---------------------------------------------------------------------------------------------------
+# DECK BUTTONS
+#---------------------------------------------------------------------------------------------------
+func _on_clear_deck_button_up():
+	PlayerData.player_deck.clear()
+	update_right_panel()
+	var resorted_trunk = $panel_left/sortables.sort_cards(PlayerData.player_trunk.keys(), "new")
+	update_left_panel(resorted_trunk)
+
+func _on_export_deck_button_up():
+	export_player_deck()
+func export_player_deck():
+	#Generate the deck string
+	var deck_string : String = ""
+	var player_deck : Array = PlayerData.player_deck
+	
+	var temp_deck_as_dictionary = {}
+	for card in player_deck:
+		if card in temp_deck_as_dictionary:
+			temp_deck_as_dictionary[card] += 1 #register another copy of the card to the already existing id key
+		else: 
+			temp_deck_as_dictionary[card] = 1 #card is not in trunk, so add it's key:value pair as id:count
+	
+	for card in temp_deck_as_dictionary.keys():
+		deck_string += card + String(temp_deck_as_dictionary[card])
+	$import_export_canvas/export_window/exported_string.text = deck_string
+	
+	#Show everything
+	$import_export_canvas.show()
+	$import_export_canvas/export_window.show()
+	$import_export_canvas/import_window.hide()
+func _on_export_close_button_up():
+	$import_export_canvas.hide()
+
+#For importing the logic is a bit different
+func _on_import_deck_button_up():
+	#Show everything
+	$import_export_canvas.show()
+	$import_export_canvas/export_window.hide()
+	$import_export_canvas/import_window.show()
+func _on_import_string_input_text_changed(entered_string):
+	$import_export_canvas/import_window/import_string_visual.text = entered_string
+func _on_import_close_button_up():
+	#do the checks on the entered string to generate a deck from it
+	var entered_string = $import_export_canvas/import_window/import_string_visual.text
+	
+	#If there is no string inputed, just close the window without doing anything
+	if entered_string.length() < 1:
+		$import_export_canvas.hide()
+		return
+	
+	#If there is any character that isn't a number, fail to close the window
+	if not entered_string.is_valid_integer():
+		print("has something else than numbers")
+		return
+	
+	#Splice the entered string into 6 digit packets, since card ID is 5 digits and the 6th is the amount of copies
+	var entered_string_splices : Array = []
+	var multiples_of_six = entered_string.length()/6
+	for _i in range(multiples_of_six):
+		var six_digits = entered_string.left(6)
+		entered_string_splices.append(six_digits)
+		entered_string = entered_string.trim_prefix(six_digits)
+	
+	#Transform the Array with spliced strings into a deck for the player
+	var deck_to_be_generated : Array = []
+	for card_code in entered_string_splices:
+		var card_id = card_code.left(5)
+		var copies = card_code.trim_prefix(card_id)
+		#print("FULL: ", card_code, " ID: ", card_id, " COPIES: ", copies)
+		
+		#If the player has that card in their trunk, add to the new deck
+		if PlayerData.player_trunk.keys().has(card_id):
+			var player_number_of_copies = PlayerData.player_trunk[card_id]
+			for _i in range(player_number_of_copies):
+				if deck_to_be_generated.count(card_id) < int(copies):
+					deck_to_be_generated.append(card_id)
+	
+	#print("Player Deck: ", PlayerData.player_deck)
+	#print("Imported Deck: ", deck_to_be_generated)
+	
+	#Update the actual player Deck and screen visuals
+	PlayerData.player_deck = deck_to_be_generated
+	update_right_panel()
+	var resorted_trunk = $panel_left/sortables.sort_cards(PlayerData.player_trunk.keys(), "new")
+	update_left_panel(resorted_trunk)
+	
+	#Finally hide the window
+	$import_export_canvas/import_window/import_string_input.clear()
+	$import_export_canvas.hide()
+
+#---------------------------------------------------------------------------------------------------
 func _on_back_button_button_up():
 	#If button isn't enabled, don't change scene
 	if $user_interface/back_button.modulate != Color(1, 1, 1, 1):
@@ -127,3 +218,14 @@ func _on_back_button_button_up():
 		$scene_transitioner.scene_transition("main_menu")
 	else:
 		$scene_transitioner.scene_transition("free_duel")
+
+
+
+
+
+
+
+
+
+
+
