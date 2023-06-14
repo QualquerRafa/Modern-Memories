@@ -8380,6 +8380,38 @@ text = "Export"
 align = 1
 valign = 1
 
+[node name="button_go_duel" type="Control" parent="panel_right/deck_buttons"]
+visible = false
+margin_left = 506.0
+margin_right = 626.0
+margin_bottom = 90.0
+rect_min_size = Vector2( 120, 0 )
+
+[node name="go_duel" type="Button" parent="panel_right/deck_buttons/button_go_duel"]
+margin_left = 4.0
+margin_right = 117.0
+margin_bottom = 84.0
+rect_scale = Vector2( 1.1, 1 )
+rect_pivot_offset = Vector2( 56, 25 )
+focus_mode = 0
+enabled_focus_mode = 0
+icon = ExtResource( 15 )
+flat = true
+
+[node name="label" type="Label" parent="panel_right/deck_buttons/button_go_duel"]
+margin_left = 10.0
+margin_top = 17.0
+margin_right = 111.0
+margin_bottom = 61.0
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+custom_fonts/font = SubResource( 4 )
+text = "Duel"
+align = 1
+valign = 1
+
 [node name="user_interface" type="Node2D" parent="."]
 
 [node name="card_info_box" parent="user_interface" instance=ExtResource( 1 )]
@@ -8612,6 +8644,7 @@ valign = 1
 [connection signal="button_up" from="panel_right/deck_buttons/button_clear/clear_deck" to="." method="_on_clear_deck_button_up"]
 [connection signal="button_up" from="panel_right/deck_buttons/button_import/import_deck" to="." method="_on_import_deck_button_up"]
 [connection signal="button_up" from="panel_right/deck_buttons/button_export/export_deck" to="." method="_on_export_deck_button_up"]
+[connection signal="button_up" from="panel_right/deck_buttons/button_go_duel/go_duel" to="." method="_on_go_duel_button_up"]
 [connection signal="button_up" from="user_interface/back_button" to="." method="_on_back_button_button_up"]
 [connection signal="button_up" from="DebugAddAll" to="DebugAddAll" method="_on_DebugAddAll_button_up"]
 [connection signal="button_up" from="import_export_canvas/export_window/button_close/export_close" to="." method="_on_export_close_button_up"]
