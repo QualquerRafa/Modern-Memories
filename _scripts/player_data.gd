@@ -17,7 +17,13 @@ var game_volume : int = 100
 
 #Game variables that aren't persistent
 var last_reward_cards : Array = [] #populated by ID:String
+var scene_to_return_after_duel : String = ""
 var going_to_duel : String = "" #populated by a Duelist Name from 'npc_decks.gd'
+var last_duel_result : String = "" #win or lose passed by the reward_scene
+
+var tournament_last_progression_saved : String = ""
+var tournament_competitors_saved = {"green" : [], "blue" : [], "purple" : [], "red" : [], "gold" : []}
+var tournament_last_duelist_saved : String = ""
 
 #---------------------------------------------------------------------------------------------------
 func create_player_deck():

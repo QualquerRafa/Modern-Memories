@@ -276,10 +276,16 @@ func show_duel_info():
 				elif get_viewport().get_mouse_position().x >= 904 and get_viewport().get_mouse_position().x <= 1234:
 					$user_interface/card_info_box.update_user_interface($cards_reward/HBoxContainer/reward_3)
 				else:
-					$scene_transitioner.scene_transition("main_menu")
+					if PlayerData.scene_to_return_after_duel != "":
+						$scene_transitioner.scene_transition(PlayerData.scene_to_return_after_duel)
+					else:
+						$scene_transitioner.scene_transition("main_menu")
 			
 			else:
-				$scene_transitioner.scene_transition("main_menu")
+				if PlayerData.scene_to_return_after_duel != "":
+					$scene_transitioner.scene_transition(PlayerData.scene_to_return_after_duel)
+				else:
+					$scene_transitioner.scene_transition("main_menu")
 
 ####################################################################################################
 # AUXILIARY FUNCTIONS
@@ -317,10 +323,12 @@ func register_player_rewards(starchips : int, array_of_3 : Array):
 
 func show_big_letters():
 	if duel_winner == "player":
+		PlayerData.last_duel_result = "win"
 		$BIG_LETTERS/YOU.add_color_override("font_color","ff0000") #RED
 		$BIG_LETTERS/win_lose.text = "WIN"
 		$BIG_LETTERS/win_lose.add_color_override("font_color","ff0000") #RED
 	else:
+		PlayerData.last_duel_result = "lose"
 		$BIG_LETTERS/YOU.add_color_override("font_color","0000ff") #BLUE
 		$BIG_LETTERS/win_lose.text = "LOSE"
 		$BIG_LETTERS/win_lose.add_color_override("font_color","0000ff") #BLUE

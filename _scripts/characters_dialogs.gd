@@ -75,7 +75,7 @@ func empty_dialog_box():
 #-------------------------------------------------------------------------------
 var dialogs = {
 	"generic" : {
-		"pre_duel" : "Let's duel!",
+		"pre_duel" : "It's nice to meet you. Now let's Duel!",
 		"duel_defeated" : "Oh, I lost...",
 		"duel_victorious" : "Wow! I won!",
 	},
