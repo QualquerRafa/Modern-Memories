@@ -86,7 +86,7 @@ func _on_go_duel_button_up():
 	$user_interface/UI_tween.start()
 	
 	PlayerData.going_to_duel = active_duelist_name
-	$scene_transitioner.scene_transition("duel_scene")
+	$scene_transitioner.scene_transition("deck_building")
 
 #---------------------------------------------------------------------------------------------------
 func _on_back_button_button_up():

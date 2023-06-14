@@ -14,6 +14,10 @@ func _ready():
 	$user_interface/card_info_box/extra_icons.hide()
 	$user_interface/card_info_box/card_text.hide()
 	
+	#If the player is about to start a duel, show only the correct buttons for it
+	if PlayerData.going_to_duel != "":
+		about_to_duel_correct_buttons()
+	
 	#Do the first sort of cards for the trunk byNEW
 	var first_sorted_left = $panel_left/sortables.sort_cards(PlayerData.player_trunk.keys(), "new")
 	
@@ -57,8 +61,10 @@ func update_right_panel():
 	#Unable the button to leave the Deck Building screen if the Deck doesn't have 40 cards
 	if PlayerData.player_deck.size() < 40:
 		$user_interface/back_button.modulate = Color(0.5, 0.5, 0.5, 0.9)
+		$panel_right/deck_buttons/button_go_duel.modulate = Color(0.5, 0.5, 0.5, 0.9)
 	else:
 		$user_interface/back_button.modulate = Color(1, 1, 1, 1)
+		$panel_right/deck_buttons/button_go_duel.modulate = Color(1, 1, 1, 1)
 	
 	#Hide the nodes that don't correspond to a card in deck
 	for i in range(40 - (40 - PlayerData.player_deck.size()), 40):
@@ -110,6 +116,25 @@ func update_left_panel(player_trunk_as_array):
 #---------------------------------------------------------------------------------------------------
 # DECK BUTTONS
 #---------------------------------------------------------------------------------------------------
+func about_to_duel_correct_buttons():
+	#Un-nable the go_back button
+	$user_interface/back_button.hide()
+	
+	#Show the go_duel button
+	$panel_right/deck_buttons/button_go_duel.show()
+	
+	#Hide the other deck buttons
+	$panel_right/deck_buttons/button_auto.hide()
+	$panel_right/deck_buttons/button_clear.hide()
+	$panel_right/deck_buttons/button_import.hide()
+	$panel_right/deck_buttons/button_export.hide()
+
+#Only visible if the player is about to enter a duel
+func _on_go_duel_button_up():
+	#Check if the player deck has 40 cards
+	if PlayerData.player_deck.size() == 40:
+		$scene_transitioner.scene_transition("duel_scene")
+
 func _on_clear_deck_button_up():
 	PlayerData.player_deck.clear()
 	update_right_panel()
@@ -218,14 +243,5 @@ func _on_back_button_button_up():
 		$scene_transitioner.scene_transition("main_menu")
 	else:
 		$scene_transitioner.scene_transition("free_duel")
-
-
-
-
-
-
-
-
-
 
 

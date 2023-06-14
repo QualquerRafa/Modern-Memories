@@ -157,6 +157,13 @@ func _on_dialogue_scene_dialogue_box_clicked():
 	tournament_flow()
 
 func tournament_flow():
+	#Catch when player loses a duel
+	if PlayerData.last_duel_result == "lose" and tournament_progression[-1] != "next_click_returns_to_main_screen":
+		var dialogue_to_show = $dialogue_scene.get_dialog("generic", "duel_victorious")
+		$dialogue_scene.update_screen_dialog(PlayerData.tournament_last_duelist_saved, dialogue_to_show[1])
+		tournament_progression.append("next_click_returns_to_main_screen")
+		return
+	
 	#First message
 	if tournament_progression.size() == 0:
 		var dialogue_to_show = $dialogue_scene.get_dialog("roland", "tournament_1")
@@ -196,7 +203,7 @@ func tournament_flow():
 			current_color = PlayerData.tournament_last_progression_saved.split("_")[1] #this saved string comes in the format of "tournament_blue_tier"
 	
 	#Special check for gold color
-	if current_color == "gold":
+	if current_color == "gold" and not tournament_progression.has("gold_tier"):
 		tournament_progression.append("gold_tier")
 	
 	#LOOP
@@ -204,7 +211,7 @@ func tournament_flow():
 		#Get the opponent's name and use it to show the correct picure, dialogue and start the duel
 		var opponent_name = get_opponent_name(current_color)
 		
-		#toggle_tournament_brackets_visibility()
+		toggle_tournament_brackets_visibility()
 		#yield(get_tree().create_timer(0.2), "timeout")
 		
 		var dialogue_to_show = $dialogue_scene.get_dialog("generic", "pre_duel")
@@ -221,7 +228,7 @@ func tournament_flow():
 		
 		#Go to the duel
 		PlayerData.scene_to_return_after_duel = "tournament_scene"
-		$scene_transitioner.scene_transition("duel_scene")
+		$scene_transitioner.scene_transition("deck_building")
 		
 	elif tournament_progression[-1] == current_color + "_tier_after_duel":
 		var last_opponent_name = PlayerData.tournament_last_duelist_saved
@@ -257,13 +264,68 @@ func tournament_flow():
 		tournament_progression.append("tournament_"+ next_color +"_tier")
 		PlayerData.tournament_last_progression_saved = "tournament_"+ next_color +"_tier"
 		
-		tournament_flow()
+		#Give the final reward of the Tournament
+		PlayerData.player_starchips += 50
+		
+		#tournament_flow()
 	
 	#Dealing with the Golden Tier separately since there is no tier above it
 	if tournament_progression[-1] == "gold_tier":
-		#Update all the duelist faces thingy
+		var dialogue_to_show = $dialogue_scene.get_dialog("roland", "tournament_hijack")
+		$dialogue_scene.update_screen_dialog("?????", dialogue_to_show[1], true)
+		tournament_progression.append("loser_rematch")
 		
-		print("champion!")
+	elif tournament_progression[-1] == "loser_rematch":
+		toggle_tournament_brackets_visibility()
+		PlayerData.tournament_competitors_saved.green.erase("player")
+		var duelist_to_rematch = PlayerData.tournament_competitors_saved.green[randi()%PlayerData.tournament_competitors_saved.green.size()]
+		
+		var dialogue_to_show = $dialogue_scene.get_dialog("generic", "tournament_rematch")
+		$dialogue_scene.update_screen_dialog(duelist_to_rematch, dialogue_to_show[1])
+		tournament_progression.append("rematch_duel")
+		
+	elif tournament_progression[-1] == "rematch_duel":
+		PlayerData.going_to_duel = $dialogue_scene/dialogue_box/character_name.get_text().to_lower()
+		
+		#Save stuff on PlayerData so it can be recovered once the duel is over
+		PlayerData.tournament_last_progression_saved = "tournament_rematch_end"
+		PlayerData.tournament_last_duelist_saved = $dialogue_scene/dialogue_box/character_name.get_text().to_lower()
+		
+		#Go to the duel
+		PlayerData.scene_to_return_after_duel = "tournament_scene"
+		$scene_transitioner.scene_transition("deck_building")
+		
+	elif tournament_progression[-1] == "tournament_rematch_end":
+		var last_opponent_name = PlayerData.tournament_last_duelist_saved
+		var duel_result_string : String = ""
+		
+		#Get the correct dialogue for the NPC based on if the player has won or lost their duel
+		if PlayerData.last_duel_result == "win":
+			duel_result_string = "duel_defeated"
+		else:
+			duel_result_string = "duel_victorious"
+		
+		var dialogue_to_show = $dialogue_scene.get_dialog("generic", duel_result_string)
+		$dialogue_scene.update_screen_dialog(last_opponent_name, dialogue_to_show[1])
+		tournament_progression.append("tournament_end")
+		
+	elif tournament_progression[-1] == "tournament_end":
+		var dialogue_to_show = $dialogue_scene.get_dialog("roland", "tournament_end")
+		$dialogue_scene.update_screen_dialog(dialogue_to_show[0], dialogue_to_show[1])
+		tournament_progression.append("next_click_returns_to_main_screen")
+		
+	elif tournament_progression[-1] == "next_click_returns_to_main_screen":
+		#Erase everything related to this Tournament duel
+		PlayerData.scene_to_return_after_duel = ""
+		PlayerData.going_to_duel = ""
+		PlayerData.last_duel_result = ""
+		
+		PlayerData.tournament_last_progression_saved = ""
+		PlayerData.tournament_competitors_saved = {"green" : [], "blue" : [], "purple" : [], "red" : [], "gold" : []}
+		PlayerData.tournament_last_duelist_saved = ""
+		
+		$scene_transitioner.scene_transition("main_menu")
+	
 
 
 

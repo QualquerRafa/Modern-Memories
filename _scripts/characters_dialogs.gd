@@ -40,7 +40,8 @@ func update_screen_dialog(to_show_character_name : String, to_show_dialog : Stri
 	#Animate the Character moving in if it's a differente character than the one currently being shown
 	var current_character_name_from_resource = $character_body.texture.resource_path.split("/")[-1].trim_suffix("0.png")
 	if current_character_name_from_resource != to_show_character_name:
-		$character_body.texture = load("res://_resources/character_bodys/" + to_show_character_name + "0.png")
+		if ResourceLoader.exists("res://_resources/character_bodys/" + to_show_character_name + "0.png"):
+			$character_body.texture = load("res://_resources/character_bodys/" + to_show_character_name + "0.png")
 		var animation_speed : float = 0.2
 		$character_body/body_tween.interpolate_property($character_body, "position:x", out_screen_x, on_screen_x, animation_speed, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 		$character_body/body_tween.start()
@@ -78,18 +79,22 @@ var dialogs = {
 		"pre_duel" : "It's nice to meet you. Now let's Duel!",
 		"duel_defeated" : "Oh, I lost...",
 		"duel_victorious" : "Wow! I won!",
+		"tournament_rematch" : "You're not leaving without dueling me first!",
 	},
 	
 	"roland" : {
-		"tournament_1" : "Welcome, Duelists! \nTo the Forbidden Memories Tournament!",
-		"tournament_2" : "Duelists from all around the world are gathered here to prove themselves in this version of the Duel Monsters cardgame.",
+		"tournament_1" : "Welcome, Duelists! To the Forbidden Memories Tournament! \nWhere duelists from all around the world are gathered for a chance to be the new Duel Monsters Champion!",
+		"tournament_2" : "Since every rule we knew from the old game has changed in this new format, everyone has equal chances of being the next King or Queen of Duels!",
 		"tournament_3" : "So let's start this already! All the participants will be randomly paired.\nGood Luck everyone!",
 		
-		"tournament_green_tier": "These are the first pairings. Now go and meet your opponent.",
+		"tournament_green_tier": "These are the first pairings, ladies and gentleman.\nCompetitors, go and meet your opponent because it's time to Duel.",
 		
-		"tournament_move_tier" : "Half the competitors were eliminated! Let's continue with our event!",
+		"tournament_move_tier" : "Half the competitors were eliminated! \nLet's advance to the next stage of our event!",
 		"tournament_final_tier" : "Now, for the Grand Finale! \nMay the best duelist win!",
-		"tournament_champion" : "{player_name} is the new Forbidden Memories Tournament Champion! \nIn addition to all the new cards you have earned, there is also {starchip_reward} starchips as your prize."
+		"tournament_champion" : "This is it, ladies and gentleman! We have the new Duel Monsters Champion here on the Forbidden Memories Tournament! \nBesides everything you have already won, here is your prize of 50 starchips to use in the Card Shop!",
+		
+		"tournament_hijack" : "Stop right there, New Champion!",
+		"tournament_end" : "What a fun duel to watch. But that was it ladies and gentleman!\nSee you in the next Forbidden Memories Tournament!"
 	},
 	
 	"shadi" : {

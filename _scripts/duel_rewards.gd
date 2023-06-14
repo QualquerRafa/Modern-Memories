@@ -201,7 +201,12 @@ func _on_screen_button_button_up():
 			yield(tweener, "tween_completed")
 			$BIG_LETTERS.hide()
 			
-			$scene_transitioner.scene_transition("main_menu")
+			match PlayerData.scene_to_return_after_duel:
+				"tournament_scene": #When losing in the tournament, we need to show the opponents Win message and there it will send the player to main_menu
+					$scene_transitioner.scene_transition("tournament_scene")
+					
+				_: #default return, should be changed to the Game Over screen I think
+					$scene_transitioner.scene_transition("main_menu")
 
 var phase_of_reveal = 0
 func show_duel_info():
