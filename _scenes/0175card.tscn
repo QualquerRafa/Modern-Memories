@@ -261,4 +261,6 @@ align = 2
 
 [node name="card_self_tween" type="Tween" parent="."]
 
+[node name="card_self_tween2" type="Tween" parent="."]
+
 [connection signal="button_up" from="." to="." method="_on_0175card_button_up"]

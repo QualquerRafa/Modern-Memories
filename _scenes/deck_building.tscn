@@ -8256,6 +8256,7 @@ margin_bottom = 588.0
 alignment = 1
 
 [node name="button_auto" type="Control" parent="panel_right/deck_buttons"]
+visible = false
 modulate = Color( 1, 1, 1, 0.0980392 )
 margin_left = 72.0
 margin_right = 192.0
@@ -8288,8 +8289,8 @@ align = 1
 valign = 1
 
 [node name="button_clear" type="Control" parent="panel_right/deck_buttons"]
-margin_left = 196.0
-margin_right = 316.0
+margin_left = 134.0
+margin_right = 254.0
 margin_bottom = 90.0
 rect_min_size = Vector2( 120, 0 )
 
@@ -8319,8 +8320,8 @@ align = 1
 valign = 1
 
 [node name="button_import" type="Control" parent="panel_right/deck_buttons"]
-margin_left = 320.0
-margin_right = 440.0
+margin_left = 258.0
+margin_right = 378.0
 margin_bottom = 90.0
 rect_min_size = Vector2( 120, 0 )
 
@@ -8350,8 +8351,8 @@ align = 1
 valign = 1
 
 [node name="button_export" type="Control" parent="panel_right/deck_buttons"]
-margin_left = 444.0
-margin_right = 564.0
+margin_left = 382.0
+margin_right = 502.0
 margin_bottom = 90.0
 rect_min_size = Vector2( 120, 0 )
 

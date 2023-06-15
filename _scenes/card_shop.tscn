@@ -269,4 +269,5 @@ flat = true
 visible = false
 
 [connection signal="text_changed" from="shop_panels/VBoxContainer/code/player_input" to="." method="_on_player_input_text_changed"]
+[connection signal="button_up" from="shop_panels/VBoxContainer/price/buy_card" to="." method="_on_buy_card_button_up"]
 [connection signal="button_up" from="user_interface/back_button" to="." method="_on_back_button_button_up"]
