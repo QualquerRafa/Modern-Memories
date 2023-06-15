@@ -7101,7 +7101,7 @@ const card_list = {
 	"count_as": null,
 	"effect": [
 	  "ritual",
-	  579
+	  580
 	],
 	"passcode": "80811661"
   },

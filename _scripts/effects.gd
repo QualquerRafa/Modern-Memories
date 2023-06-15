@@ -590,8 +590,9 @@ func activate_spell_ritual(card_node : Node):
 		#Remove from the field the obligatory sacrificial monsters
 		GAME_LOGIC.destroy_a_card(sacrificial_monster)
 		#Remove from the field any other monsters that were sacrificed with it
-		for i in range(level_reached_extended[1].size()):
-			GAME_LOGIC.destroy_a_card(level_reached_extended[1][i])
+		if level_reached_extended.size() > 0:
+			for i in range(level_reached_extended[1].size()):
+				GAME_LOGIC.destroy_a_card(level_reached_extended[1][i])
 		
 		#Summon the resulting monster on the field
 		sacrificial_monster.this_card_id = ritual_result_monster_id
@@ -599,7 +600,7 @@ func activate_spell_ritual(card_node : Node):
 		sacrificial_monster.update_card_information(sacrificial_monster.this_card_id)
 		sacrificial_monster.show()
 		
-		#Call for monster effects and field bonus
+		#Call for monster field bonus and effects
 		var field_name = GAME_LOGIC.get_parent().get_node("user_interface/top_info_box/field_info/field_name").text.split(" ", true)[0].to_lower()
 		field_bonus(field_name)
 		
@@ -719,7 +720,7 @@ func monster_on_summon(card_node : Node):
 			var target_side_of_field = GAME_LOGIC.get_parent().get_node("duel_field/" + caller_and_target[0] + "_side_zones")
 			for i in range(5):
 				var monster_target = target_side_of_field.get_node("monster_" + String(i))
-				if monster_target.is_visible() and monster_target.this_card_flags.is_facedown == false and CardList.card_list[monster_target.this_card_id].type == friendly_type:
+				if monster_target.is_visible() and monster_target.this_card_flags.is_facedown == false and CardList.card_list[monster_target.this_card_id].type == friendly_type and monster_target != card_node:
 					monster_target.this_card_flags.atk_up += boost_value
 					monster_target.this_card_flags.def_up += boost_value
 					monster_target.update_card_information(monster_target.this_card_id)

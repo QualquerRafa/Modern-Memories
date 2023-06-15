@@ -67,6 +67,8 @@ func reset_a_card_node_properties(card_node_to_reset):
 	"def_up" : 0,
 	"has_activated_effect" : false,
 	}
+	
+	card_node_to_reset.get_node("darken_card").hide()
 
 func destroy_a_card(card_node_to_destroy):
 	#first reset the nodes properties so it's wiped clean
@@ -115,6 +117,7 @@ func do_battle(attacking_card : Node, defending_card : Node):
 	
 	#Attacker flags
 	attacking_card.this_card_flags.has_battled = true
+	attacking_card.get_node("darken_card").show()
 	attacking_card.this_card_flags.is_facedown = false
 	attacking_card.update_card_information(attacking_card.this_card_id)
 	
@@ -174,6 +177,7 @@ func do_battle(attacking_card : Node, defending_card : Node):
 		
 		#Set the attacker flags
 		attacking_card.this_card_flags.has_battled = true
+		attacking_card.get_node("darken_card").show()
 		attacking_card.this_card_flags.is_facedown = false
 		attacking_card.update_card_information(attacking_card.this_card_id)
 		
@@ -468,6 +472,7 @@ func do_direct_attack(attacking_card):
 	
 	#Set the attacker flags
 	attacking_card.this_card_flags.has_battled = true
+	attacking_card.get_node("darken_card").show()
 	attacking_card.this_card_flags.is_facedown = false
 	attacking_card.update_card_information(attacking_card.this_card_id)
 	
@@ -490,6 +495,7 @@ func do_direct_attack(attacking_card):
 		
 		#Set the attacker flags
 		attacking_card.this_card_flags.has_battled = true
+		attacking_card.get_node("darken_card").show()
 		attacking_card.this_card_flags.is_facedown = false
 		attacking_card.update_card_information(attacking_card.this_card_id)
 		
@@ -631,9 +637,9 @@ func check_for_game_end(optional_passed_condition : String = "nothing"):
 	
 	#Loss by decking out
 	if optional_passed_condition == "deck_out":
-		if int(self.get_parent().get_node("user_interface/top_info_box/com_info/deck").get_text()) == 0:
+		if $enemy_logic.enemy_deck.size() <= 0:
 			game_loser = "COM"
-		elif int(self.get_parent().get_node("user_interface/top_info_box/player_info/deck").get_text()) == 0:
+		elif $player_logic.player_deck.size() <= 0:
 			game_loser = "player"
 	
 	#DEBUG menu testing stuff

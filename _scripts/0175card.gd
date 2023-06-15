@@ -113,9 +113,27 @@ func _on_0175card_button_up():
 		reset_highlighted_card()
 		deck_building_root.update_left_panel(newly_sorted_trunk)
 		deck_building_root.update_right_panel()
+		
+	
+	#move the trunk_counter indicator
+	var onBig_trunk_counter_position = Vector2(4, 64)
+	var original_counter_position = Vector2(-1, 54)
+	if $z_indexer/trunk_counter.rect_position == original_counter_position:
+		$card_self_tween2.interpolate_property($z_indexer/trunk_counter, "rect_position", $z_indexer/trunk_counter.rect_position, onBig_trunk_counter_position, 0.1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+		$card_self_tween2.start()
+	else:
+		$card_self_tween2.interpolate_property(card_info_box.current_highlighted_card.get_node("z_indexer/trunk_counter"), "rect_position", card_info_box.current_highlighted_card.get_node("z_indexer/trunk_counter").rect_position, original_counter_position, 0.1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+		$card_self_tween2.start()
 
 func reset_highlighted_card():
 	if card_info_box.current_highlighted_card != null:
 		card_info_box.current_highlighted_card.get_child(0).z_index = 0
 		$card_self_tween.interpolate_property(card_info_box.current_highlighted_card.get_child(0).get_child(0), "rect_scale", card_info_box.current_highlighted_card.get_child(0).get_child(0).rect_scale, init_scale, 0.1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 		$card_self_tween.start()
+		
+		print(card_info_box.current_highlighted_card)
+		
+		#move the trunk_counter indicator back to small position
+		var original_counter_position = Vector2(-1, 54)
+		$card_self_tween2.interpolate_property(card_info_box.current_highlighted_card.get_node("z_indexer/trunk_counter"), "rect_position", card_info_box.current_highlighted_card.get_node("z_indexer/trunk_counter").rect_position, original_counter_position, 0.1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+		$card_self_tween2.start()

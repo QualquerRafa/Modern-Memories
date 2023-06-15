@@ -496,6 +496,11 @@ func enemy_end_turn():
 	#Wait some time before actually ending the turn for better game flow
 	$enemy_timer.start(1); yield($enemy_timer, "timeout")
 	
+	#At the end of the turn, remove the darken layer from the monsters that battled this turn
+	for i in range(5):
+		var this_i_monster = get_node("../../duel_field/enemy_side_zones/monster_" + String(i))
+		this_i_monster.get_node("darken_card").hide()
+	
 	#Move camera back to player's side of the field
 	if get_node("../../duel_field").position == get_node("../../").enemy_field_camera_position:
 		get_node("../../").change_field_view()

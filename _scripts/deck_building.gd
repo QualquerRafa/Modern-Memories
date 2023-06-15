@@ -142,6 +142,7 @@ func _on_clear_deck_button_up():
 	update_left_panel(resorted_trunk)
 
 func _on_export_deck_button_up():
+	get_node("panel_right/deck_cards/MarginContainer/GridContainer/0175card").reset_highlighted_card()
 	export_player_deck()
 func export_player_deck():
 	#Generate the deck string
@@ -168,6 +169,8 @@ func _on_export_close_button_up():
 
 #For importing the logic is a bit different
 func _on_import_deck_button_up():
+	get_node("panel_right/deck_cards/MarginContainer/GridContainer/0175card").reset_highlighted_card()
+	
 	#Show everything
 	$import_export_canvas.show()
 	$import_export_canvas/export_window.hide()

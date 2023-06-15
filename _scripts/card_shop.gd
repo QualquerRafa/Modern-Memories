@@ -45,15 +45,15 @@ func get_card_price(card_id):
 	match CardList.card_list[card_id].type:
 		"equip": #Stat Boost divided by 100 times a multiplier
 			var equip_bonus = ceil(CardList.card_list[card_id].effect[1] /100)
-			final_price = equip_bonus * 3 #15 duels for 500 equip, 30 duels for 1000 equip
+			final_price = equip_bonus * 4
 		
-		"field": final_price = 10 #10 duels to buy a field
+		"field": final_price = 30
 		
-		"spell": final_price = 20 #20 duels to buy a spell
+		"spell": final_price = 25
 		
-		"ritual": final_price = 25 #25 duels to buy a ritual
+		"ritual": final_price = 25
 		
-		"trap":  final_price = 40 #40 duels to buy a trap
+		"trap":  final_price = 40
 		
 		_: #monsters are more complicated
 			var monster_level = CardList.card_list[card_id].level
@@ -80,10 +80,17 @@ var small_scale = Vector2(0.01, 1)
 var flip_time = 0.2
 
 func update_shop_card(card_id : String, card_price : int):
+	#If the player already bought the card from this password, don't even show it
+	if PlayerData.password_bought_cards.has(card_id):
+		return
+	
 	#Update visual stuff on screen
 	$shop_panels/VBoxContainer/price/card_price.text = String(card_price)
-	$shop_panels/VBoxContainer/price/buy_card.modulate = Color(1, 1, 1, 1)
 	$card_slot/card_centerer/card_visual_only.update_card_information(card_id)
+	if PlayerData.player_starchips >= int($shop_panels/VBoxContainer/price/card_price.get_text()):
+		$shop_panels/VBoxContainer/price/buy_card.modulate = Color(1, 1, 1, 1)
+	else:
+		$shop_panels/VBoxContainer/price/buy_card.modulate = Color(0.3, 0.3, 0.3, 1)
 	
 	#Update bottom bar
 	$user_interface/card_info_box.update_user_interface($card_slot/card_centerer/card_visual_only)
@@ -139,3 +146,30 @@ func _on_back_button_button_up():
 	
 	#Return to Main Menu screen
 	$scene_transitioner.scene_transition("main_menu")
+
+#---------------------------------------------------------------------------------------------------
+func _on_buy_card_button_up():
+	if $shop_panels/VBoxContainer/price/buy_card.modulate !=  Color(1,1,1, 1):
+		#print("unable")
+		return
+	
+	var get_card_id_from_displayed = $card_slot/card_centerer/card_visual_only.this_card_id
+	var get_price_from_displayer = int($shop_panels/VBoxContainer/price/card_price.get_text())
+	
+	if PlayerData.player_starchips >= get_price_from_displayer:
+		if not PlayerData.password_bought_cards.has(get_card_id_from_displayed):
+			if get_card_id_from_displayed in PlayerData.player_trunk:
+				player_trunk[get_card_id_from_displayed] += 1 #register another copy of the card to the already existing id key
+			else: 
+				player_trunk[get_card_id_from_displayed] = 1 #card is not in trunk, so add it's key:value pair as id:count
+			
+			PlayerData.player_starchips -= get_price_from_displayer
+			PlayerData.password_bought_cards.append(get_card_id_from_displayed)
+			
+			reset_scene_after_buy()
+	#print("Password Bought Cards (ids): ", PlayerData.password_bought_cards)
+
+func reset_scene_after_buy():
+	flip_down_shop_card()
+	$shop_panels/VBoxContainer/starchips/player_starchips.text = String(PlayerData.player_starchips)
+	$shop_panels/VBoxContainer/code/player_input.clear()

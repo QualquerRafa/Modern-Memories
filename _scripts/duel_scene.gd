@@ -258,6 +258,11 @@ func _on_turn_end_button_button_up():
 	toggle_visibility_of_turn_end_button()
 	toggle_visibility_of_change_field_view_button()
 	
+	#At the end of player's turn, remove the darken layer from the monsters that battled this turn
+	for i in range(5):
+		var this_i_monster = get_node("duel_field/player_side_zones/monster_" + String(i))
+		this_i_monster.get_node("darken_card").hide()
+	
 	#Change field view to Enemy Field
 	if $duel_field.position == player_field_camera_position:
 		change_field_view()
