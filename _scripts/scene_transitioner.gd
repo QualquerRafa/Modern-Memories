@@ -5,6 +5,10 @@ var full_black = Color(0,0,0, 1)
 var transition_time = 0.8
 
 func entering_this_scene():
+	#Play the scene BGM
+	var scene_bgm_file = "lohweo_" + self.get_parent().get_name()
+	SoundControl.play_sound(scene_bgm_file, "music")
+	
 	self.show()
 	yield(get_tree().create_timer(transition_time/3), "timeout")
 	$loading_indicator.hide()
@@ -16,7 +20,8 @@ func entering_this_scene():
 	self.hide()
 
 func scene_transition(scene):
-	SoundControl.play_sound("poc_scene", "force")
+	SoundControl.bgm_fadeout()
+	SoundControl.play_sound("poc_scene")
 	
 	self.show()
 	$loading_indicator.show()

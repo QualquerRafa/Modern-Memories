@@ -289,14 +289,24 @@ func show_duel_info():
 				else:
 					if PlayerData.scene_to_return_after_duel != "":
 						$scene_transitioner.scene_transition(PlayerData.scene_to_return_after_duel)
+						remove_reward_scene_from_tree()
 					else:
 						$scene_transitioner.scene_transition("main_menu")
+						remove_reward_scene_from_tree()
 			
 			else:
 				if PlayerData.scene_to_return_after_duel != "":
 					$scene_transitioner.scene_transition(PlayerData.scene_to_return_after_duel)
+					remove_reward_scene_from_tree()
 				else:
 					$scene_transitioner.scene_transition("main_menu")
+					remove_reward_scene_from_tree()
+
+func remove_reward_scene_from_tree():
+	#print(get_node("..").get_children())
+	$final_timer.start(2); yield($final_timer, "timeout")
+	get_node("../reward_scene").queue_free()
+	#print(get_node("..").get_children())
 
 ####################################################################################################
 # AUXILIARY FUNCTIONS

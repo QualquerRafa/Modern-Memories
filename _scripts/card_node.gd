@@ -424,7 +424,7 @@ func _on_fusion_summon_button_up():
 	if GAME_LOGIC.GAME_PHASE == "card_options":
 		#Add the 'card_node' to the Fusion Order list
 		if !PLAYER_LOGIC.fusion_order.has(scene_root.card_in_the_middle):
-			SoundControl.play_sound("poc_cursor", "force")
+			SoundControl.play_sound("poc_cursor")
 			PLAYER_LOGIC.fusion_order.append(scene_root.card_in_the_middle)
 		else:
 			remove_a_card_from_fusion_order(scene_root.card_in_the_middle)
@@ -442,7 +442,7 @@ func _on_fusion_indicator_button_up():
 	remove_a_card_from_fusion_order(self)
 
 func remove_a_card_from_fusion_order(card_to_remove):
-	SoundControl.play_sound("poc_unable", "force")
+	SoundControl.play_sound("poc_unable")
 	
 	#Remove the 'card_node' from the Fusion Order list
 	if PLAYER_LOGIC.fusion_order.has(card_to_remove):

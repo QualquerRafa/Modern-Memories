@@ -97,18 +97,19 @@ func _on_0175card_button_up():
 	
 	#Figure out where to move on second click
 	if $z_indexer/card_design.rect_scale == big_scale:
-		SoundControl.play_sound("poc_unable", "force")
 		var self_onScreen_position_X = self.get_global_transform_with_canvas()[2][0]
 		if self_onScreen_position_X >= 1280/2: #Right side, click should remove from deck
 			if PlayerData.player_deck.has(this_card_id):
-				SoundControl.play_sound("poc_move", "force")
+				SoundControl.play_sound("poc_move")
 				#Remove the card and update the visual list
 				PlayerData.player_deck.erase(this_card_id)
 			
 		else: #Left side, click should add to deck if possible
 			if int($z_indexer/trunk_counter.text) > 0 and PlayerData.player_deck.size() < 40 and PlayerData.player_deck.count(this_card_id) < 3:
-				SoundControl.play_sound("poc_move", "force")
+				SoundControl.play_sound("poc_move")
 				PlayerData.player_deck.append(this_card_id)
+			else:
+				SoundControl.play_sound("poc_unable")
 		
 		#update both sides' panels
 		var sorter =  deck_building_root.get_child(0).get_child(2)

@@ -181,7 +181,7 @@ func enemy_play_that_card(card_to_play_array : Array):
 		$fusion_animation/fusion_result_card.this_card_flags = field_node_to_use.this_card_flags
 		$fusion_animation/fusion_result_card.update_card_information(card_being_played)
 		$fusion_animation/fusion_result_card.show()
-		SoundControl.play_sound("poc_fusion2", "force")
+		SoundControl.play_sound("poc_fusion2")
 		$fusion_animation/tween_fusion.interpolate_property($fusion_animation/fusion_result_card, "modulate", Color(10, 10, 10), Color(1, 1, 1), fusion_timer*0.8, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 		$fusion_animation/tween_fusion.interpolate_property($fusion_animation/fusion_result_card, "rect_scale", fusion_result_start_size, fusion_result_final_size, fusion_timer*0.8, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 		$fusion_animation/tween_fusion.start()
@@ -501,7 +501,7 @@ func enemy_end_turn():
 	#Wait some time before actually ending the turn for better game flow
 	$enemy_timer.start(1); yield($enemy_timer, "timeout")
 	
-	SoundControl.play_sound("poc_turn_end", "force")
+	SoundControl.play_sound("poc_turn_end")
 	
 	#At the end of the turn, remove the darken layer from the monsters that battled this turn
 	for i in range(5):

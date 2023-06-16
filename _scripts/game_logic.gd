@@ -257,7 +257,7 @@ func do_battle(attacking_card : Node, defending_card : Node):
 	battle_timer_node.start(battle_timer); yield(battle_timer_node, "timeout")
 	
 	#The attacking movements
-	SoundControl.play_sound("poc_attack", "force")
+	SoundControl.play_sound("poc_attack")
 	$battle_visuals/tween_battle.interpolate_property($battle_visuals/visual_cardA, "rect_position:x", $battle_visuals/visual_cardA.rect_position.x, $battle_visuals/visual_cardA.rect_position.x + 120, battle_timer, Tween.TRANS_QUINT, Tween.EASE_IN_OUT)
 	$battle_visuals/tween_battle.start()
 	battle_timer_node.start(battle_timer); yield(battle_timer_node, "timeout")

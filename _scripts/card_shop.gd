@@ -138,6 +138,8 @@ func flip_down_shop_card():
 
 #---------------------------------------------------------------------------------------------------
 func _on_back_button_button_up():
+	SoundControl.play_sound("poc_decide")
+	
 	#Animate the button being clicked
 	var btn_small_scale = Vector2(0.8 , 0.8)
 	var btn_normal_scale = Vector2(1 , 1)
@@ -153,7 +155,7 @@ func _on_back_button_button_up():
 #---------------------------------------------------------------------------------------------------
 func _on_buy_card_button_up():
 	if $shop_panels/VBoxContainer/price/buy_card.modulate !=  Color(1,1,1, 1):
-		SoundControl.play_sound("poc_unable", "force")
+		SoundControl.play_sound("poc_unable")
 		return
 	
 	#Animate the button being clicked
@@ -165,7 +167,7 @@ func _on_buy_card_button_up():
 	$user_interface/UI_tween.interpolate_property($shop_panels/VBoxContainer/price/buy_card, "rect_scale", $shop_panels/VBoxContainer/price/buy_card.rect_scale, btn_normal_scale, 0.1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$user_interface/UI_tween.start()
 	
-	SoundControl.play_sound("poc_decide", "force")
+	SoundControl.play_sound("poc_decide")
 	
 	var get_card_id_from_displayed = $card_slot/card_centerer/card_visual_only.this_card_id
 	var get_price_from_displayer = int($shop_panels/VBoxContainer/price/card_price.get_text())

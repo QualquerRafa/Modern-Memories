@@ -370,7 +370,7 @@ func call_fusion_logic(passing_field_slot_to_summon):
 	$fusion_animation/fusion_result_card.rect_scale = fusion_result_start_size
 	$fusion_animation/fusion_result_card.update_card_information(fusion_result.this_card_id)
 	$fusion_animation/fusion_result_card.show()
-	SoundControl.play_sound("poc_fusion2", "force")
+	SoundControl.play_sound("poc_fusion2")
 	$fusion_animation/tween_fusion.interpolate_property($fusion_animation/fusion_result_card, "modulate", Color(10, 10, 10), Color(1, 1, 1), fusion_timer*0.8, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$fusion_animation/tween_fusion.interpolate_property($fusion_animation/fusion_result_card, "rect_scale", fusion_result_start_size, fusion_result_final_size, fusion_timer*0.8, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 	$fusion_animation/tween_fusion.start()
