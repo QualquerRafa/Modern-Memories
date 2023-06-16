@@ -334,4 +334,6 @@ flat = true
 [node name="scene_transitioner" parent="." instance=ExtResource( 10 )]
 visible = false
 
+[node name="final_timer" type="Timer" parent="."]
+
 [connection signal="button_up" from="screen_button" to="." method="_on_screen_button_button_up"]
