@@ -8293,6 +8293,7 @@ margin_left = 134.0
 margin_right = 254.0
 margin_bottom = 90.0
 rect_min_size = Vector2( 120, 0 )
+rect_pivot_offset = Vector2( 60, 45 )
 
 [node name="clear_deck" type="Button" parent="panel_right/deck_buttons/button_clear"]
 margin_left = 4.0
@@ -8324,6 +8325,7 @@ margin_left = 258.0
 margin_right = 378.0
 margin_bottom = 90.0
 rect_min_size = Vector2( 120, 0 )
+rect_pivot_offset = Vector2( 60, 45 )
 
 [node name="import_deck" type="Button" parent="panel_right/deck_buttons/button_import"]
 margin_left = 4.0
@@ -8355,6 +8357,7 @@ margin_left = 382.0
 margin_right = 502.0
 margin_bottom = 90.0
 rect_min_size = Vector2( 120, 0 )
+rect_pivot_offset = Vector2( 60, 45 )
 
 [node name="export_deck" type="Button" parent="panel_right/deck_buttons/button_export"]
 margin_left = 4.0
@@ -8387,6 +8390,7 @@ margin_left = 506.0
 margin_right = 626.0
 margin_bottom = 90.0
 rect_min_size = Vector2( 120, 0 )
+rect_pivot_offset = Vector2( 60, 45 )
 
 [node name="go_duel" type="Button" parent="panel_right/deck_buttons/button_go_duel"]
 margin_left = 4.0

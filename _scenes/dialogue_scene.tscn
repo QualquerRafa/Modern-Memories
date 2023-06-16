@@ -89,7 +89,7 @@ position = Vector2( 602, 83 )
 scale = Vector2( 2.5, 2.5 )
 frames = SubResource( 6 )
 animation = "button_press"
-frame = 1
+frame = 2
 playing = true
 
 [connection signal="button_up" from="dialogue_box/dialogue_button" to="." method="_on_dialogue_button_button_up"]
