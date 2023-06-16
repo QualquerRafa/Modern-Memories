@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/lohweo_duel_lose.mp3-bb9d438ce89aa8057ff0caa1f0930e24.mp3str"
+
+[deps]
+
+source_file="res://_resources/_audio/music/lohweo_duel_lose.mp3"
+dest_files=[ "res://.import/lohweo_duel_lose.mp3-bb9d438ce89aa8057ff0caa1f0930e24.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

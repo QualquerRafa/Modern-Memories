@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/lohweo_deck_building.mp3-19ca2b1c39ab70fd6493a58d232fcd1c.mp3str"
+
+[deps]
+
+source_file="res://_resources/_audio/music/lohweo_deck_building.mp3"
+dest_files=[ "res://.import/lohweo_deck_building.mp3-19ca2b1c39ab70fd6493a58d232fcd1c.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
