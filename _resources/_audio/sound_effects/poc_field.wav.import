@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/poc_field.wav-166fb7a9e04ad8839cbe8e92eb17336b.sample"
+
+[deps]
+
+source_file="res://_resources/_audio/sound_effects/poc_field.wav"
+dest_files=[ "res://.import/poc_field.wav-166fb7a9e04ad8839cbe8e92eb17336b.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=true
+edit/loop_mode=1
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
