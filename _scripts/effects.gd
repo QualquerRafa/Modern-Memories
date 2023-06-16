@@ -114,6 +114,7 @@ func do_activation_animation(card_node : Node, force_animation = false):
 	#var catch_on_flip = CardList.card_list[card_node.this_card_id].effect[0] == "on_flip" and was_flipped == true
 	if not CardList.card_list[card_node.this_card_id].effect[0] in ["special_description", "on_attack", "on_defend", "on_flip"] or force_animation == true: # or catch_on_flip == true
 		animation_timer = 0.2
+		SoundControl.play_sound("poc_effect")
 		$effect_visuals.show()
 	
 	#First the black background fade in
@@ -218,6 +219,7 @@ func simulate_fusion_animation_resulting_in_card1(card_1_caller : Node, card_2_m
 	GAME_LOGIC.get_node("player_logic/fusion_animation/fusion_order_1").show()
 	GAME_LOGIC.get_node("player_logic/fusion_animation").show()
 	
+	SoundControl.play_sound("poc_fusion1")
 	GAME_LOGIC.get_node("player_logic/fusion_animation/tween_fusion").interpolate_property(GAME_LOGIC.get_node("player_logic/fusion_animation/fusion_order_0"), "rect_position", fusion_start_pos_0, fusion_final_pos, fusion_timer, Tween.TRANS_QUINT, Tween.EASE_IN_OUT)
 	GAME_LOGIC.get_node("player_logic/fusion_animation/tween_fusion").interpolate_property(GAME_LOGIC.get_node("player_logic/fusion_animation/fusion_order_0"), "modulate", Color(1, 1, 1, 1), Color(10, 10, 10, 0.666), fusion_timer*0.9, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	GAME_LOGIC.get_node("player_logic/fusion_animation/tween_fusion").interpolate_property(GAME_LOGIC.get_node("player_logic/fusion_animation/fusion_order_1"), "rect_position", fusion_start_pos_1, fusion_final_pos, fusion_timer, Tween.TRANS_QUINT, Tween.EASE_IN_OUT)
@@ -281,6 +283,8 @@ func activate_spell_field(card_node : Node):
 		"dark":  new_field_color = Color("5100ff")
 		"light": new_field_color = Color("ffef00")
 		_: new_field_color = Color("ffffff")
+	
+	SoundControl.play_sound("poc_field")
 	
 	var field_texture1 = GAME_LOGIC.get_parent().get_node("duel_field/player_side_zones")
 	var field_texture2 = GAME_LOGIC.get_parent(). get_node("duel_field/enemy_side_zones")
@@ -374,6 +378,8 @@ func equip_from_field_to_target(target_card_node : Node):
 		#Final update on the card to visually reflect the status up
 		target_card_node.update_card_information(target_card_node.this_card_id)
 		GAME_LOGIC.get_parent().update_user_interface(target_card_node)
+		
+		SoundControl.play_sound("poc_equip")
 		
 	#This means the equip_result returned as [monster_id, False]
 	else:

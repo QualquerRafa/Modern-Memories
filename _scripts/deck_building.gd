@@ -133,15 +133,20 @@ func about_to_duel_correct_buttons():
 func _on_go_duel_button_up():
 	#Check if the player deck has 40 cards
 	if PlayerData.player_deck.size() == 40:
+		button_click_animation("panel_right/deck_buttons/button_go_duel")
 		$scene_transitioner.scene_transition("duel_scene")
+	else:
+		SoundControl.play_sound("poc_unable")
 
 func _on_clear_deck_button_up():
+	button_click_animation("panel_right/deck_buttons/button_clear")
 	PlayerData.player_deck.clear()
 	update_right_panel()
 	var resorted_trunk = $panel_left/sortables.sort_cards(PlayerData.player_trunk.keys(), "new")
 	update_left_panel(resorted_trunk)
 
 func _on_export_deck_button_up():
+	button_click_animation("panel_right/deck_buttons/button_export")
 	get_node("panel_right/deck_cards/MarginContainer/GridContainer/0175card").reset_highlighted_card()
 	export_player_deck()
 func export_player_deck():
@@ -165,10 +170,12 @@ func export_player_deck():
 	$import_export_canvas/export_window.show()
 	$import_export_canvas/import_window.hide()
 func _on_export_close_button_up():
+	button_click_animation("import_export_canvas/export_window/button_close")
 	$import_export_canvas.hide()
 
 #For importing the logic is a bit different
 func _on_import_deck_button_up():
+	button_click_animation("panel_right/deck_buttons/button_import")
 	get_node("panel_right/deck_cards/MarginContainer/GridContainer/0175card").reset_highlighted_card()
 	
 	#Show everything
@@ -178,6 +185,8 @@ func _on_import_deck_button_up():
 func _on_import_string_input_text_changed(entered_string):
 	$import_export_canvas/import_window/import_string_visual.text = entered_string
 func _on_import_close_button_up():
+	button_click_animation("import_export_canvas/import_window/button_close")
+	
 	#do the checks on the entered string to generate a deck from it
 	var entered_string = $import_export_canvas/import_window/import_string_visual.text
 	
@@ -230,21 +239,30 @@ func _on_import_close_button_up():
 func _on_back_button_button_up():
 	#If button isn't enabled, don't change scene
 	if $user_interface/back_button.modulate != Color(1, 1, 1, 1):
+		SoundControl.play_sound("poc_unable")
 		return
 	
 	#Animate the button being clicked
-	var small_scale = Vector2(0.8 , 0.8)
-	var normal_scale = Vector2(1 , 1)
-	$user_interface/UI_tween.interpolate_property($user_interface/back_button, "rect_scale", $user_interface/back_button.rect_scale, small_scale, 0.1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$user_interface/UI_tween.start()
-	yield($user_interface/UI_tween, "tween_completed")
-	$user_interface/UI_tween.interpolate_property($user_interface/back_button, "rect_scale", $user_interface/back_button.rect_scale, normal_scale, 0.1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$user_interface/UI_tween.start()
+	button_click_animation("user_interface/back_button")
 	
 	#Return to Main Menu screen
 	if PlayerData.going_to_duel == "":
 		$scene_transitioner.scene_transition("main_menu")
 	else:
 		$scene_transitioner.scene_transition("free_duel")
+
+#---------------------------------------------------------------------------------------------------
+func button_click_animation(button_node_path : String):
+	SoundControl.play_sound("poc_decide")
+	
+	#Animate the button being clicked
+	var small_scale = Vector2(0.8 , 0.8)
+	var normal_scale = Vector2(1 , 1)
+	
+	$user_interface/UI_tween.interpolate_property(get_node(button_node_path), "rect_scale", get_node(button_node_path).rect_scale, small_scale, 0.1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$user_interface/UI_tween.start()
+	yield($user_interface/UI_tween, "tween_completed")
+	$user_interface/UI_tween.interpolate_property(get_node(button_node_path), "rect_scale", get_node(button_node_path).rect_scale, normal_scale, 0.1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$user_interface/UI_tween.start()
 
 

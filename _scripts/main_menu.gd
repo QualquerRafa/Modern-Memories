@@ -11,7 +11,7 @@ func _ready():
 #---------------------------------------------------------------------------------------------------
 #CLICKING THE BUTTONS
 func _on_btn_campaign_button_up():
-	pass # Replace with function body.
+	SoundControl.play_sound("poc_unable")
 func _on_btn_tournament_button_up():
 	animate_button($CenterContainer/VBoxContainer/btn_tournament)
 	change_scene("tournament_scene")
@@ -28,6 +28,8 @@ func _on_btn_password_button_up():
 	change_scene("card_shop")
 
 func animate_button(node : Node):
+	SoundControl.play_sound("poc_decide")
+	
 	#Animate the button being clicked
 	var small_scale = Vector2(0.9 , 0.9)
 	var normal_scale = Vector2(1 , 1)

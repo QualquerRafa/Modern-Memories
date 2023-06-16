@@ -91,6 +91,8 @@ func _on_rarity_card_button_up():
 	if !$z_indexer.is_visible():
 		return
 	
+	SoundControl.play_sound("poc_cursor")
+	
 	#Reset previous card, if any
 	reset_highlighted_card()
 	

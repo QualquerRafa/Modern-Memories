@@ -16,6 +16,8 @@ func entering_this_scene():
 	self.hide()
 
 func scene_transition(scene):
+	SoundControl.play_sound("poc_scene", "force")
+	
 	self.show()
 	$loading_indicator.show()
 	

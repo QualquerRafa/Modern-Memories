@@ -99,6 +99,7 @@ var to_middle_time : float = 0.1 #in seconds
 
 func _on_darken_screen_button_up():
 	if $game_logic.GAME_PHASE == "card_options":
+		SoundControl.play_sound("poc_unable", "force")
 		put_middle_card_in_hand()
 
 func put_middle_card_in_hand():
@@ -142,6 +143,8 @@ func _on_back_to_hand_button_up():
 	if $back_to_hand.rect_position.x != 1174:
 		return
 	
+	SoundControl.play_sound("poc_unable", "force")
+	
 	#when cancelling the summon of a monster i'm basically resetting everything that was changed by trying to summon a card
 	var is_monster_or_spelltrap : String = "monster_field_slots" #monster_field_slots or spelltrap_field_slots
 	if !(get_node("duel_field/player_side_zones/monster_field_slots").is_visible()):
@@ -167,6 +170,8 @@ var time_to_cross_field = 0.3 #in seconds
 func _on_change_field_view_button_up():
 	if $change_field_view.rect_position.x != 1174:
 		return
+	
+	SoundControl.play_sound("poc_move")
 	
 	#GAME_PHASES where player can look at the other side of the field
 	match $game_logic.GAME_PHASE:
@@ -253,6 +258,8 @@ func toggle_visibility_of_back_to_hand_button():
 func _on_turn_end_button_button_up():
 	if $turn_end_button.rect_position.x != 1174:
 		return
+	
+	SoundControl.play_sound("poc_turn_end", "force")
 	
 	#Animate these buttons out so player doesn't control anything anymore
 	toggle_visibility_of_turn_end_button()

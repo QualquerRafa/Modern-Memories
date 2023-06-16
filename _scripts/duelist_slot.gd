@@ -26,6 +26,8 @@ func _on_duelist_slot_button_up():
 	if free_duel_node_path.get_name() != "free_duel":
 		return
 	
+	SoundControl.play_sound("poc_cursor")
+	
 	#Pass up the duelist name so the list can be correctly updated
 	free_duel_node_path.update_duelist_cards(this_duelist_name)
 	active_this_duelist()

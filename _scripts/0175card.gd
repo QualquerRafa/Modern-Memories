@@ -97,14 +97,17 @@ func _on_0175card_button_up():
 	
 	#Figure out where to move on second click
 	if $z_indexer/card_design.rect_scale == big_scale:
+		SoundControl.play_sound("poc_unable", "force")
 		var self_onScreen_position_X = self.get_global_transform_with_canvas()[2][0]
 		if self_onScreen_position_X >= 1280/2: #Right side, click should remove from deck
 			if PlayerData.player_deck.has(this_card_id):
+				SoundControl.play_sound("poc_move", "force")
 				#Remove the card and update the visual list
 				PlayerData.player_deck.erase(this_card_id)
 			
 		else: #Left side, click should add to deck if possible
 			if int($z_indexer/trunk_counter.text) > 0 and PlayerData.player_deck.size() < 40 and PlayerData.player_deck.count(this_card_id) < 3:
+				SoundControl.play_sound("poc_move", "force")
 				PlayerData.player_deck.append(this_card_id)
 		
 		#update both sides' panels
@@ -113,7 +116,8 @@ func _on_0175card_button_up():
 		reset_highlighted_card()
 		deck_building_root.update_left_panel(newly_sorted_trunk)
 		deck_building_root.update_right_panel()
-		
+	else:
+		SoundControl.play_sound("poc_cursor")
 	
 	#move the trunk_counter indicator
 	var onBig_trunk_counter_position = Vector2(4, 64)
@@ -130,8 +134,6 @@ func reset_highlighted_card():
 		card_info_box.current_highlighted_card.get_child(0).z_index = 0
 		$card_self_tween.interpolate_property(card_info_box.current_highlighted_card.get_child(0).get_child(0), "rect_scale", card_info_box.current_highlighted_card.get_child(0).get_child(0).rect_scale, init_scale, 0.1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 		$card_self_tween.start()
-		
-		print(card_info_box.current_highlighted_card)
 		
 		#move the trunk_counter indicator back to small position
 		var original_counter_position = Vector2(-1, 54)

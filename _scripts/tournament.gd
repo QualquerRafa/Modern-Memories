@@ -264,9 +264,6 @@ func tournament_flow():
 		tournament_progression.append("tournament_"+ next_color +"_tier")
 		PlayerData.tournament_last_progression_saved = "tournament_"+ next_color +"_tier"
 		
-		#Give the final reward of the Tournament
-		PlayerData.player_starchips += 50
-		
 		#tournament_flow()
 	
 	#Dealing with the Golden Tier separately since there is no tier above it
@@ -275,10 +272,19 @@ func tournament_flow():
 		$dialogue_scene.update_screen_dialog("?????", dialogue_to_show[1], true)
 		tournament_progression.append("loser_rematch")
 		
+		#Give the final reward of the Tournament
+		PlayerData.player_starchips += 50
+		#print("Added 50 starchips, total is ", PlayerData.player_starchips)
+		
 	elif tournament_progression[-1] == "loser_rematch":
 		toggle_tournament_brackets_visibility()
 		PlayerData.tournament_competitors_saved.green.erase("player")
-		var duelist_to_rematch = PlayerData.tournament_competitors_saved.green[randi()%PlayerData.tournament_competitors_saved.green.size()]
+		
+		var duelists_available_for_rematch = []
+		for duelist in PlayerData.tournament_competitors_saved.green:
+			if not duelist in PlayerData.tournament_competitors_saved.red:
+				duelists_available_for_rematch.append(duelist)
+		var duelist_to_rematch = duelists_available_for_rematch[randi()%duelists_available_for_rematch.size()]
 		
 		var dialogue_to_show = $dialogue_scene.get_dialog("generic", "tournament_rematch")
 		$dialogue_scene.update_screen_dialog(duelist_to_rematch, dialogue_to_show[1])

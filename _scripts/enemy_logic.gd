@@ -145,6 +145,8 @@ func enemy_play_that_card(card_to_play_array : Array):
 		var fusion_start_pos_1 : Vector2 = Vector2(856-60, 80)
 		var fusion_final_pos : Vector2 = Vector2(475, 80)
 		
+		SoundControl.play_sound("poc_fusion1")
+		
 		$fusion_animation/fusion_order_0.rect_position = fusion_start_pos_0
 		$fusion_animation/fusion_order_1.rect_position = fusion_start_pos_1
 		$fusion_animation/fusion_order_0.update_card_information(card_to_play_array[1])
@@ -179,6 +181,7 @@ func enemy_play_that_card(card_to_play_array : Array):
 		$fusion_animation/fusion_result_card.this_card_flags = field_node_to_use.this_card_flags
 		$fusion_animation/fusion_result_card.update_card_information(card_being_played)
 		$fusion_animation/fusion_result_card.show()
+		SoundControl.play_sound("poc_fusion2", "force")
 		$fusion_animation/tween_fusion.interpolate_property($fusion_animation/fusion_result_card, "modulate", Color(10, 10, 10), Color(1, 1, 1), fusion_timer*0.8, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 		$fusion_animation/tween_fusion.interpolate_property($fusion_animation/fusion_result_card, "rect_scale", fusion_result_start_size, fusion_result_final_size, fusion_timer*0.8, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 		$fusion_animation/tween_fusion.start()
@@ -206,6 +209,8 @@ func enemy_play_that_card(card_to_play_array : Array):
 	field_node_to_use.this_card_id = card_being_played
 	field_node_to_use.update_card_information(field_node_to_use.this_card_id)
 	field_node_to_use.show()
+	
+	SoundControl.play_sound("poc_move")
 	
 	#Check if this card will get a field bonus
 	var field_name = GAME_LOGIC.get_parent().get_node("user_interface/top_info_box/field_info/field_name").text.split(" ", true)[0].to_lower()
@@ -495,6 +500,8 @@ func try_to_defense_position(monster_being_checked : Node):
 func enemy_end_turn():
 	#Wait some time before actually ending the turn for better game flow
 	$enemy_timer.start(1); yield($enemy_timer, "timeout")
+	
+	SoundControl.play_sound("poc_turn_end", "force")
 	
 	#At the end of the turn, remove the darken layer from the monsters that battled this turn
 	for i in range(5):

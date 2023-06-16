@@ -18,6 +18,7 @@ func _on_dialogue_button_button_up():
 		return
 	
 	#This is the signal to be used by the individual scenes containing Dialogues
+	SoundControl.play_sound("poc_move")
 	emit_signal("dialogue_box_clicked")
 
 func get_dialog(character_name : String, specific_dialog : String):

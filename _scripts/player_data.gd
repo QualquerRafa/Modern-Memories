@@ -13,7 +13,7 @@ var recorded_duels : Dictionary = {} #populated by {duelist_name : {W:int, L:int
 
 #Game Settings, stored in a separate file
 var game_language : String = "english" #default is english
-var game_volume : int = 100
+var game_volume : float = 0.1 #0 to 1, 'linear2db' converts it into db in 'sound_control.gd'
 
 #Game variables that aren't persistent
 var last_reward_cards : Array = [] #populated by ID:String

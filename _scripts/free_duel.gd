@@ -79,6 +79,8 @@ func update_duelist_cards(duelist_name):
 
 #---------------------------------------------------------------------------------------------------
 func _on_go_duel_button_up():
+	SoundControl.play_sound("poc_decide")
+	
 	$user_interface/UI_tween.interpolate_property($panel_left/go_duel, "rect_scale", $panel_left/go_duel.rect_scale, Vector2(0.9, 0.9), 0.1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$user_interface/UI_tween.start()
 	yield($user_interface/UI_tween, "tween_completed")
@@ -90,6 +92,8 @@ func _on_go_duel_button_up():
 
 #---------------------------------------------------------------------------------------------------
 func _on_back_button_button_up():
+	SoundControl.play_sound("poc_decide")
+	
 	#Animate the button being clicked
 	var small_scale = Vector2(0.8 , 0.8)
 	var normal_scale = Vector2(1 , 1)

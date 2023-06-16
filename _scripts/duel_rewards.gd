@@ -220,6 +220,8 @@ func show_duel_info():
 			yield(tweener, "tween_completed")
 			$BIG_LETTERS.hide()
 			
+			SoundControl.play_sound("poc_decide")
+			
 			#Do the counting animation for each category kept track
 			tween_card_count($duel_info/deck_used, duel_deck_count, $tweens/tween_1)
 			tween_card_count($duel_info/fusion_used, duel_fusion_count, $tweens/tween_2)
@@ -235,6 +237,8 @@ func show_duel_info():
 			$duel_info/effects_used.text = String(duel_effect_count).pad_zeros(2)
 			$duel_info/spelltrap_used.text = String(duel_spelltrap_count).pad_zeros(2)
 			
+			SoundControl.play_sound("poc_decide")
+			
 			#Calculate and show the final Rank
 			get_duel_rank()
 			$rank_info.show()
@@ -242,6 +246,8 @@ func show_duel_info():
 			phase_of_reveal += 1
 		
 		2:
+			SoundControl.play_sound("poc_decide")
+			
 			#Calculate and show the Starchips earned
 			get_starchips_reward()
 			$starchip_reward.show()
@@ -297,6 +303,8 @@ func show_duel_info():
 ####################################################################################################
 func flip_a_reward(reward_id : Node, tweener : Node):
 	var flipping_timer = 0.3
+	
+	SoundControl.play_sound("poc_move")
 	
 	tweener.interpolate_property(reward_id, "rect_scale", Vector2(1, 1), Vector2(0.05, 1), flipping_timer, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	tweener.start()

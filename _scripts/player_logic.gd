@@ -110,6 +110,8 @@ func player_draw_phase():
 		card_node_to_animate.rect_position = card_references.offscreen_reference.rect_position
 		card_node_to_animate.rect_rotation = card_references.offscreen_reference.rect_rotation
 		
+		SoundControl.play_sound("poc_move")
+		
 		#Do the tween animation
 		hand_tween.interpolate_property(card_node_to_animate, "rect_position", card_node_to_animate.rect_position, final_position_reference.rect_position, waiting_time, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 		hand_tween.interpolate_property(card_node_to_animate, "rect_rotation", card_node_to_animate.rect_rotation, final_position_reference.rect_rotation, waiting_time, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
@@ -293,6 +295,8 @@ func call_fusion_logic(passing_field_slot_to_summon):
 	var fusion_start_pos_1 : Vector2 = Vector2(856-60, 80)
 	var fusion_final_pos : Vector2 = Vector2(475, 80)
 	
+	SoundControl.play_sound("poc_fusion1")
+	
 	$fusion_animation/fusion_order_0.rect_position = fusion_start_pos_0
 	$fusion_animation/fusion_order_1.rect_position = fusion_start_pos_1
 	$fusion_animation/fusion_order_0.this_card_flags.fusion_type = fusion_order[0].this_card_flags.fusion_type
@@ -366,6 +370,7 @@ func call_fusion_logic(passing_field_slot_to_summon):
 	$fusion_animation/fusion_result_card.rect_scale = fusion_result_start_size
 	$fusion_animation/fusion_result_card.update_card_information(fusion_result.this_card_id)
 	$fusion_animation/fusion_result_card.show()
+	SoundControl.play_sound("poc_fusion2", "force")
 	$fusion_animation/tween_fusion.interpolate_property($fusion_animation/fusion_result_card, "modulate", Color(10, 10, 10), Color(1, 1, 1), fusion_timer*0.8, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$fusion_animation/tween_fusion.interpolate_property($fusion_animation/fusion_result_card, "rect_scale", fusion_result_start_size, fusion_result_final_size, fusion_timer*0.8, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 	$fusion_animation/tween_fusion.start()
@@ -387,6 +392,8 @@ func call_fusion_logic(passing_field_slot_to_summon):
 		call_fusion_logic(passing_field_slot_to_summon)
 
 func summon_final_card(final_card_to_summon, field_slot_to_summon):
+	SoundControl.play_sound("poc_move")
+	
 	var kind_of_card : String = "monster"
 	if CardList.card_list[final_card_to_summon.this_card_id].attribute in ["spell", "trap"]: kind_of_card = "spelltrap"
 	

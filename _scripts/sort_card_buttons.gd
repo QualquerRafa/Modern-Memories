@@ -99,6 +99,8 @@ func sort_with_duplicates(list_of_cards_to_sort, type_of_sort):
 
 #---------------------------------------------------------------------------------------------------
 func animate_button_click(button):
+	SoundControl.play_sound("poc_decide")
+	
 	$sortables_tween.interpolate_property(button, "rect_scale", button.rect_scale, Vector2(1.1, 1.1), 0.1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$sortables_tween.start()
 	

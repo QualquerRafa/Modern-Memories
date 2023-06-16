@@ -159,6 +159,8 @@ func _on_card_node_button_up():
 				card_self_tween.interpolate_property(self, "rect_rotation", self.rect_rotation, 0, to_middle_time, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 				card_self_tween.interpolate_property(self, "rect_scale", self.rect_scale, middle_screen_scale, to_middle_time, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 				card_self_tween.start()
+				
+				SoundControl.play_sound("poc_decide")
 			
 			#What to do with a clicked card if it's on a card on the field
 			elif GAME_LOGIC.GAME_PHASE == "main_phase" or GAME_LOGIC.GAME_PHASE == "choosing_combat_options":
@@ -172,14 +174,18 @@ func _on_card_node_button_up():
 				
 				if $combat_controls.is_visible(): #this card already called it, so cancel everything
 					cancel_all_combat_controls()
+					SoundControl.play_sound("poc_unable")
 				else:
 					cancel_all_combat_controls()
 					show_card_combat_controls()
+					SoundControl.play_sound("poc_cursor")
 			
 			#What to do with a card if the player is choosing a enemy target to battle
 			elif GAME_LOGIC.GAME_PHASE == "selecting_combat_target":
 				if self.get_parent().get_name().find("enemy") != -1:
 					GAME_LOGIC.card_ready_to_defend = self
+					
+					SoundControl.play_sound("poc_decide")
 					
 					#Call battle phase now that both cards are defined
 					GAME_LOGIC.do_battle(GAME_LOGIC.card_ready_to_attack, GAME_LOGIC.card_ready_to_defend)
@@ -418,6 +424,7 @@ func _on_fusion_summon_button_up():
 	if GAME_LOGIC.GAME_PHASE == "card_options":
 		#Add the 'card_node' to the Fusion Order list
 		if !PLAYER_LOGIC.fusion_order.has(scene_root.card_in_the_middle):
+			SoundControl.play_sound("poc_cursor", "force")
 			PLAYER_LOGIC.fusion_order.append(scene_root.card_in_the_middle)
 		else:
 			remove_a_card_from_fusion_order(scene_root.card_in_the_middle)
@@ -435,6 +442,8 @@ func _on_fusion_indicator_button_up():
 	remove_a_card_from_fusion_order(self)
 
 func remove_a_card_from_fusion_order(card_to_remove):
+	SoundControl.play_sound("poc_unable", "force")
+	
 	#Remove the 'card_node' from the Fusion Order list
 	if PLAYER_LOGIC.fusion_order.has(card_to_remove):
 		PLAYER_LOGIC.fusion_order.remove(PLAYER_LOGIC.fusion_order.find(card_to_remove))
@@ -449,6 +458,7 @@ func remove_a_card_from_fusion_order(card_to_remove):
 
 #-------------------------------------------------------------------------------
 func _on_faceup_summon_button_up():
+	SoundControl.play_sound("poc_decide")
 	var card_to_summon : Node = self
 	
 	#Add this card to 'fusion_order' if there are cards on the list and this isn't yet
@@ -458,6 +468,7 @@ func _on_faceup_summon_button_up():
 	PLAYER_LOGIC.get_field_slot_for_new_card(card_to_summon)
 
 func _on_facedown_summon_button_up():
+	SoundControl.play_sound("poc_decide")
 	var card_to_summon : Node = self
 	this_card_flags.is_facedown = true #at first, it's flagged to be faced down. If it is or not by the end is decided by player_logic.gd
 	
@@ -474,6 +485,7 @@ func _on_defense_button_button_up(): #This is actually Defense AND Attack button
 		toggle_battle_position()
 
 func toggle_battle_position():
+	SoundControl.play_sound("poc_move")
 	var position_rotate_timer : float = 0.2 #in seconds
 	
 	if this_card_flags.is_defense_position == false: #it's in attack, toggle to defense
@@ -493,6 +505,8 @@ func toggle_battle_position():
 func _on_attack_button_button_up():
 	if this_card_flags.is_defense_position == true or this_card_flags.has_battled == true:
 		return #this card can't battle if met these conditions
+	
+	SoundControl.play_sound("poc_move")
 	
 	#This is the button to enter Battle Phase with this card
 	GAME_LOGIC.GAME_PHASE = "selecting_combat_target"

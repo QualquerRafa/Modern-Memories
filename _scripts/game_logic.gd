@@ -244,6 +244,7 @@ func do_battle(attacking_card : Node, defending_card : Node):
 	battle_timer_node.start(battle_timer*1.5); yield(battle_timer_node, "timeout")
 	
 	#The card flip
+	SoundControl.play_sound("poc_move")
 	$battle_visuals/tween_battle.interpolate_property($battle_visuals/visual_cardA, "rect_scale", Vector2(1.4, 1.4), Vector2(0.1, 1.4), battle_timer, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$battle_visuals/tween_battle.interpolate_property($battle_visuals/visual_cardB, "rect_scale", Vector2(1.4, 1.4), Vector2(0.1, 1.4), battle_timer, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$battle_visuals/tween_battle.start()
@@ -256,6 +257,7 @@ func do_battle(attacking_card : Node, defending_card : Node):
 	battle_timer_node.start(battle_timer); yield(battle_timer_node, "timeout")
 	
 	#The attacking movements
+	SoundControl.play_sound("poc_attack", "force")
 	$battle_visuals/tween_battle.interpolate_property($battle_visuals/visual_cardA, "rect_position:x", $battle_visuals/visual_cardA.rect_position.x, $battle_visuals/visual_cardA.rect_position.x + 120, battle_timer, Tween.TRANS_QUINT, Tween.EASE_IN_OUT)
 	$battle_visuals/tween_battle.start()
 	battle_timer_node.start(battle_timer); yield(battle_timer_node, "timeout")
@@ -322,6 +324,7 @@ func do_battle(attacking_card : Node, defending_card : Node):
 		defending_card.get_node("card_design/card_back").hide()
 	
 	#Get rid of the Battle Loser
+	SoundControl.play_sound("poc_destroy")
 	if battle_loser_anim_path != null:
 		$battle_visuals/tween_battle.interpolate_property(battle_loser_anim_path, "modulate", Color(1,1,1, 1), Color(1,1,1, 0), battle_timer, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 		$battle_visuals/tween_battle.start()
@@ -529,6 +532,7 @@ func do_direct_attack(attacking_card):
 	battle_timer_node.start(battle_timer*1.5); yield(battle_timer_node, "timeout")
 	
 	#The card flip
+	SoundControl.play_sound("poc_move")
 	$battle_visuals/tween_battle.interpolate_property($battle_visuals/visual_cardA, "rect_scale", Vector2(1.4, 1.4), Vector2(0.1, 1.4), battle_timer, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$battle_visuals/tween_battle.start()
 	battle_timer_node.start(battle_timer); yield(battle_timer_node, "timeout")
@@ -538,6 +542,7 @@ func do_direct_attack(attacking_card):
 	battle_timer_node.start(battle_timer); yield(battle_timer_node, "timeout")
 	
 	#The attacking movements
+	SoundControl.play_sound("poc_attack")
 	$battle_visuals/tween_battle.interpolate_property($battle_visuals/visual_cardA, "rect_position:x", $battle_visuals/visual_cardA.rect_position.x, $battle_visuals/visual_cardA.rect_position.x + 120, battle_timer, Tween.TRANS_QUINT, Tween.EASE_IN_OUT)
 	$battle_visuals/tween_battle.start()
 	battle_timer_node.start(battle_timer); yield(battle_timer_node, "timeout")
