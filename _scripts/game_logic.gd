@@ -23,7 +23,7 @@ func effect_activation(card_node : Node, type_of_activation : String):
 
 func check_for_trap_cards(attacking_card : Node):
 	#If the attacking has the ignore_spelltrap effect, return null
-	if CardList.card_list[attacking_card.this_card_id].effect.size() > 0 and CardList.card_list[attacking_card.this_card_id].effect[1] == "ignore_spelltrap":
+	if CardList.card_list[attacking_card.this_card_id].effect.size() > 1 and CardList.card_list[attacking_card.this_card_id].effect[1] == "ignore_spelltrap":
 		return null
 	
 	#Figure out which side is attacking to check the other side for set trap cards
@@ -231,6 +231,8 @@ func do_battle(attacking_card : Node, defending_card : Node):
 	$battle_visuals/visual_cardB.modulate = Color(1,1,1,1)
 	$battle_visuals/darken_screen.modulate  = Color(1,1,1,0)
 	$battle_visuals/LP_damage.modulate = Color(1,1,1,0)
+	$battle_visuals/visual_cardA.rect_scale = Vector2(1.4, 1.4)
+	$battle_visuals/visual_cardB.rect_scale = Vector2(1.4, 1.4)
 	
 	#Do all the animations of this battle
 	$battle_visuals/visual_cardA/card_design/card_back.show()

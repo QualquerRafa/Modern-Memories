@@ -324,13 +324,17 @@ func tournament_flow():
 		#Erase everything related to this Tournament duel
 		PlayerData.scene_to_return_after_duel = ""
 		PlayerData.going_to_duel = ""
-		PlayerData.last_duel_result = ""
 		
 		PlayerData.tournament_last_progression_saved = ""
 		PlayerData.tournament_competitors_saved = {"green" : [], "blue" : [], "purple" : [], "red" : [], "gold" : []}
 		PlayerData.tournament_last_duelist_saved = ""
 		
-		$scene_transitioner.scene_transition("main_menu")
+		if PlayerData.last_duel_result != "lose":
+			PlayerData.last_duel_result = ""
+			$scene_transitioner.scene_transition("main_menu")
+		else:
+			PlayerData.last_duel_result = ""
+			$scene_transitioner.scene_transition("game_over")
 	
 
 

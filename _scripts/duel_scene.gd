@@ -13,6 +13,11 @@ func _ready():
 	
 	#Start player turn as the first thing to do
 	$game_logic/player_logic.start_player_turn()
+	
+	#Wait for the intro part to play before playing the actual looping parte of the free_duel theme song
+	if PlayerData.scene_to_return_after_duel == "free_duel":
+		$debug_menu/debug_timer.start(1.5); yield($debug_menu/debug_timer, "timeout")
+		SoundControl.play_sound("lohweo_duel_free", "music")
 
 #-------------------------------------------------------------------------------
 func update_user_interface(card_node):

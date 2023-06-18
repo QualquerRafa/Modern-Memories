@@ -33,7 +33,7 @@ func play_sound(sound_name : String, sfx_or_music = "sfx"):
 				if PlayerData.tournament_last_progression_saved == "tournament_rematch_end":
 					sound_name = "lohweo_duel_tournament_rematch"
 			"free_duel":
-				sound_name = "lohweo_duel_free"
+				sound_name = "lohweo_duel_free_pre"
 		
 		#Update the final sound_file path
 		sound_file = load("res://_resources/_audio/music/" + sound_name + ".mp3")

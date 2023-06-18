@@ -1,8 +1,5 @@
 extends Node
 
-#Programming stuff
-const DEBUG_MODE : bool = false
-
 #Player Variables that are stored within the save
 var player_name : String
 var player_deck : Array = [] #populated by ID:String
@@ -15,7 +12,9 @@ var recorded_duels : Dictionary = {} #populated by {duelist_name : {W:int, L:int
 var game_language : String = "english" #default is english
 var game_volume : float = 0.1 #0 to 1, 'linear2db' converts it into db in 'sound_control.gd'
 
-#Game variables that aren't persistent
+#Variables that aren't persistent
+var game_loaded : bool = false #set to true after the 'savefile' has been correctly loaded
+
 var last_reward_cards : Array = [] #populated by ID:String
 var scene_to_return_after_duel : String = ""
 var going_to_duel : String = "" #populated by a Duelist Name from 'npc_decks.gd'

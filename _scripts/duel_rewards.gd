@@ -41,6 +41,18 @@ func _ready():
 	$duel_info/spelltrap_used.text = "00"
 	$rank_info.hide()
 	$starchip_reward.hide()
+	
+	#If it's free duel, increment the Win and Lose count
+	if PlayerData.scene_to_return_after_duel == "free_duel":
+		var win_or_lose = "W"
+		if duel_winner != "player":
+			win_or_lose = "L"
+		
+		if PlayerData.recorded_duels.keys().has(PlayerData.going_to_duel):
+			PlayerData.recorded_duels[PlayerData.going_to_duel][win_or_lose] += 1
+		else:
+			PlayerData.recorded_duels[PlayerData.going_to_duel] = {"W":0, "L":0}
+			PlayerData.recorded_duels[PlayerData.going_to_duel][win_or_lose] = 1
 
 ####################################################################################################
 # CALCULATE REWARDS FUNCTIONS
@@ -212,6 +224,8 @@ var phase_of_reveal = 0
 func show_duel_info():
 	match phase_of_reveal:
 		0:
+			SoundControl.play_sound("lohweo_duel_win_extension", "music")
+			
 			#Hide the YOU WIN text
 			var tweener = $BIG_LETTERS/tween
 			var text_timer : float = 1
@@ -303,10 +317,13 @@ func show_duel_info():
 					remove_reward_scene_from_tree()
 
 func remove_reward_scene_from_tree():
-	#print(get_node("..").get_children())
+	#For free duels, reset temporarily stored info in PlayerData
+	if PlayerData.scene_to_return_after_duel == "free_duel":
+		PlayerData.last_duel_result = ""
+	
 	$final_timer.start(2); yield($final_timer, "timeout")
 	get_node("../reward_scene").queue_free()
-	#print(get_node("..").get_children())
+
 
 ####################################################################################################
 # AUXILIARY FUNCTIONS
@@ -360,18 +377,32 @@ func show_big_letters():
 	
 	#Do the animation of the words comming in on the screen
 	var tweener = $BIG_LETTERS/tween
-	var x_position_offset : int = 1280
-	var text_timer : float = 1
+	var x_position_offset : int = 1000
+	var text_timer : float = 3
 	
-	tweener.interpolate_property($BIG_LETTERS/YOU, "rect_position:x", $BIG_LETTERS/YOU.rect_position.x - x_position_offset, $BIG_LETTERS/YOU.rect_position.x, text_timer, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	tweener.interpolate_property($BIG_LETTERS/win_lose, "rect_position:x", $BIG_LETTERS/win_lose.rect_position.x + x_position_offset, $BIG_LETTERS/win_lose.rect_position.x, text_timer, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	tweener.interpolate_property($BIG_LETTERS/YOU, "rect_position:x", $BIG_LETTERS/YOU.rect_position.x - x_position_offset, $BIG_LETTERS/YOU.rect_position.x, text_timer, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+	tweener.interpolate_property($BIG_LETTERS/win_lose, "rect_position:x", $BIG_LETTERS/win_lose.rect_position.x + x_position_offset, $BIG_LETTERS/win_lose.rect_position.x, text_timer, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 	tweener.start()
 	yield(tweener, "tween_completed")
 	
-	$BIG_LETTERS/timer.start(text_timer/2); yield($BIG_LETTERS/timer, "timeout")
+	$BIG_LETTERS/timer.start(6); yield($BIG_LETTERS/timer, "timeout")
 	
-	#tweener.interpolate_property($BIG_LETTERS, "modulate", Color(1,1,1, 1), Color(1,1,1, 0), text_timer/2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	#tweener.start()
-	#yield(tweener, "tween_completed")
-	
-	#show_duel_info()
+	if duel_winner == "player":
+		show_duel_info()
+	else:
+		#Hide stuff so it doesn't overlap before queieng free
+		$user_interface.hide()
+		$cards_reward.hide()
+		$duel_info.hide()
+		$rank_info.hide()
+		$starchip_reward.hide()
+		$screen_button.hide()
+		
+		tweener.interpolate_property($BIG_LETTERS, "modulate", Color(1,1,1, 1), Color(1,1,1, 0), text_timer/2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+		tweener.start()
+		yield(tweener, "tween_completed")
+		$BIG_LETTERS.hide()
+		$BIG_LETTERS.z_index = 0
+		
+		remove_reward_scene_from_tree()
+		$scene_transitioner.scene_transition(PlayerData.scene_to_return_after_duel)

@@ -6,8 +6,12 @@ onready var free_duel_node_path = get_node("../../../../")
 func _ready():
 	$duelist_name.text = this_duelist_name
 	$duelist_face.texture = load("res://_resources/character_faces/" + this_duelist_name + "0.png")
-	#$win_count.text = "W: " + String(PlayerData.recorded_duels[this_duelist_name].W)
-	#$loss_count.text = "L: " + String(PlayerData.recorded_duels[this_duelist_name].L)
+	
+	if not PlayerData.recorded_duels.keys().has(this_duelist_name):
+		PlayerData.recorded_duels[this_duelist_name] = {"W":0, "L":0}
+	
+	$win_count.text = "W: " + String(PlayerData.recorded_duels[this_duelist_name].W)
+	$loss_count.text = "L: " + String(PlayerData.recorded_duels[this_duelist_name].L)
 
 func active_this_duelist():
 	#Darken the previously highlighted button
