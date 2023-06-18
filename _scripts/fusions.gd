@@ -10,6 +10,11 @@ func check_for_fusion(card_1 : String, card_2 : String):
 	if CardList.card_list[card_2].attribute in ["spell", "trap"] and !(CardList.card_list[card_1].attribute in ["spell", "trap"]):
 		default_result = [card_1, null]
 	
+	#First check if one of the members of the fusion is a Token monster. Those can't be used.
+	if CardList.card_list[card_1].card_name == "Token" or CardList.card_list[card_2].card_name == "Token":
+		#print("cant fuse with token")
+		return default_result #by default Tokens will only be on the field, so they would be card1, returning card2 will always make sense
+	
 	#Check for equipments, return will be [monster_card_id, [status, value_change]]
 	var check_for_equip = equip_fusion(card_1, card_2)
 	if check_for_equip != null:

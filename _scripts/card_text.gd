@@ -99,6 +99,8 @@ func get_card_text(card_id : String):
 				match card_on_CardList.effect[0]:
 					"special_description":
 						line1 = "This card fused with the correct monsters will unleash their unique powers."
+					"token_monster":
+						line1 = "Token monsters cannot be used for Fusions or be Equiped."
 					"on_attack": #Effects triggered when a monster is attacking
 						line1 = "When this Monster attacks, "
 						match card_on_CardList.effect[1]:

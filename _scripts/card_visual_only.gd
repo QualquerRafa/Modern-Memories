@@ -77,6 +77,8 @@ func update_card_information(card_id : String):
 				$card_design/background_texture.texture = load("res://_resources/card_design/texture_purple.png")
 			if this_card_flags.fusion_type == "ritual":
 				$card_design/background_texture.texture = load("res://_resources/card_design/texture_blue.png")
+			if this_card_flags.fusion_type == "token":
+				$card_design/background_texture.texture = load("res://_resources/card_design/texture_gray.png")
 	
 	#Determine if it will show 'monster_features' or 'spelltrap_features' on the design
 	match this_card.attribute:

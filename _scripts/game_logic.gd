@@ -183,7 +183,12 @@ func do_battle(attacking_card : Node, defending_card : Node):
 		
 		emit_signal("battle_finished")
 		check_for_camera_movement_on_effect_return(attacking_card)
-		return #battle logic is stopped, since traps will AT LEAST negate the attack (can do more, but that's on effects.gd to solve)
+		
+		#Check if the trap won't stop battle. By default it does.
+		if CardList.card_list[fell_into_trap.this_card_id].effect.size() > 1 and typeof(CardList.card_list[fell_into_trap.this_card_id].effect[1]) == TYPE_STRING and CardList.card_list[fell_into_trap.this_card_id].effect[1] == "non_interrupt_battle":
+			pass
+		else:
+			return #battle logic is stopped, since most traps will AT LEAST negate the attack (can do more, but that's on effects.gd to solve)
 	
 	var battle_timer_node = $battle_visuals/battle_timer_node
 	var battle_timer : float = 0.2 #in seconds
@@ -285,7 +290,7 @@ func do_battle(attacking_card : Node, defending_card : Node):
 	#Figure out which card should be destroyed (Placed here to be visually hidden by the animations of battle)
 	if attacker_stats > defender_stats:
 		#Check for "on_defend" cant_die
-		if CardList.card_list[defending_card.this_card_id].effect.size() > 0 and CardList.card_list[defending_card.this_card_id].effect[1] == "cant_die":
+		if CardList.card_list[defending_card.this_card_id].effect.size() > 1 and CardList.card_list[defending_card.this_card_id].effect[1] == "cant_die":
 			#pass
 			
 			#Check for special cases where the monster can die by a fragile attribute
@@ -303,7 +308,7 @@ func do_battle(attacking_card : Node, defending_card : Node):
 			destroy_a_card(attacking_card)
 			
 			#Check for "on_defend" cant_die
-			if CardList.card_list[defending_card.this_card_id].effect.size() > 0 and CardList.card_list[defending_card.this_card_id].effect[1] == "cant_die":
+			if CardList.card_list[defending_card.this_card_id].effect.size() > 1 and CardList.card_list[defending_card.this_card_id].effect[1] == "cant_die":
 				#pass
 				
 				#Check for special cases where the monster can die by a fragile attribute
@@ -375,7 +380,7 @@ func do_battle(attacking_card : Node, defending_card : Node):
 			change_lifepoints("enemy", LP_damage)
 			
 			#check for return_damage that Enemy will inflict on the player
-			if CardList.card_list[defending_card.this_card_id].effect.size() > 0 and CardList.card_list[defending_card.this_card_id].effect[1] == "return_damage":
+			if CardList.card_list[defending_card.this_card_id].effect.size() > 1 and CardList.card_list[defending_card.this_card_id].effect[1] == "return_damage":
 				$battle_visuals/battle_timer_node.start(0.9); yield($battle_visuals/battle_timer_node, "timeout")
 				if LP_damage >= int(get_node("../user_interface/top_info_box/player_info/lifepoints").get_text()):
 					check_for_game_end("player_lp_out")
@@ -393,21 +398,21 @@ func do_battle(attacking_card : Node, defending_card : Node):
 			change_lifepoints("player", LP_damage)
 			
 			#check for return_damage that player will inflict on the enemy
-			if CardList.card_list[defending_card.this_card_id].effect.size() > 0 and CardList.card_list[defending_card.this_card_id].effect[1] == "return_damage":
+			if CardList.card_list[defending_card.this_card_id].effect.size() > 1 and CardList.card_list[defending_card.this_card_id].effect[1] == "return_damage":
 				$battle_visuals/battle_timer_node.start(0.9); yield($battle_visuals/battle_timer_node, "timeout")
 				if LP_damage >= int(get_node("../user_interface/top_info_box/com_info/lifepoints").get_text()):
 					check_for_game_end("com_lp_out")
 				change_lifepoints("enemy", LP_damage)
 	
 	#Revert some temporary effects
-	if attacking_card.is_visible() and CardList.card_list[attacking_card.this_card_id].effect.size() > 0 and CardList.card_list[attacking_card.this_card_id].effect[1] in ["injection_fairy"]:
+	if attacking_card.is_visible() and CardList.card_list[attacking_card.this_card_id].effect.size() > 1 and CardList.card_list[attacking_card.this_card_id].effect[1] in ["injection_fairy"]:
 		match CardList.card_list[attacking_card.this_card_id].effect[1]:
 			#Remove the 3000 ATK boost from Injection Fairy Lily
 			"injection_fairy":
 				if attacking_card.this_card_flags.atk_up >= 3000:
 					 attacking_card.this_card_flags.atk_up -= 3000
 					 attacking_card.update_card_information(attacking_card.this_card_id)
-	if defending_card.is_visible() and CardList.card_list[defending_card.this_card_id].effect.size() > 0 and CardList.card_list[defending_card.this_card_id].effect[1] in ["ehero_core"]:
+	if defending_card.is_visible() and CardList.card_list[defending_card.this_card_id].effect.size() > 1 and CardList.card_list[defending_card.this_card_id].effect[1] in ["ehero_core"]:
 		match CardList.card_list[defending_card.this_card_id].effect[1]:
 			"ehero_core":
 				#Remove the attack bonus it gets
@@ -417,7 +422,7 @@ func do_battle(attacking_card : Node, defending_card : Node):
 	
 	#The "change position" effect should happen after battle for both Attacking and Defense
 	for battler in [attacking_card, defending_card]:
-		if CardList.card_list[battler.this_card_id].effect.size() > 0 and CardList.card_list[battler.this_card_id].effect[1] == "change_position":
+		if CardList.card_list[battler.this_card_id].effect.size() > 1 and CardList.card_list[battler.this_card_id].effect[1] == "change_position":
 			effect_activation(battler, CardList.card_list[battler.this_card_id].effect[0])
 			yield($effects, "effect_fully_executed")
 			$battle_visuals/battle_timer_node.start(0.5); yield($battle_visuals/battle_timer_node, "timeout")
@@ -506,7 +511,12 @@ func do_direct_attack(attacking_card):
 		
 		check_for_camera_movement_on_effect_return(attacking_card)
 		emit_signal("battle_finished")
-		return #battle logic is stopped, since traps will AT LEAST negate the attack (can do more, but that's on effects.gd to solve)
+		
+		#Check if the trap won't stop battle. By default it does.
+		if CardList.card_list[fell_into_trap.this_card_id].effect.size() > 1 and typeof(CardList.card_list[fell_into_trap.this_card_id].effect[1]) == TYPE_STRING and CardList.card_list[fell_into_trap.this_card_id].effect[1] == "non_interrupt_battle":
+			pass
+		else:
+			return #battle logic is stopped, since most traps will AT LEAST negate the attack (can do more, but that's on effects.gd to solve)
 	
 	#First thing is to update the cards involved in battle so I can use them as references for calculations and stuff
 	$battle_visuals/visual_cardA.this_card_flags = attacking_card.this_card_flags

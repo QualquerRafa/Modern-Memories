@@ -532,7 +532,42 @@ func activate_spell_generic(card_node : Node):
 						monster_being_checked.update_card_information(monster_being_checked.this_card_id)
 			
 			return type_of_effect
+		
+		"tokens":
+			var token_quantity = CardList.card_list[card_node.this_card_id].effect[1]
+			var target_side_of_field = GAME_LOGIC.get_parent().get_node("duel_field/" + caller_and_target[0] + "_side_zones")
 			
+			for _i in range(token_quantity):
+				for j in [2,1,3,0,4]:
+					var monster_being_checked = target_side_of_field.get_node("monster_" + String(j))
+					if not monster_being_checked.is_visible():
+						#Summon the resulting monster on the field
+						monster_being_checked.this_card_id = String(int(card_node.this_card_id) + 1).pad_zeros(5)
+						monster_being_checked.this_card_flags.fusion_type = "token"
+						monster_being_checked.update_card_information(monster_being_checked.this_card_id)
+						monster_being_checked.toggle_battle_position()
+						monster_being_checked.show()
+						break
+			
+			return "tokens"
+		
+		"tokens_for_life", "tokens_for_damage":
+			var value = 500
+			
+			#Count how many monsters on caller side of the field
+			var number_of_monsters : int = 0
+			var target_side_of_field = GAME_LOGIC.get_parent().get_node("duel_field/" + caller_and_target[0] + "_side_zones")
+			for i in range(5):
+				var card_being_checked = target_side_of_field.get_node("monster_" + String(i))
+				if card_being_checked.is_visible() and card_being_checked.this_card_flags.fusion_type == "token":
+					number_of_monsters += 1
+			
+			#To GIVE lifepoints I have to pass a third extra parameter as true
+			var is_to_heal = CardList.card_list[card_node.this_card_id].effect[0] == "tokens_for_life" #smart way to reference it bellow
+			GAME_LOGIC.change_lifepoints(caller_and_target[int(!is_to_heal)], value * number_of_monsters, is_to_heal)
+			
+			return "Token Heal: " + String(value * number_of_monsters)
+		
 		"special_description": #Magic Cards that are supposed to be used only for fusions, i.e. Metalmorph, Level Up, Toon World, Mask Change ...
 			return "nothing"
 
@@ -584,21 +619,28 @@ func activate_spell_ritual(card_node : Node):
 	#print("monsters_sorted_by_level removed it: ", monsters_sorted_by_level)
 	
 	var level_reached : int = CardList.card_list[sacrificial_monster.this_card_id].level
-	var level_reached_extended : Array = [] #level_reached, [other, monsters, in, case, used]
+	var extra_sacrificed = []
 	
 	if level_reached < ritual_level_goal:
 		#look for more monsters until goal is reached
-		level_reached_extended = pick_more_for_ritual(monsters_sorted_by_level, level_reached, ritual_level_goal)
-		level_reached = level_reached_extended[0]
+		for monster in monsters_sorted_by_level:
+			var lowest_level_in_array = CardList.card_list[monsters_sorted_by_level[0].this_card_id].level
+			level_reached += lowest_level_in_array
+			
+			var monster_popped = monsters_sorted_by_level.pop_front()
+			extra_sacrificed.append(monster_popped)
+			
+			if level_reached >= ritual_level_goal or monsters_sorted_by_level.size() == 0:
+				break
 	
 	#DO THE RITUAL SUMMON FINALLY
 	if level_reached >= ritual_level_goal:
 		#Remove from the field the obligatory sacrificial monsters
 		GAME_LOGIC.destroy_a_card(sacrificial_monster)
 		#Remove from the field any other monsters that were sacrificed with it
-		if level_reached_extended.size() > 0:
-			for i in range(level_reached_extended[1].size()):
-				GAME_LOGIC.destroy_a_card(level_reached_extended[1][i])
+		if extra_sacrificed.size() > 0:
+			for i in range(extra_sacrificed.size()):
+				GAME_LOGIC.destroy_a_card(extra_sacrificed[i])
 		
 		#Summon the resulting monster on the field
 		sacrificial_monster.this_card_id = ritual_result_monster_id
@@ -619,19 +661,6 @@ func activate_spell_ritual(card_node : Node):
 	else:
 		#Couldn't match the level needed, ritual will just fail and card disappears
 		return "FAIL"
-
-var extra_sacrificed : Array = []
-func pick_more_for_ritual(sorted_by_level_array : Array, current_level_reached : int,  level_goal : int):
-	var lowest_level_in_array = CardList.card_list[sorted_by_level_array[0].this_card_id].level
-	current_level_reached += lowest_level_in_array
-	
-	var monster_popped = sorted_by_level_array.pop_front()
-	extra_sacrificed.append(monster_popped)
-	
-	if current_level_reached >= level_goal or sorted_by_level_array.size() == 0:
-		return [current_level_reached, extra_sacrificed]
-	else:
-		pick_more_for_ritual(sorted_by_level_array, current_level_reached, level_goal)
 
 ####################################################################################################
 # TRAP CARDS
@@ -670,6 +699,39 @@ func activate_trap(card_node : Node):
 				var monster_being_checked = target_side_of_field.get_node("monster_" + String(i))
 				if monster_being_checked.is_visible() and monster_being_checked.this_card_flags.is_defense_position == false:
 					GAME_LOGIC.destroy_a_card(monster_being_checked)
+		
+		"copy_as_token":
+			#Summon a copy of the attacking monster as a Token on player's side of the field
+			var target_side_of_field = GAME_LOGIC.get_parent().get_node("duel_field/" + caller_and_target[0] + "_side_zones")
+			
+			for i in [2,1,3,0,4]:
+				var monster_being_checked = target_side_of_field.get_node("monster_" + String(i))
+				if not monster_being_checked.is_visible():
+					monster_being_checked.this_card_flags.fusion_type = "token"
+					monster_being_checked.update_card_information(current_attacker.this_card_id)
+					monster_being_checked.show()
+					break
+		
+		"transform_in_token":
+			#Substitutes the attacking monster for a Token with half of it's strenght
+			var target_side_of_field = GAME_LOGIC.get_parent().get_node("duel_field/" + caller_and_target[1] + "_side_zones")
+			for i in range(5):
+				var monster_being_checked = target_side_of_field.get_node("monster_" + String(i))
+				if monster_being_checked == current_attacker:
+					monster_being_checked.this_card_flags.fusion_type = "token"
+					monster_being_checked.this_card_flags.atk_up -= int(current_attacker.get_node("card_design/monster_features/atk_def/atk").text)/2.0
+					monster_being_checked.this_card_flags.def_up -= int(current_attacker.get_node("card_design/monster_features/atk_def/def").text)/2.0
+					monster_being_checked.update_card_information(current_attacker.this_card_id)
+					break
+		
+		"fortify_tokens":
+			var target_side_of_field = GAME_LOGIC.get_parent().get_node("duel_field/" + caller_and_target[0] + "_side_zones")
+			for i in range(5):
+				var card_being_checked = target_side_of_field.get_node("monster_" + String(i))
+				if card_being_checked.is_visible() and card_being_checked.this_card_flags.fusion_type == "token":
+					#card_being_checked.this_card_flags.atk_up += 1000
+					card_being_checked.this_card_flags.def_up += 1000
+					card_being_checked.update_card_information(card_being_checked.this_card_id)
 	
 	return "trapped!"
 

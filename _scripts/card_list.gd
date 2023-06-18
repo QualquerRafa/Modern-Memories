@@ -13274,7 +13274,7 @@ const card_list = {
 	"attribute": "light",
 	"level": 8,
 	"atk": 2800,
-	"def": 500,
+	"def": 2500,
 	"type": "warrior",
 	"count_as": null,
 	"effect": [
@@ -13678,18 +13678,366 @@ const card_list = {
 	"passcode": "81896370"
   },
   "01083": {
-	"card_name": "Cyber Shield",
+	"card_name": "Stray Lambs",
 	"attribute": "spell",
 	"level": null,
 	"atk": null,
 	"def": null,
-	"type": "equip",
+	"type": "spell",
 	"count_as": null,
 	"effect": [
-	  "atk_up",
-	  500,
-	  "harpie"
+	  "tokens",
+	  2
 	],
-	"passcode": "63224564"
+	"passcode": "60764581"
+  },
+  "01084": {
+	"card_name": "Token",
+	"attribute": "earth",
+	"level": 1,
+	"atk": 0,
+	"def": 0,
+	"type": "beast",
+	"count_as": null,
+	"effect": [
+	  "token_monster"
+	],
+	"passcode": "45681076"
+  },
+  "01085": {
+	"card_name": "Fires of Doomsday",
+	"attribute": "spell",
+	"level": null,
+	"atk": null,
+	"def": null,
+	"type": "spell",
+	"count_as": null,
+	"effect": [
+	  "tokens",
+	  2
+	],
+	"passcode": "46173679"
+  },
+  "01086": {
+	"card_name": "Token",
+	"attribute": "dark",
+	"level": 1,
+	"atk": 0,
+	"def": 0,
+	"type": "fiend",
+	"count_as": null,
+	"effect": [
+	  "token_monster"
+	],
+	"passcode": "63467917"
+  },
+  "01087": {
+	"card_name": "Haunted Zombies",
+	"attribute": "spell",
+	"level": null,
+	"atk": null,
+	"def": null,
+	"type": "spell",
+	"count_as": null,
+	"effect": [
+	  "tokens",
+	  2
+	],
+	"passcode": "32335697"
+  },
+  "01088": {
+	"card_name": "Token",
+	"attribute": "dark",
+	"level": 2,
+	"atk": 0,
+	"def": 0,
+	"type": "zombie",
+	"count_as": null,
+	"effect": [
+	  "token_monster"
+	],
+	"passcode": "73256933"
+  },
+  "01089": {
+	"card_name": "Jam Breeding Machine",
+	"attribute": "spell",
+	"level": null,
+	"atk": null,
+	"def": null,
+	"type": "spell",
+	"count_as": null,
+	"effect": [
+	  "tokens",
+	  2
+	],
+	"passcode": "21770260"
+  },
+  "01090": {
+	"card_name": "Token",
+	"attribute": "water",
+	"level": 1,
+	"atk": 500,
+	"def": 500,
+	"type": "aqua",
+	"count_as": null,
+	"effect": [
+	  "token_monster"
+	],
+	"passcode": "76210702"
+  },
+  "01091": {
+	"card_name": "Multiplication of Ants",
+	"attribute": "spell",
+	"level": null,
+	"atk": null,
+	"def": null,
+	"type": "spell",
+	"count_as": null,
+	"effect": [
+	  "tokens",
+	  2
+	],
+	"passcode": "22493811"
+  },
+  "01092": {
+	"card_name": "Token",
+	"attribute": "earth",
+	"level": 4,
+	"atk": 500,
+	"def": 1200,
+	"type": "insect",
+	"count_as": null,
+	"effect": [
+	  "token_monster"
+	],
+	"passcode": "81293124"
+  },
+  "01093": {
+	"card_name": "Wild Fire",
+	"attribute": "spell",
+	"level": null,
+	"atk": null,
+	"def": null,
+	"type": "spell",
+	"count_as": null,
+	"effect": [
+	  "tokens",
+	  2
+	],
+	"passcode": "68815401"
+  },
+  "01094": {
+	"card_name": "Token",
+	"attribute": "fire",
+	"level": 3,
+	"atk": 1000,
+	"def": 1000,
+	"type": "pyro",
+	"count_as": null,
+	"effect": [
+	  "token_monster"
+	],
+	"passcode": "15481068"
+  },
+  "01095": {
+	"card_name": "Gadget Box",
+	"attribute": "spell",
+	"level": null,
+	"atk": null,
+	"def": null,
+	"type": "spell",
+	"count_as": null,
+	"effect": [
+	  "tokens",
+	  3
+	],
+	"passcode": "08025950"
+  },
+  "01096": {
+	"card_name": "Token",
+	"attribute": "earth",
+	"level": 1,
+	"atk": 0,
+	"def": 0,
+	"type": "machine",
+	"count_as": null,
+	"effect": [
+	  "token_monster"
+	],
+	"passcode": "75805090"
+  },
+  "01097": {
+	"card_name": "Spider Egg",
+	"attribute": "spell",
+	"level": null,
+	"atk": null,
+	"def": null,
+	"type": "spell",
+	"count_as": null,
+	"effect": [
+	  "tokens",
+	  3
+	],
+	"passcode": "56051648"
+  },
+  "01098": {
+	"card_name": "Token",
+	"attribute": "earth",
+	"level": 1,
+	"atk": 100,
+	"def": 100,
+	"type": "insect",
+	"count_as": null,
+	"effect": [
+	  "token_monster"
+	],
+	"passcode": "16456058"
+  },
+  "01099": {
+	"card_name": "Scapegoat",
+	"attribute": "spell",
+	"level": null,
+	"atk": null,
+	"def": null,
+	"type": "spell",
+	"count_as": null,
+	"effect": [
+	  "tokens",
+	  4
+	],
+	"passcode": "73915051"
+  },
+  "01100": {
+	"card_name": "Token",
+	"attribute": "earth",
+	"level": 1,
+	"atk": 0,
+	"def": 0,
+	"type": "beast",
+	"count_as": null,
+	"effect": [
+	  "token_monster"
+	],
+	"passcode": "15073951"
+  },
+  "01101": {
+	"card_name": "Shield Wall",
+	"attribute": "spell",
+	"level": null,
+	"atk": null,
+	"def": null,
+	"type": "spell",
+	"count_as": null,
+	"effect": [
+	  "tokens",
+	  4
+	],
+	"passcode": "01146550"
+  },
+  "01102": {
+	"card_name": "Token",
+	"attribute": "earth",
+	"level": 1,
+	"atk": 0,
+	"def": 1000,
+	"type": "rock",
+	"count_as": null,
+	"effect": [
+	  "token_monster"
+	],
+	"passcode": "65145010"
+  },
+  "01103": {
+	"card_name": "Lair of Darkness",
+	"attribute": "spell",
+	"level": null,
+	"atk": null,
+	"def": null,
+	"type": "spell",
+	"count_as": null,
+	"effect": [
+	  "tokens",
+	  4
+	],
+	"passcode": "59160188"
+  },
+  "01104": {
+	"card_name": "Token",
+	"attribute": "dark",
+	"level": 3,
+	"atk": 1000,
+	"def": 1000,
+	"type": "fiend",
+	"count_as": null,
+	"effect": [
+	  "token_monster"
+	],
+	"passcode": "89518160"
+  },
+  "01105": {
+	"card_name": "Cloning",
+	"attribute": "trap",
+	"level": null,
+	"atk": null,
+	"def": null,
+	"type": "trap",
+	"count_as": null,
+	"effect": [
+	  "copy_as_token"
+	],
+	"passcode": "86871614"
+  },
+  "01106": {
+	"card_name": "Sealing Ceremony of Mokuton",
+	"attribute": "trap",
+	"level": null,
+	"atk": null,
+	"def": null,
+	"type": "trap",
+	"count_as": null,
+	"effect": [
+	  "transform_in_token"
+	],
+	"passcode": "01802450"
+  },
+  "01107": {
+	"card_name": "Token Stampede",
+	"attribute": "trap",
+	"level": null,
+	"atk": null,
+	"def": null,
+	"type": "trap",
+	"count_as": null,
+	"effect": [
+	  "fortify_tokens",
+	  "non_interrupt_battle"
+	],
+	"passcode": "14342283"
+  },
+  "01108": {
+	"card_name": "Token Thanksgiving",
+	"attribute": "spell",
+	"level": null,
+	"atk": null,
+	"def": null,
+	"type": "spell",
+	"count_as": null,
+	"effect": [
+	  "tokens_for_life"
+	],
+	"passcode": "57182235"
+  },
+  "01109": {
+	"card_name": "Token Feastevil",
+	"attribute": "spell",
+	"level": null,
+	"atk": null,
+	"def": null,
+	"type": "spell",
+	"count_as": null,
+	"effect": [
+	  "tokens_for_damage"
+	],
+	"passcode": "83675475"
   }
 }

@@ -67,13 +67,15 @@ func update_card_information(card_id : String):
 		_: #monsters
 			$card_design/card_frame.texture = load("res://_resources/card_design/frame_monster.png")
 			$card_design/background_texture.texture = load("res://_resources/card_design/texture_yellow.png")
-			#Special cases where the background color will change. Effect, Fusion, Rituals, Synchro
+			#Special cases where the background color will change. Effect, Fusion, Rituals, Synchro, Tokens
 			if this_card.effect.size() > 0:
 				$card_design/background_texture.texture = load("res://_resources/card_design/texture_orange.png")
 			if this_card_flags.fusion_type == "fusion":
 				$card_design/background_texture.texture = load("res://_resources/card_design/texture_purple.png")
 			if this_card_flags.fusion_type == "ritual":
 				$card_design/background_texture.texture = load("res://_resources/card_design/texture_blue.png")
+			if this_card_flags.fusion_type == "token":
+				$card_design/background_texture.texture = load("res://_resources/card_design/texture_gray.png")
 	
 	#Determine if it will show 'monster_features' or 'spelltrap_features' on the design
 	match this_card.attribute:

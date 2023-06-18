@@ -72,6 +72,10 @@ func update_user_interface(card_node):
 				$user_interface/card_info_box/colored_bar.texture = load("res://_resources/scene_duel/bar_effect.png")
 			if card_node.this_card_flags.fusion_type == "fusion":
 				$user_interface/card_info_box/colored_bar.texture = load("res://_resources/scene_duel/bar_fusion.png")
+			if card_node.this_card_flags.fusion_type == "ritual":
+				$user_interface/card_info_box/colored_bar.texture = load("res://_resources/scene_duel/bar_ritual.png")
+			if card_node.this_card_flags.fusion_type == "token":
+				$user_interface/card_info_box/colored_bar.texture = load("res://_resources/scene_duel/bar_token.png")
 	
 	#update basic information about the card
 	$user_interface/card_info_box/card_name/card_name.text = this_card.card_name
