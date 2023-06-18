@@ -1,0 +1,72 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://_resources/game_over/background.png" type="Texture" id=1]
+[ext_resource path="res://_scenes/scene_transitioner.tscn" type="PackedScene" id=2]
+[ext_resource path="res://_scripts/game_over.gd" type="Script" id=3]
+[ext_resource path="res://_resources/game_over/puzzle.png" type="Texture" id=4]
+[ext_resource path="res://_resources/tournament/dark_aura.png" type="Texture" id=5]
+[ext_resource path="res://_resources/game_over/game_over.png" type="Texture" id=6]
+
+[sub_resource type="StyleBoxTexture" id=1]
+texture = ExtResource( 1 )
+region_rect = Rect2( 6, 0, 564, 667 )
+axis_stretch_horizontal = 1
+
+[node name="game_over" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="timer" type="Timer" parent="."]
+
+[node name="background" type="Panel" parent="."]
+margin_right = 1280.0
+margin_bottom = 720.0
+custom_styles/panel = SubResource( 1 )
+
+[node name="scene_transitioner" parent="." instance=ExtResource( 2 )]
+visible = false
+
+[node name="DarkAura2" type="Sprite" parent="."]
+position = Vector2( -720, 0 )
+scale = Vector2( 2.16953, 1 )
+texture = ExtResource( 5 )
+centered = false
+
+[node name="DarkAura3" type="Sprite" parent="."]
+position = Vector2( -720, 0 )
+scale = Vector2( 2.16953, 1 )
+texture = ExtResource( 5 )
+centered = false
+
+[node name="Puzzle" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.972549 )
+self_modulate = Color( 1, 1, 1, 0.960784 )
+position = Vector2( 995, 555 )
+rotation = 0.0523599
+scale = Vector2( 0.666, 0.666 )
+texture = ExtResource( 4 )
+
+[node name="Puzzle2" type="Sprite" parent="Puzzle"]
+self_modulate = Color( 0, 0, 0, 0.686275 )
+show_behind_parent = true
+position = Vector2( 25.2484, 22.7338 )
+texture = ExtResource( 4 )
+
+[node name="Puzzle3" type="Sprite" parent="Puzzle"]
+self_modulate = Color( 0, 0, 0, 0.2 )
+show_behind_parent = true
+position = Vector2( -6.23352, -4.18414 )
+texture = ExtResource( 4 )
+
+[node name="GameOver" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.85098 )
+position = Vector2( 27, 115 )
+rotation = -0.0279253
+scale = Vector2( 0.666, 0.666 )
+texture = ExtResource( 6 )
+centered = false
+
+[node name="DarkAura" type="Sprite" parent="."]
+position = Vector2( -720, 0 )
+scale = Vector2( 2.16953, 1 )
+texture = ExtResource( 5 )
+centered = false

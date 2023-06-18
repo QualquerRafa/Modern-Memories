@@ -1,0 +1,210 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://_resources/fonts/BankGothic Md BT.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://_resources/card_shop/full_bg.png" type="Texture" id=2]
+[ext_resource path="res://_scenes/scene_transitioner.tscn" type="PackedScene" id=3]
+[ext_resource path="res://_resources/scene_duel/top_info_box.png" type="Texture" id=4]
+[ext_resource path="res://_resources/scene_deck_building/back_button.png" type="Texture" id=5]
+[ext_resource path="res://_scripts/options_scene.gd" type="Script" id=6]
+[ext_resource path="res://_resources/card_shop/window_code.png" type="Texture" id=7]
+
+[sub_resource type="DynamicFont" id=1]
+size = 68
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+use_mipmaps = true
+use_filter = true
+extra_spacing_char = -4
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 33
+outline_size = 2
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.0313726, 0.0862745, 0.117647, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0.356863, 0.407843, 0.435294, 1 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.0313726, 0.0862745, 0.117647, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0.356863, 0.407843, 0.435294, 1 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.0313726, 0.0862745, 0.117647, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0.356863, 0.407843, 0.435294, 1 )
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0.356863, 0.407843, 0.435294, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0.0313726, 0.0862745, 0.117647, 1 )
+expand_margin_top = 1.0
+expand_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0.356863, 0.407843, 0.435294, 1 )
+
+[sub_resource type="Theme" id=4]
+HScrollBar/icons/decrement = null
+HScrollBar/icons/decrement_highlight = null
+HScrollBar/icons/decrement_pressed = null
+HScrollBar/icons/increment = null
+HScrollBar/icons/increment_highlight = null
+HScrollBar/icons/increment_pressed = null
+HScrollBar/styles/grabber = SubResource( 3 )
+HScrollBar/styles/grabber_highlight = SubResource( 5 )
+HScrollBar/styles/grabber_pressed = SubResource( 6 )
+HScrollBar/styles/scroll = SubResource( 7 )
+HScrollBar/styles/scroll_focus = SubResource( 8 )
+
+[node name="options_scene" type="Node2D"]
+script = ExtResource( 6 )
+
+[node name="FullBg" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+centered = false
+
+[node name="user_interface" type="Node2D" parent="."]
+
+[node name="top_info_box" type="Sprite" parent="user_interface"]
+texture = ExtResource( 4 )
+centered = false
+
+[node name="window_title" type="Label" parent="user_interface/top_info_box"]
+margin_top = -15.0
+margin_right = 1280.0
+margin_bottom = 58.0
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+custom_fonts/font = SubResource( 1 )
+text = "Game Options"
+align = 1
+valign = 1
+
+[node name="back_button" type="Button" parent="user_interface"]
+margin_right = 12.0
+margin_bottom = 20.0
+rect_pivot_offset = Vector2( 28, 25 )
+focus_mode = 0
+enabled_focus_mode = 0
+icon = ExtResource( 5 )
+flat = true
+
+[node name="UI_tween" type="Tween" parent="user_interface"]
+
+[node name="scene_transitioner" parent="." instance=ExtResource( 3 )]
+visible = false
+
+[node name="option_volume" type="Control" parent="."]
+margin_left = 40.0
+margin_top = 100.0
+margin_right = 568.0
+margin_bottom = 226.0
+
+[node name="window_frame" type="Sprite" parent="option_volume"]
+texture = ExtResource( 7 )
+centered = false
+
+[node name="window_title" type="Label" parent="option_volume"]
+margin_left = 8.0
+margin_top = 2.0
+margin_right = 513.0
+margin_bottom = 40.0
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+custom_fonts/font = SubResource( 2 )
+text = "Game Volume"
+valign = 1
+
+[node name="volume_percent_indicator" type="Label" parent="option_volume"]
+margin_left = 403.0
+margin_top = 2.0
+margin_right = 513.0
+margin_bottom = 40.0
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+custom_fonts/font = SubResource( 2 )
+text = "100%"
+align = 2
+valign = 1
+
+[node name="scroller" type="HScrollBar" parent="option_volume"]
+margin_left = 28.0
+margin_top = 63.0
+margin_right = 498.0
+margin_bottom = 101.0
+theme = SubResource( 4 )
+max_value = 11.0
+step = 0.1
+page = 1.0
+value = 1.0
+
+[node name="option_language" type="Control" parent="."]
+margin_left = 40.0
+margin_top = 244.0
+margin_right = 568.0
+margin_bottom = 370.0
+
+[node name="window_frame" type="Sprite" parent="option_language"]
+texture = ExtResource( 7 )
+centered = false
+
+[node name="window_title" type="Label" parent="option_language"]
+margin_left = 8.0
+margin_top = 2.0
+margin_right = 513.0
+margin_bottom = 40.0
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+custom_fonts/font = SubResource( 2 )
+text = "Game Language"
+valign = 1
+
+[node name="option_challenges" type="Control" parent="."]
+margin_left = 664.0
+margin_top = 100.0
+margin_right = 1192.0
+margin_bottom = 226.0
+
+[node name="window_frame" type="Sprite" parent="option_challenges"]
+texture = ExtResource( 7 )
+centered = false
+
+[node name="window_title" type="Label" parent="option_challenges"]
+margin_left = 8.0
+margin_top = 2.0
+margin_right = 513.0
+margin_bottom = 40.0
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+custom_fonts/font = SubResource( 2 )
+text = "Game Challenges"
+valign = 1
+
+[connection signal="button_up" from="user_interface/back_button" to="." method="_on_back_button_button_up"]
+[connection signal="value_changed" from="option_volume/scroller" to="." method="_on_scroller_value_changed"]

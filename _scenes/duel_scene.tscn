@@ -2197,63 +2197,65 @@ texture = ExtResource( 18 )
 
 [node name="tween" type="Tween" parent="back_to_hand"]
 
-[node name="Debug Menu" type="Control" parent="."]
+[node name="debug_menu" type="Control" parent="."]
 margin_top = 56.0
 margin_right = 40.0
 margin_bottom = 96.0
 script = ExtResource( 16 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Debug Menu"]
+[node name="VBoxContainer" type="VBoxContainer" parent="debug_menu"]
 margin_right = 40.0
 margin_bottom = 40.0
 
-[node name="reset_scene_button" type="Button" parent="Debug Menu/VBoxContainer"]
+[node name="reset_scene_button" type="Button" parent="debug_menu/VBoxContainer"]
 margin_right = 100.0
 margin_bottom = 33.0
 rect_min_size = Vector2( 100, 33 )
 text = "RESET SCENE"
 
-[node name="change_card_id" type="Button" parent="Debug Menu/VBoxContainer"]
+[node name="change_card_id" type="Button" parent="debug_menu/VBoxContainer"]
 margin_top = 37.0
 margin_right = 100.0
 margin_bottom = 70.0
 rect_min_size = Vector2( 100, 33 )
 text = "Change Card"
 
-[node name="print_phase" type="Button" parent="Debug Menu/VBoxContainer"]
+[node name="print_phase" type="Button" parent="debug_menu/VBoxContainer"]
 margin_top = 74.0
 margin_right = 100.0
 margin_bottom = 107.0
 rect_min_size = Vector2( 100, 33 )
 text = "print phase"
 
-[node name="change_field_view" type="Button" parent="Debug Menu/VBoxContainer"]
+[node name="change_field_view" type="Button" parent="debug_menu/VBoxContainer"]
 margin_top = 111.0
 margin_right = 100.0
 margin_bottom = 144.0
 rect_min_size = Vector2( 100, 33 )
 text = "change field"
 
-[node name="phase_rewind" type="Button" parent="Debug Menu/VBoxContainer"]
+[node name="phase_rewind" type="Button" parent="debug_menu/VBoxContainer"]
 margin_top = 148.0
 margin_right = 100.0
 margin_bottom = 181.0
 rect_min_size = Vector2( 100, 33 )
 text = "Next turn"
 
-[node name="end_duel" type="Button" parent="Debug Menu/VBoxContainer"]
+[node name="end_duel" type="Button" parent="debug_menu/VBoxContainer"]
 margin_top = 185.0
 margin_right = 100.0
 margin_bottom = 218.0
 rect_min_size = Vector2( 100, 33 )
 text = "End Duel"
 
-[node name="mill_Com" type="Button" parent="Debug Menu/VBoxContainer"]
+[node name="mill_Com" type="Button" parent="debug_menu/VBoxContainer"]
 margin_top = 222.0
 margin_right = 100.0
 margin_bottom = 255.0
 rect_min_size = Vector2( 100, 33 )
 text = "Mill COM"
+
+[node name="debug_timer" type="Timer" parent="debug_menu"]
 
 [node name="scene_transitioner" parent="." instance=ExtResource( 24 )]
 visible = false
@@ -2276,10 +2278,10 @@ visible = false
 [connection signal="button_up" from="change_field_view" to="." method="_on_change_field_view_button_up"]
 [connection signal="button_up" from="turn_end_button" to="." method="_on_turn_end_button_button_up"]
 [connection signal="button_up" from="back_to_hand" to="." method="_on_back_to_hand_button_up"]
-[connection signal="button_up" from="Debug Menu/VBoxContainer/reset_scene_button" to="Debug Menu" method="_on_reset_scene_button_button_up"]
-[connection signal="button_up" from="Debug Menu/VBoxContainer/change_card_id" to="Debug Menu" method="_on_change_card_id_button_up"]
-[connection signal="button_up" from="Debug Menu/VBoxContainer/print_phase" to="Debug Menu" method="_on_print_phase_button_up"]
-[connection signal="button_up" from="Debug Menu/VBoxContainer/change_field_view" to="Debug Menu" method="_on_change_field_view_button_up"]
-[connection signal="button_up" from="Debug Menu/VBoxContainer/phase_rewind" to="Debug Menu" method="_on_phase_rewind_button_up"]
-[connection signal="button_up" from="Debug Menu/VBoxContainer/end_duel" to="Debug Menu" method="_on_end_duel_button_up"]
-[connection signal="button_up" from="Debug Menu/VBoxContainer/mill_Com" to="Debug Menu" method="_on_mill_Com_button_up"]
+[connection signal="button_up" from="debug_menu/VBoxContainer/reset_scene_button" to="debug_menu" method="_on_reset_scene_button_button_up"]
+[connection signal="button_up" from="debug_menu/VBoxContainer/change_card_id" to="debug_menu" method="_on_change_card_id_button_up"]
+[connection signal="button_up" from="debug_menu/VBoxContainer/print_phase" to="debug_menu" method="_on_print_phase_button_up"]
+[connection signal="button_up" from="debug_menu/VBoxContainer/change_field_view" to="debug_menu" method="_on_change_field_view_button_up"]
+[connection signal="button_up" from="debug_menu/VBoxContainer/phase_rewind" to="debug_menu" method="_on_phase_rewind_button_up"]
+[connection signal="button_up" from="debug_menu/VBoxContainer/end_duel" to="debug_menu" method="_on_end_duel_button_up"]
+[connection signal="button_up" from="debug_menu/VBoxContainer/mill_Com" to="debug_menu" method="_on_mill_Com_button_up"]

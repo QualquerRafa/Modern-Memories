@@ -60,7 +60,6 @@ font_data = ExtResource( 3 )
 script = ExtResource( 9 )
 
 [node name="BIG_LETTERS" type="Node2D" parent="."]
-visible = false
 z_index = 1
 
 [node name="bg_dark" type="Sprite" parent="BIG_LETTERS"]
