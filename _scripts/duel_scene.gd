@@ -24,11 +24,6 @@ func update_user_interface(card_node):
 	#'this_card' is defined by the passed ID when clicking a card on screen
 	var this_card : Dictionary = CardList.card_list[card_node.this_card_id]
 	
-	#update card descriptive text
-	$user_interface/card_info_box/card_text.show()
-	var card_text = CardText.get_card_text(card_node.this_card_id)
-	$user_interface/card_info_box/card_text/Container/description_line1.text = card_text
-	
 	#Update the specifics that may vary from card to card
 	match this_card.attribute:
 		"spell", "trap":
@@ -76,6 +71,11 @@ func update_user_interface(card_node):
 				$user_interface/card_info_box/colored_bar.texture = load("res://_resources/scene_duel/bar_ritual.png")
 			if card_node.this_card_flags.fusion_type == "token":
 				$user_interface/card_info_box/colored_bar.texture = load("res://_resources/scene_duel/bar_token.png")
+	
+	#update card descriptive text
+	$user_interface/card_info_box/card_text.show()
+	var card_text = CardText.get_card_text(card_node.this_card_id)
+	$user_interface/card_info_box/card_text/Container/description_line1.text = card_text
 	
 	#update basic information about the card
 	$user_interface/card_info_box/card_name/card_name.text = this_card.card_name
@@ -277,7 +277,10 @@ func _on_turn_end_button_button_up():
 	#At the end of player's turn, remove the darken layer from the monsters that battled this turn
 	for i in range(5):
 		var this_i_monster = get_node("duel_field/player_side_zones/monster_" + String(i))
-		this_i_monster.get_node("darken_card").hide()
+		this_i_monster.get_node("card_design/darken_card").hide()
+		
+		if CardList.card_list[this_i_monster.this_card_id].effect.size() > 1 and typeof(CardList.card_list[this_i_monster.this_card_id].effect[1]) == TYPE_STRING and CardList.card_list[this_i_monster.this_card_id].effect[1] == "multiple_attacker":
+			this_i_monster.this_card_flags.multiple_attacks = 0
 	
 	#Change field view to Enemy Field
 	if $duel_field.position == player_field_camera_position:

@@ -506,7 +506,10 @@ func enemy_end_turn():
 	#At the end of the turn, remove the darken layer from the monsters that battled this turn
 	for i in range(5):
 		var this_i_monster = get_node("../../duel_field/enemy_side_zones/monster_" + String(i))
-		this_i_monster.get_node("darken_card").hide()
+		this_i_monster.get_node("card_design/darken_card").hide()
+		
+		if CardList.card_list[this_i_monster.this_card_id].effect.size() > 1 and typeof(CardList.card_list[this_i_monster.this_card_id].effect[1]) == TYPE_STRING and CardList.card_list[this_i_monster.this_card_id].effect[1] == "multiple_attacker":
+			this_i_monster.this_card_flags.multiple_attacks = 0
 	
 	#Move camera back to player's side of the field
 	if get_node("../../duel_field").position == get_node("../../").enemy_field_camera_position:

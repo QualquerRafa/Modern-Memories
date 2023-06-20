@@ -272,4 +272,16 @@ func get_card_text(card_id : String):
 		line2 = "This card can count as " + card_on_CardList.count_as + " for some fusions."
 		full_card_text = line1 + "\n" + line2
 	
+	#If the card was ritual summoned change Line2 to describe that special effect. Check it by colored bar.
+	if self.get_node("../").has_node("duel_scene"):
+		var sketchy_as_hell_scene_node = self.get_node("../").get_node("duel_scene")
+		var even_sketchier_colored_bar_resource_path = sketchy_as_hell_scene_node.get_node("user_interface/card_info_box/colored_bar").texture.resource_path
+		var step1 = even_sketchier_colored_bar_resource_path.split("/")
+		var from_texture_path_card_type = step1[step1.size()-1].trim_suffix(".png").split("_")[1]
+		#print(from_texture_path_card_type)
+		
+		if from_texture_path_card_type == "ritual" and not CardList.card_list[card_id].attribute in ["spell", "trap"]:
+			line2 = "This Ritual monster has some hidden powers."
+			full_card_text = line1 + "\n" + line2
+	
 	return full_card_text

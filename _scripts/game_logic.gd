@@ -66,11 +66,20 @@ func reset_a_card_node_properties(card_node_to_reset):
 	"atk_up" : 0,
 	"def_up" : 0,
 	"has_activated_effect" : false,
+	"multiple_attacks" : 0,
 	}
 	
-	card_node_to_reset.get_node("darken_card").hide()
+	card_node_to_reset.get_node("card_design/darken_card").hide()
 
 func destroy_a_card(card_node_to_destroy):
+	#If it's a ritual monster, check for it's on_ritual_death effects
+	if card_node_to_destroy.this_card_flags.fusion_type == "ritual":
+		#Wait some time if it's in a battle
+		if card_ready_to_attack == card_node_to_destroy or card_ready_to_defend == card_node_to_destroy:
+			$effects/effect_timer_node.start(0.5); yield($effects/effect_timer_node, "timeout")
+		
+		$effects.ritual_effects_activation(card_node_to_destroy, "on_ritual_death")
+	
 	#first reset the nodes properties so it's wiped clean
 	reset_a_card_node_properties(card_node_to_destroy)
 	
@@ -117,9 +126,13 @@ func do_battle(attacking_card : Node, defending_card : Node):
 	
 	#Attacker flags
 	attacking_card.this_card_flags.has_battled = true
-	attacking_card.get_node("darken_card").show()
+	attacking_card.get_node("card_design/darken_card").show()
 	attacking_card.this_card_flags.is_facedown = false
 	attacking_card.update_card_information(attacking_card.this_card_id)
+	
+	#For multiple attackers that still didn't do it's second attack, hide the darken indicator
+	if CardList.card_list[attacking_card.this_card_id].effect.size() > 1 and CardList.card_list[attacking_card.this_card_id].effect[1] == "multiple_attacker" and attacking_card.this_card_flags.multiple_attacks == 0:
+		attacking_card.get_node("card_design/darken_card").hide()
 	
 	#Catch end of Flip Effect
 	if not attacking_card.is_visible() or not defending_card.is_visible():
@@ -155,6 +168,12 @@ func do_battle(attacking_card : Node, defending_card : Node):
 		effect_activation(attacking_card, "on_attack")
 		yield($effects, "effect_fully_executed")
 		$battle_visuals/battle_timer_node.start(0.3); yield($battle_visuals/battle_timer_node, "timeout")
+	#Check for Ritual Monsters Attack effects
+	if attacking_card.this_card_flags.fusion_type == "ritual" and CardList.card_list[attacking_card.this_card_id].card_name in ["Blue-Eyes Chaos MAX Dragon", "Gearfried the Swordmaster"]:
+		effect_activation(attacking_card, "on_attack")
+		yield($effects, "effect_fully_executed")
+		$battle_visuals/battle_timer_node.start(0.3); yield($battle_visuals/battle_timer_node, "timeout")
+	
 	#Catch end of Attack Effect
 	if not attacking_card.is_visible() or not defending_card.is_visible():
 		emit_signal("battle_finished")
@@ -177,7 +196,7 @@ func do_battle(attacking_card : Node, defending_card : Node):
 		
 		#Set the attacker flags
 		attacking_card.this_card_flags.has_battled = true
-		attacking_card.get_node("darken_card").show()
+		attacking_card.get_node("card_design/darken_card").show()
 		attacking_card.this_card_flags.is_facedown = false
 		attacking_card.update_card_information(attacking_card.this_card_id)
 		
@@ -288,6 +307,10 @@ func do_battle(attacking_card : Node, defending_card : Node):
 	battle_timer_node.start(battle_timer); yield(battle_timer_node, "timeout")
 	
 	#Figure out which card should be destroyed (Placed here to be visually hidden by the animations of battle)
+	var fix_for_relinquished_ritual_effect = false
+	if defending_card.this_card_flags.fusion_type == "ritual" and CardList.card_list[defending_card.this_card_id].card_name == "Relinquished":
+		fix_for_relinquished_ritual_effect = true
+	
 	if attacker_stats > defender_stats:
 		#Check for "on_defend" cant_die
 		if CardList.card_list[defending_card.this_card_id].effect.size() > 1 and CardList.card_list[defending_card.this_card_id].effect[1] == "cant_die":
@@ -385,6 +408,12 @@ func do_battle(attacking_card : Node, defending_card : Node):
 				if LP_damage >= int(get_node("../user_interface/top_info_box/player_info/lifepoints").get_text()):
 					check_for_game_end("player_lp_out")
 				change_lifepoints("player", LP_damage)
+			#check for Relinquished ritual effect
+			if fix_for_relinquished_ritual_effect:
+				$battle_visuals/battle_timer_node.start(0.9); yield($battle_visuals/battle_timer_node, "timeout")
+				if LP_damage >= int(get_node("../user_interface/top_info_box/player_info/lifepoints").get_text()):
+					check_for_game_end("player_lp_out")
+				change_lifepoints("player", LP_damage)
 			
 	else:
 		#Reduce LP as intended
@@ -399,6 +428,12 @@ func do_battle(attacking_card : Node, defending_card : Node):
 			
 			#check for return_damage that player will inflict on the enemy
 			if CardList.card_list[defending_card.this_card_id].effect.size() > 1 and CardList.card_list[defending_card.this_card_id].effect[1] == "return_damage":
+				$battle_visuals/battle_timer_node.start(0.9); yield($battle_visuals/battle_timer_node, "timeout")
+				if LP_damage >= int(get_node("../user_interface/top_info_box/com_info/lifepoints").get_text()):
+					check_for_game_end("com_lp_out")
+				change_lifepoints("enemy", LP_damage)
+			#check for Relinquished ritual effect
+			if fix_for_relinquished_ritual_effect:
 				$battle_visuals/battle_timer_node.start(0.9); yield($battle_visuals/battle_timer_node, "timeout")
 				if LP_damage >= int(get_node("../user_interface/top_info_box/com_info/lifepoints").get_text()):
 					check_for_game_end("com_lp_out")
@@ -419,6 +454,16 @@ func do_battle(attacking_card : Node, defending_card : Node):
 				if defending_card.this_card_flags.atk_up >= CardList.card_list[defending_card.this_card_id].atk:
 					defending_card.this_card_flags.atk_up -= CardList.card_list[defending_card.this_card_id].atk
 					defending_card.update_card_information(defending_card.this_card_id)
+	#Revert the Ritual battle effects (atk and def)
+	if attacking_card.this_card_flags.fusion_type == "ritual" and CardList.card_list[attacking_card.this_card_id].card_name in ["Blue-Eyes Chaos MAX Dragon", "Gearfried the Swordmaster"]:
+		match CardList.card_list[attacking_card.this_card_id].card_name:
+			"Blue-Eyes Chaos MAX Dragon":
+				attacking_card.this_card_flags.atk_up -= 4000
+				attacking_card.update_card_information(attacking_card.this_card_id)
+			"Gearfried the Swordmaster":
+				var full_atk_on_field = int(attacking_card.get_node("card_design/monster_features/atk_def/atk").text)
+				attacking_card.this_card_flags.atk_up -= full_atk_on_field/2
+				attacking_card.update_card_information(attacking_card.this_card_id)
 	
 	#The "change position" effect should happen after battle for both Attacking and Defense
 	for battler in [attacking_card, defending_card]:
@@ -482,15 +527,25 @@ func do_direct_attack(attacking_card):
 	
 	#Set the attacker flags
 	attacking_card.this_card_flags.has_battled = true
-	attacking_card.get_node("darken_card").show()
+	attacking_card.get_node("card_design/darken_card").show()
 	attacking_card.this_card_flags.is_facedown = false
 	attacking_card.update_card_information(attacking_card.this_card_id)
+	
+	#For multiple attackers that still didn't do it's second attack, hide the darken indicator
+	if CardList.card_list[attacking_card.this_card_id].effect.size() > 1 and CardList.card_list[attacking_card.this_card_id].effect[1] == "multiple_attacker" and attacking_card.this_card_flags.multiple_attacks == 0:
+		attacking_card.get_node("card_design/darken_card").hide()
 	
 	#Check for on_attack effects right before battle starts
 	if CardList.card_list[attacking_card.this_card_id].effect.size() > 0 and CardList.card_list[attacking_card.this_card_id].effect[0] == "on_attack":
 		effect_activation(attacking_card, "on_attack")
 		yield($effects, "effect_fully_executed")
 		$battle_visuals/battle_timer_node.start(0.3); yield($battle_visuals/battle_timer_node, "timeout")
+	#Check for Ritual Monsters Attack effects
+	if attacking_card.this_card_flags.fusion_type == "ritual" and CardList.card_list[attacking_card.this_card_id].card_name in ["Blue-Eyes Chaos MAX Dragon", "Gearfried the Swordmaster"]:
+		effect_activation(attacking_card, "on_attack")
+		yield($effects, "effect_fully_executed")
+		$battle_visuals/battle_timer_node.start(0.3); yield($battle_visuals/battle_timer_node, "timeout")
+		
 	#Catch end of Attack Effect
 	if not attacking_card.is_visible():
 		emit_signal("battle_finished")
@@ -503,11 +558,15 @@ func do_direct_attack(attacking_card):
 		effect_activation(fell_into_trap, "on_flip")
 		yield($effects, "effect_fully_executed")
 		
-		#Set the attacker flags
-		attacking_card.this_card_flags.has_battled = true
-		attacking_card.get_node("darken_card").show()
-		attacking_card.this_card_flags.is_facedown = false
-		attacking_card.update_card_information(attacking_card.this_card_id)
+#		#Set the attacker flags
+#		attacking_card.this_card_flags.has_battled = true
+#		attacking_card.get_node("card_design/darken_card").show()
+#		attacking_card.this_card_flags.is_facedown = false
+#		attacking_card.update_card_information(attacking_card.this_card_id)
+#
+#		#For multiple attackers that still didn't do it's second attack, hide the darken indicator
+#		if CardList.card_list[attacking_card.this_card_id].effect.size() > 1 and CardList.card_list[attacking_card.this_card_id].effect[1] == "multiple_attacker" and attacking_card.this_card_flags.multiple_attacks == 0:
+#			attacking_card.get_node("card_design/darken_card").hide()
 		
 		check_for_camera_movement_on_effect_return(attacking_card)
 		emit_signal("battle_finished")
@@ -601,13 +660,23 @@ func do_direct_attack(attacking_card):
 		GAME_PHASE = "enemy_main_phase"
 	
 	#Revert some temporary effects
-	if attacking_card.is_visible() and CardList.card_list[attacking_card.this_card_id].effect.size() > 0 and CardList.card_list[attacking_card.this_card_id].effect[1] in ["injection_fairy"]:
+	if attacking_card.is_visible() and CardList.card_list[attacking_card.this_card_id].effect.size() > 1 and CardList.card_list[attacking_card.this_card_id].effect[1] in ["injection_fairy"]:
 		match CardList.card_list[attacking_card.this_card_id].effect[1]:
 			#Remove the 3000 ATK boost from Injection Fairy Lily
 			"injection_fairy":
 				if attacking_card.this_card_flags.atk_up >= 3000:
 					 attacking_card.this_card_flags.atk_up -= 3000
 					 attacking_card.update_card_information(attacking_card.this_card_id)
+	#Revert the Ritual battle effects
+	if attacking_card.this_card_flags.fusion_type == "ritual" and CardList.card_list[attacking_card.this_card_id].card_name in ["Blue-Eyes Chaos MAX Dragon", "Gearfried the Swordmaster"]:
+		match CardList.card_list[attacking_card.this_card_id].card_name:
+			"Blue-Eyes Chaos MAX Dragon":
+				attacking_card.this_card_flags.atk_up -= 4000
+				attacking_card.update_card_information(attacking_card.this_card_id)
+			"Gearfried the Swordmaster":
+				var full_atk_on_field = int(attacking_card.get_node("card_design/monster_features/atk_def/atk").text)
+				attacking_card.this_card_flags.atk_up -= full_atk_on_field/2
+				attacking_card.update_card_information(attacking_card.this_card_id)
 	
 	#Emit signal at the end of battle
 	emit_signal("battle_finished")

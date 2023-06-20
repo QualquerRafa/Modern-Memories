@@ -8378,7 +8378,7 @@ const card_list = {
 	"card_name": "Elemental HERO Divine Neos",
 	"attribute": "light",
 	"level": 12,
-	"atk": 3000,
+	"atk": 2500,
 	"def": 2500,
 	"type": "warrior",
 	"count_as": null,
@@ -11582,7 +11582,10 @@ const card_list = {
 	"def": 1500,
 	"type": "dragon",
 	"count_as": null,
-	"effect": [],
+	"effect": [
+	  "on_attack",
+	  "multiple_attacker"
+	],
 	"passcode": "95888876"
   },
   "00928": {
@@ -12425,10 +12428,7 @@ const card_list = {
 	"count_as": null,
 	"effect": [
 	  "ritual",
-	  987,
-	  984,
-	  977,
-	  976
+	  998
 	],
 	"passcode": "39996157"
   },
@@ -14039,5 +14039,153 @@ const card_list = {
 	  "tokens_for_damage"
 	],
 	"passcode": "83675475"
+  },
+  "01110": {
+	"card_name": "Royal Straight Slasher",
+	"attribute": "light",
+	"level": 6,
+	"atk": 2400,
+	"def": 1350,
+	"type": "warrior",
+	"count_as": null,
+	"effect": [
+	  "on_summon",
+	  "destroy_card",
+	  "all_enemy_monsters"
+	],
+	"passcode": "11020863"
+  },
+  "01111": {
+	"card_name": "Potato & Chips",
+	"attribute": "earth",
+	"level": 2,
+	"atk": 200,
+	"def": 200,
+	"type": "plant",
+	"count_as": null,
+	"effect": [],
+	"passcode": "54112932"
+  },
+  "01112": {
+	"card_name": "Warrior of Zera",
+	"attribute": "earth",
+	"level": 4,
+	"atk": 1600,
+	"def": 1600,
+	"type": "warrior",
+	"count_as": null,
+	"effect": [],
+	"passcode": "66073051"
+  },
+  "01113": {
+	"card_name": "Zeradias, Herald of Heaven",
+	"attribute": "light",
+	"level": 4,
+	"atk": 2100,
+	"def": 800,
+	"type": "fairy",
+	"count_as": null,
+	"effect": [],
+	"passcode": "12171659"
+  },
+  "01114": {
+	"card_name": "Archlord Zerato",
+	"attribute": "light",
+	"level": 8,
+	"atk": 2800,
+	"def": 2300,
+	"type": "fairy",
+	"count_as": null,
+	"effect": [
+	  "on_summon",
+	  "destroy_card",
+	  "all_enemy_monsters"
+	],
+	"passcode": "18378582"
+  },
+  "01115": {
+	"card_name": "Mazera DeVille",
+	"attribute": "dark",
+	"level": 8,
+	"atk": 2800,
+	"def": 2300,
+	"type": "fiend",
+	"count_as": null,
+	"effect": [
+	  "on_summon",
+	  "mill",
+	  3
+	],
+	"passcode": "06133894"
+  },
+  "01116": {
+	"card_name": "Alghoul Mazera",
+	"attribute": "earth",
+	"level": 8,
+	"atk": 2800,
+	"def": 2300,
+	"type": "zombie",
+	"count_as": null,
+	"effect": [
+	  "on_attack",
+	  "change_position"
+	],
+	"passcode": "45154513"
+  },
+  "01117": {
+	"card_name": "Berserk Dragon",
+	"attribute": "dark",
+	"level": 8,
+	"atk": 3500,
+	"def": 0,
+	"type": "zombie",
+	"count_as": "dragon",
+	"effect": [
+	  "on_attack",
+	  "multiple_attacker"
+	],
+	"passcode": "85605684"
+  },
+  "01118": {
+	"card_name": "Hayabusa Knight",
+	"attribute": "earth",
+	"level": 3,
+	"atk": 1000,
+	"def": 700,
+	"type": "warrior",
+	"count_as": "winged beast",
+	"effect": [
+	  "on_attack",
+	  "multiple_attacker"
+	],
+	"passcode": "21015833"
+  },
+  "01119": {
+	"card_name": "Dragon Revival Ritual",
+	"attribute": "spell",
+	"level": null,
+	"atk": null,
+	"def": null,
+	"type": "ritual",
+	"count_as": null,
+	"effect": [
+	  "ritual",
+	  1040
+	],
+	"passcode": "67195092"
+  },
+  "01120": {
+	"card_name": "Armor Dragon Ritual",
+	"attribute": "spell",
+	"level": null,
+	"atk": null,
+	"def": null,
+	"type": "ritual",
+	"count_as": null,
+	"effect": [
+	  "ritual",
+	  939
+	],
+	"passcode": "58827995"
   }
 }

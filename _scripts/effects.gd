@@ -74,6 +74,20 @@ func call_effect(card_node : Node, type_of_activation : String): #The 'card_node
 					print("Monster effect of type ", CardList.card_list[card_node.this_card_id].effect[0], " isn't programmed.")
 					extra_return_information = "FAIL"
 	
+	#For Ritual Summoned monsters, check for their special effects
+	if card_node.this_card_flags.fusion_type == "ritual":
+		var transform_type_of_activation_in_ritual_condition = {
+			#"on_summon" : "on_ritual_summon", #this one isn't actually needed, when a Ritual Monster is summoned it's effects are auto-called with this parameter
+			"on_attack" : "on_ritual_attack",
+			"on_defend" : "on_ritual_defend",
+			#on_ritual_death is specially called only on card_destroy() function
+		}
+		if transform_type_of_activation_in_ritual_condition.keys().has(type_of_activation):
+			ritual_effects_activation(card_node, transform_type_of_activation_in_ritual_condition[type_of_activation])
+		else:
+			pass
+			#print(type_of_activation, " parameter was ignored for ritual monster")
+	
 	#Increment the correct counters for Duel Reward
 	match card_attribute:
 		"spell", "trap":
@@ -112,7 +126,7 @@ func do_activation_animation(card_node : Node, force_animation = false):
 	$effect_visuals/visual_cardA/card_design/card_back.show()
 	#Gambiarra do caralho pra "não animar" e emitir o sinal direitinho no final
 	#var catch_on_flip = CardList.card_list[card_node.this_card_id].effect[0] == "on_flip" and was_flipped == true
-	if not CardList.card_list[card_node.this_card_id].effect[0] in ["special_description", "on_attack", "on_defend", "on_flip"] or force_animation == true: # or catch_on_flip == true
+	if force_animation == true or not CardList.card_list[card_node.this_card_id].effect[0] in ["special_description", "on_attack", "on_defend", "on_flip"]: # or catch_on_flip == true
 		animation_timer = 0.2
 		SoundControl.play_sound("poc_effect")
 		$effect_visuals.show()
@@ -621,6 +635,9 @@ func activate_spell_ritual(card_node : Node):
 	var level_reached : int = CardList.card_list[sacrificial_monster.this_card_id].level
 	var extra_sacrificed = []
 	
+	#print(level_reached)
+	#print(ritual_level_goal)
+	
 	if level_reached < ritual_level_goal:
 		#look for more monsters until goal is reached
 		for monster in monsters_sorted_by_level:
@@ -655,6 +672,8 @@ func activate_spell_ritual(card_node : Node):
 		if CardList.card_list[ritual_result_monster_id].effect.size() > 0:
 			GAME_LOGIC.effect_activation(sacrificial_monster, "on_summon")
 			#yield(get_node("../effects"), "effect_fully_executed")
+		
+		ritual_effects_activation(sacrificial_monster, "on_ritual_summon")
 		
 		return ritual_result_monster_id
 		
@@ -1249,6 +1268,27 @@ func monster_on_summon(card_node : Node):
 			
 			return "Is to Heal: " + String(is_to_heal)
 		
+		"mill":
+			var card_quantity = CardList.card_list[card_node.this_card_id].effect[2]
+			
+			#Get the Deck reference
+			var target_is = caller_and_target[1]
+			var deck : Array = GAME_LOGIC.get_node("player_logic").player_deck
+			if target_is == "enemy":
+				target_is = "com"
+				deck = GAME_LOGIC.get_node("enemy_logic").enemy_deck
+			var current_deck_size = int(get_node("../../user_interface/top_info_box/"+ target_is +"_info/deck").get_text())
+			
+			#Remove cards from the deck, if it has enough
+			var cards_removed : int = 0
+			for _i in range(card_quantity):
+				if current_deck_size > 0:
+					deck.remove(0) #remove that same card from deck
+					get_node("../../user_interface/top_info_box/"+ target_is +"_info/deck").text = String(deck.size())
+					cards_removed += 1
+			
+			return String(cards_removed)
+		
 	return card_id #generic return
 
 func monster_on_flip(card_node : Node):
@@ -1375,6 +1415,12 @@ func monster_on_attack(card_node : Node):
 	match type_of_effect:
 		"anti_flip", "ignore_spelltrap", "piercing", "can_direct":
 			return type_of_effect #these effects are actually part of the logic on GAME_LOGIC.do_battle() and player_logic and enemy_logic
+		
+		"multiple_attacker": #a good part of the logic here is set by player_logic, game_logic, enemy_logic
+			if card_node.this_card_flags.has_battled == true and card_node.this_card_flags.multiple_attacks == 0:
+				card_node.this_card_flags.has_battled = false
+				card_node.this_card_flags.multiple_attacks = 1
+			return "multiple attacks"
 		
 		"toon":
 			#All the combat checks for this is done in the GAME_LOGIC.do_battle() thingy, this effect will only deduce the 500 LP in case of a direct attack
@@ -1520,3 +1566,165 @@ func monster_on_defend(card_node : Node):
 			return "changed to atk"
 	
 	return "generic return"
+
+func ritual_effects_activation(card_node : Node, ritual_activation_condition : String):
+	var caller_and_target = get_caller_and_target(card_node)
+	var ritual_monster_name = CardList.card_list[card_node.this_card_id].card_name
+	
+	#Call for card animation
+	var monsters_to_not_animate = [
+		"Five-Headed Dragon", "Arcana Knight Joker", "Valkyrion the Magna Warrior",
+		"Lord of the Red", "Paladin of White Dragon", "Paladin of Dark Dragon", "Knight of Armor Dragon",
+		"Cyber Angel Natasha", "Cyber Angel Idaten", "Cyber Angel Benten", "Cyber Angel Izana", "Cyber Angel Dakini", "Cyber Angel Vrash",
+		"Blue-Eyes Chaos MAX Dragon", "Gearfried the Swordmaster", "Relinquished"
+	]
+	
+	if not ritual_monster_name in monsters_to_not_animate:
+		do_activation_animation(card_node, true)
+		yield(self, "effect_animation_finished")
+	
+	#The effects will happen individually for each monster
+	match ritual_activation_condition:
+		"on_ritual_summon":
+			match ritual_monster_name:
+				#on_summon, summon friend
+				"Hungry Burger", "Zera the Mant":
+					var target_side_of_field = GAME_LOGIC.get_parent().get_node("duel_field/" + caller_and_target[0] + "_side_zones")
+					var friend_match = {
+						"Hungry Burger" : "01111", #Potato & Chips
+						"Zera the Mant" : "01112", #Warrior of Zera
+					}
+					#Summon one friend on field
+					for i in [2,1,3,0,4]:
+						var monster_being_checked = target_side_of_field.get_node("monster_" + String(i))
+						if not monster_being_checked.is_visible():
+							#Summon the resulting monster on the field
+							monster_being_checked.this_card_id = friend_match[ritual_monster_name]
+							monster_being_checked.update_card_information(monster_being_checked.this_card_id)
+							monster_being_checked.show()
+							break
+				
+				#on_summon, destroy enemies
+				"Fortress Whale":
+					var target_side_of_field = GAME_LOGIC.get_parent().get_node("duel_field/" + caller_and_target[1] + "_side_zones")
+					
+					#List all of the targetable monsters
+					var highest_atk_so_far = 0
+					var the_monster : Node = null
+					for i in range(5):
+						var card_being_checked = target_side_of_field.get_node("monster_" + String(i))
+						if card_being_checked.is_visible() and card_being_checked.this_card_flags.is_facedown == false and int(card_being_checked.get_node("card_design/monster_features/atk_def/atk").text) >= highest_atk_so_far:
+							highest_atk_so_far = int(card_being_checked.get_node("card_design/monster_features/atk_def/atk").text)
+							the_monster = card_being_checked
+					
+					#Destroy the Highest ATK monster
+					if the_monster != null:
+						GAME_LOGIC.destroy_a_card(the_monster)
+				
+				"Black Luster Soldier", "Magician of Black Chaos":
+					var all_monsters_destroyer = ["Black Luster Soldier"]
+					var destroy_keyword = ""
+					if ritual_monster_name in all_monsters_destroyer:
+						destroy_keyword = "enemy_monsters"
+					else:
+						destroy_keyword = "enemy_spelltraps"
+					
+					var target_side_of_field = GAME_LOGIC.get_parent().get_node("duel_field/" + caller_and_target[1] + "_side_zones")
+					var get_keyword = destroy_keyword.split("_")[1].trim_suffix("s") #returns 'monster' or 'spelltrap
+					for i in range(5):
+						var card_being_checked = target_side_of_field.get_node(get_keyword + "_" + String(i))
+						if card_being_checked.is_visible():
+							GAME_LOGIC.destroy_a_card(card_being_checked)
+				
+				#on_summon, power up
+				"Elemental HERO Divine Neos":
+					var count_spelltrap_on_field : int = 0
+					var target_side_of_field = GAME_LOGIC.get_parent().get_node("duel_field/" + caller_and_target[0] + "_side_zones")
+					for i in range(5):
+						var spelltrap_target = target_side_of_field.get_node("spelltrap_" + String(i))
+						if spelltrap_target.is_visible():
+							count_spelltrap_on_field += 1
+					
+					card_node.this_card_flags.atk_up += 500 * count_spelltrap_on_field
+					card_node.update_card_information(card_node.this_card_id)
+		
+		"on_ritual_death":
+			match ritual_monster_name:
+				#on_death summon successors
+				"Five-Headed Dragon", "Arcana Knight Joker", "Valkyrion the Magna Warrior", "Lord of the Red", "Paladin of White Dragon", "Paladin of Dark Dragon", "Knight of Armor Dragon":
+					var successor_match = {
+						"Five-Headed Dragon" : ["01117"], #Berserk Dragon
+						"Arcana Knight Joker" : ["01110"], #Royal Straight Slasher
+						"Valkyrion the Magna Warrior" : ["00445", "00446", "00447"], #Alpha, Beta, Gamma
+						"Lord of the Red" : ["00643"], #Red-Eyes Black Flare Dragon
+						"Paladin of White Dragon" : ["00240"], #Blue-Eyes White Dragon
+						"Paladin of Dark Dragon" : ["00073"], #Red-Eyes Black Dragon 
+						"Knight of Armor Dragon" : ["00164"], #Armed Dragon LV5
+					}
+					
+					#At Death, do the animation
+					do_activation_animation(card_node, true)
+					yield(self, "effect_animation_finished")
+					
+					#Summon one friend on field
+					var target_side_of_field = GAME_LOGIC.get_parent().get_node("duel_field/" + caller_and_target[0] + "_side_zones")
+					for i in range(successor_match[ritual_monster_name].size()):
+						for j in [2,1,3,0,4]:
+							var monster_being_checked = target_side_of_field.get_node("monster_" + String(j))
+							if not monster_being_checked.is_visible():
+								monster_being_checked.this_card_id = successor_match[ritual_monster_name][i]
+								monster_being_checked.update_card_information(monster_being_checked.this_card_id)
+								monster_being_checked.show()
+								
+								#Call for a possible effect of the summoned monster
+								if CardList.card_list[monster_being_checked.this_card_id].effect.size() > 0:
+									call_effect(monster_being_checked, "on_summon")
+								break
+				
+				#Same thing, but I've separated because it's TOO LONG wtf
+				"Cyber Angel Natasha", "Cyber Angel Idaten", "Cyber Angel Benten", "Cyber Angel Izana", "Cyber Angel Dakini", "Cyber Angel Vrash":
+					var succession_line = ["00998", "00987", "00997", "00984", "00977", "00976"] #same as above but IDs
+					
+					#At Death, do the animation
+					do_activation_animation(card_node, true)
+					yield(self, "effect_animation_finished")
+					
+					#Summon next one on the field
+					var target_side_of_field = GAME_LOGIC.get_parent().get_node("duel_field/" + caller_and_target[0] + "_side_zones")
+					for j in [2,1,3,0,4]:
+						var monster_being_checked = target_side_of_field.get_node("monster_" + String(j))
+						if not monster_being_checked.is_visible():
+							#print("Looking for: ", card_node.this_card_id, " in: ", succession_line, " Found it at index: ", succession_line.find(card_node.this_card_id))
+							if succession_line.find(card_node.this_card_id) != succession_line.size() -1:
+								monster_being_checked.this_card_id = succession_line[succession_line.find(card_node.this_card_id) + 1]
+								monster_being_checked.this_card_flags.fusion_type = "ritual"
+								monster_being_checked.update_card_information(monster_being_checked.this_card_id)
+								monster_being_checked.show()
+								
+								#Call for a possible effect of the summoned monster
+								if CardList.card_list[monster_being_checked.this_card_id].effect.size() > 0:
+									call_effect(monster_being_checked, "on_summon")
+								break
+		
+		"on_ritual_attack":
+			match ritual_monster_name:
+				"Blue-Eyes Chaos MAX Dragon":
+					card_node.this_card_flags.atk_up += 4000
+					card_node.update_card_information(card_node.this_card_id)
+				"Gearfried the Swordmaster":
+					var full_atk_on_field = int(card_node.get_node("card_design/monster_features/atk_def/atk").text)
+					card_node.this_card_flags.atk_up += full_atk_on_field
+					card_node.update_card_information(card_node.this_card_id)
+		
+		"on_ritual_defend":
+			match ritual_monster_name:
+				#Relinquished basically does the same 'return_damage' effect that is purely part of game_logic
+				"Relinquished": pass
+
+
+
+
+
+
+
+

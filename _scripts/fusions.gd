@@ -605,7 +605,7 @@ var generic_fusion_list = {
 	"dinosaur_machine":     ["00052", "00379"],                                    #Cyber Saurus, Cyber Dinosaur
 	"dinosaur_sea serpent": ["00385"],                                             #Megalosmasher X
 	
-	"dragon_egg":         ["00582"],                                              #Ryu-ran
+	"dragon_egg":         ["00559"],                                              #Ryu-ran
 	"dragon_fiend":       ["00535"],                                              #Fiend Skull Dragon
 	"dragon_harpie":      ["01080", "01081"],                                     #Harpie's Baby Dragon, Harpie's Pet Dragon
 	"dragon_machine":     ["00029", "00421"],                                      #Metal Dragon, Rare Metal Dragon
