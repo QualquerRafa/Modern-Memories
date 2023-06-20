@@ -261,6 +261,14 @@ position = Vector2( 164.75, 239.5 )
 scale = Vector2( 1.01064, 1.01042 )
 texture = ExtResource( 13 )
 
+[node name="darken_card" type="Sprite" parent="card_design"]
+visible = false
+self_modulate = Color( 1, 1, 1, 0.392157 )
+position = Vector2( -2, -3 )
+scale = Vector2( 2.60156, 3.79687 )
+texture = ExtResource( 17 )
+centered = false
+
 [node name="card_self_tween" type="Tween" parent="."]
 
 [node name="fusion_indicator" type="Button" parent="."]
@@ -417,14 +425,6 @@ texture = ExtResource( 9 )
 centered = false
 
 [node name="combat_tween" type="Tween" parent="combat_controls"]
-
-[node name="darken_card" type="Sprite" parent="."]
-visible = false
-self_modulate = Color( 1, 1, 1, 0.392157 )
-position = Vector2( -2, -3 )
-scale = Vector2( 2.60156, 3.79687 )
-texture = ExtResource( 17 )
-centered = false
 
 [connection signal="button_up" from="." to="." method="_on_card_node_button_up"]
 [connection signal="mouse_entered" from="." to="." method="_on_card_node_mouse_entered"]
