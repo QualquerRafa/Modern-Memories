@@ -14,12 +14,6 @@ stream = ExtResource( 2 )
 [node name="music_player2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
 
-[node name="music_player3" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 2 )
-
-[node name="music_player4" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 2 )
-
 [node name="sfx_player1" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
 

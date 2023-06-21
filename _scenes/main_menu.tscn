@@ -609,6 +609,7 @@ margin_top = 180.0
 margin_right = 374.0
 margin_bottom = 233.0
 rect_min_size = Vector2( 120, 0 )
+rect_pivot_offset = Vector2( 60, 26 )
 
 [node name="export_close" type="Button" parent="save_load_overlay/save_warning/button_close"]
 margin_left = 4.0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://_resources/fonts/BankGothic Md BT.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://_resources/card_shop/full_bg.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://_resources/scene_deck_building/back_button.png" type="Texture" id=5]
 [ext_resource path="res://_scripts/options_scene.gd" type="Script" id=6]
 [ext_resource path="res://_resources/card_shop/window_code.png" type="Texture" id=7]
+[ext_resource path="res://_resources/scene_duel/darken_bg.png" type="Texture" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 size = 68
@@ -166,9 +167,24 @@ margin_top = 244.0
 margin_right = 568.0
 margin_bottom = 370.0
 
+[node name="window_frame2" type="Sprite" parent="option_language"]
+position = Vector2( 0, 81 )
+texture = ExtResource( 7 )
+centered = false
+
+[node name="option_check" type="Sprite" parent="option_language"]
+position = Vector2( 487, 161 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 8 )
+
 [node name="window_frame" type="Sprite" parent="option_language"]
 texture = ExtResource( 7 )
 centered = false
+
+[node name="option_check2" type="Sprite" parent="option_language"]
+position = Vector2( 487, 81 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 8 )
 
 [node name="window_title" type="Label" parent="option_language"]
 margin_left = 8.0
@@ -183,11 +199,60 @@ custom_fonts/font = SubResource( 2 )
 text = "Game Language"
 valign = 1
 
-[node name="option_challenges" type="Control" parent="."]
+[node name="language1" type="Label" parent="option_language"]
+margin_left = 34.0
+margin_top = 63.0
+margin_right = 450.0
+margin_bottom = 101.0
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+custom_fonts/font = SubResource( 2 )
+text = "English"
+valign = 1
+
+[node name="language2" type="Label" parent="option_language"]
+margin_left = 34.0
+margin_top = 143.0
+margin_right = 450.0
+margin_bottom = 181.0
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+custom_fonts/font = SubResource( 2 )
+text = "Português (Brasil)"
+valign = 1
+
+[node name="option_auto_save" type="Control" parent="."]
 margin_left = 664.0
 margin_top = 100.0
 margin_right = 1192.0
 margin_bottom = 226.0
+
+[node name="window_frame" type="Sprite" parent="option_auto_save"]
+texture = ExtResource( 7 )
+centered = false
+
+[node name="window_title" type="Label" parent="option_auto_save"]
+margin_left = 8.0
+margin_top = 2.0
+margin_right = 513.0
+margin_bottom = 40.0
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+custom_fonts/font = SubResource( 2 )
+text = "Auto-Save after Duel"
+valign = 1
+
+[node name="option_challenges" type="Control" parent="."]
+margin_left = 664.0
+margin_top = 252.0
+margin_right = 1192.0
+margin_bottom = 378.0
 
 [node name="window_frame" type="Sprite" parent="option_challenges"]
 texture = ExtResource( 7 )
