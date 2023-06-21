@@ -678,6 +678,8 @@ func do_direct_attack(attacking_card):
 				attacking_card.this_card_flags.atk_up -= full_atk_on_field/2
 				attacking_card.update_card_information(attacking_card.this_card_id)
 	
+	check_for_game_end()
+	
 	#Emit signal at the end of battle
 	emit_signal("battle_finished")
 

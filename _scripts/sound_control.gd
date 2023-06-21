@@ -1,9 +1,6 @@
 extends Control
 
-var settings_volume : float = linear2db(PlayerData.game_volume)
-
-#func _ready():
-	#play_sound("poc_attack")
+var register_sound_node = [] #[sound_name, node]
 
 func play_sound(sound_name : String, sfx_or_music = "sfx"):
 	#Reset initial volume for music nodes
@@ -18,15 +15,12 @@ func play_sound(sound_name : String, sfx_or_music = "sfx"):
 		"music":
 			if sound_name != "lohweo_duel_scene" and sound_name != "lohweo_reward_scene":
 				sound_file = load("res://_resources/_audio/music/" + sound_name + ".mp3")
-		"force": #used for scene transition what will play over everything
-			sound_file = load("res://_resources/_audio/sound_effects/" + sound_name + ".wav")
 		_:
 			print("couldn't determine if Audio to be played is 'sfx' or 'music' ", sfx_or_music)
 			return
 	
 	#For the 'duel_scene' the file has to be more specifically determined
 	if sound_name == "lohweo_duel_scene":
-		#print(PlayerData.scene_to_return_after_duel)
 		match PlayerData.scene_to_return_after_duel:
 			"tournament_scene":
 				sound_name = "lohweo_duel_tournament"
@@ -47,7 +41,6 @@ func play_sound(sound_name : String, sfx_or_music = "sfx"):
 				sound_name = "lohweo_duel_lose"
 		
 		#Update the final sound_file path
-		bgm_fadeout() #necessary so the Duel Music stops playing
 		sound_file = load("res://_resources/_audio/music/" + sound_name + ".mp3")
 	
 	#Setup the correct files and names
@@ -55,10 +48,31 @@ func play_sound(sound_name : String, sfx_or_music = "sfx"):
 	sound_player_node.stream = sound_file
 	
 	#Adjust the volume
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), settings_volume)
+	adjust_sound_volume(PlayerData.game_volume)
 	
 	#Play the sound
+	if sfx_or_music == "music":
+		register_sound_node = [sound_name, sound_player_node]
 	sound_player_node.play()
+
+func bgm_fadeout():
+	var transition_duration : float = 1.0
+	var transition_type = 1 # TRANS_SINE
+	
+	#print(register_sound_node)
+	var playing_node = register_sound_node[1]
+	
+	# tween music volume down to 0
+	$fadeout_tween.interpolate_property(playing_node, "volume_db", playing_node.volume_db, -80, transition_duration, transition_type, Tween.EASE_IN, 0)
+	$fadeout_tween.start()
+	yield($fadeout_tween, "tween_completed")
+	playing_node.stop()
+
+
+func adjust_sound_volume(volume : float):
+	var converted_volume : float = linear2db(volume)
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), converted_volume)
+
 
 func get_first_available_audio_player(sfx_or_music : String):
 	var available_audio_player : Node = null
@@ -75,20 +89,3 @@ func get_first_available_audio_player(sfx_or_music : String):
 		available_audio_player = get_node(sfx_or_music + "_player1")
 	
 	return available_audio_player
-
-func bgm_fadeout():
-	var transition_duration : float = 1.5
-	var transition_type = 1 # TRANS_SINE
-	
-	#Get which music node is playing
-	var playing_node
-	if $music_player1.is_playing():
-		playing_node = $music_player1
-	else:
-		playing_node = $music_player2
-	
-	# tween music volume down to 0
-	$fadeout_tween.interpolate_property(playing_node, "volume_db", playing_node.volume_db, -80, transition_duration, transition_type, Tween.EASE_IN, 0)
-	$fadeout_tween.start()
-	yield($fadeout_tween, "tween_completed")
-	playing_node.stop()

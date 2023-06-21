@@ -13,8 +13,8 @@ func _ready():
 #---------------------------------------------------------------------------------------------------
 func _on_scroller_value_changed(value):
 	$option_volume/volume_percent_indicator.text = String(value*10) + "%"
+	SoundControl.adjust_sound_volume(value/10)
 	PlayerData.game_volume = value/10
-
 
 func _on_back_button_button_up():
 	save_options_file()

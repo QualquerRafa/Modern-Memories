@@ -18,6 +18,7 @@ var final_field_atk : int
 
 func _ready():
 	#Animate the transition when starting this scene
+	SoundControl.bgm_fadeout()
 	$scene_transitioner.entering_this_scene()
 	
 	#Show the YOU WIN/LOSE first
@@ -190,35 +191,37 @@ func get_card_rewards():
 # PLAYER INTERACTION HANDLING
 ####################################################################################################
 func _on_screen_button_button_up():
-	
-	if !$BIG_LETTERS/tween.is_active():
-		if duel_winner == "player":
-			show_duel_info()
-		else:
-			#Only one click
-			if not $BIG_LETTERS.is_visible():
-				return
-			
-			#Hide everything, otherwise scene transition doesn't work ????
-			$user_interface.hide()
-			$cards_reward.hide()
-			$duel_info.hide()
-			$rank_info.hide()
-			$starchip_reward.hide()
-			
-			var tweener = $BIG_LETTERS/tween
-			var text_timer : float = 1
-			tweener.interpolate_property($BIG_LETTERS, "modulate", Color(1,1,1, 1), Color(1,1,1, 0), text_timer/2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-			tweener.start()
-			yield(tweener, "tween_completed")
-			$BIG_LETTERS.hide()
-			
-			match PlayerData.scene_to_return_after_duel:
-				"tournament_scene": #When losing in the tournament, we need to show the opponents Win message and there it will send the player to main_menu
-					$scene_transitioner.scene_transition("tournament_scene")
-					
-				_: #default return, should be changed to the Game Over screen I think
-					$scene_transitioner.scene_transition("main_menu")
+	if duel_winner == "player":
+		#Can't click on You Lose screen, KEEP WAITING
+		if $BIG_LETTERS.is_visible():
+			return
+		
+		show_duel_info()
+	else:
+		#Can't click on You Lose screen, KEEP WAITING
+		if $BIG_LETTERS.is_visible():
+			return
+		
+		#Hide everything, otherwise scene transition doesn't work ????
+		$user_interface.hide()
+		$cards_reward.hide()
+		$duel_info.hide()
+		$rank_info.hide()
+		$starchip_reward.hide()
+		
+		var tweener = $BIG_LETTERS/tween
+		var text_timer : float = 1
+		tweener.interpolate_property($BIG_LETTERS, "modulate", Color(1,1,1, 1), Color(1,1,1, 0), text_timer/2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+		tweener.start()
+		yield(tweener, "tween_completed")
+		$BIG_LETTERS.hide()
+		
+		match PlayerData.scene_to_return_after_duel:
+			"tournament_scene": #When losing in the tournament, we need to show the opponents Win message and there it will send the player to main_menu
+				$scene_transitioner.scene_transition("tournament_scene")
+				
+			_: #default return, should be changed to the Game Over screen I think
+				$scene_transitioner.scene_transition("main_menu")
 
 var phase_of_reveal = 0
 func show_duel_info():
@@ -385,24 +388,32 @@ func show_big_letters():
 	tweener.start()
 	yield(tweener, "tween_completed")
 	
-	$BIG_LETTERS/timer.start(6); yield($BIG_LETTERS/timer, "timeout")
+	$BIG_LETTERS/timer.start(4.5); yield($BIG_LETTERS/timer, "timeout")
 	
-	if duel_winner == "player":
-		show_duel_info()
-	else:
-		#Hide stuff so it doesn't overlap before queieng free
-		$user_interface.hide()
-		$cards_reward.hide()
-		$duel_info.hide()
-		$rank_info.hide()
-		$starchip_reward.hide()
-		$screen_button.hide()
-		
-		tweener.interpolate_property($BIG_LETTERS, "modulate", Color(1,1,1, 1), Color(1,1,1, 0), text_timer/2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-		tweener.start()
-		yield(tweener, "tween_completed")
-		$BIG_LETTERS.hide()
-		$BIG_LETTERS.z_index = 0
-		
-		remove_reward_scene_from_tree()
-		$scene_transitioner.scene_transition(PlayerData.scene_to_return_after_duel)
+	tweener.interpolate_property($BIG_LETTERS/YOU, "rect_position:x", $BIG_LETTERS/YOU.rect_position.x, $BIG_LETTERS/YOU.rect_position.x + x_position_offset, text_timer, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+	tweener.interpolate_property($BIG_LETTERS/win_lose, "rect_position:x", $BIG_LETTERS/win_lose.rect_position.x, $BIG_LETTERS/win_lose.rect_position.x - x_position_offset, text_timer, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+	tweener.start()
+	
+	$BIG_LETTERS/timer.start(1.5); yield($BIG_LETTERS/timer, "timeout")
+	
+	if $BIG_LETTERS.is_visible():
+		if duel_winner == "player":
+			show_duel_info()
+		else:
+			#Hide stuff so it doesn't overlap before queieng free
+			$user_interface.hide()
+			$cards_reward.hide()
+			$duel_info.hide()
+			$rank_info.hide()
+			$starchip_reward.hide()
+			$screen_button.hide()
+			
+			tweener.interpolate_property($BIG_LETTERS, "modulate", Color(1,1,1, 1), Color(1,1,1, 0), text_timer/2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+			tweener.start()
+			yield(tweener, "tween_completed")
+			$BIG_LETTERS.hide()
+			$BIG_LETTERS.z_index = 0
+			
+			remove_reward_scene_from_tree()
+			SoundControl.play_sound("lohweo_duel_win_extension", "music")
+			$scene_transitioner.scene_transition(PlayerData.scene_to_return_after_duel)

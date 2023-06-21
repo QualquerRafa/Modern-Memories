@@ -4,6 +4,11 @@ func _ready():
 	#Animate the transition when starting this scene
 	$scene_transitioner.entering_this_scene()
 	
+	#Check for a saved options file to instantly load it
+	var options_file = File.new()
+	if options_file.file_exists("user://gameoptions.save"):
+		auto_load_options_file()
+	
 	#Check for a savegame file to enable the load button or not
 	var save_file = File.new()
 	if save_file.file_exists("user://savegame.save"):
@@ -20,6 +25,41 @@ func _ready():
 		$CenterContainer.show()
 		$big_logo.show()
 
+func auto_load_options_file():
+	#Check if a saved file exists, if not, scape function
+	var save_file = File.new()
+	if not save_file.file_exists("user://gameoptions.save"):
+		return
+	
+	#Load the file if one was found
+	save_file.open_encrypted_with_pass("user://gameoptions.save", File.READ, OS.get_unique_id()) #ENCRYPTED
+	
+	var info_to_load = { } #start as empty dictionary and will be loaded key by key
+	info_to_load = parse_json(save_file.get_as_text())
+	
+	#Load it safely. IF the save file has that information, load it. Good for future-proof with backwards compatibility
+	var saved_info = [
+		["game_language", "string"],
+		["game_volume", "float"]
+	]
+	
+	for i in range(saved_info.size()):
+		if info_to_load.has(saved_info[i][0]):
+			match saved_info[i][1]:
+				"string":
+					PlayerData[saved_info[i][0]] = String(info_to_load[saved_info[i][0]])
+				"int":
+					PlayerData[saved_info[i][0]] = int(info_to_load[saved_info[i][0]])
+				"float":
+					PlayerData[saved_info[i][0]] = float(info_to_load[saved_info[i][0]])
+				"array":
+					PlayerData[saved_info[i][0]] = Array(info_to_load[saved_info[i][0]])
+				"dictionary":
+					PlayerData[saved_info[i][0]] = Dictionary(info_to_load[saved_info[i][0]])
+	
+	#NOW THAT THE INFORMATION WAS PROPERLY LOADED, UPDATE NECESSARY THINGS
+	SoundControl.adjust_sound_volume(PlayerData.game_volume)
+
 #---------------------------------------------------------------------------------------------------
 func save_game():
 	#Show the overlay warning, the button there actually calls the logic lol
@@ -31,7 +71,7 @@ func _on_export_close_button_up():
 		return
 	
 	already_confirmed = true
-	animate_button($save_load_overlay/save_warning/button_close/export_close)
+	animate_button($save_load_overlay/save_warning/button_close)
 	
 	#Call for the Save Game function
 	$save_load_logic.save_game()
@@ -101,6 +141,7 @@ func separation_of_boxes():
 #CLICKING THE BUTTONS
 func _on_btn_new_game_button_up():
 	animate_button($CenterContainer2/VBoxContainer/btn_new_game)
+	
 	#Create a new Player Deck
 	if PlayerData.player_deck.size() == 0:
 		var _DEBUG_initialize_Player_Deck : Array = PlayerData.create_player_deck()
