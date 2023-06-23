@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/chazz0.png-1dc215749b56f90318f02f18765e6413.stex"
+path="res://.import/mako0.png-532bf27212ef2ed115faa1223744f898.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://_resources/character_bodys/chazz0.png"
-dest_files=[ "res://.import/chazz0.png-1dc215749b56f90318f02f18765e6413.stex" ]
+source_file="res://_resources/character_bodys/mako0.png"
+dest_files=[ "res://.import/mako0.png-532bf27212ef2ed115faa1223744f898.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/chazz0.png-1dc215749b56f90318f02f18765e6413.stex"
+path="res://.import/bonz0.png-20e570cac2aee9ecd47b8cd3f365ecee.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://_resources/character_bodys/chazz0.png"
-dest_files=[ "res://.import/chazz0.png-1dc215749b56f90318f02f18765e6413.stex" ]
+source_file="res://_resources/character_bodys/bonz0.png"
+dest_files=[ "res://.import/bonz0.png-20e570cac2aee9ecd47b8cd3f365ecee.stex" ]
 
 [params]
 
