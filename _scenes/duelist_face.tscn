@@ -1,0 +1,77 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://_resources/character_faces/shadi0.png" type="Texture" id=1]
+[ext_resource path="res://_resources/card_shop/full_bg.png" type="Texture" id=2]
+[ext_resource path="res://_scripts/duelist_face.gd" type="Script" id=3]
+
+[sub_resource type="StyleBoxFlat" id=14]
+bg_color = Color( 0, 0, 0, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="StyleBoxFlat" id=15]
+bg_color = Color( 0.694118, 0.694118, 0.694118, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="StyleBoxTexture" id=16]
+texture = ExtResource( 2 )
+region_rect = Rect2( 0, 0, 1280, 720 )
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+modulate_color = Color( 0.784314, 0.784314, 0.784314, 1 )
+
+[node name="duelist_face" type="Button"]
+margin_left = 136.0
+margin_top = 80.0
+margin_right = 262.0
+margin_bottom = 206.0
+rect_min_size = Vector2( 126, 126 )
+rect_pivot_offset = Vector2( 63, 63 )
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+script = ExtResource( 3 )
+
+[node name="visuals" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 1
+
+[node name="bg_shadow" type="Panel" parent="visuals"]
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 126.0
+margin_bottom = 126.0
+mouse_filter = 1
+custom_styles/panel = SubResource( 14 )
+
+[node name="bg_borders" type="Panel" parent="visuals"]
+margin_right = 123.0
+margin_bottom = 123.0
+mouse_filter = 1
+custom_styles/panel = SubResource( 15 )
+
+[node name="bg_texture1" type="Panel" parent="visuals"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 119.0
+margin_bottom = 119.0
+mouse_filter = 1
+custom_styles/panel = SubResource( 16 )
+
+[node name="face" type="Sprite" parent="visuals"]
+position = Vector2( 5, 5 )
+scale = Vector2( 0.75, 0.75 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="tween" type="Tween" parent="."]
+
+[connection signal="button_up" from="." to="." method="_on_duelist_face_button_up"]

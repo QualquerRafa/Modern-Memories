@@ -184,3 +184,6 @@ flat = true
 [node name="description_tween" type="Tween" parent="card_text"]
 
 [node name="interface_timer" type="Timer" parent="."]
+
+[connection signal="mouse_entered" from="card_text/Container/description_mouse_over" to="." method="_on_description_mouse_over_mouse_entered"]
+[connection signal="mouse_exited" from="card_text/Container/description_mouse_over" to="." method="_on_description_mouse_over_mouse_exited"]
