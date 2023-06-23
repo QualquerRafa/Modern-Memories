@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/player0.png-82d2161f98323410be562f214fe4e9d8.stex"
+path="res://.import/mako0.png-616c2c4867ebccfaa4112d28f6205b77.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://_resources/character_faces/player0.png"
-dest_files=[ "res://.import/player0.png-82d2161f98323410be562f214fe4e9d8.stex" ]
+source_file="res://_resources/character_faces/mako0.png"
+dest_files=[ "res://.import/mako0.png-616c2c4867ebccfaa4112d28f6205b77.stex" ]
 
 [params]
 

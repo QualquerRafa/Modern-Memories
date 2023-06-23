@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/player0.png-82d2161f98323410be562f214fe4e9d8.stex"
+path="res://.import/weevil0.png-221c0d0b2a7a116635d4ac38279ca2b5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://_resources/character_faces/player0.png"
-dest_files=[ "res://.import/player0.png-82d2161f98323410be562f214fe4e9d8.stex" ]
+source_file="res://_resources/character_faces/weevil0.png"
+dest_files=[ "res://.import/weevil0.png-221c0d0b2a7a116635d4ac38279ca2b5.stex" ]
 
 [params]
 

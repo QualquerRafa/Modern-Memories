@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/player0.png-82d2161f98323410be562f214fe4e9d8.stex"
+path="res://.import/duke0.png-0d3e0f2120f0622007c5533babec0166.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://_resources/character_faces/player0.png"
-dest_files=[ "res://.import/player0.png-82d2161f98323410be562f214fe4e9d8.stex" ]
+source_file="res://_resources/character_faces/duke0.png"
+dest_files=[ "res://.import/duke0.png-0d3e0f2120f0622007c5533babec0166.stex" ]
 
 [params]
 
