@@ -19,6 +19,7 @@ config/icon="res://icon.png"
 CardList="*res://_scripts/card_list.gd"
 PlayerData="*res://_scripts/player_data.gd"
 CardText="*res://_scripts/card_text.gd"
+SoundControl="*res://_scenes/sound_control.tscn"
 
 [debug]
 
@@ -41,7 +42,7 @@ texture={
 "compress/normal_map": 0,
 "detect_3d": false,
 "flags/anisotropic": false,
-"flags/filter": false,
+"flags/filter": true,
 "flags/mipmaps": false,
 "flags/repeat": 0,
 "flags/srgb": 2,
