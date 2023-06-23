@@ -4,6 +4,9 @@ func _ready():
 	#Animate the transition when starting this scene
 	$scene_transitioner.entering_this_scene()
 	
+	#Check for updates
+	look_for_updates()
+	
 	#Check for a saved options file to instantly load it
 	var options_file = File.new()
 	if options_file.file_exists("user://gameoptions.save"):
@@ -59,6 +62,26 @@ func auto_load_options_file():
 	
 	#NOW THAT THE INFORMATION WAS PROPERLY LOADED, UPDATE NECESSARY THINGS
 	SoundControl.adjust_sound_volume(PlayerData.game_volume)
+
+#---------------------------------------------------------------------------------------------------
+func look_for_updates():
+	var _request_return = $game_version/HTTPRequest.request("https://permitted-memories.github.io/")
+
+func _on_HTTPRequest_request_completed(result, _response_code, _headers, body):
+	if result == 0: #RESULT_SUCCESS
+		var site_version_return = body.get_string_from_utf8().split(" ")[1]
+		var game_version_string = $game_version.text.split(" ")[1]
+		
+		if site_version_return != game_version_string:
+			$game_version/version_update_warning.text = "Update to " + String(site_version_return)
+			$game_version/version_update_warning.show()
+		else:
+			$game_version/version_update_warning.hide()
+	else:
+		print("Request wasn't completed, result enum: ", result)
+		$game_version/version_update_warning.text = "Unable to check for updates"
+		$game_version/version_update_warning.show()
+
 
 #---------------------------------------------------------------------------------------------------
 func save_game():
@@ -166,7 +189,7 @@ func _on_btn_tournament_button_up():
 	change_scene("tournament_scene")
 func _on_btn_free_duel_button_up():
 	animate_button($CenterContainer/VBoxContainer/btn_free_duel)
-	change_scene("free_duel")
+	change_scene("free_duel_new")
 func _on_btn_build_deck_button_up():
 	animate_button($CenterContainer/VBoxContainer/btn_build_deck)
 	change_scene("deck_building")
@@ -249,14 +272,5 @@ func hovering_over_button(button : Node):
 		get_node(String(button.get_path()) + "/white_over").show()
 func unhover_button(button : Node):
 	get_node(String(button.get_path()) + "/white_over").hide()
-
-
-
-
-
-
-
-
-
 
 

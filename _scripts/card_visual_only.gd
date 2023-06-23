@@ -17,9 +17,10 @@ func _ready():
 	this_card_id = generate_random_card()
 	update_card_information("00000")
 	
-#	generate_card_for_printScreen()
+	#generate_card_for_printScreen()
 #func generate_card_for_printScreen():
-#	self.rect_position = Vector2(480, 100)
+	#update_card_information("00078")
+	#self.rect_position = Vector2(480, 100)
 
 #-------------------------------------------------------------------------------
 func generate_random_card():

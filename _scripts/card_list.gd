@@ -6250,11 +6250,11 @@ const card_list = {
 	"atk": 900,
 	"def": 900,
 	"type": "rock",
-	"count_as": null,
+	"count_as": "machine",
 	"effect": [
 	  "on_flip",
 	  "destroy_card",
-	  "all_enemy_monsters"
+	  "both_sides_monsters"
 	],
 	"passcode": "34124316"
   },
@@ -14187,5 +14187,1598 @@ const card_list = {
 	  939
 	],
 	"passcode": "58827995"
+  },
+  "01121": {
+	"card_name": "Spirit of the Pharaoh",
+	"attribute": "light",
+	"level": 6,
+	"atk": 2500,
+	"def": 2000,
+	"type": "zombie",
+	"count_as": null,
+	"effect": [
+	  "on_summon",
+	  "summon_friend",
+	  1122
+	],
+	"passcode": "25343280"
+  },
+  "01122": {
+	"card_name": "Pharaohs Servant",
+	"attribute": "dark",
+	"level": 2,
+	"atk": 900,
+	"def": 0,
+	"type": "zombie",
+	"count_as": null,
+	"effect": [],
+	"passcode": "52550973"
+  },
+  "01123": {
+	"card_name": "Seiyaryu",
+	"attribute": "light",
+	"level": 7,
+	"atk": 2500,
+	"def": 2300,
+	"type": "dragon",
+	"count_as": "fairy",
+	"effect": [],
+	"passcode": "06740720"
+  },
+  "01124": {
+	"card_name": "Change of Heart",
+	"attribute": "spell",
+	"level": null,
+	"atk": null,
+	"def": null,
+	"type": "spell",
+	"count_as": null,
+	"effect": [
+	  "change_of_heart"
+	],
+	"passcode": "04031928"
+  },
+  "01125": {
+	"card_name": "Waboku",
+	"attribute": "trap",
+	"level": null,
+	"atk": null,
+	"def": null,
+	"type": "trap",
+	"count_as": null,
+	"effect": [
+	  "waboku",
+	  "non_interrupt_battle"
+	],
+	"passcode": "12607053"
+  },
+  "01126": {
+	"card_name": "Royal Knight",
+	"attribute": "light",
+	"level": 3,
+	"atk": 1300,
+	"def": 800,
+	"type": "fairy",
+	"count_as": "warrior",
+	"effect": [
+	  "on_attack",
+	  "lifepoint_up",
+	  500
+	],
+	"passcode": "68280530"
+  },
+  "01127": {
+	"card_name": "Fairy Archer",
+	"attribute": "light",
+	"level": 3,
+	"atk": 1400,
+	"def": 600,
+	"type": "fairy",
+	"count_as": "female",
+	"effect": [
+	  "on_attack",
+	  "burn",
+	  400
+	],
+	"passcode": "48742406"
+  },
+  "01128": {
+	"card_name": "Radiant Jeral",
+	"attribute": "light",
+	"level": 4,
+	"atk": 1000,
+	"def": 2000,
+	"type": "fairy",
+	"count_as": "machine",
+	"effect": [
+	  "on_summon",
+	  "lifepoint_up",
+	  1000
+	],
+	"passcode": "84177693"
+  },
+  "01129": {
+	"card_name": "Nimble Momonga",
+	"attribute": "earth",
+	"level": 2,
+	"atk": 1000,
+	"def": 100,
+	"type": "beast",
+	"count_as": null,
+	"effect": [
+	  "on_flip",
+	  "lifepoint_up",
+	  1000
+	],
+	"passcode": "22567609"
+  },
+  "01130": {
+	"card_name": "Mage Power",
+	"attribute": "spell",
+	"level": null,
+	"atk": null,
+	"def": null,
+	"type": "equip",
+	"count_as": null,
+	"effect": [
+	  "stats_up",
+	  500,
+	  "special_case"
+	],
+	"passcode": "83746708"
+  },
+  "01131": {
+	"card_name": "Enchanted Javelin",
+	"attribute": "trap",
+	"level": null,
+	"atk": null,
+	"def": null,
+	"type": "trap",
+	"count_as": null,
+	"effect": [
+	  "enchanted_javelin"
+	],
+	"passcode": "96355986"
+  },
+  "01132": {
+	"card_name": "Gift of The Mystical Elf",
+	"attribute": "trap",
+	"level": null,
+	"atk": null,
+	"def": null,
+	"type": "trap",
+	"count_as": null,
+	"effect": [
+	  "gift_of_elf",
+	  "non_interrupt_battle"
+	],
+	"passcode": "98299011"
+  },
+  "01133": {
+	"card_name": "Fairy's Gift",
+	"attribute": "light",
+	"level": 4,
+	"atk": 1400,
+	"def": 1000,
+	"type": "spellcaster",
+	"count_as": "female",
+	"effect": [],
+	"passcode": "68401546"
+  },
+  "01134": {
+	"card_name": "Shining Friendship",
+	"attribute": "light",
+	"level": 4,
+	"atk": 1300,
+	"def": 1100,
+	"type": "fairy",
+	"count_as": "winged beast",
+	"effect": [],
+	"passcode": "82085619"
+  },
+  "01135": {
+	"card_name": "Fire Sorcerer",
+	"attribute": "fire",
+	"level": 4,
+	"atk": 1000,
+	"def": 1500,
+	"type": "spellcaster",
+	"count_as": "female",
+	"effect": [
+	  "on_attack",
+	  "burn",
+	  800
+	],
+	"passcode": "27132350"
+  },
+  "01136": {
+	"card_name": "Maiden of the Moonlight",
+	"attribute": "light",
+	"level": 4,
+	"atk": 1500,
+	"def": 1300,
+	"type": "spellcaster",
+	"count_as": "female",
+	"effect": [],
+	"passcode": "79629370"
+  },
+  "01137": {
+	"card_name": "Magical Exemplar",
+	"attribute": "earth",
+	"level": 4,
+	"atk": 1700,
+	"def": 1400,
+	"type": "spellcaster",
+	"count_as": "female",
+	"effect": [],
+	"passcode": "06061630"
+  },
+  "01138": {
+	"card_name": "Summoner Monk",
+	"attribute": "dark",
+	"level": 4,
+	"atk": 800,
+	"def": 1600,
+	"type": "spellcaster",
+	"count_as": null,
+	"effect": [
+	  "on_attack",
+	  "change_position"
+	],
+	"passcode": "00423585"
+  },
+  "01139": {
+	"card_name": "Lady of Faith",
+	"attribute": "light",
+	"level": 3,
+	"atk": 1100,
+	"def": 800,
+	"type": "spellcaster",
+	"count_as": "female",
+	"effect": [],
+	"passcode": "17358176"
+  },
+  "01140": {
+	"card_name": "Doriado",
+	"attribute": "earth",
+	"level": 4,
+	"atk": 1200,
+	"def": 1400,
+	"type": "spellcaster",
+	"count_as": "female",
+	"effect": [],
+	"passcode": "84916669"
+  },
+  "01141": {
+	"card_name": "Water Omotics",
+	"attribute": "water",
+	"level": 4,
+	"atk": 1400,
+	"def": 1200,
+	"type": "aqua",
+	"count_as": "female",
+	"effect": [],
+	"passcode": "02483611"
+  },
+  "01142": {
+	"card_name": "Lady Assailant of Flames",
+	"attribute": "fire",
+	"level": 4,
+	"atk": 1500,
+	"def": 1000,
+	"type": "pyro",
+	"count_as": "female",
+	"effect": [
+	  "on_attack",
+	  "burn",
+	  800
+	],
+	"passcode": "90147755"
+  },
+  "01143": {
+	"card_name": "Spirit of the Breeze",
+	"attribute": "wind",
+	"level": 3,
+	"atk": 0,
+	"def": 1800,
+	"type": "fairy",
+	"count_as": "female",
+	"effect": [
+	  "on_summon",
+	  "lifepoint_up",
+	  1000
+	],
+	"passcode": "53530069"
+  },
+  "01144": {
+	"card_name": "Dancing Elf",
+	"attribute": "wind",
+	"level": 1,
+	"atk": 300,
+	"def": 200,
+	"type": "fairy",
+	"count_as": "female",
+	"effect": [],
+	"passcode": "59983499"
+  },
+  "01145": {
+	"card_name": "Skelengel",
+	"attribute": "light",
+	"level": 2,
+	"atk": 900,
+	"def": 400,
+	"type": "fairy",
+	"count_as": "winged beast",
+	"effect": [],
+	"passcode": "60694662"
+  },
+  "01146": {
+	"card_name": "Queen's Double",
+	"attribute": "earth",
+	"level": 1,
+	"atk": 350,
+	"def": 300,
+	"type": "warrior",
+	"count_as": "female",
+	"effect": [
+	  "on_attack",
+	  "can_direct"
+	],
+	"passcode": "05901497"
+  },
+  "01147": {
+	"card_name": "Queen Bird",
+	"attribute": "wind",
+	"level": 5,
+	"atk": 1200,
+	"def": 2000,
+	"type": "winged beast",
+	"count_as": null,
+	"effect": [],
+	"passcode": "73081602"
+  },
+  "01148": {
+	"card_name": "Robolady",
+	"attribute": "earth",
+	"level": 3,
+	"atk": 450,
+	"def": 900,
+	"type": "machine",
+	"count_as": "female",
+	"effect": [],
+	"passcode": "92421852"
+  },
+  "01149": {
+	"card_name": "Roboyarou",
+	"attribute": "earth",
+	"level": 3,
+	"atk": 900,
+	"def": 450,
+	"type": "machine",
+	"count_as": "warrior",
+	"effect": [],
+	"passcode": "38916461"
+  },
+  "01150": {
+	"card_name": "Thunder Kid",
+	"attribute": "wind",
+	"level": 2,
+	"atk": 700,
+	"def": 600,
+	"type": "thunder",
+	"count_as": null,
+	"effect": [],
+	"passcode": "15510988"
+  },
+  "01151": {
+	"card_name": "Dark Master - Zorc",
+	"attribute": "dark",
+	"level": 8,
+	"atk": 2700,
+	"def": 1500,
+	"type": "fiend",
+	"count_as": null,
+	"effect": [
+	  "on_summon",
+	  "destroy_card",
+	  "all_enemy_monsters"
+	],
+	"passcode": "97642679"
+  },
+  "01152": {
+	"card_name": "Contract with the Dark Master",
+	"attribute": "spell",
+	"level": null,
+	"atk": null,
+	"def": null,
+	"type": "ritual",
+	"count_as": null,
+	"effect": [
+	  "ritual",
+	  1151
+	],
+	"passcode": "96420087"
+  },
+  "01153": {
+	"card_name": "Dark Necrofear",
+	"attribute": "dark",
+	"level": 8,
+	"atk": 2200,
+	"def": 2800,
+	"type": "fiend",
+	"count_as": "female",
+	"effect": [],
+	"passcode": "31829185"
+  },
+  "01154": {
+	"card_name": "Diabound Kernel",
+	"attribute": "dark",
+	"level": 5,
+	"atk": 1800,
+	"def": 1200,
+	"type": "fiend",
+	"count_as": "reptile",
+	"effect": [
+	  "on_attack",
+	  "get_power",
+	  600
+	],
+	"passcode": "51644030"
+  },
+  "01155": {
+	"card_name": "Ryu Kokki",
+	"attribute": "dark",
+	"level": 6,
+	"atk": 2400,
+	"def": 2000,
+	"type": "zombie",
+	"count_as": null,
+	"effect": [],
+	"passcode": "57281778"
+  },
+  "01156": {
+	"card_name": "Vampire's Curse",
+	"attribute": "dark",
+	"level": 6,
+	"atk": 2000,
+	"def": 800,
+	"type": "zombie",
+	"count_as": "vampire",
+	"effect": [
+	  "on_summon",
+	  "self_power_up",
+	  100
+	],
+	"passcode": "34294855"
+  },
+  "01157": {
+	"card_name": "The Duke of Demise",
+	"attribute": "dark",
+	"level": 6,
+	"atk": 2000,
+	"def": 1700,
+	"type": "fiend",
+	"count_as": "zombie",
+	"effect": [
+	  "on_defend",
+	  "cant_die"
+	],
+	"passcode": "66984080"
+  },
+  "01158": {
+	"card_name": "Necroface",
+	"attribute": "dark",
+	"level": 4,
+	"atk": 1200,
+	"def": 1800,
+	"type": "zombie",
+	"count_as": "fiend",
+	"effect": [
+	  "on_summon",
+	  "graveyard_power_up",
+	  100
+	],
+	"passcode": "28297833"
+  },
+  "01159": {
+	"card_name": "Jowgen the Spiritualist",
+	"attribute": "light",
+	"level": 3,
+	"atk": 200,
+	"def": 1300,
+	"type": "spellcaster",
+	"count_as": null,
+	"effect": [
+	  "on_summon",
+	  "destroy_card",
+	  "all_enemy_monsters"
+	],
+	"passcode": "41855169"
+  },
+  "01160": {
+	"card_name": "White Magical Hat",
+	"attribute": "light",
+	"level": 3,
+	"atk": 1000,
+	"def": 700,
+	"type": "spellcaster",
+	"count_as": null,
+	"effect": [
+	  "on_attack",
+	  "mill",
+	  1
+	],
+	"passcode": "15150365"
+  },
+  "01161": {
+	"card_name": "Earthbound Spirit",
+	"attribute": "earth",
+	"level": 4,
+	"atk": 500,
+	"def": 2000,
+	"type": "fiend",
+	"count_as": null,
+	"effect": [],
+	"passcode": "67105242"
+  },
+  "01162": {
+	"card_name": "Gernia",
+	"attribute": "dark",
+	"level": 4,
+	"atk": 1300,
+	"def": 1200,
+	"type": "zombie",
+	"count_as": "fiend",
+	"effect": [],
+	"passcode": "77936940"
+  },
+  "01163": {
+	"card_name": "Goblin Zombie",
+	"attribute": "dark",
+	"level": 4,
+	"atk": 1100,
+	"def": 1050,
+	"type": "zombie",
+	"count_as": "fiend",
+	"effect": [
+	  "on_attack",
+	  "mill",
+	  1
+	],
+	"passcode": "63665875"
+  },
+  "01164": {
+	"card_name": "Headless Knight",
+	"attribute": "earth",
+	"level": 4,
+	"atk": 1450,
+	"def": 1700,
+	"type": "fiend",
+	"count_as": "warrior",
+	"effect": [],
+	"passcode": "05434080"
+  },
+  "01165": {
+	"card_name": "The Earl of Demise",
+	"attribute": "dark",
+	"level": 5,
+	"atk": 2000,
+	"def": 700,
+	"type": "fiend",
+	"count_as": null,
+	"effect": [],
+	"passcode": "66989694"
+  },
+  "01166": {
+	"card_name": "The Gross Ghost of Fled Dreams",
+	"attribute": "dark",
+	"level": 4,
+	"atk": 1300,
+	"def": 1800,
+	"type": "fiend",
+	"count_as": null,
+	"effect": [],
+	"passcode": "68049471"
+  },
+  "01167": {
+	"card_name": "The Portrait's Secret",
+	"attribute": "earth",
+	"level": 4,
+	"atk": 1200,
+	"def": 1500,
+	"type": "fiend",
+	"count_as": null,
+	"effect": [],
+	"passcode": "32541773"
+  },
+  "01168": {
+	"card_name": "Castle of Dark Illusions",
+	"attribute": "dark",
+	"level": 4,
+	"atk": 920,
+	"def": 1930,
+	"type": "fiend",
+	"count_as": null,
+	"effect": [
+	  "on_summon",
+	  "castle_power_up",
+	  200
+	],
+	"passcode": "00062121"
+  },
+  "01169": {
+	"card_name": "Kryuel",
+	"attribute": "dark",
+	"level": 4,
+	"atk": 1000,
+	"def": 1700,
+	"type": "fiend",
+	"count_as": "winged beast",
+	"effect": [
+	  "on_flip",
+	  "destroy_card",
+	  "random_monster"
+	],
+	"passcode": "82642348"
+  },
+  "01170": {
+	"card_name": "Doomcaliber Knight",
+	"attribute": "dark",
+	"level": 4,
+	"atk": 1900,
+	"def": 1800,
+	"type": "fiend",
+	"count_as": null,
+	"effect": [
+	  "on_attack",
+	  "anti_flip"
+	],
+	"passcode": "78700060"
+  },
+  "01171": {
+	"card_name": "Nuvia the Wicked",
+	"attribute": "dark",
+	"level": 4,
+	"atk": 2000,
+	"def": 800,
+	"type": "fiend",
+	"count_as": null,
+	"effect": [],
+	"passcode": "12953226"
+  },
+  "01172": {
+	"card_name": "Souls of the Forgotten",
+	"attribute": "dark",
+	"level": 2,
+	"atk": 900,
+	"def": 200,
+	"type": "fiend",
+	"count_as": null,
+	"effect": [],
+	"passcode": "04920010"
+  },
+  "01173": {
+	"card_name": "Gogiga Gagagigo",
+	"attribute": "water",
+	"level": 8,
+	"atk": 2950,
+	"def": 2800,
+	"type": "reptile",
+	"count_as": "aqua",
+	"effect": [],
+	"passcode": "39674352"
+  },
+  "01174": {
+	"card_name": "Combo Master",
+	"attribute": "wind",
+	"level": 5,
+	"atk": 2200,
+	"def": 1500,
+	"type": "warrior",
+	"count_as": null,
+	"effect": [
+	  "on_attack",
+	  "multiple_attacker"
+	],
+	"passcode": "44800181"
+  },
+  "01175": {
+	"card_name": "Garma Sword",
+	"attribute": "dark",
+	"level": 7,
+	"atk": 2550,
+	"def": 2150,
+	"type": "warrior",
+	"count_as": null,
+	"effect": [],
+	"passcode": "90844184"
+  },
+  "01176": {
+	"card_name": "Garma Sword Oath",
+	"attribute": "spell",
+	"level": null,
+	"atk": null,
+	"def": null,
+	"type": "ritual",
+	"count_as": null,
+	"effect": [
+	  "ritual",
+	  1175
+	],
+	"passcode": "78577570"
+  },
+  "01177": {
+	"card_name": "Super Roboyarou",
+	"attribute": "earth",
+	"level": 6,
+	"atk": 1200,
+	"def": 500,
+	"type": "machine",
+	"count_as": "warrior",
+	"effect": [
+	  "on_summon",
+	  "super_robo"
+	],
+	"passcode": "01412158"
+  },
+  "01178": {
+	"card_name": "Super Robolady",
+	"attribute": "earth",
+	"level": 6,
+	"atk": 1200,
+	"def": 500,
+	"type": "machine",
+	"count_as": "female",
+	"effect": [
+	  "on_summon",
+	  "super_robo"
+	],
+	"passcode": "75923050"
+  },
+  "01179": {
+	"card_name": "Mikazukinoyaiba",
+	"attribute": "dark",
+	"level": 7,
+	"atk": 2200,
+	"def": 2350,
+	"type": "dragon",
+	"count_as": "reptile",
+	"effect": [],
+	"passcode": "38277918"
+  },
+  "01180": {
+	"card_name": "Giga Gagagigo",
+	"attribute": "water",
+	"level": 5,
+	"atk": 2450,
+	"def": 1500,
+	"type": "reptile",
+	"count_as": "aqua",
+	"effect": [],
+	"passcode": "43793530"
+  },
+  "01181": {
+	"card_name": "Rai-Jin",
+	"attribute": "light",
+	"level": 4,
+	"atk": 0,
+	"def": 1000,
+	"type": "thunder",
+	"count_as": null,
+	"effect": [
+	  "on_summon",
+	  "graveyard_power_up",
+	  100
+	],
+	"passcode": "37829468"
+  },
+  "01182": {
+	"card_name": "Super War-Lion",
+	"attribute": "earth",
+	"level": 7,
+	"atk": 2300,
+	"def": 2100,
+	"type": "beast",
+	"count_as": null,
+	"effect": [],
+	"passcode": "33951077"
+  },
+  "01183": {
+	"card_name": "War-Lion Ritual",
+	"attribute": "spell",
+	"level": null,
+	"atk": null,
+	"def": null,
+	"type": "ritual",
+	"count_as": null,
+	"effect": [
+	  "ritual",
+	  1182
+	],
+	"passcode": "54539105"
+  },
+  "01184": {
+	"card_name": "Dokurorider",
+	"attribute": "dark",
+	"level": 6,
+	"atk": 1900,
+	"def": 1850,
+	"type": "zombie",
+	"count_as": "warrior",
+	"effect": [],
+	"passcode": "99721536"
+  },
+  "01185": {
+	"card_name": "Revival of Dokurorider",
+	"attribute": "spell",
+	"level": null,
+	"atk": null,
+	"def": null,
+	"type": "ritual",
+	"count_as": null,
+	"effect": [
+	  "ritual",
+	  1184
+	],
+	"passcode": "31066283"
+  },
+  "01186": {
+	"card_name": "Cyber Commander",
+	"attribute": "dark",
+	"level": 2,
+	"atk": 750,
+	"def": 700,
+	"type": "machine",
+	"count_as": "warrior",
+	"effect": [],
+	"passcode": "06400512"
+  },
+  "01187": {
+	"card_name": "Deepsea Warrior",
+	"attribute": "water",
+	"level": 5,
+	"atk": 1600,
+	"def": 1800,
+	"type": "warrior",
+	"count_as": "fish",
+	"effect": [
+	  "on_attack",
+	  "ignore_spelltrap"
+	],
+	"passcode": "24128274"
+  },
+  "01188": {
+	"card_name": "Voltic Kong",
+	"attribute": "light",
+	"level": 4,
+	"atk": 1800,
+	"def": 1000,
+	"type": "beast",
+	"count_as": "thunder",
+	"effect": [
+	  "on_attack",
+	  "mill",
+	  1
+	],
+	"passcode": "93151201"
+  },
+  "01189": {
+	"card_name": "Akz, the Pumer",
+	"attribute": "earth",
+	"level": 6,
+	"atk": 1500,
+	"def": 1000,
+	"type": "beast-warrior",
+	"count_as": null,
+	"effect": [
+	  "on_attack",
+	  "can_direct"
+	],
+	"passcode": "38837163"
+  },
+  "01190": {
+	"card_name": "Gagagigo",
+	"attribute": "water",
+	"level": 4,
+	"atk": 1850,
+	"def": 1000,
+	"type": "reptile",
+	"count_as": "aqua",
+	"effect": [],
+	"passcode": "49003308"
+  },
+  "01191": {
+	"card_name": "Lava Battleguard",
+	"attribute": "earth",
+	"level": 5,
+	"atk": 1550,
+	"def": 1800,
+	"type": "warrior",
+	"count_as": null,
+	"effect": [
+	  "on_summon",
+	  "self_power_up",
+	  100
+	],
+	"passcode": "20394040"
+  },
+  "01192": {
+	"card_name": "Swamp Battleguard",
+	"attribute": "earth",
+	"level": 5,
+	"atk": 1800,
+	"def": 1500,
+	"type": "warrior",
+	"count_as": null,
+	"effect": [
+	  "on_summon",
+	  "self_power_up",
+	  100
+	],
+	"passcode": "40453765"
+  },
+  "01193": {
+	"card_name": "Shovel Crusher",
+	"attribute": "earth",
+	"level": 3,
+	"atk": 900,
+	"def": 1200,
+	"type": "machine",
+	"count_as": null,
+	"effect": [],
+	"passcode": "71950093"
+  },
+  "01194": {
+	"card_name": "Ryu Senshi",
+	"attribute": "earth",
+	"level": 6,
+	"atk": 2000,
+	"def": 1200,
+	"type": "warrior",
+	"count_as": "dragon",
+	"effect": [
+	  "on_attack",
+	  "ignore_spelltrap"
+	],
+	"passcode": "49868263"
+  },
+  "01195": {
+	"card_name": "30,000-Year White Turtle",
+	"attribute": "water",
+	"level": 5,
+	"atk": 1250,
+	"def": 2100,
+	"type": "aqua",
+	"count_as": "turtle",
+	"effect": [],
+	"passcode": "11714098"
+  },
+  "01196": {
+	"card_name": "Prevent Rat",
+	"attribute": "earth",
+	"level": 4,
+	"atk": 500,
+	"def": 2000,
+	"type": "beast",
+	"count_as": null,
+	"effect": [],
+	"passcode": "00549481"
+  },
+  "01197": {
+	"card_name": "Combo Fighter",
+	"attribute": "wind",
+	"level": 4,
+	"atk": 1600,
+	"def": 800,
+	"type": "warrior",
+	"count_as": null,
+	"effect": [
+	  "on_attack",
+	  "multiple_attacker"
+	],
+	"passcode": "08806072"
+  },
+  "01198": {
+	"card_name": "Warrior Dai Grepher",
+	"attribute": "earth",
+	"level": 4,
+	"atk": 1700,
+	"def": 1600,
+	"type": "warrior",
+	"count_as": null,
+	"effect": [],
+	"passcode": "75953262"
+  },
+  "01199": {
+	"card_name": "Basic Insect",
+	"attribute": "earth",
+	"level": 2,
+	"atk": 500,
+	"def": 700,
+	"type": "insect",
+	"count_as": null,
+	"effect": [],
+	"passcode": "89091579"
+  },
+  "01200": {
+	"card_name": "B.E.S. Big Core MK-3",
+	"attribute": "light",
+	"level": 8,
+	"atk": 2700,
+	"def": 1900,
+	"type": "machine",
+	"count_as": null,
+	"effect": [
+	  "on_attack",
+	  "piercing"
+	],
+	"passcode": "82821760"
+  },
+  "01201": {
+	"card_name": "Barrel Dragon",
+	"attribute": "dark",
+	"level": 7,
+	"atk": 2600,
+	"def": 2200,
+	"type": "machine",
+	"count_as": null,
+	"effect": [
+	  "on_summon",
+	  "destroy_card",
+	  "random_monster"
+	],
+	"passcode": "81480460"
+  },
+  "01202": {
+	"card_name": "Brain Golem",
+	"attribute": "dark",
+	"level": 6,
+	"atk": 2500,
+	"def": 1800,
+	"type": "fiend",
+	"count_as": null,
+	"effect": [
+	  "on_attack",
+	  "multiple_attacker"
+	],
+	"passcode": "17313545"
+  },
+  "01203": {
+	"card_name": "Ambitious Gofer",
+	"attribute": "dark",
+	"level": 6,
+	"atk": 2400,
+	"def": 100,
+	"type": "fiend",
+	"count_as": null,
+	"effect": [
+	  "on_summon",
+	  "destroy_card",
+	  "random_monster"
+	],
+	"passcode": "41224658"
+  },
+  "01204": {
+	"card_name": "B.E.S. Big Core MK-2",
+	"attribute": "fire",
+	"level": 6,
+	"atk": 2400,
+	"def": 1100,
+	"type": "machine",
+	"count_as": null,
+	"effect": [
+	  "on_attack",
+	  "piercing"
+	],
+	"passcode": "75937826"
+  },
+  "01205": {
+	"card_name": "B.E.S. Big Core",
+	"attribute": "dark",
+	"level": 6,
+	"atk": 2300,
+	"def": 1100,
+	"type": "machine",
+	"count_as": null,
+	"effect": [
+	  "on_attack",
+	  "piercing"
+	],
+	"passcode": "14148099"
+  },
+  "01206": {
+	"card_name": "Orgoth the Relentless",
+	"attribute": "earth",
+	"level": 7,
+	"atk": 2500,
+	"def": 2450,
+	"type": "warrior",
+	"count_as": null,
+	"effect": [
+	  "on_summon",
+	  "self_power_up",
+	  "random_dice"
+	],
+	"passcode": "15744417"
+  },
+  "01207": {
+	"card_name": "Victory Viper XX03",
+	"attribute": "light",
+	"level": 4,
+	"atk": 1200,
+	"def": 1000,
+	"type": "machine",
+	"count_as": null,
+	"effect": [
+	  "on_summon",
+	  "self_power_up",
+	  400
+	],
+	"passcode": "93130021"
+  },
+  "01208": {
+	"card_name": "Gaia Soul the Combustible Collective",
+	"attribute": "fire",
+	"level": 4,
+	"atk": 2000,
+	"def": 0,
+	"type": "pyro",
+	"count_as": "rock",
+	"effect": [
+	  "on_summon",
+	  "self_power_up",
+	  "same_attribute"
+	],
+	"passcode": "51355346"
+  },
+  "01209": {
+	"card_name": "Flint Lock",
+	"attribute": "light",
+	"level": 4,
+	"atk": 1500,
+	"def": 800,
+	"type": "machine",
+	"count_as": null,
+	"effect": [
+	  "on_defend",
+	  "cant_die"
+	],
+	"passcode": "83812099"
+  },
+  "01210": {
+	"card_name": "Gradius Option",
+	"attribute": "light",
+	"level": 1,
+	"atk": 0,
+	"def": 0,
+	"type": "machine",
+	"count_as": null,
+	"effect": [
+	  "on_summon",
+	  "copy_atk"
+	],
+	"passcode": "14291024"
+  },
+  "01211": {
+	"card_name": "Fire Darts",
+	"attribute": "trap",
+	"level": null,
+	"atk": null,
+	"def": null,
+	"type": "trap",
+	"count_as": null,
+	"effect": [
+	  "fire_darts"
+	],
+	"passcode": "43061293"
+  },
+  "01212": {
+	"card_name": "Dark Bat",
+	"attribute": "wind",
+	"level": 3,
+	"atk": 1000,
+	"def": 1000,
+	"type": "winged beast",
+	"count_as": "vampire",
+	"effect": [],
+	"passcode": "67049542"
+  },
+  "01213": {
+	"card_name": "Gradius",
+	"attribute": "light",
+	"level": 4,
+	"atk": 1200,
+	"def": 800,
+	"type": "machine",
+	"count_as": null,
+	"effect": [],
+	"passcode": "10992251"
+  },
+  "01214": {
+	"card_name": "Oni Tank T-34",
+	"attribute": "earth",
+	"level": 4,
+	"atk": 1400,
+	"def": 1700,
+	"type": "machine",
+	"count_as": null,
+	"effect": [],
+	"passcode": "66927994"
+  },
+  "01215": {
+	"card_name": "Spikebot",
+	"attribute": "dark",
+	"level": 5,
+	"atk": 1800,
+	"def": 1700,
+	"type": "machine",
+	"count_as": null,
+	"effect": [],
+	"passcode": "87511987"
+  },
+  "01216": {
+	"card_name": "Dark Assailant",
+	"attribute": "dark",
+	"level": 4,
+	"atk": 1200,
+	"def": 1200,
+	"type": "zombie",
+	"count_as": null,
+	"effect": [],
+	"passcode": "41949033"
+  },
+  "01217": {
+	"card_name": "The 13th Grave",
+	"attribute": "dark",
+	"level": 3,
+	"atk": 1200,
+	"def": 900,
+	"type": "zombie",
+	"count_as": null,
+	"effect": [],
+	"passcode": "00032864"
+  },
+  "01218": {
+	"card_name": "Yaranzo",
+	"attribute": "dark",
+	"level": 4,
+	"atk": 1300,
+	"def": 1500,
+	"type": "zombie",
+	"count_as": null,
+	"effect": [],
+	"passcode": "71280811"
+  },
+  "01219": {
+	"card_name": "Roulette Barrel",
+	"attribute": "light",
+	"level": 4,
+	"atk": 1000,
+	"def": 2000,
+	"type": "machine",
+	"count_as": null,
+	"effect": [
+	  "on_summon",
+	  "destroy_card",
+	  "random_monster"
+	],
+	"passcode": "46303688"
+  },
+  "01220": {
+	"card_name": "Snipe Hunter",
+	"attribute": "dark",
+	"level": 4,
+	"atk": 1500,
+	"def": 600,
+	"type": "fiend",
+	"count_as": null,
+	"effect": [
+	  "on_summon",
+	  "destroy_card",
+	  "random_monster"
+	],
+	"passcode": "84290642"
+  },
+  "01221": {
+	"card_name": "Blue Thunder T-45",
+	"attribute": "light",
+	"level": 4,
+	"atk": 1700,
+	"def": 1000,
+	"type": "machine",
+	"count_as": null,
+	"effect": [],
+	"passcode": "14089428"
+  },
+  "01222": {
+	"card_name": "Lord British Space Fighter",
+	"attribute": "light",
+	"level": 4,
+	"atk": 1200,
+	"def": 800,
+	"type": "machine",
+	"count_as": null,
+	"effect": [
+	  "on_attack",
+	  "multiple_attacker"
+	],
+	"passcode": "35514096"
+  },
+  "01223": {
+	"card_name": "Lizard Soldier",
+	"attribute": "wind",
+	"level": 3,
+	"atk": 1100,
+	"def": 800,
+	"type": "dragon",
+	"count_as": "beast-warrior",
+	"effect": [],
+	"passcode": "20831168"
+  },
+  "01224": {
+	"card_name": "Dicelops",
+	"attribute": "fire",
+	"level": 4,
+	"atk": 1800,
+	"def": 200,
+	"type": "machine",
+	"count_as": null,
+	"effect": [
+	  "on_attack",
+	  "mill",
+	  1
+	],
+	"passcode": "62893810"
+  },
+  "01225": {
+	"card_name": "Solar Flare Dragon",
+	"attribute": "fire",
+	"level": 4,
+	"atk": 1500,
+	"def": 1000,
+	"type": "pyro",
+	"count_as": null,
+	"effect": [
+	  "on_attack",
+	  "burn",
+	  500
+	],
+	"passcode": "45985838"
+  },
+  "01226": {
+	"card_name": "Trigon",
+	"attribute": "fire",
+	"level": 3,
+	"atk": 500,
+	"def": 1700,
+	"type": "dragon",
+	"count_as": "pyro",
+	"effect": [],
+	"passcode": "48568432"
+  },
+  "01227": {
+	"card_name": "Vic Viper T301",
+	"attribute": "light",
+	"level": 4,
+	"atk": 1200,
+	"def": 800,
+	"type": "machine",
+	"count_as": null,
+	"effect": [
+	  "on_summon",
+	  "friends_power_up",
+	  300
+	],
+	"passcode": "10642488"
+  },
+  "01228": {
+	"card_name": "FalchionB",
+	"attribute": "light",
+	"level": 4,
+	"atk": 1200,
+	"def": 800,
+	"type": "machine",
+	"count_as": null,
+	"effect": [],
+	"passcode": "86170989"
+  },
+  "01229": {
+	"card_name": "Space Mambo",
+	"attribute": "water",
+	"level": 4,
+	"atk": 1700,
+	"def": 1000,
+	"type": "fish",
+	"count_as": null,
+	"effect": [],
+	"passcode": "36119641"
+  },
+  "01230": {
+	"card_name": "Nimble Sunfish",
+	"attribute": "water",
+	"level": 2,
+	"atk": 1000,
+	"def": 100,
+	"type": "fish",
+	"count_as": null,
+	"effect": [],
+	"passcode": "02843014"
+  },
+  "01231": {
+	"card_name": "Soitsu",
+	"attribute": "wind",
+	"level": 3,
+	"atk": 0,
+	"def": 0,
+	"type": "fairy",
+	"count_as": "itsu",
+	"effect": [],
+	"passcode": "60246171"
+  },
+  "01232": {
+	"card_name": "Doitsu",
+	"attribute": "earth",
+	"level": 4,
+	"atk": 100,
+	"def": 200,
+	"type": "fairy",
+	"count_as": "itsu",
+	"effect": [
+	  "on_summon",
+	  "count_as_power_up",
+	  1000
+	],
+	"passcode": "57062206"
+  },
+  "01233": {
+	"card_name": "Koitsu",
+	"attribute": "water",
+	"level": 10,
+	"atk": 200,
+	"def": 100,
+	"type": "fairy",
+	"count_as": "itsu",
+	"effect": [
+	  "on_summon",
+	  "count_as_power_up",
+	  1000
+	],
+	"passcode": "69456283"
+  },
+  "01234": {
+	"card_name": "Aitsu",
+	"attribute": "fire",
+	"level": 5,
+	"atk": 100,
+	"def": 100,
+	"type": "fairy",
+	"count_as": "itsu",
+	"effect": [],
+	"passcode": "48202661"
+  },
+  "01235": {
+	"card_name": "Skull Guardian",
+	"attribute": "light",
+	"level": 7,
+	"atk": 2050,
+	"def": 2500,
+	"type": "warrior",
+	"count_as": null,
+	"effect": [],
+	"passcode": "03627449"
+  },
+  "01236": {
+	"card_name": "Novox's Prayer",
+	"attribute": "spell",
+	"level": null,
+	"atk": null,
+	"def": null,
+	"type": "ritual",
+	"count_as": null,
+	"effect": [
+	  "ritual",
+	  1235
+	],
+	"passcode": "43694075"
+  },
+  "01237": {
+	"card_name": "Chakra",
+	"attribute": "dark",
+	"level": 7,
+	"atk": 2450,
+	"def": 2000,
+	"type": "fiend",
+	"count_as": null,
+	"effect": [],
+	"passcode": "65393205"
+  },
+  "01238": {
+	"card_name": "Resurrection of Chakra",
+	"attribute": "spell",
+	"level": null,
+	"atk": null,
+	"def": null,
+	"type": "ritual",
+	"count_as": null,
+	"effect": [
+	  "ritual",
+	  1237
+	],
+	"passcode": "39399168"
+  },
+  "01239": {
+	"card_name": "Javelin Beetle",
+	"attribute": "earth",
+	"level": 8,
+	"atk": 2450,
+	"def": 2550,
+	"type": "insect",
+	"count_as": null,
+	"effect": [],
+	"passcode": "26932788"
+  },
+  "01240": {
+	"card_name": "Javelin Beetle Pact",
+	"attribute": "spell",
+	"level": null,
+	"atk": null,
+	"def": null,
+	"type": "ritual",
+	"count_as": null,
+	"effect": [
+	  "ritual",
+	  1239
+	],
+	"passcode": "41182875"
+  },
+  "01241": {
+	"card_name": "Crab Turtle",
+	"attribute": "water",
+	"level": 8,
+	"atk": 2550,
+	"def": 2500,
+	"type": "aqua",
+	"count_as": null,
+	"effect": [],
+	"passcode": "91782219"
+  },
+  "01242": {
+	"card_name": "Turtle Oath",
+	"attribute": "spell",
+	"level": null,
+	"atk": null,
+	"def": null,
+	"type": "ritual",
+	"count_as": null,
+	"effect": [
+	  "ritual",
+	  1241
+	],
+	"passcode": "76806714"
+  },
+  "01243": {
+	"card_name": "The Masked Beast",
+	"attribute": "dark",
+	"level": 8,
+	"atk": 3200,
+	"def": 1800,
+	"type": "fiend",
+	"count_as": null,
+	"effect": [],
+	"passcode": "49064413"
+  },
+  "01244": {
+	"card_name": "Curse of the Masked Beast",
+	"attribute": "spell",
+	"level": null,
+	"atk": null,
+	"def": null,
+	"type": "ritual",
+	"count_as": null,
+	"effect": [
+	  "ritual",
+	  1243
+	],
+	"passcode": "94377247"
   }
 }

@@ -113,16 +113,16 @@ func do_battle(attacking_card : Node, defending_card : Node):
 	card_ready_to_attack = attacking_card
 	card_ready_to_defend = defending_card
 	
-	#Check for Flip Effects before battle
-	if attacking_card.this_card_flags.is_facedown == true and CardList.card_list[attacking_card.this_card_id].effect.size() > 0 and CardList.card_list[attacking_card.this_card_id].effect[0] in ["on_flip", "on_summon"] and attacking_card.this_card_flags.has_activated_effect == false:
-		match CardList.card_list[attacking_card.this_card_id].effect[0]:
-			"on_flip":
-				effect_activation(attacking_card, "on_flip")
-			"on_summon":
-				attacking_card.this_card_flags.is_facedown = false
-				effect_activation(attacking_card, "on_summon")
-		yield($effects, "effect_fully_executed")
-		$battle_visuals/battle_timer_node.start(0.3); yield($battle_visuals/battle_timer_node, "timeout")
+#	#Check for Flip Effects before battle
+#	if attacking_card.this_card_flags.is_facedown == true and CardList.card_list[attacking_card.this_card_id].effect.size() > 0 and CardList.card_list[attacking_card.this_card_id].effect[0] in ["on_flip", "on_summon"] and attacking_card.this_card_flags.has_activated_effect == false:
+#		match CardList.card_list[attacking_card.this_card_id].effect[0]:
+#			"on_flip":
+#				effect_activation(attacking_card, "on_flip")
+#			"on_summon":
+#				attacking_card.this_card_flags.is_facedown = false
+#				effect_activation(attacking_card, "on_summon")
+#		yield($effects, "effect_fully_executed")
+#		$battle_visuals/battle_timer_node.start(0.3); yield($battle_visuals/battle_timer_node, "timeout")
 	
 	#Attacker flags
 	attacking_card.this_card_flags.has_battled = true
@@ -200,13 +200,14 @@ func do_battle(attacking_card : Node, defending_card : Node):
 		attacking_card.this_card_flags.is_facedown = false
 		attacking_card.update_card_information(attacking_card.this_card_id)
 		
-		emit_signal("battle_finished")
+		
 		check_for_camera_movement_on_effect_return(attacking_card)
 		
 		#Check if the trap won't stop battle. By default it does.
 		if CardList.card_list[fell_into_trap.this_card_id].effect.size() > 1 and typeof(CardList.card_list[fell_into_trap.this_card_id].effect[1]) == TYPE_STRING and CardList.card_list[fell_into_trap.this_card_id].effect[1] == "non_interrupt_battle":
 			pass
 		else:
+			emit_signal("battle_finished")
 			return #battle logic is stopped, since most traps will AT LEAST negate the attack (can do more, but that's on effects.gd to solve)
 	
 	var battle_timer_node = $battle_visuals/battle_timer_node
@@ -506,16 +507,16 @@ func do_direct_attack(attacking_card):
 	if attacking_card.this_card_flags.has_battled == true:
 		return #failsafe to prevent cards from battling more than once
 	
-	#Check for Flip Effects before battle
-	if attacking_card.this_card_flags.is_facedown == true and CardList.card_list[attacking_card.this_card_id].effect.size() > 0 and CardList.card_list[attacking_card.this_card_id].effect[0] in ["on_flip", "on_summon"] and attacking_card.this_card_flags.has_activated_effect == false:
-		match CardList.card_list[attacking_card.this_card_id].effect[0]:
-			"on_flip":
-				effect_activation(attacking_card, "on_flip")
-			"on_summon":
-				attacking_card.this_card_flags.is_facedown = false
-				effect_activation(attacking_card, "on_summon")
-		yield($effects, "effect_fully_executed")
-		$battle_visuals/battle_timer_node.start(0.3); yield($battle_visuals/battle_timer_node, "timeout")
+#	#Check for Flip Effects before battle
+#	if attacking_card.this_card_flags.is_facedown == true and CardList.card_list[attacking_card.this_card_id].effect.size() > 0 and CardList.card_list[attacking_card.this_card_id].effect[0] in ["on_flip", "on_summon"] and attacking_card.this_card_flags.has_activated_effect == false:
+#		match CardList.card_list[attacking_card.this_card_id].effect[0]:
+#			"on_flip":
+#				effect_activation(attacking_card, "on_flip")
+#			"on_summon":
+#				attacking_card.this_card_flags.is_facedown = false
+#				effect_activation(attacking_card, "on_summon")
+#		yield($effects, "effect_fully_executed")
+#		$battle_visuals/battle_timer_node.start(0.3); yield($battle_visuals/battle_timer_node, "timeout")
 	
 	#Catch end of Flip Effect
 	if not attacking_card.is_visible():
@@ -569,12 +570,12 @@ func do_direct_attack(attacking_card):
 #			attacking_card.get_node("card_design/darken_card").hide()
 		
 		check_for_camera_movement_on_effect_return(attacking_card)
-		emit_signal("battle_finished")
 		
 		#Check if the trap won't stop battle. By default it does.
 		if CardList.card_list[fell_into_trap.this_card_id].effect.size() > 1 and typeof(CardList.card_list[fell_into_trap.this_card_id].effect[1]) == TYPE_STRING and CardList.card_list[fell_into_trap.this_card_id].effect[1] == "non_interrupt_battle":
 			pass
 		else:
+			emit_signal("battle_finished")
 			return #battle logic is stopped, since most traps will AT LEAST negate the attack (can do more, but that's on effects.gd to solve)
 	
 	#First thing is to update the cards involved in battle so I can use them as references for calculations and stuff

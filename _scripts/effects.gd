@@ -640,7 +640,7 @@ func activate_spell_ritual(card_node : Node):
 	
 	if level_reached < ritual_level_goal:
 		#look for more monsters until goal is reached
-		for monster in monsters_sorted_by_level:
+		for _i in range(monsters_sorted_by_level.size()):
 			var lowest_level_in_array = CardList.card_list[monsters_sorted_by_level[0].this_card_id].level
 			level_reached += lowest_level_in_array
 			

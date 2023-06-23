@@ -33,7 +33,7 @@ func enemy_draw_phase():
 		return "exit game"
 	
 	#Change enemy Hand for testing purposes
-	#enemy_hand = ["00444", "00444", "00444", "00444", "00444"]
+	#enemy_hand = ["01117", "01117", "01117", "01117", "01117"]
 	
 	#Reset the 'has_battled' for all monsters on the field
 	for i in range(5):
