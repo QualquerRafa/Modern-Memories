@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/duelist_slot.png-66da8ded83614e0b6af9643878e1dcf1.stex"
+path="res://.import/focus_shadow.png-bbf8a54ee02dccf564bc32e82f0db71a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://_resources/free_duel/duelist_slot.png"
-dest_files=[ "res://.import/duelist_slot.png-66da8ded83614e0b6af9643878e1dcf1.stex" ]
+source_file="res://_resources/free_duel/focus_shadow.png"
+dest_files=[ "res://.import/focus_shadow.png-bbf8a54ee02dccf564bc32e82f0db71a.stex" ]
 
 [params]
 
