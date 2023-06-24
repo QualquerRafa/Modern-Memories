@@ -38,7 +38,12 @@ func create_player_deck():
 	var list_of_type_destruction = ["00221", "00222", "00223", "00224", "00225", "00226", "00227", "00228", "00229", "00230"]
 	var list_of_type_boost_equip = ["00196", "00197", "00198", "00199", "00200", "00201", "00202", "00203", "00204", "00205", "00206", "00207", "00208", "00209", "00210"]
 	
-	#Generate the player deck by using one of the premade elemental bases + random from type_destruction + random from type_boost_equip
+	#Initial Rituals for the player
+	var tier_1_ritual = ["01185", "00581", "01183", "00635"] #50%
+	var tier_2_ritual = ["00538", "00667", "01120", "01176"] #35%
+	var tier_3_ritual = ["01240", "01236", "01242", "01044"] #15%
+	
+	#Generate the player deck by using one of the premade elemental bases + random from type_destruction + random from type_boost_equip + ritual
 	var picked_elemental_base = []
 	randomize()
 	var rand_base =  randi() %4
@@ -49,10 +54,23 @@ func create_player_deck():
 		3: picked_elemental_base = wind_base
 	player_deck = picked_elemental_base
 	
+	#add the 2 extra cards
 	var rand_type_destruction = randi() %list_of_type_destruction.size()
 	player_deck.append(list_of_type_destruction[rand_type_destruction])
 	var rand_type_equip = randi() %list_of_type_boost_equip.size()
 	player_deck.append(list_of_type_boost_equip[rand_type_equip])
+	
+	#Get one random ritual from the available ones
+	var random_tier = randf()
+	var selected_tier : Array
+	if random_tier <= 0.15:
+		selected_tier = tier_3_ritual
+	elif random_tier > 0.15 and random_tier <= 0.5:
+		selected_tier = tier_2_ritual
+	else:
+		selected_tier = tier_1_ritual
+	var rand_ritual = randi() %selected_tier.size()
+	player_deck.append(selected_tier[rand_ritual])
 	
 	#Complete the deck with random cards from the General Card Pool (MONSTERS ONLY)
 	var general_card_pool : Array = CardList.general_card_pool

@@ -62,6 +62,10 @@ func start_player_turn():
 		var this_i_card : Node = get_node("../../player_hand/card_" + String(i))
 		GAME_LOGIC.reset_a_card_node_properties(this_i_card)
 	
+	#Reset this at the start of the turn in case needed
+	if GAME_LOGIC.waboku_protection == true:
+		GAME_LOGIC.waboku_protection = false
+	
 	#Wait timer just for DEV reasons
 	$player_timer.start(0.2); yield($player_timer, "timeout")
 	#yield(get_tree().create_timer(0.2), "timeout")

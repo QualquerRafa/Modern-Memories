@@ -14198,8 +14198,8 @@ const card_list = {
 	"count_as": null,
 	"effect": [
 	  "on_summon",
-	  "summon_friend",
-	  1122
+	  "summon_pharaoh",
+	  1122, 1199
 	],
 	"passcode": "25343280"
   },
@@ -15190,15 +15190,15 @@ const card_list = {
 	"passcode": "75953262"
   },
   "01199": {
-	"card_name": "Basic Insect",
+	"card_name": "Pharaonic Protector",
 	"attribute": "earth",
 	"level": 2,
-	"atk": 500,
-	"def": 700,
-	"type": "insect",
+	"atk": 900,
+	"def": 0,
+	"type": "zombie",
 	"count_as": null,
 	"effect": [],
-	"passcode": "89091579"
+	"passcode": "89959682"
   },
   "01200": {
 	"card_name": "B.E.S. Big Core MK-3",
@@ -15780,5 +15780,31 @@ const card_list = {
 	  1243
 	],
 	"passcode": "94377247"
-  }
+	},
+	"01245": {
+		"card_name": "Battleguard King",
+		"attribute": "earth",
+		"level": 8,
+		"atk": 3000,
+		"def": 1100,
+		"type": "warrior",
+		"count_as": "beast-warrior",
+		"effect": [
+		  "on_attack",
+		  "multiple_attacker"
+		],
+		"passcode": "39389320"
+	  },
+	  "01246": {
+		"card_name": "Token",
+		"attribute": "dark",
+		"level": 1,
+		"atk": 0,
+		"def": 0,
+		"type": "fiend",
+		"count_as": null,
+		"effect": [],
+		"passcode": "06441394"
+	  }
 }
+

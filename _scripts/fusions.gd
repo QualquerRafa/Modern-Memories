@@ -97,6 +97,20 @@ func equip_fusion(card_1 : String, card_2 : String):
 		equip_result = [monster_card_id, [CardList.card_list[equip_card_id].effect[0], CardList.card_list[equip_card_id].effect[1]] ]
 	elif equip_restriction == "any":
 		equip_result = [monster_card_id, [CardList.card_list[equip_card_id].effect[0], CardList.card_list[equip_card_id].effect[1]] ]
+	elif equip_restriction == "special_case": #MAGE POWER, count spelltraps on callers field and give stats of 500 times that
+		var spelltrap_count_on_field = 0
+
+		var spell_caller = "player"
+		if get_node("../").GAME_PHASE != "checking_for_fusions":
+			spell_caller = "enemy"
+
+		var target_side_of_field = get_node("../").get_parent().get_node("duel_field/" + spell_caller + "_side_zones")
+		for i in range(5):
+			var card_being_checked = target_side_of_field.get_node("spelltrap_" + String(i))
+			if card_being_checked.is_visible():
+				spelltrap_count_on_field += 1
+		
+		equip_result = [monster_card_id, [CardList.card_list[equip_card_id].effect[0], CardList.card_list[equip_card_id].effect[1] * spelltrap_count_on_field]]
 	else:
 		print("fusions.gd failed to equip: restriction = ", equip_restriction)
 		var special_check_is_ritual = equip_card_id == "00991"
@@ -109,9 +123,16 @@ func equip_fusion(card_1 : String, card_2 : String):
 func specific_fusion(card_1 : String, card_2 : String):
 	var fusion_result : Array
 	
-	var ordered_ids = [card_1, card_2] #sort in ascending numerical order because I check for it like that
-	ordered_ids.sort()
-	var specific_string_to_check = ordered_ids[0] + "_" + ordered_ids[1]
+	#Some fusions that use the same monsters, but in different orders, can skip the sorting process
+	var dont_sort = false
+	if card_1 in ["01148", "01149"] and card_2 in ["01148", "01149"]: #Roboyarou, Robolady
+		dont_sort = true
+	
+	var specific_string_to_check = card_1 + "_" + card_2
+	if dont_sort == false:
+		var ordered_ids = [card_1, card_2] #sort in ascending numerical order because I check for it like that
+		ordered_ids.sort()
+		specific_string_to_check = ordered_ids[0] + "_" + ordered_ids[1]
 	
 	if specific_fusion_list.keys().has(specific_string_to_check):
 		fusion_result = [specific_fusion_list[specific_string_to_check], true]
@@ -363,9 +384,15 @@ var specific_fusion_list = {
 	"00078_01003" : "00981",                                                        #Time Wizard + Snow Dragon = Snowdust Dragon
 	"00644_01003" : "00981",                                                        #Time Wizard of Tomorrow + Snow Dragon = Snowdust Dragon
 	"00992_00995" : "00985",                                                        #Etoile Cyber + Blade Skater = Cyber Blader
-	"00699_00703" : "01054",	                                                    #Elemental HERO Shining Flare Wingman + Elemental HERO Neos = Elemental HERO Shining Neos Wingman
-	"00703_00748" : "01054",	                                                    #Elemental HERO Flame Wingman + Elemental HERO Neos = Elemental HERO Shining Neos Wingman
-
+	"00699_00703" : "01054",                                                        #Elemental HERO Shining Flare Wingman + Elemental HERO Neos = Elemental HERO Shining Neos Wingman
+	"00703_00748" : "01054",                                                        #Elemental HERO Flame Wingman + Elemental HERO Neos = Elemental HERO Shining Neos Wingman
+	"01148_01149" : "01178",                                                        #Robolady + Roboyarou = Super Robolady
+	"01149_01148" : "01177",                                                        #Roboyarou + Robolady = Super Roboyarou
+	"01197_01197" : "01174",                                                        #Combo Fighter + Combo Fighter = Combo Master
+	"01191_01192" : "01245",                                                        #Lava Battleguard + Swamp Battleguard = Battleguard King
+	"01164_01165" : "01157",                                                        #The Earl of Demise + Headless Knight = The Duke of Demise
+	"00641_01224" : "01206",                                                        #Maximum Six + Dicelops = Orgoth the Relentless
+	
 	#Fang of Critias
 	"00240_00506" : "00483",                                                        #Fang of Critias + Blue-Eyes White Dragon = Blue-Eyes Tyrant Dragon
 	"00244_00506" : "00483",                                                        #Fang of Critias + Dragon Spirit of White = Blue-Eyes Tyrant Dragon
@@ -389,6 +416,8 @@ var specific_fusion_list = {
 	"00155_00574" : "00575",                                                        #Metalmorph + Cannon Soldier = Cannon Soldier MK-2
 	"00155_00645" : "00628",                                                        #Metalmorph + Red-Eyes Darkness Dragon = Red-Eyes Darkness Metal Dragon
 	"00155_00923" : "00925",                                                        #Metalmorph + Ojama King = Mecha Ojama King
+	"00155_01190" : "01180",                                                        #Metalmorph + Gagagigo = Giga Gagagigo
+	"00155_01180" : "01173",                                                        #Metalmorph + Giga Gagagigo = Gogiga Gagagigo
 
 	#Level Up
 	"00162_00383" : "00384",                                                        #Level Up + Black Tyranno = Ultimate Tyranno
@@ -443,7 +472,8 @@ var attribute_fusion_list = {
 var special_fusion_list = {
 	"00067" : {"dragon" : ["00066"] },                                            #Gaia The Fierce Knight + dragon = Gaia the Dragon Champion                          
 	"00078" : {"dragon" : ["00076"],                                              #Time Wizard            + dragon = Thousand Dragon    
-			  "spellcaster" : ["00644"] },                                        #                       + spellcaster = Time Wizard of Tomorrow
+			  "spellcaster" : ["00644"],                                         #                      + spellcaster = Time Wizard of Tomorrow
+			  "turtle" : ["01195"]},                                             #Time Wizard + Turtle = 30,000-Year White Turtle
 	"00644" : {"dragon" : ["00076"]},                                             #Time Wizard of Tomorrow + dragon = Thousand Dragon 
 	"00140" : {"dragon" : ["00073"] },                                            #Tyhone #2              + dragon = Red-Eyes Black Dragon                      
 	"00155" : {"dragon" : ["00029", "00421"]},                                    #Metalmorph             + dragon = Metal Dragon, Rare Metal Dragon              
@@ -464,8 +494,9 @@ var special_fusion_list = {
 	"00254" : {"beast" : ["00256", "00257"]},                                     #Archfiend Marmot of Nefariousness + beast = Nefarious Archfiend Eater of Nefariousness, Nefariouser Archfiend - Awakening
 	"00256" : {"beast" : ["00257"]},                                              #Nefarious Archfiend Eater of Nefariousness + beast = Nefariouser Archfiend - Awakening
 	"00261" : {"pyro" : ["00263", "00264"]},                                      #Fox Fire                   + pyro = Inari Fire, Greater Inari Fire - Awakening
-	"00263" : {"pyro" : ["00264"]},                                               #Inari Fire                 + pyro = Greater Inari Fire - Awakening
-	"00268" : {"reptile" : ["00270", "00271"]},                                   #Gigobyte                   + reptile = Jigabyte, Gagigobyte - Awakening
+	"00263" : {"pyro" : ["00264"]},                                               #Inari Fire                 + pyro = Greater Inari Fire - Awakening                                      
+	"00268" : {"aqua" : ["01190"],                                                #Gigobyte                   + aqua = Gagagigo
+			   "reptile" : ["00270", "00271"]},                                   #Gigobyte                   + reptile = Jigabyte, Gagigobyte - Awakening
 	"00270" : {"reptile" : ["00271"]},                                            #Jigabyte                   + reptile = Gagigobyte - Awakening
 	"00275" : {"dragon" : ["00277", "00278"]},                                    #Petit Dragon               + dragon = Ranryu, Rasenryu - Awakening
 	"00277" : {"dragon" : ["00278"]},                                             #Ranryu                     + dragon = Rasenryu - Awakening
@@ -560,6 +591,12 @@ var special_fusion_list = {
 	"01066" : {"dragon" : ["01067"]},                                             #Crimson Ninja + dragon = Red Dragon Ninja
 	"01068" : {"dragon" : ["01069"]},                                             #White Ninja + dragon = White Dragon Ninja
 	"01070" : {"dragon" : ["01071"]},                                             #Yellow Ninja + dragon = Yellow Dragon Ninja
+	"01190" : {"machine" : ["01180", "01173"]},                                   #Gagagigo + machine = Giga Gagagigo, Gogiga Gagagigo
+	"01180" : {"machine" : ["01173"]},                                            #Giga Gagagigo + machine = Gogiga Gagagigo
+	"01146" : {"female" : ["00510"]},                                             #Queen's Double + Female = Empress Judge
+	"01209" : {"machine" : ["01205", "01204", "01200"]},                          #Flint Lock + Machine = B.E.S. Big Core, MK2 and MK3
+	"01205" : {"machine" : ["01204", "01200"]},                                   #B.E.S. Big Core + Machine = MK2 and MK3
+	"01204" : {"machine" : ["01200"]},                                            #B.E.S. Big Core MK2 + Machine = MK3
 }
 
 
@@ -588,7 +625,7 @@ var generic_fusion_list = {
 	"beast_plant":        ["00051"],                                              #Flower Wolf
 	"beast_pyro":         ["00054"],                                              #Flame Cerebrus
 	"beast_reptile":      ["00346"],                                              #Lion Alligator
-	"beast_thunder":      ["00046", "00369"],                                      #Tripwire Beast, Thunderclap Skywolf
+	"beast_thunder":      ["00046", "01188", "00369"],                            #Tripwire Beast, Voltic Kong, Thunderclap Skywolf
 	"beast_vampire":      ["01056"],                                              #Vampire Retainer
 	"beast_warrior":      ["00015", "00405", "00406"],                              #Tiger Axe, Boar Soldier, Garnecia Elefantis
 	"beast_winged beast": ["00050"],                                              #Garvas
@@ -606,7 +643,8 @@ var generic_fusion_list = {
 	"dinosaur_sea serpent": ["00385"],                                             #Megalosmasher X
 	
 	"dragon_egg":         ["00559"],                                              #Ryu-ran
-	"dragon_fiend":       ["00535"],                                              #Fiend Skull Dragon
+	"dragon_fairy":       ["00624", "01123"],                                     #Fairy Dragon, Seiyaryu
+	"dragon_fiend":       ["00535"],                                              #Fiend Skull Dragon, Serpent Night Dragon
 	"dragon_harpie":      ["01080", "01081"],                                     #Harpie's Baby Dragon, Harpie's Pet Dragon
 	"dragon_machine":     ["00029", "00421"],                                      #Metal Dragon, Rare Metal Dragon
 	"dragon_plant":       ["00059"],                                              #B. Dragon Jungle King
@@ -615,7 +653,7 @@ var generic_fusion_list = {
 	"dragon_sea serpent": ["00364"],                                              #The Dragon Dwelling in the Deep
 	"dragon_thunder":     ["00033", "00034"],                                      #Thunder Dragon, Twin-Headed Thunder Dragon
 	"dragon_vampire":     ["01057"],                                              #Vampire Dragon
-	"dragon_warrior":     ["00001", "00002", "00003", "00004"],                      #Dragon Statue, Dragoness the Wicked Knight, D. Human, Sword Arm of Dragon
+	"dragon_warrior":     ["00001", "00002", "00003", "00004", "01179"],          #Dragon Statue, Dragoness the Wicked Knight, D. Human, Sword Arm of Dragon, Mikazukinoyaiba
 	"dragon_zombie":      ["00011", "00012", "00013"],                              #Dragon Zombie, Skelgon, Curse of Dragon
 	
 	"fairy_female":       ["00060", "00212", "00216"],                              #Dark Witch, St. Joan, Amaterasu

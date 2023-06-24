@@ -189,7 +189,7 @@ func _on_btn_tournament_button_up():
 	change_scene("tournament_scene")
 func _on_btn_free_duel_button_up():
 	animate_button($CenterContainer/VBoxContainer/btn_free_duel)
-	change_scene("free_duel_new")
+	change_scene("free_duel")
 func _on_btn_build_deck_button_up():
 	animate_button($CenterContainer/VBoxContainer/btn_build_deck)
 	change_scene("deck_building")

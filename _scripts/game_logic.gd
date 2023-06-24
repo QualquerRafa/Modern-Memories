@@ -41,8 +41,8 @@ func check_for_trap_cards(attacking_card : Node):
 
 #------------------------------------------------------------------------------
 #FUSION LOGIC
-const fusion_list_gd = preload("res://_scripts/fusions.gd")
-var fusion_list = fusion_list_gd.new()
+#const fusion_list_gd = preload("res://_scripts/fusions.gd")
+onready var fusion_list = $fusions
 
 func fusing_cards_logic(card_1 : Node, card_2 : Node):
 	var card_1_id : String = card_1.this_card_id
@@ -163,7 +163,7 @@ func do_battle(attacking_card : Node, defending_card : Node):
 	defending_card.update_card_information(defending_card.this_card_id)
 	
 	#Check for on_attack effects right before battle starts
-	var on_attack_NOT_before_battle = ["change_position", "toon"]
+	var on_attack_NOT_before_battle = ["change_position", "toon", "piercing"]
 	if CardList.card_list[attacking_card.this_card_id].effect.size() > 0 and CardList.card_list[attacking_card.this_card_id].effect[0] == "on_attack" and not CardList.card_list[attacking_card.this_card_id].effect[1] in on_attack_NOT_before_battle:
 		effect_activation(attacking_card, "on_attack")
 		yield($effects, "effect_fully_executed")
@@ -537,7 +537,7 @@ func do_direct_attack(attacking_card):
 		attacking_card.get_node("card_design/darken_card").hide()
 	
 	#Check for on_attack effects right before battle starts
-	if CardList.card_list[attacking_card.this_card_id].effect.size() > 0 and CardList.card_list[attacking_card.this_card_id].effect[0] == "on_attack":
+	if CardList.card_list[attacking_card.this_card_id].effect.size() > 0 and CardList.card_list[attacking_card.this_card_id].effect[0] == "on_attack" and CardList.card_list[attacking_card.this_card_id].effect[1] != "piercing":
 		effect_activation(attacking_card, "on_attack")
 		yield($effects, "effect_fully_executed")
 		$battle_visuals/battle_timer_node.start(0.3); yield($battle_visuals/battle_timer_node, "timeout")
@@ -648,7 +648,7 @@ func do_direct_attack(attacking_card):
 			check_for_game_end("com_lp_out")
 		change_lifepoints("enemy", LP_damage)
 		
-		print("Back to Player's Main Phase")
+		#print("Back to Player's Main Phase")
 		attacking_card.cancel_all_combat_controls() #hide the combat controls for the card that already attacked
 		get_node("../").change_field_view() #return back to the other side of the field
 		GAME_PHASE = "main_phase"
@@ -657,7 +657,7 @@ func do_direct_attack(attacking_card):
 			check_for_game_end("player_lp_out")
 		change_lifepoints("player", LP_damage)
 		
-		print("Back to Enemy's Main Phase")
+		#print("Back to Enemy's Main Phase")
 		GAME_PHASE = "enemy_main_phase"
 	
 	#Revert some temporary effects
@@ -686,8 +686,13 @@ func do_direct_attack(attacking_card):
 
 #---------------------------------------------------------------------------------------------------
 var LP_info_node : Node
+var waboku_protection = false
 func change_lifepoints(target : String, LP_damage : int, adding = false):
 	if LP_damage <= 0:
+		return
+	
+	#If adding is true, ignore waboku_protection and have lifepoints go up
+	if waboku_protection == true and adding == false:
 		return
 	
 	var tween_LP : Node = get_node("../user_interface/top_info_box/tween_LP")

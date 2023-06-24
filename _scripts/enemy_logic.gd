@@ -41,6 +41,10 @@ func enemy_draw_phase():
 		if this_i_monster.is_visible():
 			this_i_monster.this_card_flags.has_battled = false
 	
+	#Reset this at the start of the turn in case needed
+	if GAME_LOGIC.waboku_protection == true:
+		GAME_LOGIC.waboku_protection = false
+	
 	#Wait some time during draw_phase for better game flow
 	$enemy_timer.start(0.5); yield($enemy_timer, "timeout")
 	

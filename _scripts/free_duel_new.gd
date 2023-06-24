@@ -25,8 +25,9 @@ func duelist_face_clicked(duelist_name):
 	$duelist_focus/duelist_body.texture = load("res://_resources/character_bodys/" + duelist_name + "0.png")
 	if PlayerData.recorded_duels.keys().has(duelist_name):
 		$duelist_focus/duelist_wins.text = "Wins: " + String(PlayerData.recorded_duels[duelist_name].W)
-		$duelist_focus/duelist_wins.text = "Losses: " + String(PlayerData.recorded_duels[duelist_name].L)
+		$duelist_focus/duelist_losses.text = "Losses: " + String(PlayerData.recorded_duels[duelist_name].L)
 	update_duelist_cards(duelist_name)
+	active_duelist_name = duelist_name
 	
 	#Duelist Focus animations
 	$duelist_focus.modulate = Color(0,0,0,0)
