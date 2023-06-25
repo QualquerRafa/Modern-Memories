@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://_resources/scene_duel/yellow_background.png" type="Texture" id=1]
 [ext_resource path="res://_resources/scene_duel/top_info_box.png" type="Texture" id=2]
@@ -26,6 +26,7 @@
 [ext_resource path="res://_scenes/scene_transitioner.tscn" type="PackedScene" id=24]
 [ext_resource path="res://_scripts/npc_decks.gd" type="Script" id=25]
 [ext_resource path="res://_scripts/effects.gd" type="Script" id=26]
+[ext_resource path="res://_scripts/fusions.gd" type="Script" id=27]
 
 [sub_resource type="DynamicFont" id=8]
 size = 150
@@ -306,6 +307,9 @@ icon = ExtResource( 17 )
 flat = true
 
 [node name="tween_slots" type="Tween" parent="game_logic/effects/just_visual_field_slots"]
+
+[node name="fusions" type="Node" parent="game_logic"]
+script = ExtResource( 27 )
 
 [node name="battle_visuals" type="Node2D" parent="game_logic"]
 visible = false
