@@ -2126,7 +2126,7 @@ const card_list = {
 	"passcode": "87756343"
   },
   "00182": {
-	"card_name": "Greath Moth",
+	"card_name": "Great Moth",
 	"attribute": "earth",
 	"level": 8,
 	"atk": 2600,
@@ -7721,7 +7721,7 @@ const card_list = {
 	"atk": 2600,
 	"def": 1600,
 	"type": "machine",
-	"count_as": null,
+	"count_as": "psychic",
 	"effect": [
 	  "on_summon",
 	  "jinzo",
@@ -7751,7 +7751,7 @@ const card_list = {
 	"atk": 2400,
 	"def": 1500,
 	"type": "machine",
-	"count_as": null,
+	"count_as": "psychic",
 	"effect": [
 	  "on_summon",
 	  "jinzo",
@@ -8225,7 +8225,7 @@ const card_list = {
 	"atk": 600,
 	"def": 1400,
 	"type": "machine",
-	"count_as": null,
+	"count_as": "psychic",
 	"effect": [
 	  "on_attack",
 	  "can_direct"
@@ -12653,8 +12653,11 @@ const card_list = {
 	"atk": 1000,
 	"def": 1600,
 	"type": "spellcaster",
-	"count_as": "female",
-	"effect": [],
+	"count_as": "psychic",
+	"effect": [
+	  "on_attack",
+	  "anti_flip"
+	],
 	"passcode": "66690411"
   },
   "01008": {
@@ -14199,7 +14202,8 @@ const card_list = {
 	"effect": [
 	  "on_summon",
 	  "summon_pharaoh",
-	  1122, 1199
+	  1122,
+	  1199
 	],
 	"passcode": "25343280"
   },
@@ -15738,7 +15742,7 @@ const card_list = {
 	"atk": 2550,
 	"def": 2500,
 	"type": "aqua",
-	"count_as": null,
+	"count_as": "turtle",
 	"effect": [],
 	"passcode": "91782219"
   },
@@ -15780,31 +15784,1764 @@ const card_list = {
 	  1243
 	],
 	"passcode": "94377247"
-	},
-	"01245": {
-		"card_name": "Battleguard King",
-		"attribute": "earth",
-		"level": 8,
-		"atk": 3000,
-		"def": 1100,
-		"type": "warrior",
-		"count_as": "beast-warrior",
-		"effect": [
-		  "on_attack",
-		  "multiple_attacker"
-		],
-		"passcode": "39389320"
-	  },
-	  "01246": {
-		"card_name": "Token",
-		"attribute": "dark",
-		"level": 1,
-		"atk": 0,
-		"def": 0,
-		"type": "fiend",
-		"count_as": null,
-		"effect": [],
-		"passcode": "06441394"
-	  }
+  },
+  "01245": {
+	"card_name": "Battleguard King",
+	"attribute": "earth",
+	"level": 8,
+	"atk": 3000,
+	"def": 1100,
+	"type": "warrior",
+	"count_as": "beast-warrior",
+	"effect": [
+	  "on_attack",
+	  "multiple_attacker"
+	],
+	"passcode": "39389320"
+  },
+  "01246": {
+	"card_name": "Token",
+	"attribute": "dark",
+	"level": 1,
+	"atk": 0,
+	"def": 0,
+	"type": "fiend",
+	"count_as": null,
+	"effect": [
+	  "token_monster"
+	],
+	"passcode": "06441394"
+  },
+  "01247": {
+	"card_name": "Ultimate Great Insect",
+	"attribute": "earth",
+	"level": 9,
+	"atk": 3000,
+	"def": 2600,
+	"type": "insect",
+	"count_as": null,
+	"effect": [
+	  "on_summon",
+	  "destroy_card",
+	  "all_enemy_monsters"
+	],
+	"passcode": "87804747"
+  },
+  "01248": {
+	"card_name": "Metamorphosed Insect Queen",
+	"attribute": "earth",
+	"level": 7,
+	"atk": 2800,
+	"def": 2400,
+	"type": "insect",
+	"count_as": "female",
+	"effect": [
+	  "on_summon",
+	  "friends_power_up",
+	  300
+	],
+	"passcode": "41456841"
+  },
+  "01249": {
+	"card_name": "Grasschopper",
+	"attribute": "earth",
+	"level": 5,
+	"atk": 2350,
+	"def": 1000,
+	"type": "insect",
+	"count_as": null,
+	"effect": [
+	  "on_attack",
+	  "multiple_attacker"
+	],
+	"passcode": "95166228"
+  },
+  "01250": {
+	"card_name": "Chainsaw Insect",
+	"attribute": "earth",
+	"level": 4,
+	"atk": 2400,
+	"def": 0,
+	"type": "insect",
+	"count_as": "machine",
+	"effect": [
+	  "on_attack",
+	  "mill",
+	  1
+	],
+	"passcode": "77252217"
+  },
+  "01251": {
+	"card_name": "Saber Beetle",
+	"attribute": "earth",
+	"level": 6,
+	"atk": 2400,
+	"def": 600,
+	"type": "insect",
+	"count_as": null,
+	"effect": [
+	  "on_attack",
+	  "piercing"
+	],
+	"passcode": "49645921"
+  },
+  "01252": {
+	"card_name": "Empress Mantis",
+	"attribute": "wind",
+	"level": 6,
+	"atk": 2200,
+	"def": 1400,
+	"type": "insect",
+	"count_as": "female",
+	"effect": [],
+	"passcode": "58818411"
+  },
+  "01253": {
+	"card_name": "Insect Armor with Laser Cannon",
+	"attribute": "spell",
+	"level": null,
+	"atk": null,
+	"def": null,
+	"type": "equip",
+	"count_as": null,
+	"effect": [
+	  "stats_up",
+	  700,
+	  "insect"
+	],
+	"passcode": "03492538"
+  },
+  "01254": {
+	"card_name": "Kamakiriman",
+	"attribute": "earth",
+	"level": 4,
+	"atk": 1150,
+	"def": 1400,
+	"type": "insect",
+	"count_as": null,
+	"effect": [],
+	"passcode": "68928540"
+  },
+  "01255": {
+	"card_name": "Flying Kamakiri #2",
+	"attribute": "wind",
+	"level": 4,
+	"atk": 1500,
+	"def": 800,
+	"type": "insect",
+	"count_as": null,
+	"effect": [],
+	"passcode": "03134241"
+  },
+  "01256": {
+	"card_name": "Insect Soldiers of the Sky",
+	"attribute": "wind",
+	"level": 3,
+	"atk": 1000,
+	"def": 800,
+	"type": "insect",
+	"count_as": null,
+	"effect": [
+	  "on_summon",
+	  "self_power_up",
+	  "same_attribute"
+	],
+	"passcode": "07019529"
+  },
+  "01257": {
+	"card_name": "Pinch Hopper",
+	"attribute": "earth",
+	"level": 4,
+	"atk": 1000,
+	"def": 1200,
+	"type": "insect",
+	"count_as": null,
+	"effect": [],
+	"passcode": "26185991"
+  },
+  "01258": {
+	"card_name": "Skull-Mark Ladybug",
+	"attribute": "earth",
+	"level": 4,
+	"atk": 500,
+	"def": 1500,
+	"type": "insect",
+	"count_as": null,
+	"effect": [
+	  "on_summon",
+	  "lifepoint_up",
+	  1000
+	],
+	"passcode": "64306248"
+  },
+  "01259": {
+	"card_name": "Giant Flea",
+	"attribute": "earth",
+	"level": 4,
+	"atk": 1500,
+	"def": 1200,
+	"type": "insect",
+	"count_as": null,
+	"effect": [],
+	"passcode": "41762634"
+  },
+  "01260": {
+	"card_name": "Kwagar Hercules",
+	"attribute": "earth",
+	"level": 6,
+	"atk": 1900,
+	"def": 1700,
+	"type": "insect",
+	"count_as": null,
+	"effect": [],
+	"passcode": "95144193"
+  },
+  "01261": {
+	"card_name": "Kuwagata A",
+	"attribute": "earth",
+	"level": 4,
+	"atk": 1250,
+	"def": 1000,
+	"type": "insect",
+	"count_as": null,
+	"effect": [],
+	"passcode": "60802233"
+  },
+  "01262": {
+	"card_name": "Rose Spectre of Dunn",
+	"attribute": "dark",
+	"level": 6,
+	"atk": 2000,
+	"def": 1800,
+	"type": "female",
+	"count_as": null,
+	"effect": [],
+	"passcode": "32485271"
+  },
+  "01263": {
+	"card_name": "Beetron",
+	"attribute": "dark",
+	"level": 4,
+	"atk": 1600,
+	"def": 900,
+	"type": "insect",
+	"count_as": "machine",
+	"effect": [],
+	"passcode": "30587695"
+  },
+  "01264": {
+	"card_name": "Scary Moth",
+	"attribute": "wind",
+	"level": 6,
+	"atk": 1800,
+	"def": 2300,
+	"type": "insect",
+	"count_as": null,
+	"effect": [],
+	"passcode": "68087897"
+  },
+  "01265": {
+	"card_name": "Anteatereatingant",
+	"attribute": "earth",
+	"level": 5,
+	"atk": 2000,
+	"def": 500,
+	"type": "insect",
+	"count_as": null,
+	"effect": [
+	  "on_summon",
+	  "destroy_card",
+	  "random_spelltrap"
+	],
+	"passcode": "13250922"
+  },
+  "01266": {
+	"card_name": "Armored Bee",
+	"attribute": "wind",
+	"level": 4,
+	"atk": 1600,
+	"def": 1200,
+	"type": "insect",
+	"count_as": "machine",
+	"effect": [
+	  "on_attack",
+	  "rocket_warrior"
+	],
+	"passcode": "86915847"
+  },
+  "01267": {
+	"card_name": "Cross-Sword Beetle",
+	"attribute": "wind",
+	"level": 4,
+	"atk": 1800,
+	"def": 1200,
+	"type": "insect",
+	"count_as": null,
+	"effect": [
+	  "on_attack",
+	  "piercing"
+	],
+	"passcode": "74976215"
+  },
+  "01268": {
+	"card_name": "Guardian Grarl",
+	"attribute": "earth",
+	"level": 5,
+	"atk": 2500,
+	"def": 1000,
+	"type": "dinosaur",
+	"count_as": null,
+	"effect": [],
+	"passcode": "47150851"
+  },
+  "01269": {
+	"card_name": "Serpent Night Dragon",
+	"attribute": "dark",
+	"level": 7,
+	"atk": 2350,
+	"def": 2400,
+	"type": "dragon",
+	"count_as": "fiend",
+	"effect": [],
+	"passcode": "66516792"
+  },
+  "01270": {
+	"card_name": "Horned Saurus",
+	"attribute": "dark",
+	"level": 6,
+	"atk": 2000,
+	"def": 1800,
+	"type": "dinosaur",
+	"count_as": null,
+	"effect": [
+	  "on_attack",
+	  "can_direct"
+	],
+	"passcode": "86239173"
+  },
+  "01271": {
+	"card_name": "Trakodon",
+	"attribute": "earth",
+	"level": 3,
+	"atk": 1300,
+	"def": 800,
+	"type": "dinosaur",
+	"count_as": null,
+	"effect": [],
+	"passcode": "42348802"
+  },
+  "01272": {
+	"card_name": "Kaitoptera",
+	"attribute": "wind",
+	"level": 4,
+	"atk": 1400,
+	"def": 1000,
+	"type": "dinosaur",
+	"count_as": "winged beast",
+	"effect": [],
+	"passcode": "50834074"
+  },
+  "01273": {
+	"card_name": "Pragtical",
+	"attribute": "earth",
+	"level": 5,
+	"atk": 1900,
+	"def": 1500,
+	"type": "dinosaur",
+	"count_as": null,
+	"effect": [],
+	"passcode": "33691040"
+  },
+  "01274": {
+	"card_name": "Reinforcements",
+	"attribute": "trap",
+	"level": null,
+	"atk": null,
+	"def": null,
+	"type": "trap",
+	"count_as": null,
+	"effect": [
+	  "battle_trap",
+	  "atk"
+	],
+	"passcode": "17814387"
+  },
+  "01275": {
+	"card_name": "Castle Walls",
+	"attribute": "trap",
+	"level": null,
+	"atk": null,
+	"def": null,
+	"type": "trap",
+	"count_as": null,
+	"effect": [
+	  "battle_trap",
+	  "def"
+	],
+	"passcode": "44209392"
+  },
+  "01276": {
+	"card_name": "Amazoness Augusta",
+	"attribute": "earth",
+	"level": 10,
+	"atk": 3200,
+	"def": 2800,
+	"type": "warrior",
+	"count_as": "amazon",
+	"effect": [
+	  "on_summon",
+	  "destroy_card",
+	  "all_enemy_spelltraps"
+	],
+	"passcode": "23965033"
+  },
+  "01277": {
+	"card_name": "Amazoness Pet Liger King",
+	"attribute": "earth",
+	"level": 9,
+	"atk": 2900,
+	"def": 2800,
+	"type": "beast",
+	"count_as": "amazon",
+	"effect": [
+	  "on_summon",
+	  "stop_defense"
+	],
+	"passcode": "59353647"
+  },
+  "01278": {
+	"card_name": "Amazoness Empress",
+	"attribute": "earth",
+	"level": 8,
+	"atk": 2800,
+	"def": 2400,
+	"type": "warrior",
+	"count_as": "amazon",
+	"effect": [
+	  "on_attack",
+	  "ignore_spelltrap"
+	],
+	"passcode": "04591250"
+  },
+  "01279": {
+	"card_name": "Amazoness Pet Liger",
+	"attribute": "earth",
+	"level": 7,
+	"atk": 2500,
+	"def": 2400,
+	"type": "beast",
+	"count_as": "amazon",
+	"effect": [
+	  "on_summon",
+	  "count_as_power_up",
+	  200
+	],
+	"passcode": "68507541"
+  },
+  "01280": {
+	"card_name": "Amazoness Queen",
+	"attribute": "earth",
+	"level": 6,
+	"atk": 2400,
+	"def": 1800,
+	"type": "warrior",
+	"count_as": "amazon",
+	"effect": [
+	  "on_defend",
+	  "cant_die"
+	],
+	"passcode": "15951532"
+  },
+  "01281": {
+	"card_name": "Amazoness Paladin",
+	"attribute": "earth",
+	"level": 4,
+	"atk": 1700,
+	"def": 300,
+	"type": "warrior",
+	"count_as": "amazon",
+	"effect": [
+	  "on_summon",
+	  "count_as_power_up",
+	  100
+	],
+	"passcode": "47480070"
+  },
+  "01282": {
+	"card_name": "Amazoness Archer",
+	"attribute": "earth",
+	"level": 4,
+	"atk": 1400,
+	"def": 1000,
+	"type": "warrior",
+	"count_as": "amazon",
+	"effect": [
+	  "on_attack",
+	  "burn",
+	  600
+	],
+	"passcode": "91869203"
+  },
+  "01283": {
+	"card_name": "Shadow of Eyes",
+	"attribute": "trap",
+	"level": null,
+	"atk": null,
+	"def": null,
+	"type": "trap",
+	"count_as": null,
+	"effect": [
+	  "reveal_face_down"
+	],
+	"passcode": "58621589"
+  },
+  "01284": {
+	"card_name": "Harpie Channeler",
+	"attribute": "wind",
+	"level": 4,
+	"atk": 1400,
+	"def": 1300,
+	"type": "winged beast",
+	"count_as": "harpie",
+	"effect": [],
+	"passcode": "90238142"
+  },
+  "01285": {
+	"card_name": "Harpie Dancer",
+	"attribute": "wind",
+	"level": 4,
+	"atk": 1200,
+	"def": 1000,
+	"type": "winged beast",
+	"count_as": "harpie",
+	"effect": [],
+	"passcode": "68815132"
+  },
+  "01286": {
+	"card_name": "Harpie Girl",
+	"attribute": "wind",
+	"level": 2,
+	"atk": 500,
+	"def": 500,
+	"type": "winged beast",
+	"count_as": "harpie",
+	"effect": [],
+	"passcode": "34100324"
+  },
+  "01287": {
+	"card_name": "Harpie Harpist",
+	"attribute": "wind",
+	"level": 4,
+	"atk": 1700,
+	"def": 600,
+	"type": "winged beast",
+	"count_as": "harpie",
+	"effect": [
+	  "on_summon",
+	  "destroy_card",
+	  "random_monster"
+	],
+	"passcode": "56585883"
+  },
+  "01288": {
+	"card_name": "Amazoness Tiger",
+	"attribute": "earth",
+	"level": 4,
+	"atk": 1100,
+	"def": 1500,
+	"type": "beast",
+	"count_as": "amazon",
+	"effect": [
+	  "on_summon",
+	  "count_as_power_up",
+	  400
+	],
+	"passcode": "10979723"
+  },
+  "01289": {
+	"card_name": "Amazoness Trainee",
+	"attribute": "earth",
+	"level": 4,
+	"atk": 1500,
+	"def": 1300,
+	"type": "warrior",
+	"count_as": "amazon",
+	"effect": [
+	  "on_attack",
+	  "get_power",
+	  200
+	],
+	"passcode": "89567993"
+  },
+  "01290": {
+	"card_name": "Amazoness War Chief",
+	"attribute": "earth",
+	"level": 5,
+	"atk": 1900,
+	"def": 0,
+	"type": "warrior",
+	"count_as": "amazon",
+	"effect": [
+	  "on_summon",
+	  "destroy_card",
+	  "random_spelltrap"
+	],
+	"passcode": "50486289"
+  },
+  "01291": {
+	"card_name": "Harpie Oracle",
+	"attribute": "wind",
+	"level": 4,
+	"atk": 1300,
+	"def": 1400,
+	"type": "winged beast",
+	"count_as": "harpie",
+	"effect": [
+	  "on_summon",
+	  "destroy_card",
+	  "random_spelltrap"
+	],
+	"passcode": "66386380"
+  },
+  "01292": {
+	"card_name": "Harpie Perfumer",
+	"attribute": "wind",
+	"level": 4,
+	"atk": 1400,
+	"def": 1300,
+	"type": "winged beast",
+	"count_as": "harpie",
+	"effect": [
+	  "on_summon",
+	  "destroy_card",
+	  "random_spelltrap"
+	],
+	"passcode": "39392286"
+  },
+  "01293": {
+	"card_name": "Harpie Queen",
+	"attribute": "wind",
+	"level": 4,
+	"atk": 1900,
+	"def": 1200,
+	"type": "winged beast",
+	"count_as": "harpie",
+	"effect": [
+	  "on_summon",
+	  "count_as_power_up",
+	  200
+	],
+	"passcode": "75064463"
+  },
+  "01294": {
+	"card_name": "Amazoness Baby Tiger",
+	"attribute": "earth",
+	"level": 2,
+	"atk": 500,
+	"def": 500,
+	"type": "beast",
+	"count_as": "amazon",
+	"effect": [
+	  "on_summon",
+	  "count_as_power_up",
+	  100
+	],
+	"passcode": "10928224"
+  },
+  "01295": {
+	"card_name": "Amazoness Sage",
+	"attribute": "earth",
+	"level": 4,
+	"atk": 1400,
+	"def": 700,
+	"type": "warrior",
+	"count_as": "amazon",
+	"effect": [
+	  "on_summon",
+	  "destroy_card",
+	  "random_spelltrap"
+	],
+	"passcode": "53162898"
+  },
+  "01296": {
+	"card_name": "Phantom Gryphon",
+	"attribute": "wind",
+	"level": 4,
+	"atk": 2000,
+	"def": 0,
+	"type": "winged beast",
+	"count_as": null,
+	"effect": [],
+	"passcode": "74852097"
+  },
+  "01297": {
+	"card_name": "Birdface",
+	"attribute": "wind",
+	"level": 4,
+	"atk": 1600,
+	"def": 1600,
+	"type": "winged beast",
+	"count_as": null,
+	"effect": [],
+	"passcode": "45547649"
+  },
+  "01298": {
+	"card_name": "Amazoness Fighter",
+	"attribute": "earth",
+	"level": 4,
+	"atk": 1500,
+	"def": 1300,
+	"type": "warrior",
+	"count_as": "amazon",
+	"effect": [
+	  "on_defend",
+	  "no_damage"
+	],
+	"passcode": "55821894"
+  },
+  "01299": {
+	"card_name": "Amazoness Swords Woman",
+	"attribute": "earth",
+	"level": 4,
+	"atk": 1500,
+	"def": 1600,
+	"type": "warrior",
+	"count_as": "amazon",
+	"effect": [
+	  "on_defend",
+	  "return_damage"
+	],
+	"passcode": "94004268"
+  },
+  "01300": {
+	"card_name": "Amazoness Chain Master",
+	"attribute": "earth",
+	"level": 4,
+	"atk": 1500,
+	"def": 1300,
+	"type": "warrior",
+	"count_as": "amazon",
+	"effect": [],
+	"passcode": "29654737"
+  },
+  "01301": {
+	"card_name": "The Unfriendly Amazon",
+	"attribute": "earth",
+	"level": 4,
+	"atk": 2000,
+	"def": 1000,
+	"type": "warrior",
+	"count_as": "amazon",
+	"effect": [],
+	"passcode": "65475294"
+  },
+  "01302": {
+	"card_name": "Amazoness Blowpiper",
+	"attribute": "earth",
+	"level": 3,
+	"atk": 800,
+	"def": 1500,
+	"type": "warrior",
+	"count_as": "amazon",
+	"effect": [
+	  "on_attack",
+	  "rocket_warrior"
+	],
+	"passcode": "73574678"
+  },
+  "01303": {
+	"card_name": "Amazoness Princess",
+	"attribute": "earth",
+	"level": 3,
+	"atk": 1200,
+	"def": 900,
+	"type": "warrior",
+	"count_as": "amazon",
+	"effect": [],
+	"passcode": "84539520"
+  },
+  "01304": {
+	"card_name": "Amazoness Scouts",
+	"attribute": "earth",
+	"level": 2,
+	"atk": 500,
+	"def": 1100,
+	"type": "warrior",
+	"count_as": "amazon",
+	"effect": [
+	  "on_attack",
+	  "anti_flip"
+	],
+	"passcode": "71209500"
+  },
+  "01305": {
+	"card_name": "Sky Scout",
+	"attribute": "wind",
+	"level": 4,
+	"atk": 1800,
+	"def": 600,
+	"type": "winged beast",
+	"count_as": "warrior",
+	"effect": [],
+	"passcode": "30532390"
+  },
+  "01306": {
+	"card_name": "Blue-Winged Crown",
+	"attribute": "wind",
+	"level": 4,
+	"atk": 1600,
+	"def": 1200,
+	"type": "winged beast",
+	"count_as": "pyro",
+	"effect": [],
+	"passcode": "41396436"
+  },
+  "01307": {
+	"card_name": "Peacock",
+	"attribute": "wind",
+	"level": 5,
+	"atk": 1700,
+	"def": 1500,
+	"type": "winged beast",
+	"count_as": null,
+	"effect": [],
+	"passcode": "20624263"
+  },
+  "01308": {
+	"card_name": "Kujakujaku",
+	"attribute": "wind",
+	"level": 3,
+	"atk": 1200,
+	"def": 900,
+	"type": "winged beast",
+	"count_as": null,
+	"effect": [],
+	"passcode": "24384095"
+  },
+  "01309": {
+	"card_name": "Ocean Dragon Lord - Neo-Daedalus",
+	"attribute": "water",
+	"level": 8,
+	"atk": 2900,
+	"def": 1600,
+	"type": "sea serpent",
+	"count_as": "dragon",
+	"effect": [
+	  "on_summon",
+	  "destroy_card",
+	  "all_enemy_monsters"
+	],
+	"passcode": "10485110"
+  },
+  "01310": {
+	"card_name": "Poseidra, the Atlantean Dragon",
+	"attribute": "water",
+	"level": 7,
+	"atk": 2800,
+	"def": 1600,
+	"type": "sea serpent",
+	"count_as": "dragon",
+	"effect": [
+	  "on_summon",
+	  "destroy_card",
+	  "all_enemy_spelltraps"
+	],
+	"passcode": "47826112"
+  },
+  "01311": {
+	"card_name": "Levia-Dragon - Daedalus",
+	"attribute": "water",
+	"level": 7,
+	"atk": 2600,
+	"def": 1500,
+	"type": "sea serpent",
+	"count_as": "dragon",
+	"effect": [
+	  "on_summon",
+	  "destroy_card",
+	  "all_enemy_monsters"
+	],
+	"passcode": "37721209"
+  },
+  "01312": {
+	"card_name": "Mega Fortress Whale",
+	"attribute": "water",
+	"level": 7,
+	"atk": 2550,
+	"def": 2350,
+	"type": "fish",
+	"count_as": "machine",
+	"effect": [
+	  "on_attack",
+	  "can_direct"
+	],
+	"passcode": "96546575"
+  },
+  "01313": {
+	"card_name": "The Legendary Fisherman II",
+	"attribute": "water",
+	"level": 5,
+	"atk": 2200,
+	"def": 1800,
+	"type": "warrior",
+	"count_as": "fish",
+	"effect": [
+	  "on_attack",
+	  "ignore_spelltrap"
+	],
+	"passcode": "19801646"
+  },
+  "01314": {
+	"card_name": "Orca Mega-Fortress of Darkness",
+	"attribute": "water",
+	"level": 5,
+	"atk": 2100,
+	"def": 1200,
+	"type": "fish",
+	"count_as": "machine",
+	"effect": [
+	  "on_summon",
+	  "destroy_card",
+	  "random_monster"
+	],
+	"passcode": "63120904"
+  },
+  "01315": {
+	"card_name": "Amphibious Bugroth MK-11",
+	"attribute": "water",
+	"level": 5,
+	"atk": 1850,
+	"def": 1500,
+	"type": "machine",
+	"count_as": null,
+	"effect": [
+	  "on_summon",
+	  "destroy_card",
+	  "random_monster"
+	],
+	"passcode": "04754691"
+  },
+  "01316": {
+	"card_name": "Maiden of the Aqua",
+	"attribute": "water",
+	"level": 4,
+	"atk": 700,
+	"def": 2000,
+	"type": "aqua",
+	"count_as": "female",
+	"effect": [
+	  "on_summon",
+	  "monster_change_field"
+	],
+	"passcode": "17214465"
+  },
+  "01317": {
+	"card_name": "Amphibious Bugroth MK-3",
+	"attribute": "water",
+	"level": 4,
+	"atk": 1500,
+	"def": 1300,
+	"type": "machine",
+	"count_as": null,
+	"effect": [
+	  "on_attack",
+	  "can_direct"
+	],
+	"passcode": "64342551"
+  },
+  "01318": {
+	"card_name": "Cannonball Spear Shellfish",
+	"attribute": "water",
+	"level": 2,
+	"atk": 1000,
+	"def": 1000,
+	"type": "aqua",
+	"count_as": "machine",
+	"effect": [
+	  "on_attack",
+	  "ignore_spelltrap"
+	],
+	"passcode": "95614612"
+  },
+  "01319": {
+	"card_name": "Codarus",
+	"attribute": "water",
+	"level": 4,
+	"atk": 1400,
+	"def": 1200,
+	"type": "sea serpent",
+	"count_as": "dragon",
+	"effect": [],
+	"passcode": "65496056"
+  },
+  "01320": {
+	"card_name": "Mermaid Knight",
+	"attribute": "water",
+	"level": 4,
+	"atk": 1500,
+	"def": 700,
+	"type": "aqua",
+	"count_as": "female",
+	"effect": [
+	  "on_attack",
+	  "multiple_attacker"
+	],
+	"passcode": "24435369"
+  },
+  "01321": {
+	"card_name": "Ocean Dragon Lord - Kairyu-Shin",
+	"attribute": "water",
+	"level": 5,
+	"atk": 2000,
+	"def": 1700,
+	"type": "sea serpent",
+	"count_as": "dragon",
+	"effect": [
+	  "on_summon",
+	  "destroy_card",
+	  "random_monster"
+	],
+	"passcode": "23931679"
+  },
+  "01322": {
+	"card_name": "Torpedo Fish",
+	"attribute": "water",
+	"level": 3,
+	"atk": 1000,
+	"def": 1000,
+	"type": "fish",
+	"count_as": "machine",
+	"effect": [
+	  "on_attack",
+	  "ignore_spelltrap"
+	],
+	"passcode": "90337190"
+  },
+  "01323": {
+	"card_name": "Warrior of Atlantis",
+	"attribute": "water",
+	"level": 4,
+	"atk": 1900,
+	"def": 1200,
+	"type": "aqua",
+	"count_as": "warrior",
+	"effect": [],
+	"passcode": "43797906"
+  },
+  "01324": {
+	"card_name": "Yorishiro of the Aqua",
+	"attribute": "water",
+	"level": 4,
+	"atk": 700,
+	"def": 2000,
+	"type": "aqua",
+	"count_as": "female",
+	"effect": [
+	  "on_attack",
+	  "change_position"
+	],
+	"passcode": "57511992"
+  },
+  "01325": {
+	"card_name": "Sentinel of the Seas",
+	"attribute": "water",
+	"level": 4,
+	"atk": 1300,
+	"def": 1000,
+	"type": "aqua",
+	"count_as": "fish",
+	"effect": [],
+	"passcode": "85448931"
+  },
+  "01326": {
+	"card_name": "Deepsea Macrotrema",
+	"attribute": "water",
+	"level": 1,
+	"atk": 600,
+	"def": 100,
+	"type": "fish",
+	"count_as": "fiend",
+	"effect": [
+	  "on_summon",
+	  "attribute_booster"
+	],
+	"passcode": "13314457"
+  },
+  "01327": {
+	"card_name": "Lost Blue Breaker",
+	"attribute": "water",
+	"level": 3,
+	"atk": 1400,
+	"def": 0,
+	"type": "sea serpent",
+	"count_as": null,
+	"effect": [
+	  "on_summon",
+	  "destroy_card",
+	  "random_spelltrap"
+	],
+	"passcode": "95231062"
+  },
+  "01328": {
+	"card_name": "Abyss Warrior",
+	"attribute": "water",
+	"level": 4,
+	"atk": 1800,
+	"def": 1300,
+	"type": "aqua",
+	"count_as": "warrior",
+	"effect": [],
+	"passcode": "88409165"
+  },
+  "01329": {
+	"card_name": "Gemini Lancer",
+	"attribute": "water",
+	"level": 4,
+	"atk": 1800,
+	"def": 1400,
+	"type": "sea serpent",
+	"count_as": null,
+	"effect": [
+	  "on_attack",
+	  "piercing"
+	],
+	"passcode": "26254876"
+  },
+  "01330": {
+	"card_name": "Hammer Shark",
+	"attribute": "water",
+	"level": 4,
+	"atk": 1700,
+	"def": 1500,
+	"type": "fish",
+	"count_as": null,
+	"effect": [],
+	"passcode": "17201174"
+  },
+  "01331": {
+	"card_name": "Needle Sunfish",
+	"attribute": "water",
+	"level": 3,
+	"atk": 1500,
+	"def": 100,
+	"type": "fish",
+	"count_as": null,
+	"effect": [
+	  "on_attack",
+	  "rocket_warrior"
+	],
+	"passcode": "56223084"
+  },
+  "01332": {
+	"card_name": "Piercing Moray",
+	"attribute": "water",
+	"level": 4,
+	"atk": 1500,
+	"def": 500,
+	"type": "fish",
+	"count_as": null,
+	"effect": [
+	  "on_attack",
+	  "piercing"
+	],
+	"passcode": "69846323"
+  },
+  "01333": {
+	"card_name": "Yomi Ship",
+	"attribute": "water",
+	"level": 3,
+	"atk": 800,
+	"def": 1400,
+	"type": "aqua",
+	"count_as": null,
+	"effect": [
+	  "on_attack",
+	  "mutual_banish"
+	],
+	"passcode": "51534754"
+  },
+  "01334": {
+	"card_name": "Atlantean Pikeman",
+	"attribute": "water",
+	"level": 2,
+	"atk": 1400,
+	"def": 0,
+	"type": "sea serpent",
+	"count_as": null,
+	"effect": [],
+	"passcode": "26976414"
+  },
+  "01335": {
+	"card_name": "Atlantean Attack Squad",
+	"attribute": "water",
+	"level": 3,
+	"atk": 1400,
+	"def": 0,
+	"type": "sea serpent",
+	"count_as": null,
+	"effect": [
+	  "on_summon",
+	  "self_power_up",
+	  "same_attribute"
+	],
+	"passcode": "08078366"
+  },
+  "01336": {
+	"card_name": "Atlantean Dragoons",
+	"attribute": "water",
+	"level": 4,
+	"atk": 1800,
+	"def": 0,
+	"type": "sea serpent",
+	"count_as": null,
+	"effect": [
+	  "on_attack",
+	  "can_direct"
+	],
+	"passcode": "74311226"
+  },
+  "01337": {
+	"card_name": "Atlantean Heavy Infantry",
+	"attribute": "water",
+	"level": 2,
+	"atk": 0,
+	"def": 1600,
+	"type": "sea serpent",
+	"count_as": null,
+	"effect": [],
+	"passcode": "37104630"
+  },
+  "01338": {
+	"card_name": "Atlantean Marksman",
+	"attribute": "water",
+	"level": 3,
+	"atk": 1400,
+	"def": 0,
+	"type": "sea serpent",
+	"count_as": null,
+	"effect": [],
+	"passcode": "00706925"
+  },
+  "01339": {
+	"card_name": "Legendary Atlantean Tridon",
+	"attribute": "water",
+	"level": 3,
+	"atk": 1600,
+	"def": 800,
+	"type": "sea serpent",
+	"count_as": "dragon",
+	"effect": [],
+	"passcode": "28754338"
+  },
+  "01340": {
+	"card_name": "Neptabyss, the Atlantean Prince",
+	"attribute": "water",
+	"level": 1,
+	"atk": 800,
+	"def": 0,
+	"type": "sea serpent",
+	"count_as": "warrior",
+	"effect": [
+	  "on_summon",
+	  "self_power_up",
+	  "same_attribute"
+	],
+	"passcode": "21565445"
+  },
+  "01341": {
+	"card_name": "Creeping Doom Manta",
+	"attribute": "water",
+	"level": 3,
+	"atk": 1300,
+	"def": 1200,
+	"type": "fish",
+	"count_as": null,
+	"effect": [
+	  "on_summon",
+	  "destroy_card",
+	  "random_spelltrap"
+	],
+	"passcode": "52571838"
+  },
+  "01342": {
+	"card_name": "Flying Fish",
+	"attribute": "wind",
+	"level": 4,
+	"atk": 800,
+	"def": 500,
+	"type": "fish",
+	"count_as": null,
+	"effect": [],
+	"passcode": "31987274"
+  },
+  "01343": {
+	"card_name": "Root Water",
+	"attribute": "water",
+	"level": 3,
+	"atk": 900,
+	"def": 800,
+	"type": "fish",
+	"count_as": null,
+	"effect": [],
+	"passcode": "39004808"
+  },
+  "01344": {
+	"card_name": "Deep Diver",
+	"attribute": "water",
+	"level": 3,
+	"atk": 1000,
+	"def": 1000,
+	"type": "aqua",
+	"count_as": "machine",
+	"effect": [],
+	"passcode": "17559367"
+  },
+  "01345": {
+	"card_name": "Piranha Army",
+	"attribute": "water",
+	"level": 2,
+	"atk": 800,
+	"def": 200,
+	"type": "fish",
+	"count_as": null,
+	"effect": [
+	  "on_attack",
+	  "can_direct"
+	],
+	"passcode": "50823978"
+  },
+  "01346": {
+	"card_name": "Master Gig",
+	"attribute": "earth",
+	"level": 8,
+	"atk": 2600,
+	"def": 1400,
+	"type": "psychic",
+	"count_as": "machine",
+	"effect": [
+	  "on_summon",
+	  "destroy_card",
+	  "all_enemy_monsters"
+	],
+	"passcode": "16191953"
+  },
+  "01347": {
+	"card_name": "The Last Warrior from Another Planet",
+	"attribute": "earth",
+	"level": 7,
+	"atk": 2350,
+	"def": 2300,
+	"type": "warrior",
+	"count_as": "machine",
+	"effect": [
+	  "on_flip",
+	  "destroy_card",
+	  "both_sides_monsters"
+	],
+	"passcode": "86099788"
+  },
+  "01348": {
+	"card_name": "Armored Axon Kicker",
+	"attribute": "earth",
+	"level": 6,
+	"atk": 2200,
+	"def": 1800,
+	"type": "psychic",
+	"count_as": "machine",
+	"effect": [
+	  "on_attack",
+	  "burn",
+	  "enemy_atk"
+	],
+	"passcode": "62742651"
+  },
+  "01349": {
+	"card_name": "Batteryman Fuel Cell",
+	"attribute": "light",
+	"level": 6,
+	"atk": 2100,
+	"def": 0,
+	"type": "thunder",
+	"count_as": "machine",
+	"effect": [
+	  "on_summon",
+	  "self_power_up",
+	  200
+	],
+	"passcode": "74730899"
+  },
+  "01350": {
+	"card_name": "Mutant Mindmaster",
+	"attribute": "dark",
+	"level": 6,
+	"atk": 0,
+	"def": 2500,
+	"type": "spellcaster",
+	"count_as": "psychic",
+	"effect": [
+	  "on_summon",
+	  "copy_atk"
+	],
+	"passcode": "11508758"
+  },
+  "01351": {
+	"card_name": "Cyber Raider",
+	"attribute": "dark",
+	"level": 4,
+	"atk": 1400,
+	"def": 1000,
+	"type": "machine",
+	"count_as": null,
+	"effect": [
+	  "on_summon",
+	  "equip_boost"
+	],
+	"passcode": "39978267"
+  },
+  "01352": {
+	"card_name": "Jinzo - Jector",
+	"attribute": "dark",
+	"level": 4,
+	"atk": 800,
+	"def": 2000,
+	"type": "machine",
+	"count_as": "psychic",
+	"effect": [
+	  "on_summon",
+	  "jinzo",
+	  -100
+	],
+	"passcode": "51916032"
+  },
+  "01353": {
+	"card_name": "Reflect Bounder",
+	"attribute": "light",
+	"level": 4,
+	"atk": 1700,
+	"def": 1000,
+	"type": "machine",
+	"count_as": null,
+	"effect": [
+	  "on_defend",
+	  "return_damage"
+	],
+	"passcode": "02851070"
+  },
+  "01354": {
+	"card_name": "UFO Turtle",
+	"attribute": "fire",
+	"level": 4,
+	"atk": 1400,
+	"def": 1200,
+	"type": "machine",
+	"count_as": "turtle",
+	"effect": [],
+	"passcode": "60806437"
+  },
+  "01355": {
+	"card_name": "The Illusory Gentleman",
+	"attribute": "dark",
+	"level": 4,
+	"atk": 1500,
+	"def": 1600,
+	"type": "spellcaster",
+	"count_as": "psychic",
+	"effect": [],
+	"passcode": "83764996"
+  },
+  "01356": {
+	"card_name": "Guardian of the Throne Room",
+	"attribute": "light",
+	"level": 4,
+	"atk": 1650,
+	"def": 1600,
+	"type": "machine",
+	"count_as": null,
+	"effect": [],
+	"passcode": "47879985"
+  },
+  "01357": {
+	"card_name": "Batteryman D",
+	"attribute": "light",
+	"level": 1,
+	"atk": 0,
+	"def": 1900,
+	"type": "thunder",
+	"count_as": "machine",
+	"effect": [],
+	"passcode": "55401221"
+  },
+  "01358": {
+	"card_name": "Psychic Kappa",
+	"attribute": "water",
+	"level": 2,
+	"atk": 400,
+	"def": 1000,
+	"type": "aqua",
+	"count_as": "psychic",
+	"effect": [],
+	"passcode": "07892180"
+  },
+  "01359": {
+	"card_name": "Dharma Cannon",
+	"attribute": "dark",
+	"level": 2,
+	"atk": 900,
+	"def": 500,
+	"type": "machine",
+	"count_as": "psychic",
+	"effect": [],
+	"passcode": "96967123"
+  },
+  "01360": {
+	"card_name": "End of the World",
+	"attribute": "spell",
+	"level": null,
+	"atk": null,
+	"def": null,
+	"type": "ritual",
+	"count_as": null,
+	"effect": [
+	  "ritual",
+	  1361
+	],
+	"passcode": "08198712"
+  },
+  "01361": {
+	"card_name": "Demise, Agent of Armageddon",
+	"attribute": "dark",
+	"level": 4,
+	"atk": 1800,
+	"def": 1000,
+	"type": "fiend",
+	"count_as": "zombie",
+	"effect": [
+	  "on_summon",
+	  "destroy_card",
+	  "random_monster"
+	],
+	"passcode": "86124104"
+  },
+  "01362": {
+	"card_name": "Demise, King of Armageddon",
+	"attribute": "dark",
+	"level": 8,
+	"atk": 2400,
+	"def": 2000,
+	"type": "fiend",
+	"count_as": "zombie",
+	"effect": [
+	  "on_summon",
+	  "destroy_card",
+	  "all_enemy_monsters"
+	],
+	"passcode": "72426662"
+  },
+  "01363": {
+	"card_name": "Demise, Supreme King of Armageddon",
+	"attribute": "dark",
+	"level": 10,
+	"atk": 3000,
+	"def": 3000,
+	"type": "fiend",
+	"count_as": "ritual",
+	"effect": [
+	  "on_summon",
+	  "destroy_card",
+	  "all_enemy_monsters"
+	],
+	"passcode": "59913418"
+  },
+  "01364": {
+	"card_name": "King of the Skull Servants",
+	"attribute": "dark",
+	"level": 1,
+	"atk": 0,
+	"def": 0,
+	"type": "zombie",
+	"count_as": null,
+	"effect": [
+	  "on_summon",
+	  "graveyard_power_up",
+	  500
+	],
+	"passcode": "36021814"
+  },
+  "01365": {
+	"card_name": "Ushi Oni",
+	"attribute": "dark",
+	"level": 6,
+	"atk": 2150,
+	"def": 1950,
+	"type": "fiend",
+	"count_as": "beast",
+	"effect": [],
+	"passcode": "48649353"
+  },
+  "01366": {
+	"card_name": "Shadow Ghoul",
+	"attribute": "dark",
+	"level": 5,
+	"atk": 1600,
+	"def": 1300,
+	"type": "zombie",
+	"count_as": "fiend",
+	"effect": [
+	  "on_summon",
+	  "graveyard_power_up",
+	  100
+	],
+	"passcode": "30778711"
+  },
+  "01367": {
+	"card_name": "The Lady in Wight",
+	"attribute": "dark",
+	"level": 3,
+	"atk": 0,
+	"def": 2200,
+	"type": "zombie",
+	"count_as": null,
+	"effect": [
+	  "on_defend",
+	  "cant_die"
+	],
+	"passcode": "40991587"
+  },
+  "01368": {
+	"card_name": "Clown Zombie",
+	"attribute": "dark",
+	"level": 2,
+	"atk": 1350,
+	"def": 0,
+	"type": "zombie",
+	"count_as": "clown",
+	"effect": [],
+	"passcode": "92667214"
+  },
+  "01369": {
+	"card_name": "Zombie Mammoth",
+	"attribute": "earth",
+	"level": 4,
+	"atk": 1900,
+	"def": 0,
+	"type": null,
+	"count_as": null,
+	"effect": [],
+	"passcode": "43642620"
+  },
+  "01370": {
+	"card_name": "Zanki",
+	"attribute": "earth",
+	"level": 5,
+	"atk": 1500,
+	"def": 1700,
+	"type": "warrior",
+	"count_as": null,
+	"effect": [],
+	"passcode": "30090452"
+  },
+  "01371": {
+	"card_name": "Crawling Dragon",
+	"attribute": "earth",
+	"level": 5,
+	"atk": 1600,
+	"def": 1400,
+	"type": "dragon",
+	"count_as": null,
+	"effect": [],
+	"passcode": "67494157"
+  },
+  "01372": {
+	"card_name": "Baron of the Fiend Sword",
+	"attribute": "dark",
+	"level": 4,
+	"atk": 1550,
+	"def": 800,
+	"type": "fiend",
+	"count_as": null,
+	"effect": [],
+	"passcode": "86325596"
+  },
+  "01373": {
+	"card_name": "Gozuki",
+	"attribute": "earth",
+	"level": 4,
+	"atk": 1700,
+	"def": 800,
+	"type": "zombie",
+	"count_as": "beast",
+	"effect": [],
+	"passcode": "52467217"
+  },
+  "01374": {
+	"card_name": "Zombie Master",
+	"attribute": "dark",
+	"level": 4,
+	"atk": 1800,
+	"def": 0,
+	"type": "zombie",
+	"count_as": "spellcaster",
+	"effect": [
+	  "on_summon",
+	  "friends_power_up",
+	  200
+	],
+	"passcode": "17259470"
+  },
+  "01375": {
+	"card_name": "Immortal Ruler",
+	"attribute": "earth",
+	"level": 4,
+	"atk": 1800,
+	"def": 200,
+	"type": "zombie",
+	"count_as": "spellcaster",
+	"effect": [],
+	"passcode": "32485518"
+  },
+  "01376": {
+	"card_name": "Vampire Familiar",
+	"attribute": "dark",
+	"level": 1,
+	"atk": 500,
+	"def": 0,
+	"type": "zombie",
+	"count_as": "vampire",
+	"effect": [],
+	"passcode": "34250214"
+  },
+  "01377": {
+	"card_name": "Chopman the Desperate Outlaw",
+	"attribute": "dark",
+	"level": 3,
+	"atk": 1100,
+	"def": 500,
+	"type": "zombie",
+	"count_as": null,
+	"effect": [],
+	"passcode": "40884383"
+  },
+  "01378": {
+	"card_name": "Blue-Eyed Silver Zombie",
+	"attribute": "dark",
+	"level": 3,
+	"atk": 900,
+	"def": 700,
+	"type": "zombie",
+	"count_as": "winged beast",
+	"effect": [],
+	"passcode": "35282433"
+  },
+  "01379": {
+	"card_name": "Blocker",
+	"attribute": "dark",
+	"level": 4,
+	"atk": 850,
+	"def": 1800,
+	"type": "machine",
+	"count_as": "plant",
+	"effect": [],
+	"passcode": "34743446"
+  }
 }
 

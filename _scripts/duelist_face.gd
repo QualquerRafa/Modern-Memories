@@ -12,6 +12,10 @@ func my_func(pass_duelist_name : String):
 func _ready():
 	duelist_name = self.get_name().split("_")[1]
 	my_func(duelist_name)
+	
+	#Just for the video, hide the spoilers
+	if duelist_name in ["tenma", "nitemare"]:
+		$visuals.hide()
 
 func _on_duelist_face_button_up():
 	#Animate the button click

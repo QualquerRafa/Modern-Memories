@@ -43,6 +43,9 @@ func create_player_deck():
 	var tier_2_ritual = ["00538", "00667", "01120", "01176"] #35%
 	var tier_3_ritual = ["01240", "01236", "01242", "01044"] #15%
 	
+	#Token Invocations of 2
+	var token = ["01083", "01085", "01087", "01089", "01091", "01093"]
+	
 	#Generate the player deck by using one of the premade elemental bases + random from type_destruction + random from type_boost_equip + ritual
 	var picked_elemental_base = []
 	randomize()
@@ -71,6 +74,10 @@ func create_player_deck():
 		selected_tier = tier_1_ritual
 	var rand_ritual = randi() %selected_tier.size()
 	player_deck.append(selected_tier[rand_ritual])
+	
+	#Add one of Token Summoners
+	var rand_token = randi() %token.size()
+	player_deck.append(token[rand_token])
 	
 	#Complete the deck with random cards from the General Card Pool (MONSTERS ONLY)
 	var general_card_pool : Array = CardList.general_card_pool

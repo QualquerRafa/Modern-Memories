@@ -15,9 +15,6 @@ func _ready():
 	$user_interface/card_info_box/card_text.hide()
 	
 	#Show the buttons for each unlocked duelist
-	#var unlocked_duelists = $npc_decks_gd.list_of_decks.keys() #In the future, be PlayerData.recorded_duels
-	#for duelist_name in unlocked_duelists:
-		#$duelist_faces/duelist_buttons/GridContainer.get_node("duelist_" + duelist_name).show()
 
 
 func duelist_face_clicked(duelist_name):
