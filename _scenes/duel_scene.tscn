@@ -1787,7 +1787,7 @@ text = "3000/"
 [node name="tween_field_cards" type="Tween" parent="duel_field/enemy_side_zones"]
 
 [node name="player_hand" type="Node2D" parent="."]
-position = Vector2( 0, 22 )
+position = Vector2( -33, 22 )
 
 [node name="darken_screen" type="Button" parent="player_hand"]
 visible = false
