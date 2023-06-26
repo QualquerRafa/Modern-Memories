@@ -2,12 +2,12 @@ extends Node
 
 #Reference values for hand cards position and rotation. Order: 0, 1, 2, 3, 4
 const card_references = {
-	"card_0_references" : {"rect_position" : Vector2(185, 280), "rect_rotation" : -11},
-	"card_1_references" : {"rect_position" : Vector2(330, 258), "rect_rotation" : -6},
-	"card_2_references" : {"rect_position" : Vector2(475, 250), "rect_rotation" : 0},
-	"card_3_references" : {"rect_position" : Vector2(620, 258), "rect_rotation" : 6},
-	"card_4_references" : {"rect_position" : Vector2(765, 280), "rect_rotation" : 11},
-	"offscreen_reference" : {"rect_position" : Vector2(475, 400), "rect_rotation" : 0}}
+	"card_0_references" : {"rect_position" : Vector2(185-35, 280), "rect_rotation" : -11},
+	"card_1_references" : {"rect_position" : Vector2(330-35, 258), "rect_rotation" : -6},
+	"card_2_references" : {"rect_position" : Vector2(475-35, 250), "rect_rotation" : 0},
+	"card_3_references" : {"rect_position" : Vector2(620-35, 258), "rect_rotation" : 6},
+	"card_4_references" : {"rect_position" : Vector2(765-35, 280), "rect_rotation" : 11},
+	"offscreen_reference" : {"rect_position" : Vector2(475-35, 400), "rect_rotation" : 0}}
 
 #Player variables
 var player_LP : int

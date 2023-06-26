@@ -23,6 +23,9 @@ func duelist_face_clicked(duelist_name):
 	if PlayerData.recorded_duels.keys().has(duelist_name):
 		$duelist_focus/duelist_wins.text = "Wins: " + String(PlayerData.recorded_duels[duelist_name].W)
 		$duelist_focus/duelist_losses.text = "Losses: " + String(PlayerData.recorded_duels[duelist_name].L)
+	else:
+		$duelist_focus/duelist_wins.text = "Wins: 0"
+		$duelist_focus/duelist_losses.text = "Losses: 0"
 	update_duelist_cards(duelist_name)
 	active_duelist_name = duelist_name
 	

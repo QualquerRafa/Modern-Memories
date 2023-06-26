@@ -14,8 +14,8 @@ func _ready():
 	my_func(duelist_name)
 	
 	#Just for the video, hide the spoilers
-	if duelist_name in ["tenma", "nitemare"]:
-		$visuals.hide()
+	#if duelist_name in ["tenma", "nitemare"]:
+		#$visuals.hide()
 
 func _on_duelist_face_button_up():
 	#Animate the button click

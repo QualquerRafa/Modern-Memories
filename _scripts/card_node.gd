@@ -127,7 +127,7 @@ onready var GAME_LOGIC := get_tree().get_current_scene().get_child(0)
 #-------------------------------------------------------------------------------
 var recorded_position : Vector2 = self.rect_position
 var recorded_rotation : float = self.rect_rotation
-var middle_screen_position : Vector2 = Vector2(475, -104) #arbitrary middle of the screen
+var middle_screen_position : Vector2 = Vector2(475-25, -104) #arbitrary middle of the screen
 var middle_screen_scale : Vector2 = Vector2(0.666, 0.666)
 var to_middle_time : float = 0.2 #in seconds
 

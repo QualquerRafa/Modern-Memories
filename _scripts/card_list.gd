@@ -2936,7 +2936,10 @@ const card_list = {
 	"def": 2500,
 	"type": "dragon",
 	"count_as": null,
-	"effect": [],
+	"effect": [
+	  "on_attack",
+	  "multiple_attacker"
+	],
 	"passcode": "02129638"
   },
   "00242": {
@@ -16013,8 +16016,8 @@ const card_list = {
 	"level": 6,
 	"atk": 2000,
 	"def": 1800,
-	"type": "female",
-	"count_as": null,
+	"type": "plant",
+	"count_as": "female",
 	"effect": [],
 	"passcode": "32485271"
   },
@@ -16162,7 +16165,7 @@ const card_list = {
 	"count_as": null,
 	"effect": [
 	  "battle_trap",
-	  "atk"
+	  "non_interrupt_battle"
 	],
 	"passcode": "17814387"
   },
@@ -16176,7 +16179,7 @@ const card_list = {
 	"count_as": null,
 	"effect": [
 	  "battle_trap",
-	  "def"
+	  "non_interrupt_battle"
 	],
 	"passcode": "44209392"
   },
@@ -17209,7 +17212,7 @@ const card_list = {
 	"effect": [
 	  "on_summon",
 	  "jinzo",
-	  -100
+	  0
 	],
 	"passcode": "51916032"
   },
@@ -17400,7 +17403,7 @@ const card_list = {
 	"atk": 0,
 	"def": 2200,
 	"type": "zombie",
-	"count_as": null,
+	"count_as": "female",
 	"effect": [
 	  "on_defend",
 	  "cant_die"
@@ -17424,7 +17427,7 @@ const card_list = {
 	"level": 4,
 	"atk": 1900,
 	"def": 0,
-	"type": null,
+	"type": "zombie",
 	"count_as": null,
 	"effect": [],
 	"passcode": "43642620"
@@ -17542,6 +17545,510 @@ const card_list = {
 	"count_as": "plant",
 	"effect": [],
 	"passcode": "34743446"
+  },
+  "01380": {
+	"card_name": "Wightbaking",
+	"attribute": "dark",
+	"level": 1,
+	"atk": 300,
+	"def": 200,
+	"type": "zombie",
+	"count_as": null,
+	"effect": [],
+	"passcode": "06128460"
+  },
+  "01381": {
+	"card_name": "Wightprincess",
+	"attribute": "light",
+	"level": 3,
+	"atk": 1600,
+	"def": 0,
+	"type": "zombie",
+	"count_as": "female",
+	"effect": [],
+	"passcode": "90243945"
+  },
+  "01382": {
+	"card_name": "Psi-Beast",
+	"attribute": "earth",
+	"level": 2,
+	"atk": 700,
+	"def": 500,
+	"type": "psychic",
+	"count_as": "beast",
+	"effect": [],
+	"passcode": "46291010"
+  },
+  "01383": {
+	"card_name": "Pandaborg",
+	"attribute": "water",
+	"level": 4,
+	"atk": 1700,
+	"def": 1400,
+	"type": "psychic",
+	"count_as": "beast",
+	"effect": [],
+	"passcode": "39091951"
+  },
+  "01384": {
+	"card_name": "Grapple Blocker",
+	"attribute": "earth",
+	"level": 4,
+	"atk": 1200,
+	"def": 2000,
+	"type": "psychic",
+	"count_as": "warrior",
+	"effect": [],
+	"passcode": "32907538"
+  },
+  "01385": {
+	"card_name": "Space-Time Police",
+	"attribute": "wind",
+	"level": 5,
+	"atk": 2300,
+	"def": 1500,
+	"type": "psychic",
+	"count_as": null,
+	"effect": [
+	  "on_summon",
+	  "destroy_card",
+	  "random_monster"
+	],
+	"passcode": "47126872"
+  },
+  "01386": {
+	"card_name": "Risebell the Star Adjuster",
+	"attribute": "wind",
+	"level": 3,
+	"atk": 800,
+	"def": 800,
+	"type": "psychic",
+	"count_as": "spellcaster",
+	"effect": [],
+	"passcode": "25788011"
+  },
+  "01387": {
+	"card_name": "Psychic Ace",
+	"attribute": "dark",
+	"level": 2,
+	"atk": 1000,
+	"def": 0,
+	"type": "psychic",
+	"count_as": "machine",
+	"effect": [
+	  "on_summon",
+	  "destroy_card",
+	  "random_monster"
+	],
+	"passcode": "84453939"
+  },
+  "01388": {
+	"card_name": "Wattsychic Fighter",
+	"attribute": "light",
+	"level": 3,
+	"atk": 1500,
+	"def": 300,
+	"type": "psychic",
+	"count_as": "thunder",
+	"effect": [],
+	"passcode": "81028112"
+  },
+  "01389": {
+	"card_name": "Telekinetic Shocker",
+	"attribute": "earth",
+	"level": 4,
+	"atk": 1700,
+	"def": 700,
+	"type": "psychic",
+	"count_as": "thunder",
+	"effect": [],
+	"passcode": "84847656"
+  },
+  "01390": {
+	"card_name": "Psychic Snail",
+	"attribute": "earth",
+	"level": 4,
+	"atk": 1900,
+	"def": 1200,
+	"type": "psychic",
+	"count_as": "thunder",
+	"effect": [
+	  "on_attack",
+	  "multiple_attacker"
+	],
+	"passcode": "58453942"
+  },
+  "01391": {
+	"card_name": "Hypnosister",
+	"attribute": "wind",
+	"level": 4,
+	"atk": 1300,
+	"def": 1400,
+	"type": "psychic",
+	"count_as": "female",
+	"effect": [],
+	"passcode": "22200403"
+  },
+  "01392": {
+	"card_name": "Power Injector",
+	"attribute": "earth",
+	"level": 4,
+	"atk": 1300,
+	"def": 1400,
+	"type": "psychic",
+	"count_as": null,
+	"effect": [
+	  "on_summon",
+	  "friends_power_up",
+	  250
+	],
+	"passcode": "89547299"
+  },
+  "01393": {
+	"card_name": "Overdrive Teleporter",
+	"attribute": "light",
+	"level": 6,
+	"atk": 2100,
+	"def": 1200,
+	"type": "psychic",
+	"count_as": null,
+	"effect": [],
+	"passcode": "01834753"
+  },
+  "01394": {
+	"card_name": "Psychic Emperor",
+	"attribute": "light",
+	"level": 6,
+	"atk": 2400,
+	"def": 1000,
+	"type": "psychic",
+	"count_as": null,
+	"effect": [
+	  "on_summon",
+	  "lifepoint_up",
+	  1000
+	],
+	"passcode": "77600660"
+  },
+  "01395": {
+	"card_name": "The Wicked Dreadroot",
+	"attribute": "dark",
+	"level": 10,
+	"atk": 4000,
+	"def": 4000,
+	"type": "fiend",
+	"count_as": null,
+	"effect": [
+	  "on_summon",
+	  "wicked_dreadroot"
+	],
+	"passcode": "62180201"
+  },
+  "01396": {
+	"card_name": "The Wicked Avatar",
+	"attribute": "dark",
+	"level": 10,
+	"atk": 0,
+	"def": 0,
+	"type": "fiend",
+	"count_as": null,
+	"effect": [
+	  "on_summon",
+	  "wicked_avatar"
+	],
+	"passcode": "21208154"
+  },
+  "01397": {
+	"card_name": "The Wicked Eraser",
+	"attribute": "dark",
+	"level": 10,
+	"atk": 0,
+	"def": 0,
+	"type": "fiend",
+	"count_as": null,
+	"effect": [
+	  "on_summon",
+	  "wicked_eraser"
+	],
+	"passcode": "57793869"
+  },
+  "01398": {
+	"card_name": "Beast Machine King Barbaros Ur",
+	"attribute": "earth",
+	"level": 8,
+	"atk": 3800,
+	"def": 1200,
+	"type": "beast-warrior",
+	"count_as": "machine",
+	"effect": [
+	  "on_summon",
+	  "destroy_card",
+	  "all_enemy_monsters"
+	],
+	"passcode": "19028307"
+  },
+  "01399": {
+	"card_name": "Beast King Barbaros",
+	"attribute": "earth",
+	"level": 8,
+	"atk": 3000,
+	"def": 1200,
+	"type": "beast-warrior",
+	"count_as": null,
+	"effect": [
+	  "on_summon",
+	  "destroy_card",
+	  "random_monster"
+	],
+	"passcode": "78651105"
+  },
+  "01400": {
+	"card_name": "Van'Dalgyon the Dark Dragon Lord",
+	"attribute": "dark",
+	"level": 8,
+	"atk": 2800,
+	"def": 2500,
+	"type": "dragon",
+	"count_as": null,
+	"effect": [
+	  "on_summon",
+	  "destroy_card",
+	  "all_enemy_monsters"
+	],
+	"passcode": "24857466"
+  },
+  "01401": {
+	"card_name": "Tualatin",
+	"attribute": "light",
+	"level": 8,
+	"atk": 2800,
+	"def": 2500,
+	"type": "fairy",
+	"count_as": null,
+	"effect": [
+	  "on_summon",
+	  "destroy_card",
+	  "all_enemy_monsters"
+	],
+	"passcode": "27769400"
+  },
+  "01402": {
+	"card_name": "Gorz the Emissary of Darkness",
+	"attribute": "dark",
+	"level": 7,
+	"atk": 2700,
+	"def": 2500,
+	"type": "fiend",
+	"count_as": "warrior",
+	"effect": [
+	  "on_defend",
+	  "return_damage"
+	],
+	"passcode": "44330098"
+  },
+  "01403": {
+	"card_name": "Voltanis the Adjudicator",
+	"attribute": "light",
+	"level": 8,
+	"atk": 2800,
+	"def": 1400,
+	"type": "fairy",
+	"count_as": null,
+	"effect": [
+	  "on_summon",
+	  "destroy_card",
+	  "random_monster"
+	],
+	"passcode": "20951752"
+  },
+  "01404": {
+	"card_name": "Dark Voltanis",
+	"attribute": "dark",
+	"level": 8,
+	"atk": 2800,
+	"def": 1400,
+	"type": "fairy",
+	"count_as": null,
+	"effect": [
+	  "on_summon",
+	  "destroy_card",
+	  "random_monster"
+	],
+	"passcode": "65282484"
+  },
+  "01405": {
+	"card_name": "Angel O7",
+	"attribute": "light",
+	"level": 7,
+	"atk": 2500,
+	"def": 1500,
+	"type": "fairy",
+	"count_as": null,
+	"effect": [
+	  "on_attack",
+	  "anti_flip"
+	],
+	"passcode": "56784842"
+  },
+  "01406": {
+	"card_name": "Alector, Sovereign of Birds",
+	"attribute": "wind",
+	"level": 6,
+	"atk": 2400,
+	"def": 2000,
+	"type": "winged beast",
+	"count_as": null,
+	"effect": [
+	  "on_attack",
+	  "anti_flip"
+	],
+	"passcode": "17573739"
+  },
+  "01407": {
+	"card_name": "Gaap the Divine Soldier",
+	"attribute": "dark",
+	"level": 6,
+	"atk": 2200,
+	"def": 2000,
+	"type": "fiend",
+	"count_as": null,
+	"effect": [
+	  "on_summon",
+	  "stop_defense"
+	],
+	"passcode": "37955049"
+  },
+  "01408": {
+	"card_name": "Leraje the God of Archery",
+	"attribute": "dark",
+	"level": 4,
+	"atk": 1800,
+	"def": 1600,
+	"type": "fiend",
+	"count_as": null,
+	"effect": [
+	  "on_summon",
+	  "graveyard_power_up",
+	  100
+	],
+	"passcode": "49922726"
+  },
+  "01409": {
+	"card_name": "Angel O1",
+	"attribute": "light",
+	"level": 1,
+	"atk": 200,
+	"def": 300,
+	"type": "fairy",
+	"count_as": null,
+	"effect": [],
+	"passcode": "82243738"
+  },
+  "01410": {
+	"card_name": "Cassimolar",
+	"attribute": "dark",
+	"level": 3,
+	"atk": 1000,
+	"def": 1200,
+	"type": "fiend",
+	"count_as": null,
+	"effect": [
+	  "on_attack",
+	  "burn",
+	  "enemy_atk"
+	],
+	"passcode": "12527118"
+  },
+  "01411": {
+	"card_name": "Hourglass of Life",
+	"attribute": "light",
+	"level": 2,
+	"atk": 700,
+	"def": 600,
+	"type": "fairy",
+	"count_as": null,
+	"effect": [],
+	"passcode": "08783685"
+  },
+  "01412": {
+	"card_name": "Machine Lord Ur",
+	"attribute": "earth",
+	"level": 4,
+	"atk": 1600,
+	"def": 1500,
+	"type": "machine",
+	"count_as": null,
+	"effect": [
+	  "on_attack",
+	  "multiple_attacker"
+	],
+	"passcode": "96938777"
+  },
+  "01413": {
+	"card_name": "Votis",
+	"attribute": "dark",
+	"level": 4,
+	"atk": 1700,
+	"def": 1900,
+	"type": "fiend",
+	"count_as": "reptile",
+	"effect": [],
+	"passcode": "75311421"
+  },
+  "01414": {
+	"card_name": "Hardened Armed Dragon",
+	"attribute": "earth",
+	"level": 4,
+	"atk": 1500,
+	"def": 800,
+	"type": "dragon",
+	"count_as": null,
+	"effect": [],
+	"passcode": "68473226"
+  },
+  "01415": {
+	"card_name": "Goddess of Sweet Revenge",
+	"attribute": "light",
+	"level": 5,
+	"atk": 1800,
+	"def": 2000,
+	"type": "fairy",
+	"count_as": "female",
+	"effect": [
+	  "on_summon",
+	  "destroy_card",
+	  "random_monster"
+	],
+	"passcode": "72589042"
+  },
+  "01416": {
+	"card_name": "Lancer Dragonute",
+	"attribute": "dark",
+	"level": 4,
+	"atk": 1500,
+	"def": 1800,
+	"type": "dragon",
+	"count_as": null,
+	"effect": [
+	  "on_attack",
+	  "piercing"
+	],
+	"passcode": "11125718"
+  },
+  "01417": {
+	"card_name": "Dark Red Enchanter",
+	"attribute": "dark",
+	"level": 6,
+	"atk": 1700,
+	"def": 2200,
+	"type": "spellcaster",
+	"count_as": null,
+	"effect": [
+	  "on_summon",
+	  "self_power_up",
+	  "spelltrap_count"
+	],
+	"passcode": "45462639"
   }
 }
 

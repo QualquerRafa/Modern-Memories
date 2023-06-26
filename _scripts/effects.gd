@@ -722,6 +722,7 @@ func activate_trap(card_node : Node):
 	var caller_and_target = get_caller_and_target(card_node)
 	var type_of_effect = CardList.card_list[card_node.this_card_id].effect[0]
 	var current_attacker = GAME_LOGIC.card_ready_to_attack
+	var current_defender = GAME_LOGIC.card_ready_to_defend
 	
 	match type_of_effect:
 		"negate_attacker": #just negate the attack
@@ -811,6 +812,25 @@ func activate_trap(card_node : Node):
 			var dice_roll : int = 1 + randi()%6 #returns between 1+0 and 1+5
 			var damage_value = 300 * dice_roll
 			GAME_LOGIC.change_lifepoints(caller_and_target[1], damage_value)
+		
+		"battle_trap": #reinforcements (for atk) and castle walls (for def)
+			var status_to_increase = ""
+			if CardList.card_list[card_node.this_card_id].card_name == "Reinforcements":
+				status_to_increase = "atk_up"
+			elif CardList.card_list[card_node.this_card_id].card_name == "Castle Walls":
+				status_to_increase = "def_up"
+			
+			if current_defender != null:
+				current_defender.this_card_flags[status_to_increase] += 500
+				current_defender.update_card_information(current_defender.this_card_id)
+		
+		"reveal_face_down": #flip monsters that are face down, without calling their effects
+			var target_side_of_field = GAME_LOGIC.get_parent().get_node("duel_field/" + caller_and_target[1] + "_side_zones")
+			for i in range(5):
+				var card_being_checked = target_side_of_field.get_node("monster_" + String(i))
+				if card_being_checked.is_visible() and card_being_checked.this_card_flags.is_facedown == true:
+					card_being_checked.this_card_flags.is_facedown = false
+					card_being_checked.update_card_information(card_being_checked.this_card_id)
 	
 	return "trapped!"
 
@@ -1400,6 +1420,80 @@ func monster_on_summon(card_node : Node):
 						break
 			
 			return "summoned friend"
+		
+		"monster_change_field": #THIS IS A COPY OF THE ACTIVATE_SPELL_FIELD
+			var monster_attribute = CardList.card_list[card_node.this_card_id].attribute
+			
+			#Change the text at the top
+			GAME_LOGIC.get_parent().get_node("user_interface/top_info_box/field_info/field_name").text = monster_attribute.capitalize() + " bonus"
+			
+			#Change the color of the field to visually represent Field Change
+			var new_field_color
+			match monster_attribute.to_lower():
+				"fire":  new_field_color = Color("ff4a4a")
+				"earth": new_field_color = Color("0ca528")
+				"water": new_field_color = Color("1c68ff")
+				"wind":  new_field_color = Color("4dedff")
+				"dark":  new_field_color = Color("5100ff")
+				"light": new_field_color = Color("ffef00")
+				_: new_field_color = Color("ffffff")
+			
+			SoundControl.play_sound("poc_field")
+			
+			var field_texture1 = GAME_LOGIC.get_parent().get_node("duel_field/player_side_zones")
+			var field_texture2 = GAME_LOGIC.get_parent(). get_node("duel_field/enemy_side_zones")
+			field_texture1.self_modulate = new_field_color
+			field_texture2.self_modulate = new_field_color
+			
+			#Call for the field bonus function to update all monsters that will benefit from the new field
+			field_bonus(monster_attribute)
+			
+			return "field changed to attribute " + monster_attribute
+		
+		"wicked_dreadroot": #Halves the attack and def of enemy monsters
+			var target_side_of_field = GAME_LOGIC.get_parent().get_node("duel_field/" + caller_and_target[1] + "_side_zones")
+			for i in range(5):
+				var card_being_checked = target_side_of_field.get_node("monster_" + String(i))
+				var atk_on_field = int(card_being_checked.get_node("card_design/monster_features/atk_def/atk").text)
+				var def_on_field = int(card_being_checked.get_node("card_design/monster_features/atk_def/def").text)
+				
+				if card_being_checked.is_visible() and card_being_checked.this_card_flags.is_facedown == false:
+					card_being_checked.this_card_flags.atk_up -= atk_on_field/2
+					card_being_checked.this_card_flags.def_up -= def_on_field/2
+					card_being_checked.update_card_information(card_being_checked.this_card_id)
+			
+			return "Dreadroot debuffed"
+		
+		"wicked_avatar": #gets the highest attack on the field + 100
+			var target_side_of_field = GAME_LOGIC.get_parent().get_node("duel_field/" + caller_and_target[1] + "_side_zones")
+			var highest_atk = 0
+			
+			for i in range(5):
+				var card_being_checked = target_side_of_field.get_node("monster_" + String(i))
+				if card_being_checked.is_visible() and card_being_checked.this_card_flags.is_facedown == false and int(card_being_checked.get_node("card_design/monster_features/atk_def/atk").text) > highest_atk:
+					highest_atk = int(card_being_checked.get_node("card_design/monster_features/atk_def/atk").text)
+			
+			card_node.this_card_flags.atk_up += highest_atk + 100
+			card_node.this_card_flags.def_up += highest_atk + 100
+			card_node.update_card_information(card_node.this_card_id)
+			
+			return "Wicked Avatar"
+		
+		"wicked_eraser": #gets 1000 times the number of cards on opponent field
+			var target_side_of_field = GAME_LOGIC.get_parent().get_node("duel_field/" + caller_and_target[1] + "_side_zones")
+			var card_count = 0
+			
+			for card_type in ["monster_", "spelltrap_"]:
+				for i in range(5):
+					var card_being_checked = target_side_of_field.get_node(card_type + String(i))
+					if card_being_checked.is_visible():
+						card_count += 1
+			
+			card_node.this_card_flags.atk_up += card_count * 1000
+			card_node.this_card_flags.def_up += card_count * 1000
+			card_node.update_card_information(card_node.this_card_id)
+			
+			return "wicked_eraser"
 	
 	return card_id #generic return
 
@@ -1887,7 +1981,7 @@ func ritual_effects_activation(card_node : Node, ritual_activation_condition : S
 		"on_ritual_death":
 			match ritual_monster_name:
 				#on_death summon successors
-				"Five-Headed Dragon", "Arcana Knight Joker", "Valkyrion the Magna Warrior", "Lord of the Red", "Paladin of White Dragon", "Paladin of Dark Dragon", "Knight of Armor Dragon", "Chakra":
+				"Five-Headed Dragon", "Arcana Knight Joker", "Valkyrion the Magna Warrior", "Lord of the Red", "Paladin of White Dragon", "Paladin of Dark Dragon", "Knight of Armor Dragon", "Chakra", "Demise, Agent of Armageddon", "Demise, King of Armageddon":
 					var successor_match = {
 						"Five-Headed Dragon" : ["01117"], #Berserk Dragon
 						"Arcana Knight Joker" : ["01110"], #Royal Straight Slasher
@@ -1897,6 +1991,8 @@ func ritual_effects_activation(card_node : Node, ritual_activation_condition : S
 						"Paladin of Dark Dragon" : ["00073"], #Red-Eyes Black Dragon 
 						"Knight of Armor Dragon" : ["00164"], #Armed Dragon LV5
 						"Chakra" : ["01237"], #Chakra invokes a normal version of itself
+						"Demise, Agent of Armageddon" : ["01362"], #Demise, King of Armageddon
+						"Demise, King of Armageddon" : ["01363"], #Demise, Supreme King of Armageddon
 					}
 					
 					#At Death, do the animation
@@ -1910,6 +2006,11 @@ func ritual_effects_activation(card_node : Node, ritual_activation_condition : S
 							var monster_being_checked = target_side_of_field.get_node("monster_" + String(j))
 							if not monster_being_checked.is_visible():
 								monster_being_checked.this_card_id = successor_match[ritual_monster_name][i]
+								
+								#Monsters which successors come as ritual monsters themselves to keep the Chain going
+								if successor_match[ritual_monster_name][i] in ["01362"]: 
+									monster_being_checked.this_card_flags.fusion_type = "ritual"
+								
 								monster_being_checked.update_card_information(monster_being_checked.this_card_id)
 								monster_being_checked.show()
 								

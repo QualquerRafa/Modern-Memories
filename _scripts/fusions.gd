@@ -392,6 +392,14 @@ var specific_fusion_list = {
 	"01191_01192" : "01245",                                                        #Lava Battleguard + Swamp Battleguard = Battleguard King
 	"01164_01165" : "01157",                                                        #The Earl of Demise + Headless Knight = The Duke of Demise
 	"00641_01224" : "01206",                                                        #Maximum Six + Dicelops = Orgoth the Relentless
+	"00078_01319" : "01311",                                                        #Time Wizard + Codarus = Levia Dragon Daedalus
+	"00078_01311" : "01309",                                                        #Time Wizard + Levia Dragon Daedalus = Neo Daedalus
+	"00078_01339" : "01310",                                                        #Time Wizard + Legendary Atlantean Tridon = Poseidra, the Atlantean Dragon
+	"00058_00440" : "00982",                                                        #Dark Elf + Mystical Elf = Cosmo Queen
+	"00129_00129" : "01380",                                                        #Skull Servant + Skull Servant = Wightbaking
+	"00129_01380" : "01364",                                                        #Skull Servant + Wightbaking = King of the Skull Servants
+	"01381_01381" : "01367",                                                        #Wightprincess + Wightprincess = The Lady in Wight
+	"01399_01412" : "01398",                                                        #Beast King Barbaros + Machine Lord Ur = Beast Machine King Barbaros Ur
 	
 	#Fang of Critias
 	"00240_00506" : "00483",                                                        #Fang of Critias + Blue-Eyes White Dragon = Blue-Eyes Tyrant Dragon
@@ -418,10 +426,16 @@ var specific_fusion_list = {
 	"00155_00923" : "00925",                                                        #Metalmorph + Ojama King = Mecha Ojama King
 	"00155_01190" : "01180",                                                        #Metalmorph + Gagagigo = Giga Gagagigo
 	"00155_01180" : "01173",                                                        #Metalmorph + Giga Gagagigo = Gogiga Gagagigo
+	"00155_00403" : "01248",                                                        #Metalmorph + Insect Queen = Metamorphosed Insect Queen
+	"00096_00155" : "01266",                                                        #Metalmorph + Killer Needle = Armored Bee
+	"00155_00634" : "01312",                                                        #Metalmorph + Fortress Whale = Mega Fortress Whale
+	"00155_01314" : "01312",                                                        #Metalmorph + Orca Mega-Fortress of Darkness = Mega Fortress Whale
 
 	#Level Up
 	"00162_00383" : "00384",                                                        #Level Up + Black Tyranno = Ultimate Tyranno
 	"00162_00073" : "00645",                                                        #Level Up + Red-Eyes Black Dragon = Red-Eyes Darkness Dragon
+	"00162_00403" : "01248",                                                        #Level Up + Insect Queen = Metamorphosed Insect Queen
+	"00017_00162" : "01321",                                                        #Level Up + Kairyu Shin = Ocean Dragon Lord - Kairyu-Shin
 	
 	#Toon World
 	"00240_00582" : "00549",                                                        #Toon World + Blue-Eyes White Dragon = Blue-Eyes Toon Dragon
@@ -476,7 +490,8 @@ var special_fusion_list = {
 			  "turtle" : ["01195"]},                                             #Time Wizard + Turtle = 30,000-Year White Turtle
 	"00644" : {"dragon" : ["00076"]},                                             #Time Wizard of Tomorrow + dragon = Thousand Dragon 
 	"00140" : {"dragon" : ["00073"] },                                            #Tyhone #2              + dragon = Red-Eyes Black Dragon                      
-	"00155" : {"dragon" : ["00029", "00421"]},                                    #Metalmorph             + dragon = Metal Dragon, Rare Metal Dragon              
+	"00155" : {"dragon" : ["00029", "00421"],                                     #Metalmorph             + dragon = Metal Dragon, Rare Metal Dragon 
+			   "harpie" : ["01074"]},                                             #Metalmorph             + harpie = Cyber harpie Lady           
 	"00217" : {"spellcaster" : ["00219", "00080"]},                               #Magician's Rod         + spellcaster = Magician of Dark Illusion, Dark Magician                        
 	"00218" : {"spellcaster" : ["00219", "00080"]},                               #Magician's Robe        + spellcaster = Magician of Dark Illusion, Dark Magician                  
 	"00231" : {"dragon" : ["00232"]},                                             #Dark Magician Girl     + dragon = Dark Magician Girl the Dragon Knight
@@ -597,11 +612,42 @@ var special_fusion_list = {
 	"01209" : {"machine" : ["01205", "01204", "01200"]},                          #Flint Lock + Machine = B.E.S. Big Core, MK2 and MK3
 	"01205" : {"machine" : ["01204", "01200"]},                                   #B.E.S. Big Core + Machine = MK2 and MK3
 	"01204" : {"machine" : ["01200"]},                                            #B.E.S. Big Core MK2 + Machine = MK3
+	"00182" : {"insect" : ["01247"]},                                             #Great Moth + insect = Ultimate Great Insect
+	"01255" : {"insect" : ["01249"]},                                             #Flying Kamakiri #2 + Insect = Grasschopper
+	"00096" : {"machine" : ["01266"]},                                            #Killer Needle + Machine = Armored Bee
+	"01261" : {"insect" : ["01260"]},                                             #Kuwagata A + insect = Kuwagar Hercules
+	"00095" : {"insect" : ["01260"]},                                             #Hercules Beetle + insect = Kuwagar Hercules
+	"01272" : {"dinosaur" : ["01270"]},                                           #Kaitoptera + dinosaur = Horned Saurus
+	"01271" : {"pyro" : ["01273"]},                                               #Trakodon + pyro = Pragtical
+	"01319" : {"dragon" : ["01311", "01309"]},                                    #Codarus + Dragon = Dedalus, Neo-dedalus
+	"01311" : {"dragon" : ["01309"]},                                             #Dedalus + Dragon = Neo-Dedalus
+	"01339" : {"dragon" : ["01310"]},                                             #Tridon + Dragon = Poseidra
+	"00634" : {"machine" : ["01312"]},                                            #Fortress Whale + Machine = Mega Fortress Whale
+	"01314" : {"machine" : ["01312"]},                                            #Orca Mega-Fortress of Darkness + Machine = Mega Fortress Whale
+	"01280" : {"amazon" : ["01278", "01276"]},                                    #Amazoness Queen + Amazon = Amazoness Empress, Amazoness Augusta
+	"01278" : {"amazon" : ["01276"]},                                             #Amazoness Empress + Amazon = Amazoness Augusta
+	"01279" : {"amazon" : ["01277"]},                                             #Pet Liger + Amazon = Pet Liger King
+	"01350" : {"female" : ["00982"]},                                             #Mutant Mindmaster + Female = Cosmo Queen
+	"00459" : {"machine" : ["01347"],                                             #Zombyra + Machine = Last Warrior from Another Planet
+			   "thunder" : ["01347"]},                                            #Zombyra + Thunder = Last Warrior from Another Planet
+	"00129" : {"female" : ["01381"]},                                             #Skull Servante + Female = Wightprincess
+	"01375" : {"fiend": ["00353"],                                                #Immortal Ruler + Fiend = Dark Ruler Ha Des
+			   "spellcaster" : ["00353"],                                         #Immortal Ruler + Spellcaster = Dark Ruler Ha Des
+			   "zombie" : ["00353"]},                                             #Immortal Ruler + Zombie = Dark Ruler Ha Des
+	"01112" : {"fairy" : ["01113"]},                                              #Warrior of Zera + Fairy = Zeradias
+	"01113" : {"fairy" : ["01114"],                                               #Zeradias + Fairy = Archlord Zerato
+			   "fiend" : ["01115"],                                               #Zeradias + Fiend = Mazera DeVille
+			   "zombie": ["01116"]},                                              #Zeradias + Zombie = Alghoul Mazera
+	"01409" : {"fairy" : ["01405"]},                                              #Angel O1 + Fairy = Angel O7
+	"00642" : {"fairy" : ["01405"]},                                              #Divine Knight Ishzark + Fairy = Angel O7
 }
 
 
 #Classic Forbidden Memories fusions, based on monster types (and secret additional monster types!)
 var generic_fusion_list = {
+	"amazon_amazon":     ["01303", "01281", "01280"],                              #Princess, Paladin, Queen
+	"amazon_beast" :     ["01294", "01288", "01279"],                              #Baby, Tiger, Pet Liger
+	
 	"aqua_dinosaur":     ["00387", "00388"],                                       #Hydrogeddon, Duoterion
 	"aqua_dragon":       ["00016", "00017", "00362", "00363"],                       #Spike Seadra, Kairyu-Shin, Aqua Dragon, Water Dragon
 	"aqua_fish":         ["00419"],                                               #High Tide Gyojin
@@ -623,6 +669,7 @@ var generic_fusion_list = {
 	"beast_machine":      ["00030", "00031"],                                      #Giga-Tech Wolf, Dice Armadillo
 	"beast_ninja":        ["01065"],                                              #Nin-Ken Dog
 	"beast_plant":        ["00051"],                                              #Flower Wolf
+	"beast_psychic":      ["01382", "01383"],                                     #Psi-Beast, Pandaborg
 	"beast_pyro":         ["00054"],                                              #Flame Cerebrus
 	"beast_reptile":      ["00346"],                                              #Lion Alligator
 	"beast_thunder":      ["00046", "01188", "00369"],                            #Tripwire Beast, Voltic Kong, Thunderclap Skywolf
@@ -633,6 +680,7 @@ var generic_fusion_list = {
 	"clown_fiend" : ["00566"],                                                    #Bickuribox
 	"clown_dragon" : ["00587"],                                                   #Soul Hunter
 	"clown_reptile": ["00587"],                                                   #Soul Hunter
+	"clown_zombie" : ["01368"],                                                   #Clown Zombie
 	
 	"cyber_dragon" : ["00899", "00823"],                                          #Proto-Cyber Dragon, Cyber Dragon
 	"cyber_cyber" : ["00894"],                                                    #Chimeratech Rampage Dragon
@@ -641,10 +689,11 @@ var generic_fusion_list = {
 	"dinosaur_fiend":       ["00382", "00383"],                                    #Destroyersaurus, Black Tyranno
 	"dinosaur_machine":     ["00052", "00379"],                                    #Cyber Saurus, Cyber Dinosaur
 	"dinosaur_sea serpent": ["00385"],                                             #Megalosmasher X
+	"dinosaur_rock" : ["01273"],                                                   #Pragtical
 	
 	"dragon_egg":         ["00559"],                                              #Ryu-ran
 	"dragon_fairy":       ["00624", "01123"],                                     #Fairy Dragon, Seiyaryu
-	"dragon_fiend":       ["00535"],                                              #Fiend Skull Dragon, Serpent Night Dragon
+	"dragon_fiend":       ["00535", "01269"],                                     #Fiend Skull Dragon, Serpent Night Dragon
 	"dragon_harpie":      ["01080", "01081"],                                     #Harpie's Baby Dragon, Harpie's Pet Dragon
 	"dragon_machine":     ["00029", "00421"],                                      #Metal Dragon, Rare Metal Dragon
 	"dragon_plant":       ["00059"],                                              #B. Dragon Jungle King
@@ -668,6 +717,7 @@ var generic_fusion_list = {
 	"female_insect":  ["00402", "00403"],                                          #Insect Princess, Insect Queen
 	"female_ninja":   ["01062", "01064"],                                         #Lady Ninja Yae, Kunoichi
 	"female_plant":   ["00064", "00390"],                                          #Queen of Autumn Leaves, Iris the Earth Mother
+	"female_psychic" : ["01391"],                                                  #Hypnosister
 	"female_rock":    ["00055"],                                                  #Mystical Sand
 	"female_thunder": ["00366"],                                                  #Denko Sekka
 	"female_vampire": ["01058", "01061"],                                         #vampire lady, vampire vamp
@@ -690,14 +740,18 @@ var generic_fusion_list = {
 	"gem_pyro":    ["00782"],                                                     #Gem-Knight Citrine
 	"gem_rock":    ["00780"],                                                     #Gem-Knight Zirconia
 	
-	"harpie_harpie": ["00593", "01079"],                                                   #Harpie Lady Sisters
-
+	"harpie_harpie": ["00593", "01079"],                                          #Lady, Harpie Lady Sisters
+	"harpie_machine" : ["01074"],                                                 #Cyber Harpie lady
+	
+	"insect_machine" : ["01263", "01250"],                                         #Beetron, Chainsaw Insect
 	"insect_pyro":    ["00422"],                                                  #Blazewing Butterfly
 	"insect_rock":    ["00397", "00398", "00399"],                                  #Aztekipede the Worm Warrior, Hundred-Footed Horror, Doom Dozer
 	"insect_warrior": ["00049", "00000"],                                          #Cockroach Knight, Shiny Black "C" Squadder
 	
+	"machine_psychic" : ["01387"],                                                 #Psychic Ace
 	"machine_spellcaster": ["00065", "00404"],                                     #Disk Magician, Cybernetic Magician
 	"machine_thunder":     ["00371", "00372", "00373"],                             #Batteryman 9-Volt, Batteryman Charger, Batteryman Industrial Strength
+	"machine_turtle" :     ["01354"],                                              #UFO Turtle
 	"machine_warrior":     ["00032", "00409"],                                     #Cyber Soldier, Gearfried the Iron Knight
 
 	"masked_masked": ["00689"],                                                   #Contrast HERO Chaos
@@ -708,6 +762,11 @@ var generic_fusion_list = {
 
 	"plant_warrior": ["00053", "00410"],                                           #Bean Soldier, Jerry Beans Man
 	"plant_zombie":  ["00018", "00019"],                                           #Wood Remains, Pumpking the King of Ghosts
+	
+	"psychic_psychic" : ["01392", "01393", "01394"],                              #Power Injector, Overdrive Teleporter, Psychic Emperor
+	"psychic_spellcaster" : ["01386", "01355"],                                   #Risebell the Star Adjuster, Illusory gentleman
+	"psychic_thunder" : ["01388", "01389", "01390"],                              #Wattsychic Fighter, Telekinetic Shocker, Psychic Snail
+	"psychic_warrior" : ["01384", "01385"],                                       #Grapple Blocker, Space-Time Police
 	
 	"pyro_warrior":      ["00005", "00006", "00007"],                               #Charubin the Fire Knight, Flame Swordsman, Vermillion Sparrow
 	"pyro_winged beast": ["00027", "00028"],                                       #Mavelus, Crimson Sunbird
