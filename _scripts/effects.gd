@@ -285,7 +285,10 @@ func activate_spell_field(card_node : Node):
 	var field_element = CardList.card_list[card_id].effect[0]
 	
 	#Change the text at the top
-	GAME_LOGIC.get_parent().get_node("user_interface/top_info_box/field_info/field_name").text = field_element.capitalize() + " bonus"
+	if PlayerData.game_language == "en":
+		GAME_LOGIC.get_parent().get_node("user_interface/top_info_box/field_info/field_name").text = GameLanguage.attributes[field_element][PlayerData.game_language].capitalize() + " Field"
+	elif PlayerData.game_language == "pt":
+		GAME_LOGIC.get_parent().get_node("user_interface/top_info_box/field_info/field_name").text = "Campo de " + GameLanguage.attributes[field_element][PlayerData.game_language].capitalize()
 	
 	#Change the color of the field to visually represent Field Change
 	var new_field_color
@@ -1077,6 +1080,7 @@ func monster_on_summon(card_node : Node):
 					monster_target.this_card_flags.atk_up += robo_power_up_value
 					monster_target.update_card_information(monster_target.this_card_id)
 			
+			return "super robo"
 		
 		#CARD DESTRUCTION TYPES OF EFFECT
 		"destroy_card":
@@ -1450,17 +1454,18 @@ func monster_on_summon(card_node : Node):
 			
 			return "field changed to attribute " + monster_attribute
 		
-		"wicked_dreadroot": #Halves the attack and def of enemy monsters
-			var target_side_of_field = GAME_LOGIC.get_parent().get_node("duel_field/" + caller_and_target[1] + "_side_zones")
-			for i in range(5):
-				var card_being_checked = target_side_of_field.get_node("monster_" + String(i))
-				var atk_on_field = int(card_being_checked.get_node("card_design/monster_features/atk_def/atk").text)
-				var def_on_field = int(card_being_checked.get_node("card_design/monster_features/atk_def/def").text)
-				
-				if card_being_checked.is_visible() and card_being_checked.this_card_flags.is_facedown == false:
-					card_being_checked.this_card_flags.atk_up -= atk_on_field/2
-					card_being_checked.this_card_flags.def_up -= def_on_field/2
-					card_being_checked.update_card_information(card_being_checked.this_card_id)
+		"wicked_dreadroot": #Halves the attack and def of all other monsters
+			for side in ["player", "enemy"]:
+				var target_side_of_field = GAME_LOGIC.get_parent().get_node("duel_field/" + side + "_side_zones")
+				for i in range(5):
+					var card_being_checked = target_side_of_field.get_node("monster_" + String(i))
+					var atk_on_field = int(card_being_checked.get_node("card_design/monster_features/atk_def/atk").text)
+					var def_on_field = int(card_being_checked.get_node("card_design/monster_features/atk_def/def").text)
+					
+					if card_being_checked.is_visible() and card_being_checked != card_node:
+						card_being_checked.this_card_flags.atk_up -= atk_on_field/2
+						card_being_checked.this_card_flags.def_up -= def_on_field/2
+						card_being_checked.update_card_information(card_being_checked.this_card_id)
 			
 			return "Dreadroot debuffed"
 		

@@ -5,6 +5,12 @@ func _ready():
 	#Animate the transition when starting this scene
 	$scene_transitioner.entering_this_scene()
 	
+	#Properly load the text in the correct language
+	$user_interface/top_info_box/player_info/YOU.text = GameLanguage.duel_scene.you[PlayerData.game_language]
+	$turn_end_button/end.text = GameLanguage.duel_scene.turn_end[PlayerData.game_language]
+	$user_interface/top_info_box/field_info/turn.text = GameLanguage.duel_scene.turn[PlayerData.game_language] + " 0"
+	$user_interface/top_info_box/field_info/field_name.text = GameLanguage.duel_scene.no_field_bonus[PlayerData.game_language]
+	
 	#Initialize stuff on 'card_info_box' hidden
 	$user_interface/card_info_box/card_name.hide()
 	$user_interface/card_info_box/atk_def.hide()

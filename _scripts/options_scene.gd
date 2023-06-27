@@ -13,6 +13,12 @@ func _ready():
 	$CenterContainer/VBoxContainer/option_others/window_title.text = GameLanguage.options_scene.others_window[PlayerData.game_language]
 	$CenterContainer/VBoxContainer/option_others/auto_save.text = GameLanguage.options_scene.others_window_1[PlayerData.game_language]
 	$CenterContainer/VBoxContainer/option_others/auto_save/option_check/checkmark.set_visible(PlayerData.game_autosave)
+	$FocusShadow/game_credits.text = GameLanguage.options_scene.credits_soundtrack[PlayerData.game_language] + "\n" + GameLanguage.options_scene.credits_everything[PlayerData.game_language]
+	
+	if PlayerData.game_autosave == true:
+		$CenterContainer/VBoxContainer/option_others/auto_save/option_check/checkmark.show()
+	else:
+		$CenterContainer/VBoxContainer/option_others/auto_save/option_check/checkmark.hide()
 	
 	#Load the store options
 	load_options_file()

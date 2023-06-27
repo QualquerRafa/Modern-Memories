@@ -330,6 +330,14 @@ var options_scene = {
 	"others_window_1" : {
 		"en" : "Auto-Save after Duels",
 		"pt" : "Auto-Salvar após Duelos"
+	},
+	"credits_soundtrack" : {
+		"en" : "Soundtrack: youtube.com/@lohweo",
+		"pt" : "Trilha Sonora: youtube.com/@lohweo"
+	},
+	"credits_everything" : {
+		"en" : "Everything else: youtube.com/@Rafa_SCN",
+		"pt" : "Qualquer outra Coisa: youtube.com/@Rafa_SCN"
 	}
 }
 
@@ -415,6 +423,25 @@ var free_duel = {
 	"losses" : {
 		"en" : "Losses: ",
 		"pt" : "Derrotas: "
+	}
+}
+
+var duel_scene = {
+	"you" : {
+		"en" : "YOU",
+		"pt" : "VOCÊ",
+	},
+	"turn" : {
+		"en" : "Turn",
+		"pt" : "Turno"
+	},
+	"turn_end" : {
+		"en" : "Turn\nEnd",
+		"pt" : "Turn\nEnd"
+	},
+	"no_field_bonus" : {
+		"en" : "No Field Bonus",
+		"pt" : "Sem Bônus de Campo"
 	}
 }
 
@@ -752,7 +779,7 @@ var lifepoint_change = {
 	},
 	"final" : {
 		"en" : " Lifepoints.",
-		"pt" : " Pontos de vida."
+		"pt" : " Pontos de Vida."
 	}
 }
 var get_power = {
@@ -764,16 +791,302 @@ var mill = {
 	"pt" : "O Deck do oponente perde "
 }
 
-
-
-
 #on_defend effects
+var on_defend_first = {
+	"en" : "When this Monster is attacked: ",
+	"pt" : "Quando esse Monstro é atacado: "
+}
+
+var cant_die = {
+	"basic" : {
+		"en" : "It can't be destroyed by Battle",
+		"pt" : "Ele não pode ser destruido por Batalha"
+	},
+	"extra" : {
+		"en" : " unless it battles a ",
+		"pt" : " a não ser por um Monstro de "
+	},
+	"final" : {
+		"en" : " Monster.",
+		"pt" : "."
+	}
+}
+var debuff = {
+	"en" : "It reduces the attacker's ATK by ",
+	"pt" : "Ele reduz o ATK do atacante em "
+}
+var ehero_core = {
+	"en" : "It doubles it's own ATK during this battle only.",
+	"pt" : "Ele dobra seu próprio ATK durante apenas essa batalha."
+}
+var no_damage = {
+	"en" : "It's controller will not take Battle Damage.",
+	"pt" : "Seu controlador não levará Dano de Batalha."
+}
+var return_damage = {
+	"en" : "The opposing player takes the same Battle Damage as you do.",
+	"pt" : "O jogador adversário leva o mesmo Dano de Batalha que você."
+}
 
 #on_flip effects
+var on_flip_first = {
+	"en" : "When this Monster is Flipped: ",
+	"pt" : "Quando esse Monstro é Virado: "
+}
+
+var jigen_bakudan = {
+	"en" : "It destroys all of your Monsters on the Field and deal half the sum of their Attack to the opponent's LP.",
+	"pt" : "Ele destrói todos os seus Monstros no Campo e reduz metade da soma dos Ataques deles dos PV do oponente."
+}
+var slate_warrior = {
+	"en" : "It increases it's own ATK and DEF by 500 points.",
+	"pt" : "Ele aumenta seu próprio ATK e DEF em 500 pontos."
+}
+var monster_destroy_effects = {
+	"all_enemy_monsters" : {
+		"en" : "It destroys all of your opponent's Monsters on the Field.",
+		"pt" : "Ele destrói todos os Monstros no Campo do seu adversário."
+	},
+	"both_sides_monsters" : {
+		"en" : "It destroys all Monsters on both sides of the Field.",
+		"pt" : "Ele destrói todos os Monstros nos dois lados do Campo."
+	},
+	"level4_enemy_monsters" : {
+		"en" : "It destroys all Level 4 Monsters on your opponent's side of the Field.",
+		"pt" : "Ele destrói todos os Monstros Nível 4 no Campo do seu adversário."
+	},
+	"random_monster" : {
+		"en" : "It destroys a Random Monster on your opponent's side of the Field.",
+		"pt" : "Ele destrói um Monstro Aleatório no Campo do seu adversário."
+	},
+	"random_spelltrap" : {
+		"en" : "It destroys a Random Spell or Trap card on your opponent's side of the Field.",
+		"pt" : "Ele destrói uma Carta de Magia ou Armadilha Aleatória no Campo do seu adversário."
+	},
+	"atk_highest" : {
+		"en" : "It destroys the Strongest Monster on your opponent's side of the Field.",
+		"pt" : "Ele destrói o Monstro mais Forte no Campo do seu adversário."
+	}
+}
 
 #on_summon effects
+var on_summon_first = {
+	"en" : "When this Monster is Summoned: ",
+	"pt" : "Quando esse Monstro é Invocado: "
+}
 
-
+var air_neos = {
+	"en" : "It increases it's own ATK by the difference between both player's Life Points.",
+	"pt" : "Ele aumenta seu ATK pela diferença entre os Pontos de Vida dos dois jogadores."
+}
+var attribute_booster = {
+	"part1" : {
+		"en" : "It increases the ATK of ",
+		"pt" : "Ele aumenta o ATK de Monstros "
+	},
+	"part2" : {
+		"en" : " Monsters by 500 points and decreases the ATK of ",
+		"pt" : " em 500 pontos e diminui o ATK de Monstros "
+	},
+	"part3" : {
+		"en" : " by 400 points.",
+		"pt" : " em 400 pontos."
+	},
+}
+var attribute_reptile = {
+	"en" : "It destroys all Monsters that aren't Attribute ",
+	"pt" : "Ele destrói todos os Monstros que não sejam Atributo "
+}
+var castle_power_up = {
+	"en" : "It increases Fiend and Zombie type Monster's ATK and DEF on your field by 200 points.",
+	"pt" : "Ele aumenta o ATK e DEF de Monstros tipo Demônio e Zumbi no seu campo em 200 pontos."
+}
+var copy_atk = {
+	"en" : "It copies the ATK and DEF of the strongest Monster on your opponent's side of the field.",
+	"pt" : "Ele copia o ATK e DEF do Monstro mais forte no lado do Campo do seu oponente."
+}
+var count_as_power_up = {
+	"part1" : {
+		"en" : "It increases it's own ATK by ",
+		"pt" : "Ele aumenta seu ATK em "
+	},
+	"part2" : {
+		"en" : " points for each ",
+		"pt" : " pontos para cada Monstro "
+	},
+	"part3" : {
+		"en" : " Monster on your side of the Field.",
+		"pt" : " no seu lado do Campo."
+	}
+}
+var cyber_stein = {
+	"en" : "At the cost of 5000 Life Points, it transforms itself into the Strongest Monster in the player's Deck.",
+	"pt" : "Ao custo de 5000 Pontos de Vida, ele se transforma no Monstro mais Forte no Deck do jogador."
+}
+var damage_monster_count = {
+	"part1" : {
+		"en" : "It damages your opponent's Life Points by ",
+		"pt" : "Ele reduz os Pontos de Vida do seu oponente em "
+	},
+	"part2" : {
+		"en" : " points times the number of Monsters on your side of the Field.",
+		"pt" : " pontos vezes o número de Monstros no seu lado do Campo." 
+	}
+}
+var lifeup_monster_count = {
+	"part1" : {
+		"en" : "It increases your Life Points by ",
+		"pt" : "Ele aumenta seus Pontos de Vida em "
+	},
+	"part2" : {
+		"en" : " points times the number of Monsters on your side of the Field.",
+		"pt" : " pontos vezes o número de Monstros no seu lado do Campo." 
+	}
+}
+var deck_for_stat = {
+	"part1" : {
+		"en" : "It removes up to 3 cards from your Deck and increases it's ",
+		"pt" : "Ele remove até 3 cartas do seu Deck e aumenta seu "
+	},
+	"part2" : {
+		"en" : " by 500 points times the number of cards removed.",
+		"pt" : " em 500 pontos vezes o número de cartas removidas."
+	}
+}
+var specific_type_destroy = {
+	"part1" : {
+		"en" : "It destroys a random ", # 
+		"pt" : "Ele destrói um Monstro aleatório tipo ",
+	},
+	"part2" : {
+		"en" : "-type Monster on your opponent's side of the Field.",
+		"pt" : " no Campo do seu adversário."
+	}
+}
+var equip_boost = {
+	"en" : "It increases it's own ATK by 500 points for each ATK boost it has received.",
+	"pt" : "Ele aumenta seu próprio ATK em 500 pontos para cada aumento de ATK que já recebeu."
+}
+var flip_enemy_down = {
+	"en" : "It Flips an opponent's Monster to Face-Down Defense Position, removing it's ATK and DEF boosts.",
+	"pt" : "Ele Vira um Monstro do oponente para Baixo em Posição de Defesa, removendo seus aumentos de ATK e DEF."
+}
+var friends_power_up = {
+	"part1" : {
+		"en" : "It increases ",
+		"pt" : "Ele aumenta o ATK e DEF de Monstros "
+	},
+	"part2" : {
+		"en" : "-type Monsters ATK and DEF by ",
+		"pt" : " em "
+	}
+}
+var gandora = {
+	"en" : "By paying half of your LP, it destroys all Monsters on both sides of the Field and increases it's ATK and DEF by 300 times the number of Monsters destroyed.",
+	"pt" : "Ao pagar metade dos seus PV, ele destrói todos os Monstros nos dois lados do Campo e aumenta seu ATK e DEF em 300 vezes o número de Monstros destruídos."
+}
+var white_horned = {
+	"en" : "It destroys all Spell and Trap cards on your opponent's side of the Field and increases it's ATK and DEF by 300 times the number of cards destroyed.",
+	"pt" : "Ele destrói todas as cartas de Magia e Armadilha no Campo do seu adversário e aumenta seu ATK e DEF em 300 vezes o número de cartas destruídas."
+}
+var graveyard_power_up = {
+	"part1" : {
+		"en" : "It increases it's ATK and DEF by ",
+		"pt" : "Ele aumenta seu ATK e DEF em "
+	},
+	"part2" : {
+		"en" : " points for each card out of your Deck.",
+		"pt" : " pontos para cada carta fora do seu Deck."
+	}
+}
+var honest = {
+	"part1" : {
+		"en" : "A random ",
+		"pt" : "Um Monstro "
+	},
+	"part2" : {
+		"en" : " Monster on your side of the Field gets it's ATK increased by 1000 points.",
+		"pt" : " aleatório no seu lado do Campo tem seu ATK aumentado em 1000 pontos."
+	}
+}
+var jinzo = {
+	"part1" : {
+		"en" : "It destroys all of your opponent's Spell and Traps on the Field",
+		"pt" : "Ele destrói todas as Magias e Armadilhas no Campo do seu adversário"
+	},
+	"part2" : {
+		"en" : " and causes LP damage equal to ",
+		"pt" : " e causa dano aos PV igual a "
+	},
+	"part3" : {
+		"en" : " points times the number of cards destroyed.",
+		"pt" : " pontos vezes o número de cartas destruídas."
+	}
+}
+var monster_change_field = {
+	"en" : "It changes the Field to boost the Attribute ",
+	"pt" : "Ele muda o Campo para fortalecer o Atributo "
+}
+var monster_count_boost = {
+	"part1" : {
+		"en" : "It increases it's ATK by ",
+		"pt" : "Ele aumenta seu ATK em "
+	},
+	"part2" : {
+		"en" : " points for each other Monster on your side of the Field.",
+		"pt" : " pontos para cada outro Monstro no seu lado do Campo."
+	}
+}
+var self_power_up = {
+	"part1" : {
+		"en" : "It increases it's ATK and DEF by ",
+		"pt" : "Ele aumenta seu ATK e DEF em "
+	},
+	"part2" : {
+		"en" : " points for each Monster with the same Type as it on your side of the Field.",
+		"pt" : " pontos para cada Monstro com o mesmo Tipo que ele no seu lado do Campo."
+	},
+	"buster_blader" : {
+		"en" : "500 points for each Dragon Monster on your side of the Field.",
+		"pt" : "500 pontos para cada Monstro Dragão no seu lado do Campo."
+	},
+	"random_dice" : {
+		"en" : "100 points times the result of a Dice Roll.",
+		"pt" : "100 pontos vezes o resultado de um Rolar de Dados."
+	},
+	"same_attribute" : {
+		"en" : "500 points for each Monster with the same Attribute as it on your side of the Field.",
+		"pt" : "500 pontos para cada Monstro com o mesmo Atributo que ele no seu lado do Campo."
+	},
+	"spelltrap_count" : {
+		"en" : "500 points for each Spell and Trap card on your side of the Field.",
+		"pt" : "500 pontos para cada carta de Magia e Armadilha no seu lado do Campo."
+	}
+}
+var stop_defense = {
+	"en" : "It changes all of your opponent's Defense Position Monsters to Attack Position.",
+	"pt" : "Ele muda todos os monstros do seu oponente em Posição de Defesa para Posição de Ataque."
+}
+var summon_pharaoh = {
+	"en" : "It Summons it's Servants to aid it in Battle.",
+	"pt" : "Ele Invoca seus Servos para ajudá-lo em Batalha."
+}
+var super_robo = {
+	"en" : "It increases it's ATK and the ATK of all opposite gender Super Robo on your side of the Field by 1000 points.",
+	"pt" : "Ele aumenta seu ATK e o ATK de todos os Super Robos do gênero oposto no seu lado do Campo em 1000 pontos."
+}
+var wicked_avatar = {
+	"en" : "It's ATK and DEF becomes 100 points higher than the Strongest Monster on your opponent's side of the Field.",
+	"pt" : "Seu ATK e DEF se tornam 100 pontos maior que o Monstro mais Forte do lado do Campo do seu oponente."
+}
+var wicked_dreadroot = {
+	"en" : "It halves the ATK and DEF of all other Monsters on both sides of the Field.",
+	"pt" : "Ele divide pela metade o ATK e DEF de todos os outros Monstros nos dois lados do Campo."
+}
+var wicked_eraser = {
+	"en" : "It's ATK and DEF becomes 1000 times the total number of Cards on your opponent's side of the Field.",
+	"pt" : "Seu ATK e DEF se tornam 1000 vezes o número total de Cartas no lado do Campo do seu oponente."
+}
 
 
 

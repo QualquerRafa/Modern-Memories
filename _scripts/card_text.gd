@@ -156,55 +156,111 @@ func get_card_text(card_id : String):
 				#EFFECTS TRIGGERED WHEN THE MONSTER IS ATTACKED
 				"on_defend":
 					match card_on_CardList.effect[1]:
-						"cant_die": pass
-						"change_position": pass
-						"debuff": pass
-						"ehero_core": pass
-						"no_damage": pass
-						"return_damage": pass
+						"change_position", "ehero_core", "no_damage", "return_damage": #looks for it's own identifier in the language list
+							line1 = GameLanguage.on_defend_first[PlayerData.game_language] + GameLanguage[card_on_CardList.effect[1]][PlayerData.game_language]
+						"cant_die":
+							line1 = GameLanguage.on_defend_first[PlayerData.game_language] + GameLanguage.cant_die.basic[PlayerData.game_language] + "."
+							if card_on_CardList.effect.size() > 2:
+								line1 = GameLanguage.on_defend_first[PlayerData.game_language] + GameLanguage.cant_die.basic[PlayerData.game_language] + GameLanguage.cant_die.extra[PlayerData.game_language] + GameLanguage.attributes[card_on_CardList.effect[2]][PlayerData.game_language] + GameLanguage.cant_die.final[PlayerData.game_language]
+						"debuff":
+							var debuff_value = String(card_on_CardList.effect[2])
+							line1 = GameLanguage.on_defend_first[PlayerData.game_language] + GameLanguage.debuff[PlayerData.game_language] + debuff_value + " " + GameLanguage.system.points[PlayerData.game_language] + "."
 				
 				#EFFECTS TRIGGERED WHEN THE MONSTER IS FLIPPED
 				"on_flip":
 					match card_on_CardList.effect[1]:
-						"destroy_card": pass
-						"jigen_bakudan": pass
-						"lifepoint_up": pass
-						"mill": pass
-						"slate_warrior": pass
+						"jigen_bakudan", "slate_warrior":#looks for it's own identifier in the language list
+							line1 = GameLanguage.on_flip_first[PlayerData.game_language] + GameLanguage[card_on_CardList.effect[1]][PlayerData.game_language]
+						"destroy_card":
+							#Varies by type of target
+							match card_on_CardList.effect[2]:
+								"all_enemy_monsters", "both_sides_monsters", "level4_enemy_monsters", "random_monster", "random_spelltrap":
+									line1 = GameLanguage.on_flip_first[PlayerData.game_language] + GameLanguage.monster_destroy_effects[card_on_CardList.effect[2]][PlayerData.game_language]
+						"lifepoint_up":
+							var lifepoint_value = String(card_on_CardList.effect[2])
+							line1 = GameLanguage.on_flip_first[PlayerData.game_language] + GameLanguage.lifepoint_change.lifepoint_up[PlayerData.game_language] + lifepoint_value + GameLanguage.lifepoint_change.final[PlayerData.game_language]
+						"mill":
+							var milled_cards = String(card_on_CardList.effect[2])
+							if int(milled_cards) <= 1:
+								line1 = GameLanguage.on_flip_first[PlayerData.game_language] + GameLanguage.mill[PlayerData.game_language] + milled_cards + " " + GameLanguage.system.card[PlayerData.game_language] + "."
+							else:
+								line1 = GameLanguage.on_flip_first[PlayerData.game_language] + GameLanguage.mill[PlayerData.game_language] + milled_cards + " " + GameLanguage.system.cards[PlayerData.game_language] + "."
 				
 				#EFFECTS TRIGGERED WHEN THE MONSTER IS SUMMONED
 				"on_summon":
 					match card_on_CardList.effect[1]:
-						"air_neos": pass
-						"attribute_booster": pass
-						"attribute_reptile": pass
-						"castle_power_up": pass
-						"copy_atk": pass
-						"count_as_power_up": pass
-						"cyber_stein": pass
-						"damage_monster_count": pass
-						"deck_for_stat": pass
-						"destroy_card": pass
-						"equip_boost": pass
-						"flip_enemy_down": pass
-						"friends_power_up": pass
-						"gandora": pass
-						"graveyard_power_up": pass
-						"honest": pass
-						"jinzo": pass
-						"lifepoint_up": pass
-						"lifeup_monster_count": pass
-						"mill": pass
-						"monster_change_field": pass
-						"monster_count_boost": pass
-						"self_power_up": pass
-						"stop_defense": pass
-						"summon_pharaoh": pass
-						"super_robo": pass
-						"white_horned": pass
-						"wicked_avatar": pass
-						"wicked_dreadroot": pass
-						"wicked_eraser": pass
+						"air_neos", "castle_power_up", "copy_atk", "cyber_stein", "equip_boost", "flip_enemy_down", "gandora", "stop_defense", "summon_pharaoh", "super_robo", "white_horned", "wicked_avatar", "wicked_dreadroot", "wicked_eraser": #looks for it's own identifier in the language list
+							line1 = GameLanguage.on_summon_first[PlayerData.game_language] + GameLanguage[card_on_CardList.effect[1]][PlayerData.game_language]
+						"attribute_booster":
+							var monster_attribute = card_on_CardList.attribute
+							var negative_attribute = "?"
+							match monster_attribute:
+								"dark": negative_attribute = "light"
+								"light": negative_attribute = "dark"
+								"water": negative_attribute = "fire"
+								"fire": negative_attribute = "water"
+								"earth": negative_attribute = "wind"
+								"wind": negative_attribute = "earth"
+							line1 = GameLanguage.on_summon_first[PlayerData.game_language] + GameLanguage.attribute_booster.part1[PlayerData.game_language] + GameLanguage.attributes[monster_attribute][PlayerData.game_language] + GameLanguage.attribute_booster.part2[PlayerData.game_language] + GameLanguage.attributes[negative_attribute][PlayerData.game_language] + GameLanguage.attribute_booster.part3[PlayerData.game_language]
+						"attribute_reptile":
+							var monster_attribute = card_on_CardList.attribute
+							line1 = GameLanguage.on_summon_first[PlayerData.game_language] + GameLanguage.attribute_reptile[PlayerData.game_language] + GameLanguage.attributes[monster_attribute][PlayerData.game_language] + "."
+						"count_as_power_up":
+							var count_as_type = card_on_CardList.count_as
+							var value = String(card_on_CardList.effect[2])
+							line1 = GameLanguage.on_summon_first[PlayerData.game_language] + GameLanguage.count_as_power_up.part1[PlayerData.game_language] + value + GameLanguage.count_as_power_up.part2[PlayerData.game_language] + GameLanguage.types[count_as_type][PlayerData.game_language] + GameLanguage.count_as_power_up.part3[PlayerData.game_language]
+						"damage_monster_count", "lifeup_monster_count":
+							var value = String(card_on_CardList.effect[2])
+							line1 = GameLanguage.on_summon_first[PlayerData.game_language] + GameLanguage[card_on_CardList.effect[1]].part1[PlayerData.game_language] + value + GameLanguage[card_on_CardList.effect[1]].part2[PlayerData.game_language]
+						"deck_for_stat":
+							var ATK_or_DEF = card_on_CardList.effect[2].to_upper()
+							line1 = GameLanguage.on_summon_first[PlayerData.game_language] + GameLanguage.deck_for_stat.part1[PlayerData.game_language] + ATK_or_DEF + GameLanguage.deck_for_stat.part2[PlayerData.game_language]
+						"destroy_card":
+							#Varies by type of target
+							match card_on_CardList.effect[2]:
+								"all_enemy_monsters", "atk_highest", "random_monster", "random_spelltrap":
+									line1 = GameLanguage.on_summon_first[PlayerData.game_language] + GameLanguage.monster_destroy_effects[card_on_CardList.effect[2]][PlayerData.game_language]
+								_: #Monster Types
+									var monster_type = card_on_CardList.effect[2]
+									line1 = GameLanguage.on_summon_first[PlayerData.game_language] + GameLanguage.specific_type_destroy.part1[PlayerData.game_language] + GameLanguage.types[monster_type][PlayerData.game_language] + GameLanguage.specific_type_destroy.part2[PlayerData.game_language]
+						"friends_power_up":
+							var value = String(card_on_CardList.effect[2])
+							var monster_type = card_on_CardList.type
+							line1 = GameLanguage.on_summon_first[PlayerData.game_language] + GameLanguage.friends_power_up.part1[PlayerData.game_language] + GameLanguage.types[monster_type][PlayerData.game_language] + GameLanguage.friends_power_up.part2[PlayerData.game_language] + value + " " + GameLanguage.system.points[PlayerData.game_language] + "."
+						"graveyard_power_up":
+							var value = String(card_on_CardList.effect[2])
+							line1 = GameLanguage.on_summon_first[PlayerData.game_language] + GameLanguage.graveyard_power_up.part1[PlayerData.game_language] + value + GameLanguage.graveyard_power_up.part2[PlayerData.game_language]
+						"honest":
+							var honest_attribute = card_on_CardList.attribute
+							line1 = GameLanguage.on_summon_first[PlayerData.game_language] + GameLanguage.honest.part1[PlayerData.game_language] + GameLanguage.attributes[honest_attribute][PlayerData.game_language] + GameLanguage.honest.part2[PlayerData.game_language]
+						"jinzo":
+							var jinzo_damage_value = card_on_CardList.effect[2]
+							if jinzo_damage_value == 0:
+								line1 = GameLanguage.on_summon_first[PlayerData.game_language] + GameLanguage.jinzo.part1[PlayerData.game_language] + "."
+							else:
+								line1 = GameLanguage.on_summon_first[PlayerData.game_language] + GameLanguage.jinzo.part1[PlayerData.game_language] + GameLanguage.jinzo.part2[PlayerData.game_language] + String(jinzo_damage_value) + GameLanguage.jinzo.part3[PlayerData.game_language]
+						"lifepoint_up":
+							var lifepoint_value = String(card_on_CardList.effect[2])
+							line1 = GameLanguage.on_summon_first[PlayerData.game_language] + GameLanguage.lifepoint_change.lifepoint_up[PlayerData.game_language] + lifepoint_value + GameLanguage.lifepoint_change.final[PlayerData.game_language]
+						"mill":
+							var milled_cards = String(card_on_CardList.effect[2])
+							if int(milled_cards) <= 1:
+								line1 = GameLanguage.on_summon_first[PlayerData.game_language] + GameLanguage.mill[PlayerData.game_language] + milled_cards + " " + GameLanguage.system.card[PlayerData.game_language] + "."
+							else:
+								line1 = GameLanguage.on_summon_first[PlayerData.game_language] + GameLanguage.mill[PlayerData.game_language] + milled_cards + " " + GameLanguage.system.cards[PlayerData.game_language] + "."
+						"monster_change_field":
+							var monster_attribute = card_on_CardList.attribute
+							line1 = GameLanguage.on_summon_first[PlayerData.game_language] + GameLanguage.monster_change_field[PlayerData.game_language] + GameLanguage.attributes[monster_attribute][PlayerData.game_language]
+						"monster_count_boost":
+							var boost_value = String(card_on_CardList.effect[2])
+							line1 = GameLanguage.on_summon_first[PlayerData.game_language] + GameLanguage.monster_count_boost.part1[PlayerData.game_language] + boost_value + GameLanguage.monster_count_boost.part2[PlayerData.game_language]
+						"self_power_up":
+							var boost_value = card_on_CardList.effect[2]
+							match boost_value:
+								"buster_blader", "random_dice", "same_attribute", "spelltrap_count":
+									line1 = GameLanguage.on_summon_first[PlayerData.game_language] + GameLanguage.self_power_up.part1[PlayerData.game_language] + GameLanguage.self_power_up[boost_value][PlayerData.game_language]
+								_: #just a numerical value
+									line1 = GameLanguage.on_summon_first[PlayerData.game_language] + GameLanguage.self_power_up.part1[PlayerData.game_language] + String(boost_value) + GameLanguage.self_power_up.part2[PlayerData.game_language]
 	
 	#Compose the final String to be returned
 	if line1 != null:

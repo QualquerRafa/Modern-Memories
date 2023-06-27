@@ -35,7 +35,7 @@ func _ready():
 func start_player_turn():
 	#Increment the turn counter
 	turn_count += 1
-	get_node("../../user_interface/top_info_box/field_info/turn").text = "Turn " + String(turn_count)
+	get_node("../../user_interface/top_info_box/field_info/turn").text = GameLanguage.duel_scene.turn[PlayerData.game_language] + " " + String(turn_count)
 	#print("------------------------------- TURN ", turn_count," -------------------------------")
 	
 	#Start player turn with hand hidden
