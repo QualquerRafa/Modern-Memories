@@ -7,6 +7,9 @@ func _ready():
 	#Animate the transition when starting this scene
 	$scene_transitioner.entering_this_scene()
 	
+	#Get everything on the correct language
+	load_text_in_correct_language()
+	
 	#Initialize stuff on 'card_info_box' hidden
 	$user_interface/card_info_box/colored_bar.hide()
 	$user_interface/card_info_box/card_name.hide()
@@ -22,8 +25,27 @@ func _ready():
 	var first_sorted_left = $panel_left/sortables.sort_cards(PlayerData.player_trunk.keys(), "new")
 	
 	#Update the screen with the correct cards
+	generate_necessary_left_side_nodes()
 	update_right_panel()
 	update_left_panel(first_sorted_left)
+
+#---------------------------------------------------------------------------------------------------
+func load_text_in_correct_language():
+	$user_interface/top_info_box/window_title.text = GameLanguage.deck_building.scene_title[PlayerData.game_language]
+	$panel_left/sortables/HBoxContainer/byNAME/label.text = GameLanguage.deck_building.name[PlayerData.game_language]
+	$panel_left/sortables/HBoxContainer/byATK/label.text = GameLanguage.deck_building.atk[PlayerData.game_language]
+	$panel_left/sortables/HBoxContainer/byDEF/label.text = GameLanguage.deck_building.def[PlayerData.game_language]
+	$panel_left/sortables/HBoxContainer/byTYPE/label.text = GameLanguage.deck_building.type[PlayerData.game_language]
+	$panel_left/sortables/HBoxContainer/byATTR/label.text = GameLanguage.deck_building.attr[PlayerData.game_language]
+	$panel_right/deck_buttons/button_clear/label.text = GameLanguage.deck_building.clear[PlayerData.game_language]
+	$panel_right/deck_buttons/button_go_duel/label.text = GameLanguage.system.duel[PlayerData.game_language]
+	
+	$import_export_canvas/export_window/export_description.text = GameLanguage.deck_building.export_message[PlayerData.game_language]
+	$import_export_canvas/import_window/import_description.text = GameLanguage.deck_building.import_message_1[PlayerData.game_language]
+	$import_export_canvas/import_window/import_description/import_description2.text = GameLanguage.deck_building.import_message_2[PlayerData.game_language]
+	$import_export_canvas/import_window/import_string_input.placeholder_text = GameLanguage.deck_building.import_placeholder[PlayerData.game_language]
+	$import_export_canvas/export_window/button_close/label.text = GameLanguage.system.close[PlayerData.game_language]
+	$import_export_canvas/import_window/button_close/label.text = GameLanguage.system.close[PlayerData.game_language]
 
 #---------------------------------------------------------------------------------------------------
 func update_right_panel():
@@ -77,17 +99,21 @@ func update_right_panel():
 		visual_deck_card.update_card_information(PlayerData.player_deck[i])
 		visual_deck_card.show()
 
+func generate_necessary_left_side_nodes():
+	#Instance only the exact amount of nodes that is necessary to show
+	var trunk_card_node_file = preload("res://_scenes/0175card.tscn")
+	var referece_parent_node = $panel_left/ScrollContainer/MarginContainer/GridContainer
+	
+	for _i in range(PlayerData.player_trunk.keys().size()):
+		var instance_of_card_node = trunk_card_node_file.instance()
+		referece_parent_node.add_child(instance_of_card_node)
+
 #---------------------------------------------------------------------------------------------------
 func update_left_panel(player_trunk_as_array):
 	if current_highlighted_card != null:
 		var node_onScreen_position_X = current_highlighted_card.get_global_transform_with_canvas()[2][0]
 		if node_onScreen_position_X <= 1280/2:
 			current_highlighted_card = null
-	
-	#Hide any node that doesn't have a corresponding card in the trunk
-	var number_of_cards_player_doesnt_have = CardList.card_list.keys().size() - PlayerData.player_trunk.keys().size()
-	for _i in range(number_of_cards_player_doesnt_have):
-		$panel_left/ScrollContainer/MarginContainer/GridContainer.get_children()[-1].hide()
 	
 	#Show the necessary nodes and update them with the correct information
 	for i in range(player_trunk_as_array.size()):
@@ -112,6 +138,16 @@ func update_left_panel(player_trunk_as_array):
 			$panel_left/ScrollContainer/MarginContainer/GridContainer.get_child(i).modulate = Color(0.42,0.42,0.42,1)
 		else:
 			$panel_left/ScrollContainer/MarginContainer/GridContainer.get_child(i).modulate = Color(1,1,1,1)
+	
+	#Remove unecessary nodes that might be on the screen
+	var nodes_visible = $panel_left/ScrollContainer/MarginContainer/GridContainer.get_child_count()
+	var trunk_size = PlayerData.player_trunk.keys().size()
+	#print(nodes_visible," ", trunk_size)
+	if nodes_visible > trunk_size:
+		for i in range(trunk_size, nodes_visible):
+			$panel_left/ScrollContainer/MarginContainer/GridContainer.get_child(i).queue_free()
+	elif nodes_visible < trunk_size:
+		print("not enough 0175cards created to show all of the Trunk Cards. Missing ", trunk_size-nodes_visible , " nodes.")
 
 #---------------------------------------------------------------------------------------------------
 # DECK BUTTONS
@@ -125,7 +161,7 @@ func about_to_duel_correct_buttons():
 	
 	#Hide the other deck buttons
 	$panel_right/deck_buttons/button_auto.hide()
-	$panel_right/deck_buttons/button_clear.hide()
+	#$panel_right/deck_buttons/button_clear.hide()
 	$panel_right/deck_buttons/button_import.hide()
 	$panel_right/deck_buttons/button_export.hide()
 

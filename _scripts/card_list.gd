@@ -15375,7 +15375,8 @@ const card_list = {
 	"type": "trap",
 	"count_as": null,
 	"effect": [
-	  "fire_darts"
+	  "fire_darts",
+	  "non_interrupt_battle"
 	],
 	"passcode": "43061293"
   },
@@ -16294,7 +16295,8 @@ const card_list = {
 	"type": "trap",
 	"count_as": null,
 	"effect": [
-	  "reveal_face_down"
+	  "reveal_face_down",
+	  "non_interrupt_battle"
 	],
 	"passcode": "58621589"
   },

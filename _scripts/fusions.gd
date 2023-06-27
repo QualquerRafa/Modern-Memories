@@ -651,7 +651,7 @@ var generic_fusion_list = {
 	"aqua_dinosaur":     ["00387", "00388"],                                       #Hydrogeddon, Duoterion
 	"aqua_dragon":       ["00016", "00017", "00362", "00363"],                       #Spike Seadra, Kairyu-Shin, Aqua Dragon, Water Dragon
 	"aqua_fish":         ["00419"],                                               #High Tide Gyojin
-	"aqua_fire":         ["00420"],                                               #Fire Kraken
+	"aqua_pyro":         ["00420"],                                               #Fire Kraken
 	"aqua_gem":          ["00803"],                                               #Gem-Knight Amethyst
 	"aqua_reptile":      ["00343", "00344"],                                       #Oshaleon, Majioshaleon
 	"aqua_sea serpent":  ["00360", "00361"],                                       #Divine Dragon Aquabizarre, Spiral Serpent

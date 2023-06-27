@@ -7,7 +7,25 @@ func _on_DebugAddAll_button_up():
 			PlayerData.player_trunk[id_as_padded_string] += 1 #register another copy of the card to the already existing id key
 		else: 
 			PlayerData.player_trunk[id_as_padded_string] = 1 #card is not in trunk, so add it's key:value pair as id:count
+	
+	update_panels()
 
+func _on_debug_add_random_button_up():
+	for _i in range(128):
+		randomize()
+		var random_card_id = randi()%CardList.card_list.keys().size()
+		var card_to_add = String(random_card_id).pad_zeros(5)
+		
+		if card_to_add in PlayerData.player_trunk:
+			PlayerData.player_trunk[card_to_add] += 1 #register another copy of the card to the already existing id key
+		else: 
+			PlayerData.player_trunk[card_to_add] = 1 #card is not in trunk, so add it's key:value pair as id:count
+	
+	update_panels()
+
+func update_panels():
+	get_node("../").generate_necessary_left_side_nodes()
+	
 	#update both sides' panels
 	var sorter =  get_node("../").get_child(0).get_child(2)
 	var newly_sorted_trunk = sorter.sort_cards(PlayerData.player_trunk.keys(), sorter.last_sorted_type)

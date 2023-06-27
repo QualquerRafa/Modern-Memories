@@ -1,6 +1,19 @@
 extends Button
 var this_card_id : String = String(101).pad_zeros(5)
 
+#This card personal flags
+var this_card_flags : Dictionary = {
+	"is_defense_position" : false,
+	"has_field_boost" : false,
+	"is_facedown" : false,
+	"has_battled" : false,
+	"fusion_type" : null,
+	"atk_up" : 0,
+	"def_up" : 0,
+	"has_activated_effect" : false,
+	"multiple_attacks" : 0,
+}
+
 #-------------------------------------------------------------------------------
 func update_card_information(card_id : String):
 	#Get from the CardList Dictionary 'this_card' information, based on passed 'card_id'

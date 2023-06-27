@@ -1,16 +1,22 @@
 extends Node2D
 
+#Easy acess to game version text indicator
+var GAME_VERSION_TEXT = "0.1.000"
+
 func _ready():
 	#Animate the transition when starting this scene
 	$scene_transitioner.entering_this_scene()
-	
-	#Check for updates
-	look_for_updates()
 	
 	#Check for a saved options file to instantly load it
 	var options_file = File.new()
 	if options_file.file_exists("user://gameoptions.save"):
 		auto_load_options_file()
+	
+	#Properly load the text in the correct language
+	load_text_in_correct_language()
+	
+	#Check for updates
+	look_for_updates()
 	
 	#Check for a savegame file to enable the load button or not
 	var save_file = File.new()
@@ -64,6 +70,27 @@ func auto_load_options_file():
 	SoundControl.adjust_sound_volume(PlayerData.game_volume)
 
 #---------------------------------------------------------------------------------------------------
+func load_text_in_correct_language():
+	#The initial main screen, with New Game, Load Game, Options and Version info
+	$CenterContainer2/VBoxContainer/btn_new_game/button_text.text = GameLanguage.main_menu.new_game[PlayerData.game_language]
+	$CenterContainer2/VBoxContainer/btn_load_game/button_text.text = GameLanguage.main_menu.load_game[PlayerData.game_language]
+	$CenterContainer2/VBoxContainer/btn_options/button_text.text = GameLanguage.main_menu.options[PlayerData.game_language]
+	$game_version.text = GameLanguage.main_menu.version[PlayerData.game_language] + GAME_VERSION_TEXT
+	
+	#The "second" main screen, with all the buttons for different scenes
+	$CenterContainer/VBoxContainer/btn_campaign/button_text.text = GameLanguage.main_menu.campaign[PlayerData.game_language]
+	$CenterContainer/VBoxContainer/btn_tournament/button_text.text = GameLanguage.main_menu.tournament[PlayerData.game_language]
+	$CenterContainer/VBoxContainer/btn_free_duel/button_text.text = GameLanguage.main_menu.free_duel[PlayerData.game_language]
+	$CenterContainer/VBoxContainer/btn_build_deck/button_text.text = GameLanguage.main_menu.build_deck[PlayerData.game_language]
+	$CenterContainer/VBoxContainer/btn_password/button_text.text = GameLanguage.main_menu.card_shop[PlayerData.game_language]
+	$CenterContainer/VBoxContainer/btn_save/button_text.text = GameLanguage.main_menu.save_game[PlayerData.game_language]
+	
+	#Save Game warning message
+	$save_load_overlay/save_warning/export_window/export_description2.text = GameLanguage.main_menu.save_confirmation_warning[PlayerData.game_language]
+	$save_load_overlay/save_warning/export_window/export_description3.text = GameLanguage.main_menu.save_path_indicator[PlayerData.game_language]
+	$save_load_overlay/save_warning/button_close/label.text = GameLanguage.system.confirm[PlayerData.game_language]
+
+#---------------------------------------------------------------------------------------------------
 func look_for_updates():
 	var _request_return = $game_version/HTTPRequest.request("https://permitted-memories.github.io/")
 
@@ -73,13 +100,13 @@ func _on_HTTPRequest_request_completed(result, _response_code, _headers, body):
 		var game_version_string = $game_version.text.split(" ")[1]
 		
 		if site_version_return != game_version_string:
-			$game_version/version_update_warning.text = "Update to " + String(site_version_return)
+			$game_version/version_update_warning.text = GameLanguage.main_menu.update[PlayerData.game_language] + String(site_version_return)
 			$game_version/version_update_warning.show()
 		else:
 			$game_version/version_update_warning.hide()
 	else:
 		print("Request wasn't completed, result enum: ", result)
-		$game_version/version_update_warning.text = "Unable to check for updates"
+		$game_version/version_update_warning.text = GameLanguage.main_menu.unable_to_check_for_updates[PlayerData.game_language]
 		$game_version/version_update_warning.show()
 
 

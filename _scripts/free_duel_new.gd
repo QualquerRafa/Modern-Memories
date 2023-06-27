@@ -3,9 +3,17 @@ extends Node2D
 var cards_per_line = 13 #Shows 13 cards per line, use this to count how many have to be hidden
 var active_duelist_name = ""
 
+#Load the "wins" and "losses" text only once, to reduce lag
+var language_wins = GameLanguage.free_duel.wins[PlayerData.game_language]
+var language_losses = GameLanguage.free_duel.losses[PlayerData.game_language]
+
 func _ready():
 	#Animate the transition when starting this scene
 	$scene_transitioner.entering_this_scene()
+	
+	#Get everything on the correct language
+	$user_interface/top_info_box/window_title.text = GameLanguage.free_duel.scene_title[PlayerData.game_language]
+	$duelist_focus/go_duel/label.text = GameLanguage.system.duel[PlayerData.game_language]
 	
 	#Initialize stuff on 'card_info_box' hidden
 	$user_interface/card_info_box/colored_bar.hide()
@@ -16,16 +24,15 @@ func _ready():
 	
 	#Show the buttons for each unlocked duelist
 
-
 func duelist_face_clicked(duelist_name):
 	#Update with the correct duelist information
 	$duelist_focus/duelist_body.texture = load("res://_resources/character_bodys/" + duelist_name + "0.png")
 	if PlayerData.recorded_duels.keys().has(duelist_name):
-		$duelist_focus/duelist_wins.text = "Wins: " + String(PlayerData.recorded_duels[duelist_name].W)
-		$duelist_focus/duelist_losses.text = "Losses: " + String(PlayerData.recorded_duels[duelist_name].L)
+		$duelist_focus/duelist_wins.text = language_wins + String(PlayerData.recorded_duels[duelist_name].W)
+		$duelist_focus/duelist_losses.text = language_losses + String(PlayerData.recorded_duels[duelist_name].L)
 	else:
-		$duelist_focus/duelist_wins.text = "Wins: 0"
-		$duelist_focus/duelist_losses.text = "Losses: 0"
+		$duelist_focus/duelist_wins.text = language_wins + "0"
+		$duelist_focus/duelist_losses.text = language_losses + "0"
 	update_duelist_cards(duelist_name)
 	active_duelist_name = duelist_name
 	

@@ -9,8 +9,9 @@ var password_bought_cards : Array = [] #populated by ID:String
 var recorded_duels : Dictionary = {} #populated by {duelist_name : {W:int, L:int}}
 
 #Game Settings, stored in a separate file
-var game_language : String = "english" #default is english
+var game_language : String = "en" #default is english
 var game_volume : float = 0.1 #0 to 1, 'linear2db' converts it into db in 'sound_control.gd'
+var game_autosave : bool = false #starts as false, player can opt in
 
 #Variables that aren't persistent
 var game_loaded : bool = false #set to true after the 'savefile' has been correctly loaded

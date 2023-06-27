@@ -9,7 +9,7 @@ func update_user_interface(card_node):
 	
 	#update card descriptive text
 	$card_text.show()
-	var card_text = CardText.get_card_text(card_node.this_card_id)
+	var card_text = $card_text_gd.get_card_text(card_node.this_card_id)
 	$card_text/Container/description_line1.text = card_text
 	
 	#Update the specifics that may vary from card to card
@@ -41,8 +41,8 @@ func update_user_interface(card_node):
 			else:
 				$atk_def.rect_position = atk_def_base_x_position
 			
-			$atk_def/atk.text = String(this_card.atk)
-			$atk_def/def.text = String(this_card.def)
+			$atk_def/atk.text = String(clamp(this_card.atk + card_node.this_card_flags.atk_up, 0, 9999))
+			$atk_def/def.text = String(clamp(this_card.def + card_node.this_card_flags.def_up, 0, 9999))
 			
 			$extra_icons/level_indicator.show()
 			$extra_icons/level.show()
@@ -53,6 +53,12 @@ func update_user_interface(card_node):
 				$colored_bar.texture = load("res://_resources/scene_duel/bar_normal.png")
 			else:
 				$colored_bar.texture = load("res://_resources/scene_duel/bar_effect.png")
+			if card_node.this_card_flags.fusion_type == "fusion":
+				$colored_bar.texture = load("res://_resources/scene_duel/bar_fusion.png")
+			if card_node.this_card_flags.fusion_type == "ritual":
+				$colored_bar.texture = load("res://_resources/scene_duel/bar_ritual.png")
+			if card_node.this_card_flags.fusion_type == "token":
+				$colored_bar.texture = load("res://_resources/scene_duel/bar_token.png")
 	
 	#update basic information about the card
 	$card_name/card_name.text = this_card.card_name

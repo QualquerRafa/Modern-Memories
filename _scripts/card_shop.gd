@@ -6,6 +6,13 @@ func _ready():
 	#Animate the transition when starting this scene
 	$scene_transitioner.entering_this_scene()
 	
+	#Get everything on the correct language
+	$user_interface/top_info_box/window_title.text = GameLanguage.card_shop.scene_title[PlayerData.game_language]
+	$shop_panels/VBoxContainer/starchips/window_title.text = GameLanguage.card_shop.starchips[PlayerData.game_language]
+	$shop_panels/VBoxContainer/code/window_title.text = GameLanguage.card_shop.card_code[PlayerData.game_language]
+	$shop_panels/VBoxContainer/price/window_title.text = GameLanguage.card_shop.card_price[PlayerData.game_language]
+	$shop_panels/VBoxContainer/price/buy_card/label.text = GameLanguage.card_shop.buy[PlayerData.game_language]
+	
 	#Initialize stuff on 'card_info_box' hidden
 	$user_interface/card_info_box/colored_bar.hide()
 	$user_interface/card_info_box/card_name.hide()
