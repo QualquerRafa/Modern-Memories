@@ -220,7 +220,7 @@ icon = ExtResource( 3 )
 flat = true
 
 [node name="label" type="Label" parent="shop_panels/VBoxContainer/price/buy_card"]
-margin_left = 6.0
+margin_left = 4.0
 margin_top = 3.0
 margin_right = 107.0
 margin_bottom = 47.0

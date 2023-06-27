@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://_resources/fonts/BankGothic Md BT.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://_scripts/Container.gd" type="Script" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://_resources/_types/fairy.png" type="Texture" id=8]
 [ext_resource path="res://_resources/scene_duel/card_info_box.png" type="Texture" id=9]
 [ext_resource path="res://_scripts/card_info_box.gd" type="Script" id=10]
+[ext_resource path="res://_scripts/card_text.gd" type="Script" id=11]
 
 [sub_resource type="DynamicFont" id=1]
 size = 42
@@ -28,6 +29,9 @@ position = Vector2( 0, 588 )
 texture = ExtResource( 9 )
 centered = false
 script = ExtResource( 10 )
+
+[node name="card_text_gd" type="Node" parent="."]
+script = ExtResource( 11 )
 
 [node name="colored_bar" type="Sprite" parent="."]
 visible = false

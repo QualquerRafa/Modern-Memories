@@ -329,7 +329,7 @@ icon = ExtResource( 1 )
 flat = true
 
 [node name="button_text" type="Label" parent="CenterContainer/VBoxContainer/btn_password"]
-margin_left = 6.0
+margin_left = 2.0
 margin_top = 3.0
 margin_right = 532.0
 margin_bottom = 111.0
@@ -598,14 +598,12 @@ custom_styles/panel = SubResource( 5 )
 
 [node name="export_description2" type="Label" parent="save_load_overlay/save_warning/export_window"]
 margin_left = 2.0
-margin_top = 28.0
+margin_top = 2.0
 margin_right = 601.0
-margin_bottom = 133.0
+margin_bottom = 104.0
 custom_fonts/font = SubResource( 7 )
 text = "Are you sure you want to Save your game?
-This will overwrite any previous savefile.
-
-"
+This will overwrite any previous savefile."
 align = 1
 valign = 1
 autowrap = true
