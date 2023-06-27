@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://_resources/menu_screen/big_menu_button.png" type="Texture" id=1]
 [ext_resource path="res://_resources/card_shop/full_bg.png" type="Texture" id=2]
@@ -8,7 +8,14 @@
 [ext_resource path="res://_resources/menu_screen/gradient.png" type="Texture" id=6]
 [ext_resource path="res://_scenes/scene_transitioner.tscn" type="PackedScene" id=7]
 [ext_resource path="res://_scripts/save_load_logic.gd" type="Script" id=8]
+[ext_resource path="res://_resources/game_over/background.png" type="Texture" id=9]
 [ext_resource path="res://_resources/scene_deck_building/big_button.png" type="Texture" id=10]
+[ext_resource path="res://_resources/tournament/dark_aura.png" type="Texture" id=11]
+
+[sub_resource type="StyleBoxTexture" id=10]
+texture = ExtResource( 9 )
+region_rect = Rect2( 6, 0, 564, 667 )
+axis_stretch_horizontal = 1
 
 [sub_resource type="DynamicFont" id=1]
 size = 68
@@ -95,6 +102,23 @@ modulate = Color( 0, 0, 0, 0.392157 )
 position = Vector2( 0, 81 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 6 )
+centered = false
+
+[node name="background2" type="Panel" parent="."]
+margin_right = 1280.0
+margin_bottom = 720.0
+custom_styles/panel = SubResource( 10 )
+
+[node name="DarkAura2" type="Sprite" parent="background2"]
+position = Vector2( -720, 0 )
+scale = Vector2( 2.16953, 1 )
+texture = ExtResource( 11 )
+centered = false
+
+[node name="DarkAura2" type="Sprite" parent="background2/DarkAura2"]
+position = Vector2( -720, 0 )
+scale = Vector2( 2.16953, 1 )
+texture = ExtResource( 11 )
 centered = false
 
 [node name="small_logo" type="Sprite" parent="."]

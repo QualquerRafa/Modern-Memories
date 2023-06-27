@@ -1841,9 +1841,9 @@ margin_right = 274.0
 margin_bottom = 52.0
 
 [node name="YOU" type="Label" parent="user_interface/top_info_box/player_info"]
-margin_left = 2.0
+margin_left = -8.0
 margin_top = -1.0
-margin_right = 59.0
+margin_right = 66.0
 margin_bottom = 25.0
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
@@ -1851,11 +1851,12 @@ custom_constants/shadow_offset_x = 3
 custom_constants/shadow_offset_y = 3
 custom_fonts/font = SubResource( 3 )
 text = "YOU"
+align = 2
 
 [node name="deck" type="Label" parent="user_interface/top_info_box/player_info"]
-margin_left = 24.0
+margin_left = 28.0
 margin_top = 21.0
-margin_right = 58.0
+margin_right = 66.0
 margin_bottom = 47.0
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
@@ -1866,9 +1867,9 @@ text = "40"
 align = 2
 
 [node name="lifepoints" type="Label" parent="user_interface/top_info_box/player_info"]
-margin_left = 60.0
+margin_left = 64.0
 margin_top = -14.0
-margin_right = 260.0
+margin_right = 264.0
 margin_bottom = 59.0
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )

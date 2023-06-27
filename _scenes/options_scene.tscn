@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://_resources/fonts/BankGothic Md BT.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://_resources/card_shop/full_bg.png" type="Texture" id=2]
@@ -9,6 +9,13 @@
 [ext_resource path="res://_resources/card_shop/window_code.png" type="Texture" id=7]
 [ext_resource path="res://_resources/scene_duel/darken_bg.png" type="Texture" id=8]
 [ext_resource path="res://_resources/game_options/check-mark.png" type="Texture" id=9]
+[ext_resource path="res://_resources/free_duel/focus_shadow.png" type="Texture" id=10]
+
+[sub_resource type="DynamicFont" id=10]
+size = 28
+outline_size = 3
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=1]
 size = 68
@@ -86,6 +93,20 @@ script = ExtResource( 6 )
 texture = ExtResource( 2 )
 centered = false
 
+[node name="FocusShadow" type="Sprite" parent="."]
+position = Vector2( 639, 513 )
+texture = ExtResource( 10 )
+
+[node name="game_credits" type="Label" parent="FocusShadow"]
+margin_left = -630.0
+margin_top = 133.0
+margin_right = 632.0
+margin_bottom = 200.0
+custom_fonts/font = SubResource( 10 )
+text = "Soundtrack and SFX: youtube.com/@lohweo
+Everything else: youtube.com/@Rafa_SCN"
+autowrap = true
+
 [node name="user_interface" type="Node2D" parent="."]
 
 [node name="top_info_box" type="Sprite" parent="user_interface"]
@@ -120,13 +141,13 @@ flat = true
 [node name="CenterContainer" type="CenterContainer" parent="."]
 margin_top = 53.0
 margin_right = 1279.0
-margin_bottom = 721.0
+margin_bottom = 643.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
 margin_left = 375.0
-margin_top = 81.0
+margin_top = 42.0
 margin_right = 903.0
-margin_bottom = 586.0
+margin_bottom = 547.0
 custom_constants/separation = 24
 
 [node name="option_volume" type="Control" parent="CenterContainer/VBoxContainer"]

@@ -171,6 +171,7 @@ margin_left = 10.0
 margin_top = 5.0
 margin_right = 1273.0
 margin_bottom = 72.0
+custom_constants/line_spacing = 4
 custom_fonts/font = SubResource( 2 )
 text = "This card can count as [count-as-type] for some fusions."
 autowrap = true
