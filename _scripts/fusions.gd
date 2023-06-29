@@ -112,7 +112,7 @@ func equip_fusion(card_1 : String, card_2 : String):
 		
 		equip_result = [monster_card_id, [CardList.card_list[equip_card_id].effect[0], CardList.card_list[equip_card_id].effect[1] * spelltrap_count_on_field]]
 	else:
-		print("fusions.gd failed to equip: restriction = ", equip_restriction)
+		#print("fusions.gd failed to equip: restriction = ", equip_restriction)
 		var special_check_is_ritual = equip_card_id == "00991"
 		equip_result = [monster_card_id, ["stats_up", 0, "equipment failed"], special_check_is_ritual] #if equip fail, add 0 to stats. Failsafe.
 	
@@ -147,7 +147,7 @@ func attribute_fusion(card_1 : String, card_2 : String):
 	var fusion_result : Array
 	
 	#Cards with these keywords on it's name will have attribute fusions
-	var card_name_keywords = ["Elemental HERO", "Mask Change", "Gem-Knight", "Dharc", "Lyna", "Aussa", "Hiita", "Eria", "Wynn"]
+	var card_name_keywords = ["Mask Change", "Elemental HERO", "Gem-Knight", "Dharc", "Lyna", "Aussa", "Hiita", "Eria", "Wynn"]
 	
 	#Check if Card_1 or Card_2 has a Keyword on it's name
 	var attribute_holder : String
@@ -165,8 +165,14 @@ func attribute_fusion(card_1 : String, card_2 : String):
 			keyword_found = card_name_keywords[i]
 			break
 	
-	#If Card_1 or Card_2 HAS a keyword on it's nome, check if the other card's attribute matches what it needs
+	#If Card_1 or Card_2 HAS a keyword on it's name, check if the other card's attribute matches what it needs
 	if keyword_found != null:
+		#Special check so Mask Change can only work with Elemental HEROs
+		if keyword_found == "Mask Change":
+			print(CardList.card_list[attribute_matcher].card_name)
+			if CardList.card_list[attribute_matcher].card_name.find("HERO") == -1:
+				return [card_2, false] #return a failed fusion
+		
 		#If there is a Keyword : Attribute found, look inside 'Keyword : Attribute' for the first result with atk > than both the materials used
 		if attribute_fusion_list[keyword_found].has(CardList.card_list[attribute_matcher].attribute):
 			var keyword_attribute_results_array = attribute_fusion_list[keyword_found][CardList.card_list[attribute_matcher].attribute]

@@ -5,6 +5,9 @@ func _ready():
 	#Animate the transition when starting this scene
 	$scene_transitioner.entering_this_scene()
 	
+	#Load the stored options
+	load_options_file()
+	
 	#LOAD THE CORRECT INFO WHEN ENTERING THE SCENE
 	$user_interface/top_info_box/window_title.text = GameLanguage.options_scene.scene_title[PlayerData.game_language]
 	$CenterContainer/VBoxContainer/option_volume/window_title.text = GameLanguage.options_scene.volume_window[PlayerData.game_language]
@@ -12,19 +15,11 @@ func _ready():
 	language_checkmark_update()
 	$CenterContainer/VBoxContainer/option_others/window_title.text = GameLanguage.options_scene.others_window[PlayerData.game_language]
 	$CenterContainer/VBoxContainer/option_others/auto_save.text = GameLanguage.options_scene.others_window_1[PlayerData.game_language]
-	$CenterContainer/VBoxContainer/option_others/auto_save/option_check/checkmark.set_visible(PlayerData.game_autosave)
 	$FocusShadow/game_credits.text = GameLanguage.options_scene.credits_soundtrack[PlayerData.game_language] + "\n" + GameLanguage.options_scene.credits_everything[PlayerData.game_language]
-	
-	if PlayerData.game_autosave == true:
-		$CenterContainer/VBoxContainer/option_others/auto_save/option_check/checkmark.show()
-	else:
-		$CenterContainer/VBoxContainer/option_others/auto_save/option_check/checkmark.hide()
-	
-	#Load the store options
-	load_options_file()
 	
 	$CenterContainer/VBoxContainer/option_volume/volume_percent_indicator.text = String(PlayerData.game_volume * 100) + "%"
 	$CenterContainer/VBoxContainer/option_volume/scroller.value = PlayerData.game_volume * 10
+	$CenterContainer/VBoxContainer/option_others/auto_save/option_check/checkmark.set_visible(PlayerData.game_autosave)
 
 #---------------------------------------------------------------------------------------------------
 func _on_scroller_value_changed(value):

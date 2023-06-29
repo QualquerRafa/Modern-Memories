@@ -49,7 +49,8 @@ func auto_load_options_file():
 	#Load it safely. IF the save file has that information, load it. Good for future-proof with backwards compatibility
 	var saved_info = [
 		["game_language", "string"],
-		["game_volume", "float"]
+		["game_volume", "float"],
+		["game_autosave", "bool"]
 	]
 	
 	for i in range(saved_info.size()):
@@ -65,6 +66,8 @@ func auto_load_options_file():
 					PlayerData[saved_info[i][0]] = Array(info_to_load[saved_info[i][0]])
 				"dictionary":
 					PlayerData[saved_info[i][0]] = Dictionary(info_to_load[saved_info[i][0]])
+				"bool":
+					PlayerData[saved_info[i][0]] = bool(info_to_load[saved_info[i][0]])
 	
 	#NOW THAT THE INFORMATION WAS PROPERLY LOADED, UPDATE NECESSARY THINGS
 	SoundControl.adjust_sound_volume(PlayerData.game_volume)
@@ -92,17 +95,18 @@ func load_text_in_correct_language():
 
 #---------------------------------------------------------------------------------------------------
 func look_for_updates():
-	var _request_return = $game_version/HTTPRequest.request("https://permitted-memories.github.io/")
+	var _request_return = $game_version/HTTPRequest.request("https://permitted-memories.github.io/gameversion.html")
 
 func _on_HTTPRequest_request_completed(result, _response_code, _headers, body):
 	if result == 0: #RESULT_SUCCESS
-		var site_version_return = body.get_string_from_utf8().split(" ")[1]
+		var site_version_return = body.get_string_from_utf8()
 		var game_version_string = $game_version.text.split(" ")[1]
 		
 		if site_version_return != game_version_string:
 			$game_version/version_update_warning.text = GameLanguage.main_menu.update[PlayerData.game_language] + String(site_version_return)
 			$game_version/version_update_warning.show()
 		else:
+			print("Game Version matched the current version fetched from the Site: ", site_version_return)
 			$game_version/version_update_warning.hide()
 	else:
 		print("Request wasn't completed, result enum: ", result)

@@ -21,6 +21,11 @@ func _ready():
 	SoundControl.bgm_fadeout()
 	$scene_transitioner.entering_this_scene()
 	
+	#Properly load the text in the correct language
+	$user_interface/top_info_box/window_title.text = GameLanguage.reward_scene.scene_title[PlayerData.game_language]
+	$BIG_LETTERS/YOU.text = GameLanguage.reward_scene.you[PlayerData.game_language]
+	$duel_info/title.text = GameLanguage.reward_scene.duel_info[PlayerData.game_language]
+	
 	#Show the YOU WIN/LOSE first
 	show_big_letters()
 	
@@ -56,6 +61,18 @@ func _ready():
 			PlayerData.recorded_duels[PlayerData.going_to_duel][win_or_lose] = 1
 
 ####################################################################################################
+func auto_save():
+	#If the "Auto-Save" option is enabled, check for the conditions where it can happen
+	#print("Game Autosave is: ", PlayerData.game_autosave)
+	
+	if PlayerData.game_autosave == true:
+		#After all free Duels, Wins or Losses, auto-save
+		if PlayerData.scene_to_return_after_duel == "free_duel":
+			$save_load_logic.save_game()
+		
+		#print("Game auto-saved")
+
+####################################################################################################
 # CALCULATE REWARDS FUNCTIONS
 ####################################################################################################
 func get_duel_rank():
@@ -74,6 +91,7 @@ func get_duel_rank():
 	#For deck count, the more cards still in the deck the better
 	if duel_deck_count > 28: final_duel_score += 3
 	elif duel_deck_count >= 20: final_duel_score += 2
+	elif duel_deck_count <= 3: final_duel_score += 3
 	else: final_duel_score += 1
 	
 	#For fusion count, the more the better
@@ -83,21 +101,22 @@ func get_duel_rank():
 	else: final_duel_score += 4
 	
 	#For effect count, the more the better
-	if duel_effect_count <= 6: final_duel_score += 1
-	elif duel_effect_count <= 14: final_duel_score += 2
+	if duel_effect_count <= 5: final_duel_score += 1
+	elif duel_effect_count <= 10: final_duel_score += 2
 	else: final_duel_score += 3
 	
 	#For spelltrap count, the more the better
-	if duel_spelltrap_count <= 3: final_duel_score += 1
-	elif duel_spelltrap_count <= 6: final_duel_score += 2
+	if duel_spelltrap_count <= 2: final_duel_score += 1
+	elif duel_spelltrap_count <= 4: final_duel_score += 2
 	else: final_duel_score += 3
 	
 	#Extra points
-	if final_turn_count <= 3: final_duel_score += 2
-	elif final_duel_score <= 5: final_duel_score += 1
+	if final_turn_count <= 3: final_duel_score += 3
+	elif final_duel_score <= 5: final_duel_score += 2
 	
 	if final_player_LP > 8000: final_duel_score += 2
 	elif final_player_LP > 6000: final_duel_score += 1
+	elif final_player_LP < 1000: final_duel_score += 2
 	
 	if final_field_atk > 9000: final_duel_score += 2
 	if final_field_atk > 5000: final_duel_score += 1
@@ -320,6 +339,9 @@ func show_duel_info():
 					remove_reward_scene_from_tree()
 
 func remove_reward_scene_from_tree():
+	#As the last thing to do, call the auto_save function (it does all the needed checks)
+	auto_save()
+	
 	#For free duels, reset temporarily stored info in PlayerData
 	if PlayerData.scene_to_return_after_duel == "free_duel":
 		PlayerData.last_duel_result = ""
@@ -368,12 +390,12 @@ func show_big_letters():
 	if duel_winner == "player":
 		PlayerData.last_duel_result = "win"
 		$BIG_LETTERS/YOU.add_color_override("font_color","ff0000") #RED
-		$BIG_LETTERS/win_lose.text = "WIN"
+		$BIG_LETTERS/win_lose.text = GameLanguage.reward_scene.win[PlayerData.game_language]
 		$BIG_LETTERS/win_lose.add_color_override("font_color","ff0000") #RED
 	else:
 		PlayerData.last_duel_result = "lose"
 		$BIG_LETTERS/YOU.add_color_override("font_color","0000ff") #BLUE
-		$BIG_LETTERS/win_lose.text = "LOSE"
+		$BIG_LETTERS/win_lose.text = GameLanguage.reward_scene.lose[PlayerData.game_language]
 		$BIG_LETTERS/win_lose.add_color_override("font_color","0000ff") #BLUE
 	
 	$BIG_LETTERS.show()

@@ -130,6 +130,11 @@ func do_activation_animation(card_node : Node, force_animation = false):
 		animation_timer = 0.2
 		SoundControl.play_sound("poc_effect")
 		$effect_visuals.show()
+	#Show animation for Metalmorph, Level Up, Toon World, Mask Change
+	if CardList.card_list[card_node.this_card_id].attribute == "spell" and CardList.card_list[card_node.this_card_id].effect[0] == "special_description":
+		animation_timer = 0.2
+		SoundControl.play_sound("poc_effect")
+		$effect_visuals.show()
 	
 	#First the black background fade in
 	$tween_effect.interpolate_property($effect_visuals/darken_screen, "modulate", Color(1,1,1, 0), Color(1,1,1, 1), animation_timer, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
@@ -1880,7 +1885,7 @@ func ritual_effects_activation(card_node : Node, ritual_activation_condition : S
 						GAME_LOGIC.destroy_a_card(the_monster)
 				
 				"Black Luster Soldier", "Magician of Black Chaos", "Super War-Lion":
-					var all_monsters_destroyer = ["Black Luster Soldier"]
+					var all_monsters_destroyer = ["Black Luster Soldier", "Super War-Lion"]
 					var destroy_keyword = ""
 					if ritual_monster_name in all_monsters_destroyer:
 						destroy_keyword = "enemy_monsters"
@@ -2004,7 +2009,7 @@ func ritual_effects_activation(card_node : Node, ritual_activation_condition : S
 					do_activation_animation(card_node, true)
 					yield(self, "effect_animation_finished")
 					
-					#Summon one friend on field
+					#Summon the successor on field
 					var target_side_of_field = GAME_LOGIC.get_parent().get_node("duel_field/" + caller_and_target[0] + "_side_zones")
 					for i in range(successor_match[ritual_monster_name].size()):
 						for j in [2,1,3,0,4]:
@@ -2052,7 +2057,6 @@ func ritual_effects_activation(card_node : Node, ritual_activation_condition : S
 		"on_ritual_attack":
 			match ritual_monster_name:
 				"Blue-Eyes Chaos MAX Dragon":
-					print("Chaos Max")
 					card_node.this_card_flags.atk_up += 4000
 					card_node.update_card_information(card_node.this_card_id)
 				"Gearfried the Swordmaster":
@@ -2064,10 +2068,6 @@ func ritual_effects_activation(card_node : Node, ritual_activation_condition : S
 			match ritual_monster_name:
 				#Relinquished basically does the same 'return_damage' effect that is purely part of game_logic
 				"Relinquished": pass
-
-
-
-
 
 
 

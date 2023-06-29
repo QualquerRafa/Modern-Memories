@@ -217,7 +217,22 @@ func enemy_play_that_card(card_to_play_array : Array):
 	SoundControl.play_sound("poc_move")
 	
 	#Check if this card will get a field bonus
-	var field_name = GAME_LOGIC.get_parent().get_node("user_interface/top_info_box/field_info/field_name").text.split(" ", true)[0].to_lower()
+	var field_name : String
+	var field_element_colors = {
+		"fire":  Color("ff4a4a"),
+		"earth": Color("0ca528"),
+		"water": Color("1c68ff"),
+		"wind":  Color("4dedff"),
+		"dark":  Color("5100ff"),
+		"light": Color("ffef00"),
+	}
+	
+	for attribute in field_element_colors.keys():
+		var color = field_element_colors[attribute]
+		if GAME_LOGIC.get_parent().get_node("duel_field/enemy_side_zones").self_modulate == color:
+			field_name = attribute
+			break
+	
 	get_node("../effects").field_bonus(field_name)
 	
 	#Update UI with the played card information, if card isn't facedown
@@ -386,7 +401,7 @@ func enemy_main_phase():
 					var player_atk2 = int(player_monsters_array[1].get_node("card_design/monster_features/atk_def/atk").text)
 					var player_def2 = int(player_monsters_array[1].get_node("card_design/monster_features/atk_def/def").text)
 					#If COM is stronger than the second monster and won't be vulnerable to lose the duel
-					if com_atk > player_atk2 and player_atk - com_atk <= int(get_node("../../user_interface/top_info_box/com_info/lifepoints").text) + 100 :
+					if com_atk > player_atk2 and player_atk - com_atk <= int(get_node("../../user_interface/top_info_box/com_info/lifepoints").text) + 100 and player_monsters_array[1].this_card_flags.is_defense_position == false:
 						if current_strongest_monster.this_card_flags.is_defense_position == true:
 							current_strongest_monster.toggle_battle_position()
 							$enemy_timer.start(battle_timer/2); yield($enemy_timer, "timeout")

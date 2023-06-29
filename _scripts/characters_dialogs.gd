@@ -22,7 +22,7 @@ func _on_dialogue_button_button_up():
 	emit_signal("dialogue_box_clicked")
 
 func get_dialog(character_name : String, specific_dialog : String):
-	var dialog = dialogs[character_name][specific_dialog]
+	var dialog = dialogs[character_name][specific_dialog][PlayerData.game_language]
 	return [character_name, dialog]
 
 func update_screen_dialog(to_show_character_name : String, to_show_dialog : String, dont_show_character = false):
@@ -77,31 +77,61 @@ func empty_dialog_box():
 #-------------------------------------------------------------------------------
 var dialogs = {
 	"generic" : {
-		"pre_duel" : "It's nice to meet you. Now let's Duel!",
-		"duel_defeated" : "Oh, I lost...",
-		"duel_victorious" : "Wow! I won!",
-		"tournament_rematch" : "You're not leaving without dueling me first!",
+		"pre_duel" : {
+			"en" : "It's nice to meet you. Now let's Duel!",
+			"pt" : "Prazer em conhecer. Agora vamos ao Duelo!"
+		},
+		"duel_defeated" : {
+			"en" : "Oh, I lost...",
+			"pt" : "Ah, eu perdi..."
+		},
+		"duel_victorious" : {
+			"en" : "Wow! I won!",
+			"pt" : "Eita! Eu venci!"
+		},
+		"tournament_rematch" : {
+			"en" : "You're not leaving without dueling me first!",
+			"pt" : "Você não vai sair sem duelar comigo primeiro!"
+		},
 	},
 	
 	"roland" : {
-		"tournament_1" : "Welcome, Duelists! To the Forbidden Memories Tournament! \nWhere duelists from all around the world are gathered for a chance to be the new Duel Monsters Champion!",
-		"tournament_2" : "Since every rule we knew from the old game has changed in this new format, everyone has equal chances of being the next King or Queen of Duels!",
-		"tournament_3" : "So let's start this already! All the participants will be randomly paired.\nGood Luck everyone!",
-		
-		"tournament_green_tier": "These are the first pairings, ladies and gentleman.\nCompetitors, go and meet your opponent because it's time to Duel.",
-		
-		"tournament_move_tier" : "Half the competitors were eliminated! \nLet's advance to the next stage of our event!",
-		"tournament_final_tier" : "Now, for the Grand Finale! \nMay the best duelist win!",
-		"tournament_champion" : "This is it, ladies and gentleman! We have the new Duel Monsters Champion here on the Forbidden Memories Tournament! \nBesides everything you have already won, here is your prize of 50 starchips to use in the Card Shop!",
-		
-		"tournament_hijack" : "Stop right there, New Champion!",
-		"tournament_end" : "What a fun duel to watch. But that was it ladies and gentleman!\nSee you in the next Forbidden Memories Tournament!"
-	},
-	
-	"shadi" : {
-		"tournament_before_duel" : "It's an honor for me to duel against you. May the Gods decide our fates!",
-		"tournament_defeated" : "Your victory was more than deserved. \nMay the Gods be on your side in all of your Duels.",
-		"tournament_victorious" : "Looks like the Gods were on my side this time.",
+		"tournament_1" : {
+			"en" : "Welcome, Duelists! To the Forbidden Memories Tournament!\nWhere duelists from all around the world are gathered for a chance to be the new Duel Monsters Champion!",
+			"pt" : "Bem vindos, Duelistas! Ao Torneio de Forbidden Memories!\nEm que duelistas de todo o mundo se reunem pela chance de ser o novo Rei dos Monstros de Duelo!"
+		},
+		"tournament_2" : {
+			"en" : "Since every rule we knew from the old game has changed in this new format, everyone has equal chances of being the next King or Queen of Duels!",
+			"pt" : "Já que todas as regras do jogo antigo mudaram com esse novo formato, todo mundo tem as mesmas chances de ser o próximo Rei ou Rainha dos Duelos!"
+		},
+		"tournament_3" : {
+			"en" : "So let's start this already! All the participants will be randomly paired.\nGood Luck everyone!",
+			"pt" : "Então vamos começar logo! Todos os participantes serão pareados aleatoriamente.\nBoa sorte a todos!"
+		},
+		"tournament_green_tier": {
+			"en" : "These are the first pairings, ladies and gentleman.\nCompetitors, go and meet your opponent because it's Time to Duel.",
+			"pt" : "Estas são as primeiras duplas, senhoras e senhores.\nCompetidores, encontrem seus oponentes porque é Hora do Duelo!"
+		},
+		"tournament_move_tier" : {
+			"en" : "Half the competitors were eliminated!\nLet's advance to the next stage of our event!",
+			"pt" : "Metade dos competidores foi eliminada!\nSeguimos para o próximo estágio do evento!"
+		},
+		"tournament_final_tier" : {
+			"en" : "Now, for the Grand Finale!\nMay the best duelist win!",
+			"pt" : "Agora, para a Grande Final!\nQue vençaa o melhor duelista!"
+		},
+		"tournament_champion" : {
+			"en" : "This is it, ladies and gentleman! We have the new Duel Monsters Champion here on the Forbidden Memories Tournament!\nBesides everything you have already won, here is your prize of 50 starchips to use in the Card Shop!",
+			"pt" : "Isso é tudo, pessoal! Temos nosso novo Campeão de Monstros de Duelo aqui no Torneio de Forbidden Memories!\nE além de tudo o que você já ganhou, aqui está seu premio de 50 estrelas para usar na Lojinha!"
+		},
+		"tournament_hijack" : {
+			"en" : "Stop right there, New Champion!",
+			"pt" : "Parado ai, Novo Campeão!"
+		},
+		"tournament_end" : {
+			"en" : "What a fun duel to watch! But that was it ladies and gentleman.\nSee you in the next Forbidden Memories Tournament!",
+			"pt" : "E que partida divertida! Mas é isso, senhoras e senhores.\nNos vemos no próximo Torneio de Forbidden Memories!"
+		},
 	},
 }
 

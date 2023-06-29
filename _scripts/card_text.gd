@@ -262,6 +262,54 @@ func get_card_text(card_id : String):
 								_: #just a numerical value
 									line1 = GameLanguage.on_summon_first[PlayerData.game_language] + GameLanguage.self_power_up.part1[PlayerData.game_language] + String(boost_value) + GameLanguage.self_power_up.part2[PlayerData.game_language]
 	
+	#For ritual summoned monsters on the field, make their line2 be their "secret ritual effect"
+	if self.get_node("../../../../").has_node("duel_scene"):
+		var sketchy_as_hell_scene_node = self.get_node("../../../../").get_node("duel_scene")
+		var even_sketchier_colored_bar_resource_path = sketchy_as_hell_scene_node.get_node("user_interface/card_info_box/colored_bar").texture.resource_path
+		var step1 = even_sketchier_colored_bar_resource_path.split("/")
+		var from_texture_path_card_type = step1[step1.size()-1].trim_suffix(".png").split("_")[1]
+		
+		if from_texture_path_card_type == "ritual" and not CardList.card_list[card_id].attribute in ["spell", "trap"]:
+			var ritual_monster_name = CardList.card_list[card_id].card_name
+			match ritual_monster_name:
+				#ON SUMMON
+				"Hungry Burger", "Zera the Mant":
+					line2 = GameLanguage.on_ritual_summon[PlayerData.game_language] + GameLanguage.ritual_summon_friend[PlayerData.game_language]
+				"The Masked Beast":
+					line2 = GameLanguage.on_ritual_summon[PlayerData.game_language] + GameLanguage.ritual_copy_as_token[PlayerData.game_language]
+				"Fortress Whale":
+					line2 = GameLanguage.on_ritual_summon[PlayerData.game_language] + GameLanguage.ritual_destroy_highest[PlayerData.game_language]
+				"Black Luster Soldier", "Super War-Lion":
+					line2 = GameLanguage.on_ritual_summon[PlayerData.game_language] + GameLanguage.ritual_destroy_all_monsters[PlayerData.game_language]
+				"Magician of Black Chaos":
+					line2 = GameLanguage.on_ritual_summon[PlayerData.game_language] + GameLanguage.ritual_destroy_all_spelltraps[PlayerData.game_language]
+				"Elemental HERO Divine Neos":
+					line2 = GameLanguage.on_ritual_summon[PlayerData.game_language] + GameLanguage.ritual_spelltrap_power_up[PlayerData.game_language]
+				"Dokurorider", "Crab Turtle":
+					line2 = GameLanguage.on_ritual_summon[PlayerData.game_language] + GameLanguage.ritual_same_type_power_up[PlayerData.game_language]
+				"Dark Master - Zorc":
+					line2 = GameLanguage.on_ritual_summon[PlayerData.game_language] + GameLanguage.ritual_dice_power_up[PlayerData.game_language]
+				"Javelin Beetle":
+					line2 = GameLanguage.on_ritual_summon[PlayerData.game_language] + GameLanguage.ritual_self_type_power_up[PlayerData.game_language]
+				"Skull Guardian":
+					line2 = GameLanguage.on_ritual_summon[PlayerData.game_language] + GameLanguage.ritual_sword_shield[PlayerData.game_language]
+				"Garma Sword":
+					line2 = GameLanguage.on_ritual_summon[PlayerData.game_language] + GameLanguage.ritual_mill_deck[PlayerData.game_language]
+				
+				#ON DEATH
+				"Five-Headed Dragon", "Arcana Knight Joker", "Valkyrion the Magna Warrior", "Lord of the Red", "Paladin of White Dragon", "Paladin of Dark Dragon", "Knight of Armor Dragon", "Chakra", "Demise, Agent of Armageddon", "Demise, King of Armageddon", "Cyber Angel Natasha", "Cyber Angel Idaten", "Cyber Angel Benten", "Cyber Angel Izana", "Cyber Angel Dakini", "Cyber Angel Vrash":
+					line2 = GameLanguage.on_ritual_death[PlayerData.game_language] + GameLanguage.ritual_death_successor[PlayerData.game_language]
+				
+				#ON ATTACK
+				"Blue-Eyes Chaos MAX Dragon":
+					line2 = GameLanguage.on_ritual_attack[PlayerData.game_language] + GameLanguage.ritual_chaos_max[PlayerData.game_language]
+				"Gearfried the Swordmaster":
+					line2 = GameLanguage.on_ritual_attack[PlayerData.game_language] + GameLanguage.ritual_double_ATK[PlayerData.game_language]
+				
+				#ON DEFEND
+				"Relinquished":
+					line2 = GameLanguage.on_ritual_defend[PlayerData.game_language] + GameLanguage.ritual_return_damage[PlayerData.game_language]
+	
 	#Compose the final String to be returned
 	if line1 != null:
 		full_card_text = line1

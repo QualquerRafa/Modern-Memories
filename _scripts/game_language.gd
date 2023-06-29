@@ -445,6 +445,29 @@ var duel_scene = {
 	}
 }
 
+var reward_scene = {
+	"scene_title" : {
+		"en" : "Duel Results and Rewards",
+		"pt" : "Resultado do Duelo e Recompensas"
+	},
+	"you" : {
+		"en" : "YOU",
+		"pt" : "VOCÊ"
+	},
+	"win" : {
+		"en" : "WIN",
+		"pt" : "VENCEU"
+	},
+	"lose" : {
+		"en" : "LOSE",
+		"pt" : "PERDEU"
+	},
+	"duel_info" : {
+		"en" : "Duel Info",
+		"pt" : "Informação"
+	}
+}
+
 #---------------------------------------------------------------------------------------------------
 # CARD DESCRIPTIONS
 #---------------------------------------------------------------------------------------------------
@@ -751,8 +774,8 @@ var mutual_banish = {
 	"pt" : "Ele destrói o Monstro do oponente junto de si mesmo."
 }
 var injection_fairy = {
-	"en" : "At the cost of 2000 Life Points, it gains 3000 ATK points.",
-	"pt" : "Ao custo de 2000 Pontos de Vida, ele ganha 3000 pontos de ATK."
+	"en" : "At the cost of 2000 Life Points, it gains 3000 ATK points during this battle.",
+	"pt" : "Ao custo de 2000 Pontos de Vida, ele ganha 3000 pontos de ATK durante essa batalha."
 }
 var rocket_warrior = {
 	"en" : "It causes the opponent's Monster to lose 500 ATK points.",
@@ -973,12 +996,12 @@ var flip_enemy_down = {
 }
 var friends_power_up = {
 	"part1" : {
-		"en" : "It increases ",
-		"pt" : "Ele aumenta o ATK e DEF de Monstros "
+		"en" : "It increases other ",
+		"pt" : "Ele aumenta o ATK e DEF de outros Monstros "
 	},
 	"part2" : {
-		"en" : "-type Monsters ATK and DEF by ",
-		"pt" : " em "
+		"en" : "-type Monsters ATK and DEF on your side of the Field by ",
+		"pt" : " no seu lado do Campo em "
 	}
 }
 var gandora = {
@@ -1087,6 +1110,94 @@ var wicked_eraser = {
 	"en" : "It's ATK and DEF becomes 1000 times the total number of Cards on your opponent's side of the Field.",
 	"pt" : "Seu ATK e DEF se tornam 1000 vezes o número total de Cartas no lado do Campo do seu oponente."
 }
+
+
+
+
+
+
+
+#Ritual Monsters effects
+var on_ritual_summon = {
+	"en" : "When this Monster is Ritual Summoned: ",
+	"pt" : "Quando esse Monstro é Invocado por Ritual: "
+}
+var on_ritual_death = {
+	"en" : "When this Ritual Monster is Destroyed: ",
+	"pt" : "Quando esse Monstro Ritual é Destruído: "
+}
+var on_ritual_attack = {
+	"en" : "When this Ritual Monster Attacks: ",
+	"pt" : "Quando esse Monstro Ritual Ataca: "
+}
+var on_ritual_defend = {
+	"en" : "When this Ritual Monster is Attacked: ",
+	"pt" : "Quando esse Monstro Ritual é Atacado: "
+}
+
+var ritual_summon_friend = {
+	"en" : "It summons an Ally to fight.",
+	"pt" : "Ele invoca um Aliado para lutar."
+}
+var ritual_copy_as_token = {
+	"en" : "It creates a Token of the Strongest opposing Monster.",
+	"pt" : "Ele cria um Token do Monstro adversário mais Forte."
+}
+var ritual_destroy_highest = {
+	"en" : "It destroys the Strongest opposing Monster.",
+	"pt" : "Ele destrói o Monstro adversário mais Forte."
+}
+var ritual_destroy_all_monsters = {
+	"en" : "It destroys all the opposing Monsters on the Field.",
+	"pt" : "Ele destrói todos os Monstros adversários no Campo."
+}
+var ritual_destroy_all_spelltraps = {
+	"en" : "It destroys all the opposing Spells and Traps on the Field.",
+	"pt" : "Ele destrói todas as Magias e Armadilhas adversários no Campo."
+}
+var ritual_spelltrap_power_up = {
+	"en" : "It's ATK is increased by the number of Spell and Traps on your Field.",
+	"pt" : "Seu ATK é aumentado pelo número de Magias e Armadilhas no seu Campo."
+}
+var ritual_same_type_power_up = {
+	"en" : "It increases the ATK and DEF of Monsters with the same Type as it on your Field.",
+	"pt" : "Ele aumenta o ATK e DEF de Monstros com o mesmo Tipo que ele no seu Campo."
+}
+var ritual_dice_power_up = {
+	"en" : "It rolls a Dice and increases the ATK of Monsters on your Field.",
+	"pt" : "Ele rola um Dado e aumenta o ATK de Monstros no seu Campo."
+}
+var ritual_self_type_power_up = {
+	"en" : "It's ATK is increased by the number of Monster with the same Type as it on your Field.",
+	"pt" : "Seu ATK é aumentado pelo número de Monstros com o mesmo Tipo que ele no seu Campo."
+}
+var ritual_sword_shield = {
+	"en" : "It switches the ATK and DEF of all face-up Monsters on the Field.",
+	"pt" : "Ele troca o ATK e DEF de todos os Monstros com face para cima no Campo."
+}
+var ritual_mill_deck = {
+	"en" : "It discards Cards from the opponent's Deck.",
+	"pt" : "Ele descarta Cartas do Deck do oponente."
+}
+var ritual_death_successor = {
+	"en" : "It Summons a Monster to take it's place.",
+	"pt" : "Ele Invoca um Monstro para tomar seu lugar."
+}
+var ritual_chaos_max = {
+	"en" : "It doubles it's base ATK.",
+	"pt" : "Ele dobra seu ATK base."
+}
+var ritual_double_ATK = {
+	"en" : "It doubles it's current ATK.",
+	"pt" : "Ele dobra seu ATK atual."
+}
+var ritual_return_damage = {
+	"en" : "The opposing player takes the same Battle Damage as you do.",
+	"pt" : "O jogador adversário leva o mesmo Dano de Batalha que você."
+}
+
+
+
 
 
 

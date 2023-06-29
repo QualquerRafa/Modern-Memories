@@ -434,7 +434,22 @@ func summon_final_card(final_card_to_summon, field_slot_to_summon):
 	#yield(get_tree().create_timer(summon_animation_time), "timeout")
 	
 	#Check if this card will get a field bonus
-	var field_name = GAME_LOGIC.get_parent().get_node("user_interface/top_info_box/field_info/field_name").text.split(" ", true)[0].to_lower()
+	var field_name : String
+	var field_element_colors = {
+		"fire":  Color("ff4a4a"),
+		"earth": Color("0ca528"),
+		"water": Color("1c68ff"),
+		"wind":  Color("4dedff"),
+		"dark":  Color("5100ff"),
+		"light": Color("ffef00"),
+	}
+	
+	for attribute in field_element_colors.keys():
+		var color = field_element_colors[attribute]
+		if GAME_LOGIC.get_parent().get_node("duel_field/player_side_zones").self_modulate == color:
+			field_name = attribute
+			break
+	
 	get_node("../effects").field_bonus(field_name)
 	
 	#If it's facedown, do an extra animation of card back transparency toggling

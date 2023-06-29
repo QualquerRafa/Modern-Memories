@@ -7,11 +7,6 @@ func update_user_interface(card_node):
 	#'this_card' is defined by the passed ID when clicking a card on screen
 	var this_card : Dictionary = CardList.card_list[card_node.this_card_id]
 	
-	#update card descriptive text
-	$card_text.show()
-	var card_text = $card_text_gd.get_card_text(card_node.this_card_id)
-	$card_text/Container/description_line1.text = card_text
-	
 	#Update the specifics that may vary from card to card
 	match this_card.attribute:
 		"spell", "trap":
@@ -68,6 +63,11 @@ func update_user_interface(card_node):
 	$extra_icons/attribute_indicator.texture = load("res://_resources/_attributes/"+ this_card.attribute +".png")
 	$extra_icons.show()
 	$colored_bar.show()
+	
+	#update card descriptive text
+	$card_text.show()
+	var card_text = $card_text_gd.get_card_text(card_node.this_card_id)
+	$card_text/Container/description_line1.text = card_text
 	
 	#Start the timer so the information gets cleaned after a while. Pure aesthetic reasons.
 	$interface_timer.start(20.0)
