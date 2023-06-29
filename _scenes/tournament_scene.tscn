@@ -13,7 +13,7 @@
 [ext_resource path="res://_resources/character_faces/yugi0.png" type="Texture" id=11]
 [ext_resource path="res://_resources/character_faces/kaiba0.png" type="Texture" id=12]
 [ext_resource path="res://_resources/character_faces/joey0.png" type="Texture" id=13]
-[ext_resource path="res://_resources/character_faces/jaden0.png" type="Texture" id=14]
+[ext_resource path="res://_resources/character_faces/pegasus0.png" type="Texture" id=14]
 [ext_resource path="res://_resources/character_faces/shadi0.png" type="Texture" id=15]
 [ext_resource path="res://_resources/tournament/bg_stadium_blur.png" type="Texture" id=16]
 
@@ -950,97 +950,97 @@ position = Vector2( -448, -319 )
 [node name="face1" type="Sprite" parent="tournament_brackets/duelists_faces/green"]
 position = Vector2( 190.5, 1168 )
 rotation = 1.5708
-scale = Vector2( 0.683333, 0.675 )
+scale = Vector2( 0.542944, 0.534954 )
 texture = ExtResource( 13 )
 
 [node name="face2" type="Sprite" parent="tournament_brackets/duelists_faces/green"]
 position = Vector2( 190.5, 1055 )
 rotation = 1.5708
-scale = Vector2( 0.683333, 0.675 )
+scale = Vector2( 0.543, 0.535 )
 texture = ExtResource( 13 )
 
 [node name="face3" type="Sprite" parent="tournament_brackets/duelists_faces/green"]
 position = Vector2( 190.5, 942 )
 rotation = 1.5708
-scale = Vector2( 0.683333, 0.675 )
+scale = Vector2( 0.543, 0.535 )
 texture = ExtResource( 13 )
 
 [node name="face4" type="Sprite" parent="tournament_brackets/duelists_faces/green"]
 position = Vector2( 190.5, 829 )
 rotation = 1.5708
-scale = Vector2( 0.683333, 0.675 )
+scale = Vector2( 0.543, 0.535 )
 texture = ExtResource( 13 )
 
 [node name="face5" type="Sprite" parent="tournament_brackets/duelists_faces/green"]
 position = Vector2( 190.5, 716 )
 rotation = 1.5708
-scale = Vector2( 0.683333, 0.675 )
+scale = Vector2( 0.543, 0.535 )
 texture = ExtResource( 13 )
 
 [node name="face6" type="Sprite" parent="tournament_brackets/duelists_faces/green"]
 position = Vector2( 190.5, 603 )
 rotation = 1.57079
-scale = Vector2( 0.683333, 0.675 )
+scale = Vector2( 0.543, 0.535 )
 texture = ExtResource( 13 )
 
 [node name="face7" type="Sprite" parent="tournament_brackets/duelists_faces/green"]
 position = Vector2( 190.5, 490 )
 rotation = 1.5708
-scale = Vector2( 0.683333, 0.675 )
+scale = Vector2( 0.543, 0.535 )
 texture = ExtResource( 13 )
 
 [node name="face8" type="Sprite" parent="tournament_brackets/duelists_faces/green"]
 position = Vector2( 190.5, 377 )
 rotation = 1.5708
-scale = Vector2( 0.683333, 0.675 )
+scale = Vector2( 0.543, 0.535 )
 texture = ExtResource( 13 )
 
 [node name="face9" type="Sprite" parent="tournament_brackets/duelists_faces/green"]
 position = Vector2( 190.5, 264 )
 rotation = 1.5708
-scale = Vector2( 0.683333, 0.675 )
+scale = Vector2( 0.543, 0.535 )
 texture = ExtResource( 13 )
 
 [node name="face10" type="Sprite" parent="tournament_brackets/duelists_faces/green"]
 position = Vector2( 190.5, 151 )
 rotation = 1.5708
-scale = Vector2( 0.683333, 0.675 )
+scale = Vector2( 0.535, 0.535 )
 texture = ExtResource( 13 )
 
 [node name="face11" type="Sprite" parent="tournament_brackets/duelists_faces/green"]
 position = Vector2( 190.5, 38 )
 rotation = 1.5708
-scale = Vector2( 0.683333, 0.675 )
+scale = Vector2( 0.543, 0.535 )
 texture = ExtResource( 13 )
 
 [node name="face12" type="Sprite" parent="tournament_brackets/duelists_faces/green"]
 position = Vector2( 190.5, -75 )
 rotation = 1.57079
-scale = Vector2( 0.683333, 0.675 )
+scale = Vector2( 0.543, 0.535 )
 texture = ExtResource( 13 )
 
 [node name="face13" type="Sprite" parent="tournament_brackets/duelists_faces/green"]
 position = Vector2( 190.5, -188 )
 rotation = 1.5708
-scale = Vector2( 0.683333, 0.675 )
+scale = Vector2( 0.543, 0.535 )
 texture = ExtResource( 13 )
 
 [node name="face14" type="Sprite" parent="tournament_brackets/duelists_faces/green"]
 position = Vector2( 190.5, -301 )
 rotation = 1.5708
-scale = Vector2( 0.683333, 0.675 )
+scale = Vector2( 0.543, 0.535 )
 texture = ExtResource( 13 )
 
 [node name="face15" type="Sprite" parent="tournament_brackets/duelists_faces/green"]
 position = Vector2( 190.5, -414 )
 rotation = 1.5708
-scale = Vector2( 0.683333, 0.675 )
+scale = Vector2( 0.543, 0.535 )
 texture = ExtResource( 13 )
 
 [node name="face16" type="Sprite" parent="tournament_brackets/duelists_faces/green"]
 position = Vector2( 190.5, -527 )
 rotation = 1.57079
-scale = Vector2( 0.683333, 0.675 )
+scale = Vector2( 0.543, 0.535 )
 texture = ExtResource( 13 )
 
 [node name="blue" type="Node2D" parent="tournament_brackets/duelists_faces"]
@@ -1048,49 +1048,49 @@ texture = ExtResource( 13 )
 [node name="face1" type="Sprite" parent="tournament_brackets/duelists_faces/blue"]
 position = Vector2( 329.5, 1055 )
 rotation = 1.57079
-scale = Vector2( 0.683333, 0.675 )
+scale = Vector2( 0.543, 0.535 )
 texture = ExtResource( 12 )
 
 [node name="face2" type="Sprite" parent="tournament_brackets/duelists_faces/blue"]
 position = Vector2( 329.5, 942 )
 rotation = 1.57079
-scale = Vector2( 0.683333, 0.675 )
+scale = Vector2( 0.543, 0.535 )
 texture = ExtResource( 12 )
 
 [node name="face3" type="Sprite" parent="tournament_brackets/duelists_faces/blue"]
 position = Vector2( 329.5, 603 )
 rotation = 1.57079
-scale = Vector2( 0.683333, 0.675 )
+scale = Vector2( 0.543, 0.535 )
 texture = ExtResource( 12 )
 
 [node name="face4" type="Sprite" parent="tournament_brackets/duelists_faces/blue"]
 position = Vector2( 329.5, 490 )
 rotation = 1.57079
-scale = Vector2( 0.683333, 0.675 )
+scale = Vector2( 0.543, 0.535 )
 texture = ExtResource( 12 )
 
 [node name="face5" type="Sprite" parent="tournament_brackets/duelists_faces/blue"]
 position = Vector2( 329.5, 151 )
 rotation = 1.57079
-scale = Vector2( 0.683333, 0.675 )
+scale = Vector2( 0.543, 0.535 )
 texture = ExtResource( 12 )
 
 [node name="face6" type="Sprite" parent="tournament_brackets/duelists_faces/blue"]
 position = Vector2( 329.5, 38 )
 rotation = 1.57079
-scale = Vector2( 0.683333, 0.675 )
+scale = Vector2( 0.543, 0.535 )
 texture = ExtResource( 12 )
 
 [node name="face7" type="Sprite" parent="tournament_brackets/duelists_faces/blue"]
 position = Vector2( 329.5, -301 )
 rotation = 1.57079
-scale = Vector2( 0.683333, 0.675 )
+scale = Vector2( 0.543, 0.535 )
 texture = ExtResource( 12 )
 
 [node name="face8" type="Sprite" parent="tournament_brackets/duelists_faces/blue"]
 position = Vector2( 329.5, -414 )
 rotation = 1.57079
-scale = Vector2( 0.683333, 0.675 )
+scale = Vector2( 0.543, 0.535 )
 texture = ExtResource( 12 )
 
 [node name="purple" type="Node2D" parent="tournament_brackets/duelists_faces"]
@@ -1098,25 +1098,25 @@ texture = ExtResource( 12 )
 [node name="face1" type="Sprite" parent="tournament_brackets/duelists_faces/purple"]
 position = Vector2( 468.5, 942 )
 rotation = 1.57079
-scale = Vector2( 0.683333, 0.675 )
+scale = Vector2( 0.543, 0.535 )
 texture = ExtResource( 11 )
 
 [node name="face2" type="Sprite" parent="tournament_brackets/duelists_faces/purple"]
 position = Vector2( 468.5, 603 )
 rotation = 1.57079
-scale = Vector2( 0.683333, 0.675 )
+scale = Vector2( 0.543, 0.535 )
 texture = ExtResource( 11 )
 
 [node name="face3" type="Sprite" parent="tournament_brackets/duelists_faces/purple"]
 position = Vector2( 468.5, 38 )
 rotation = 1.57079
-scale = Vector2( 0.683333, 0.675 )
+scale = Vector2( 0.543, 0.535 )
 texture = ExtResource( 11 )
 
 [node name="face4" type="Sprite" parent="tournament_brackets/duelists_faces/purple"]
 position = Vector2( 468.5, -301 )
 rotation = 1.57079
-scale = Vector2( 0.683333, 0.675 )
+scale = Vector2( 0.543, 0.535 )
 texture = ExtResource( 11 )
 
 [node name="red" type="Node2D" parent="tournament_brackets/duelists_faces"]
@@ -1124,13 +1124,13 @@ texture = ExtResource( 11 )
 [node name="face1" type="Sprite" parent="tournament_brackets/duelists_faces/red"]
 position = Vector2( 607.5, 773 )
 rotation = 1.57079
-scale = Vector2( 0.683333, 0.675 )
+scale = Vector2( 0.543, 0.535 )
 texture = ExtResource( 14 )
 
 [node name="face2" type="Sprite" parent="tournament_brackets/duelists_faces/red"]
 position = Vector2( 607.5, -131 )
 rotation = 1.57079
-scale = Vector2( 0.683333, 0.675 )
+scale = Vector2( 0.543, 0.535 )
 texture = ExtResource( 14 )
 
 [node name="gold" type="Node2D" parent="tournament_brackets/duelists_faces"]
@@ -1138,7 +1138,7 @@ texture = ExtResource( 14 )
 [node name="face1" type="Sprite" parent="tournament_brackets/duelists_faces/gold"]
 position = Vector2( 746.5, 321 )
 rotation = 1.57079
-scale = Vector2( 0.683333, 0.675 )
+scale = Vector2( 0.543, 0.535 )
 texture = ExtResource( 15 )
 
 [node name="dialogue_scene" parent="." instance=ExtResource( 8 )]

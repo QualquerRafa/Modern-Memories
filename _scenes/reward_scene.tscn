@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://_resources/scene_duel/top_info_box.png" type="Texture" id=1]
 [ext_resource path="res://_scenes/card_info_box.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://_resources/reward_scene/duel_cards_used.png" type="Texture" id=8]
 [ext_resource path="res://_scripts/duel_rewards.gd" type="Script" id=9]
 [ext_resource path="res://_scenes/scene_transitioner.tscn" type="PackedScene" id=10]
+[ext_resource path="res://_scripts/save_load_logic.gd" type="Script" id=11]
 
 [sub_resource type="DynamicFont" id=7]
 size = 400
@@ -68,8 +69,9 @@ scale = Vector2( 10, 5.61719 )
 texture = ExtResource( 4 )
 
 [node name="YOU" type="Label" parent="BIG_LETTERS"]
+margin_top = 36.0
 margin_right = 1278.0
-margin_bottom = 401.0
+margin_bottom = 437.0
 rect_scale = Vector2( 1, 1.05 )
 custom_colors/font_color = Color( 1, 0, 0, 1 )
 custom_colors/font_outline_modulate = Color( 1, 0.843137, 0.12549, 1 )
@@ -80,9 +82,9 @@ uppercase = true
 
 [node name="win_lose" type="Label" parent="BIG_LETTERS"]
 margin_left = 1.0
-margin_top = 298.0
+margin_top = 334.0
 margin_right = 1279.0
-margin_bottom = 699.0
+margin_bottom = 735.0
 rect_scale = Vector2( 1, 1.05 )
 custom_colors/font_color = Color( 1, 0, 0, 1 )
 custom_colors/font_outline_modulate = Color( 1, 0.843137, 0.12549, 1 )
@@ -334,5 +336,8 @@ flat = true
 visible = false
 
 [node name="final_timer" type="Timer" parent="."]
+
+[node name="save_load_logic" type="Node" parent="."]
+script = ExtResource( 11 )
 
 [connection signal="button_up" from="screen_button" to="." method="_on_screen_button_button_up"]
