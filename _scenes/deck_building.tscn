@@ -841,6 +841,7 @@ flat = true
 [node name="UI_tween" type="Tween" parent="user_interface"]
 
 [node name="DebugAddAll" type="Button" parent="."]
+visible = false
 margin_left = 62.0
 margin_top = 5.0
 margin_right = 193.0

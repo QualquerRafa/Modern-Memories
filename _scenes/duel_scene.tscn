@@ -2027,6 +2027,7 @@ texture = ExtResource( 18 )
 [node name="tween" type="Tween" parent="back_to_hand"]
 
 [node name="debug_menu" type="Control" parent="."]
+visible = false
 margin_top = 56.0
 margin_right = 40.0
 margin_bottom = 96.0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://_resources/menu_screen/big_menu_button.png" type="Texture" id=1]
 [ext_resource path="res://_resources/card_shop/full_bg.png" type="Texture" id=2]
@@ -16,6 +16,12 @@
 texture = ExtResource( 9 )
 region_rect = Rect2( 6, 0, 564, 667 )
 axis_stretch_horizontal = 1
+
+[sub_resource type="DynamicFont" id=11]
+size = 42
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=1]
 size = 68
@@ -138,6 +144,113 @@ modulate = Color( 0.392157, 0.392157, 0.392157, 0.494118 )
 position = Vector2( 640, 360 )
 scale = Vector2( 0.6, 0.6 )
 texture = ExtResource( 4 )
+
+[node name="website_button" type="Button" parent="."]
+margin_left = 1047.0
+margin_top = 640.0
+margin_right = 1274.0
+margin_bottom = 716.0
+rect_pivot_offset = Vector2( 113, 38 )
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="compound_little_button" type="Node2D" parent="website_button"]
+position = Vector2( 19, 19 )
+
+[node name="compound_shadow" type="Node2D" parent="website_button/compound_little_button"]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 5, 5 )
+
+[node name="top_left" type="Sprite" parent="website_button/compound_little_button/compound_shadow"]
+position = Vector2( 61, 0 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 155, 32 )
+
+[node name="top_right" type="Sprite" parent="website_button/compound_little_button/compound_shadow"]
+position = Vector2( 144, 0 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 411, 0, 115, 32 )
+
+[node name="bottom_right" type="Sprite" parent="website_button/compound_little_button/compound_shadow"]
+position = Vector2( 125, 32 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 373, 76, 153, 32 )
+
+[node name="bottom_left" type="Sprite" parent="website_button/compound_little_button/compound_shadow"]
+position = Vector2( 37, 32 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 76, 107, 32 )
+
+[node name="top_left" type="Sprite" parent="website_button/compound_little_button"]
+position = Vector2( 35, 0 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 103, 32 )
+
+[node name="top_right" type="Sprite" parent="website_button/compound_little_button"]
+position = Vector2( 144, 0 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 411, 0, 115, 32 )
+
+[node name="bottom_right" type="Sprite" parent="website_button/compound_little_button"]
+position = Vector2( 146, 32 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 415, 76, 111, 32 )
+
+[node name="bottom_left" type="Sprite" parent="website_button/compound_little_button"]
+position = Vector2( 37, 32 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 76, 107, 32 )
+
+[node name="white_over" type="Node2D" parent="website_button"]
+visible = false
+modulate = Color( 100, 100, 100, 0.00784314 )
+position = Vector2( 19, 19 )
+
+[node name="top_left" type="Sprite" parent="website_button/white_over"]
+position = Vector2( 35, 0 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 103, 32 )
+
+[node name="top_right" type="Sprite" parent="website_button/white_over"]
+position = Vector2( 144, 0 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 411, 0, 115, 32 )
+
+[node name="bottom_right" type="Sprite" parent="website_button/white_over"]
+position = Vector2( 146, 32 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 415, 76, 111, 32 )
+
+[node name="bottom_left" type="Sprite" parent="website_button/white_over"]
+position = Vector2( 37, 32 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 76, 107, 32 )
+
+[node name="label" type="Label" parent="website_button"]
+margin_left = 19.0
+margin_top = 2.0
+margin_right = 201.0
+margin_bottom = 67.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+custom_fonts/font = SubResource( 11 )
+text = "Website"
+align = 1
+valign = 1
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 visible = false
@@ -422,6 +535,7 @@ centered = false
 margin_top = 329.0
 margin_right = 1280.0
 margin_bottom = 695.0
+mouse_filter = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer2"]
 margin_left = 371.0
@@ -677,6 +791,9 @@ text = "Confirm"
 align = 1
 valign = 1
 
+[connection signal="button_up" from="website_button" to="." method="_on_website_button_button_up"]
+[connection signal="mouse_entered" from="website_button" to="." method="_on_website_button_mouse_entered"]
+[connection signal="mouse_exited" from="website_button" to="." method="_on_website_button_mouse_exited"]
 [connection signal="button_up" from="CenterContainer/VBoxContainer/btn_campaign" to="." method="_on_btn_campaign_button_up"]
 [connection signal="mouse_entered" from="CenterContainer/VBoxContainer/btn_campaign" to="." method="_on_btn_campaign_mouse_entered"]
 [connection signal="mouse_exited" from="CenterContainer/VBoxContainer/btn_campaign" to="." method="_on_btn_campaign_mouse_exited"]
