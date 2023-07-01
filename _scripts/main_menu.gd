@@ -33,6 +33,7 @@ func _ready():
 		$small_logo.hide()
 		$CenterContainer.show()
 		$big_logo.show()
+		$website_button.hide()
 
 func auto_load_options_file():
 	#Check if a saved file exists, if not, scape function
@@ -168,6 +169,7 @@ func separation_of_boxes():
 			$button_tweener.interpolate_property(the_node, "rect_position:x", the_node.rect_position.x, the_node.rect_position.x - offset, timer, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 			$button_tweener.start()
 	$animation_tweener.interpolate_property($small_logo, "modulate", Color(1,1,1,1), Color(1,1,1, 0), timer, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+	$animation_tweener.interpolate_property($website_button, "modulate", Color(1,1,1,1), Color(1,1,1, 0), timer, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 	$animation_tweener.start()
 	$timer.start(timer); yield($timer, "timeout")
 	$CenterContainer2.hide()
@@ -193,6 +195,10 @@ func separation_of_boxes():
 
 #---------------------------------------------------------------------------------------------------
 #CLICKING THE BUTTONS
+func _on_website_button_button_up():
+	animate_button($website_button)
+	var _open_website = OS.shell_open("https://permitted-memories.github.io/")
+
 func _on_btn_new_game_button_up():
 	animate_button($CenterContainer2/VBoxContainer/btn_new_game)
 	
@@ -276,6 +282,9 @@ func _on_btn_load_game_mouse_entered():
 		hovering_over_button($CenterContainer2/VBoxContainer/btn_load_game)
 func _on_btn_options_mouse_entered():
 	hovering_over_button($CenterContainer2/VBoxContainer/btn_options)
+func _on_website_button_mouse_entered():
+	hovering_over_button($website_button)
+
 
 func _on_btn_campaign_mouse_exited():
 	unhover_button($CenterContainer/VBoxContainer/btn_campaign)
@@ -297,11 +306,16 @@ func _on_btn_load_game_mouse_exited():
 	unhover_button($CenterContainer2/VBoxContainer/btn_load_game)
 func _on_btn_options_mouse_exited():
 	unhover_button($CenterContainer2/VBoxContainer/btn_options)
+func _on_website_button_mouse_exited():
+	unhover_button($website_button)
+
 
 func hovering_over_button(button : Node):
 	if button.modulate == Color(1,1,1,1):
 		get_node(String(button.get_path()) + "/white_over").show()
 func unhover_button(button : Node):
 	get_node(String(button.get_path()) + "/white_over").hide()
+
+
 
 

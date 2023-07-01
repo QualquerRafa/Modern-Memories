@@ -65,6 +65,8 @@ func update_user_interface(card_node):
 	$colored_bar.show()
 	
 	#update card descriptive text
+	text_tween.stop_all()
+	$card_text/Container/description_line1.rect_position.y = 5
 	$card_text.show()
 	var card_text = $card_text_gd.get_card_text(card_node.this_card_id)
 	$card_text/Container/description_line1.text = card_text

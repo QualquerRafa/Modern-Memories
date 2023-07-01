@@ -1475,13 +1475,14 @@ func monster_on_summon(card_node : Node):
 			return "Dreadroot debuffed"
 		
 		"wicked_avatar": #gets the highest attack on the field + 100
-			var target_side_of_field = GAME_LOGIC.get_parent().get_node("duel_field/" + caller_and_target[1] + "_side_zones")
 			var highest_atk = 0
 			
-			for i in range(5):
-				var card_being_checked = target_side_of_field.get_node("monster_" + String(i))
-				if card_being_checked.is_visible() and card_being_checked.this_card_flags.is_facedown == false and int(card_being_checked.get_node("card_design/monster_features/atk_def/atk").text) > highest_atk:
-					highest_atk = int(card_being_checked.get_node("card_design/monster_features/atk_def/atk").text)
+			for both_sides in ["player_side_zones", "enemy_side_zones"]:
+				var target_side_of_field = GAME_LOGIC.get_parent().get_node("duel_field/" + both_sides)
+				for i in range(5):
+					var card_being_checked = target_side_of_field.get_node("monster_" + String(i))
+					if card_being_checked.is_visible() and card_being_checked.this_card_flags.is_facedown == false and int(card_being_checked.get_node("card_design/monster_features/atk_def/atk").text) > highest_atk:
+						highest_atk = int(card_being_checked.get_node("card_design/monster_features/atk_def/atk").text)
 			
 			card_node.this_card_flags.atk_up += highest_atk + 100
 			card_node.this_card_flags.def_up += highest_atk + 100

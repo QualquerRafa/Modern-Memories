@@ -118,11 +118,11 @@ var dialogs = {
 		},
 		"tournament_final_tier" : {
 			"en" : "Now, for the Grand Finale!\nMay the best duelist win!",
-			"pt" : "Agora, para a Grande Final!\nQue vençaa o melhor duelista!"
+			"pt" : "Agora, para a Grande Final!\nQue vença o melhor duelista!"
 		},
 		"tournament_champion" : {
-			"en" : "This is it, ladies and gentleman! We have the new Duel Monsters Champion here on the Forbidden Memories Tournament!\nBesides everything you have already won, here is your prize of 50 starchips to use in the Card Shop!",
-			"pt" : "Isso é tudo, pessoal! Temos nosso novo Campeão de Monstros de Duelo aqui no Torneio de Forbidden Memories!\nE além de tudo o que você já ganhou, aqui está seu premio de 50 estrelas para usar na Lojinha!"
+			"en" : "This is it, ladies and gentleman! We have the new Duel Monsters Champion here on the Forbidden Memories Tournament!\nBesides everything you have already won, here is your prize of 25 starchips to use in the Card Shop!",
+			"pt" : "Isso é tudo, pessoal! Temos nosso novo Campeão de Monstros de Duelo aqui no Torneio de Forbidden Memories!\nE além de tudo o que você já ganhou, aqui está seu premio de 25 estrelas para usar na Loja de Carta!"
 		},
 		"tournament_hijack" : {
 			"en" : "Stop right there, New Champion!",

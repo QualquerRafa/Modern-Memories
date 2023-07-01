@@ -1,5 +1,8 @@
 extends Node
 
+#ON UPDATE PLAYER REWARDS <3
+var update_reward_ids = ["00000"]
+
 #Player Variables that are stored within the save
 var player_name : String
 var player_deck : Array = [] #populated by ID:String

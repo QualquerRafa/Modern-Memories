@@ -169,7 +169,7 @@ func attribute_fusion(card_1 : String, card_2 : String):
 	if keyword_found != null:
 		#Special check so Mask Change can only work with Elemental HEROs
 		if keyword_found == "Mask Change":
-			print(CardList.card_list[attribute_matcher].card_name)
+			#print(CardList.card_list[attribute_matcher].card_name)
 			if CardList.card_list[attribute_matcher].card_name.find("HERO") == -1:
 				return [card_2, false] #return a failed fusion
 		

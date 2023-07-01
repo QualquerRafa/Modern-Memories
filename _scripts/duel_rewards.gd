@@ -101,8 +101,8 @@ func get_duel_rank():
 	else: final_duel_score += 4
 	
 	#For effect count, the more the better
-	if duel_effect_count <= 5: final_duel_score += 1
-	elif duel_effect_count <= 10: final_duel_score += 2
+	if duel_effect_count <= 4: final_duel_score += 1
+	elif duel_effect_count <= 8: final_duel_score += 2
 	else: final_duel_score += 3
 	
 	#For spelltrap count, the more the better

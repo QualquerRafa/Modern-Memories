@@ -293,7 +293,7 @@ var main_menu = {
 	},
 	"card_shop" : {
 		"en" : "Card Shop",
-		"pt" : "Lojinha"
+		"pt" : "Loja de cartas"
 	},
 	"save_game" : {
 		"en" : "Save Game",
@@ -1099,8 +1099,8 @@ var super_robo = {
 	"pt" : "Ele aumenta seu ATK e o ATK de todos os Super Robos do gênero oposto no seu lado do Campo em 1000 pontos."
 }
 var wicked_avatar = {
-	"en" : "It's ATK and DEF becomes 100 points higher than the Strongest Monster on your opponent's side of the Field.",
-	"pt" : "Seu ATK e DEF se tornam 100 pontos maior que o Monstro mais Forte do lado do Campo do seu oponente."
+	"en" : "It's ATK and DEF becomes 100 points higher than the Strongest Monster on the Field.",
+	"pt" : "Seu ATK e DEF se tornam 100 pontos maior que o Monstro mais Forte no Campo."
 }
 var wicked_dreadroot = {
 	"en" : "It halves the ATK and DEF of all other Monsters on both sides of the Field.",
@@ -1110,9 +1110,6 @@ var wicked_eraser = {
 	"en" : "It's ATK and DEF becomes 1000 times the total number of Cards on your opponent's side of the Field.",
 	"pt" : "Seu ATK e DEF se tornam 1000 vezes o número total de Cartas no lado do Campo do seu oponente."
 }
-
-
-
 
 
 

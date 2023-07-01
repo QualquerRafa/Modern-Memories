@@ -153,14 +153,6 @@ func get_field_slot_for_new_card(passed_card_to_summon):
 					show_player_field_slots("monster_field_slots")
 					return
 		
-		#If it's equip and player has at least one monster on the field, show top row
-		#if CardList.card_list[card_to_summon.this_card_id].type == "equip":
-			#for i in range(5):
-				#if get_node("../../duel_field/player_side_zones/monster_" + String(i)).is_visible():
-					#show_player_field_slots("monster_field_slots")
-					#show_player_field_slots("spelltrap_field_slots")
-					#return
-		
 		#If there wasn't any reason to show top row, just show bottom row then
 		show_player_field_slots("spelltrap_field_slots")
 		
@@ -228,23 +220,19 @@ func player_try_to_summon(field_slot_to_summon : int):
 	
 	var card_on_slot : Node
 	var kind_of_card : String = "monster"
-	if CardList.card_list[card_to_summon.this_card_id].attribute in ["spell", "trap"]: kind_of_card = "spelltrap"
+	if CardList.card_list[card_to_summon.this_card_id].attribute in ["spell", "trap"] and fusion_order.size() <= 1: kind_of_card = "spelltrap"
 	
 	#If there is a card on the selected 'field_slot_to_summon', add it to the beginning of 'fusion_order' list
-	#if kind_of_card == "spelltrap" and CardList.card_list[card_to_summon.this_card_id].type == "equip":
-		#If it's an equip, FORCE IT to be placed on the top row if it's on the same column as a monster
-		#kind_of_card = "monster"
 	if get_node("../../duel_field/player_side_zones/" + kind_of_card + "_" + String(field_slot_to_summon)).is_visible():
 		card_on_slot = get_node("../../duel_field/player_side_zones/" + kind_of_card + "_" + String(field_slot_to_summon))
-		if !(fusion_order.has(card_on_slot)):
-			fusion_order.insert(0, card_on_slot)
+		fusion_order.push_front(card_on_slot)
 	
 	GAME_LOGIC.GAME_PHASE = "checking_for_fusions"
 	get_node("../../duel_field/player_side_zones/monster_field_slots").hide()
 	get_node("../../duel_field/player_side_zones/spelltrap_field_slots").hide()
 	
 	var final_card_to_summon #: Node
-	#Check if any fusions have to be done
+	#Check if any fusions have to be done	
 	match fusion_order.size():
 		0: #Trying to summon a single card
 			final_card_to_summon = card_to_summon
@@ -277,12 +265,12 @@ func player_try_to_summon(field_slot_to_summon : int):
 				final_card_to_summon = call_fusion_logic(field_slot_to_summon)
 		
 		_: #Confirmed Fusion Summon
+			final_card_to_summon = call_fusion_logic(field_slot_to_summon)
+			
 			#Remove the cards from player's hand
 			for card_node in fusion_order:
 				if player_hand.has(card_node.this_card_id):
 					player_hand.remove(player_hand.find(card_node.this_card_id))
-			
-			final_card_to_summon = call_fusion_logic(field_slot_to_summon)
 
 func call_fusion_logic(passing_field_slot_to_summon):
 	#SETUP the dummy node that will be keeping the fusion results information
@@ -329,10 +317,9 @@ func call_fusion_logic(passing_field_slot_to_summon):
 		TYPE_ARRAY: #equip [monster_card_id, [status, value_change]]
 			#The flags for the result of an Equip are exactly the same as the non-spell/trap card used
 			var monster_is : Node = card_to_fuse_1
-			fusion_result.this_card_flags = card_to_fuse_1.this_card_flags
 			if CardList.card_list[card_to_fuse_1.this_card_id].attribute in ["spell", "trap"]:
-				fusion_result.this_card_flags = card_to_fuse_2.this_card_flags
 				monster_is = card_to_fuse_2
+			fusion_result.this_card_flags = monster_is.this_card_flags
 			
 			match fusion_information_array[1][0]:
 				"atk_up", "def_up":
@@ -354,8 +341,13 @@ func call_fusion_logic(passing_field_slot_to_summon):
 				fusion_result.this_card_flags.fusion_type = "fusion"
 				fusion_result.this_card_flags.is_defense_position = false #Force fusion results to be in ATK
 			
-			#Inrement the counter for Duel Rewards
+			#Increment the counter for Duel Rewards
 			GAME_LOGIC.get_node("player_logic").fusion_count += 1
+			
+			#Safeguard for remaining Equip results
+			if fusion_result.this_card_id != $fusion_animation/fusion_order_0.this_card_id:
+				fusion_result.this_card_flags.atk_up = 0
+				fusion_result.this_card_flags.def_up = 0
 			
 		_: 
 			#Safeguard reset fusion_type after any failed fusion
@@ -386,7 +378,7 @@ func call_fusion_logic(passing_field_slot_to_summon):
 	#Remove from fusion order the used cards
 	fusion_order.remove(0) #card_to_fuse_1 is discarted
 	fusion_order.remove(0) #card_to_fuse_2 became the first, it is also discarted
-	fusion_order.insert(0, fusion_result) #the result of the fusion is now the first in the order
+	fusion_order.push_front(fusion_result) #the result of the fusion is now the first in the order
 	
 	#Recursive check until there aren't any more Fusions to do
 	if fusion_order.size() <= 1:

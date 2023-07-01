@@ -76,6 +76,10 @@ func get_card_price(card_id):
 			
 			final_price = ceil((monster_level + monster_atk + monster_def) * effect_multiplier)
 	
+	#Pequenos mimos pra quem baixar cada versão, eu dou uma cartinha gratis
+	if card_id in PlayerData.update_reward_ids:
+		final_price = 0
+	
 	#Calculate the actual final price
 	final_price = base_price * final_price
 	return final_price

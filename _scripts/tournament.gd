@@ -23,7 +23,7 @@ func _ready():
 func get_tournament_competitors(color_tier : String):
 	var npc_decks_gd = preload("res://_scripts/npc_decks.gd").new()
 	var pool_of_npcs : Array = npc_decks_gd.list_of_decks.keys()
-	var prohibited_duelists = ["darkness"]
+	var prohibited_duelists = ["tenma", "nitemare"]
 	
 	#Remove some unwanted duelists from the tournament
 	for prohibited in prohibited_duelists:
@@ -273,8 +273,8 @@ func tournament_flow():
 		tournament_progression.append("loser_rematch")
 		
 		#Give the final reward of the Tournament
-		PlayerData.player_starchips += 50
-		#print("Added 50 starchips, total is ", PlayerData.player_starchips)
+		PlayerData.player_starchips += 25
+		#print("Added 25 starchips, total is ", PlayerData.player_starchips)
 		
 	elif tournament_progression[-1] == "loser_rematch":
 		toggle_tournament_brackets_visibility()
