@@ -10,16 +10,19 @@ config_version=4
 
 [application]
 
-config/name="Modern Memories"
+config/name="Permitted Memories"
+config/description="Yu-Gi-Oh Permitted Memories IS NOT a Remake or Remaster! It's Rafa's interpretation of what a Modern version of Forbidden Memories would be like."
 run/main_scene="res://_scenes/main_menu.tscn"
+boot_splash/show_image=false
 config/icon="res://icon.png"
+config/windows_native_icon="res://icon.ico"
 
 [autoload]
 
 CardList="*res://_scripts/card_list.gd"
 PlayerData="*res://_scripts/player_data.gd"
-CardText="*res://_scripts/card_text.gd"
 SoundControl="*res://_scenes/sound_control.tscn"
+GameLanguage="*res://_scripts/game_language.gd"
 
 [debug]
 
