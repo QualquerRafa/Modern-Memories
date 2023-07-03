@@ -32,6 +32,15 @@ func call_effect(card_node : Node, type_of_activation : String): #The 'card_node
 	do_activation_animation(card_node, force_animation_on_special_cases)
 	yield(self, "effect_animation_finished")
 	
+	#Increment the correct counters for Duel Reward
+	if CardList.card_list[card_node.this_card_id].effect.size() > 0:
+		match card_attribute:
+			"spell", "trap":
+				GAME_LOGIC.get_node("player_logic").spelltrap_count += 1
+			_:
+				if type_of_activation == CardList.card_list[card_node.this_card_id].effect[0]:
+					GAME_LOGIC.get_node("player_logic").effect_count += 1
+	
 	#Handle it accordingly
 	match card_attribute:
 		"spell":
@@ -87,14 +96,6 @@ func call_effect(card_node : Node, type_of_activation : String): #The 'card_node
 		else:
 			pass
 			#print(type_of_activation, " parameter was ignored for ritual monster")
-	
-	#Increment the correct counters for Duel Reward
-	match card_attribute:
-		"spell", "trap":
-			GAME_LOGIC.get_node("player_logic").spelltrap_count += 1
-		_:
-			if type_of_activation == CardList.card_list[card_node.this_card_id].effect[0]:
-				GAME_LOGIC.get_node("player_logic").effect_count += 1
 	
 	#After a card effect was activated and it's been removed from the field, clear the bottom bar from it's information. Generally happens for Spell and Traps only, since monsters remain.
 	if card_attribute in ["spell", "trap"]:
@@ -731,6 +732,9 @@ func activate_trap(card_node : Node):
 	var type_of_effect = CardList.card_list[card_node.this_card_id].effect[0]
 	var current_attacker = GAME_LOGIC.card_ready_to_attack
 	var current_defender = GAME_LOGIC.card_ready_to_defend
+	
+	if current_attacker == null:
+		return "Fail"
 	
 	match type_of_effect:
 		"negate_attacker": #just negate the attack

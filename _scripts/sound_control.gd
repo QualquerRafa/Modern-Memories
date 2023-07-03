@@ -7,6 +7,10 @@ func play_sound(sound_name : String, sfx_or_music = "sfx"):
 	$music_player1.volume_db = 0
 	$music_player2.volume_db = 0
 	
+	#Sanitize passed sound name
+	if sound_name.find("@") != -1 and sound_name.find("reward") != -1:
+		sound_name = "lohweo_reward_scene"
+	
 	#Get the correct sound file from the name passed
 	var sound_file
 	match sfx_or_music:
@@ -73,13 +77,21 @@ func adjust_sound_volume(volume : float):
 	var converted_volume : float = linear2db(volume)
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), converted_volume)
 
-
 func get_first_available_audio_player(sfx_or_music : String):
 	var available_audio_player : Node = null
 	
-	for i in range(10):
+	var total_range = 10
+	if sfx_or_music == "music":
+		total_range = 3
+	
+	for i in range(total_range):
+		if get_node(sfx_or_music + "_player" + String(i+1)) == null:
+			break
+		
 		if get_node(sfx_or_music + "_player" + String(i+1)).is_playing():
-			continue
+			#continue
+			if sfx_or_music == "music":
+				bgm_fadeout()
 		else:
 			available_audio_player = get_node(sfx_or_music + "_player" + String(i+1))
 			break

@@ -102,6 +102,8 @@ var card_ready_to_attack : Node #passed by a card node entering in 'selecting_co
 var card_ready_to_defend : Node #passed by a card node when player is in the phase 'selecting_combat_target'
 
 func do_battle(attacking_card : Node, defending_card : Node):
+	GAME_PHASE = "damage_phase"
+	
 	if attacking_card.this_card_flags.has_battled == true:
 		emit_signal("battle_finished")
 		return #failsafe to prevent cards from battling more than once
@@ -478,6 +480,7 @@ func do_battle(attacking_card : Node, defending_card : Node):
 	card_ready_to_defend = null
 	
 	#Emit signal at the end of battle
+	check_for_game_end() #one final check, just to be sure
 	emit_signal("battle_finished")
 
 func _on_direct_attack_area_button_up():
@@ -486,7 +489,7 @@ func _on_direct_attack_area_button_up():
 		return
 	
 	#prevent clicking for a direct outside of the battle phase
-	if GAME_PHASE != "selecting_combat_target":
+	if GAME_PHASE != "selecting_combat_target" or GAME_PHASE == "damage_phase":
 		return
 	
 	#Check if the player can direct attack the enemy (only when 0 monsters on the field)
@@ -503,6 +506,8 @@ func _on_direct_attack_area_button_up():
 		print("can't direct attack")
 
 func do_direct_attack(attacking_card):
+	GAME_PHASE = "damage_phase"
+	
 	#Basically a clone of do_battle() with all the references to a defending card being invisible
 	if attacking_card.this_card_flags.has_battled == true:
 		return #failsafe to prevent cards from battling more than once
@@ -729,12 +734,11 @@ func check_for_game_end(optional_passed_condition : String = "nothing"):
 	elif int(self.get_parent().get_node("user_interface/top_info_box/player_info/lifepoints").get_text()) == 0 or optional_passed_condition == "player_lp_out":
 		game_loser = "player"
 	
-	#Loss by decking out
-	if optional_passed_condition == "deck_out":
-		if $enemy_logic.enemy_deck.size() <= 0:
-			game_loser = "COM"
-		elif $player_logic.player_deck.size() <= 0:
-			game_loser = "player"
+	#Loss by deck out
+	if $enemy_logic.enemy_deck.size() <= 0 or optional_passed_condition == "COM_deck_out":
+		game_loser = "COM"
+	elif $player_logic.player_deck.size() <= 0 or optional_passed_condition == "PLAYER_deck_out":
+		game_loser = "player"
 	
 	#DEBUG menu testing stuff
 	if optional_passed_condition == "DEBUG_END_DUEL":

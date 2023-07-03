@@ -30,11 +30,11 @@ func enemy_draw_phase():
 			$enemy_timer.start(0.2); yield($enemy_timer, "timeout")
 	else:
 		print("Enemy deck run out")
-		GAME_LOGIC.check_for_game_end("deck_out")
+		GAME_LOGIC.check_for_game_end("COM_deck_out")
 		return "exit game"
 	
 	#Change enemy Hand for testing purposes
-	#enemy_hand = ["00927", "00002", "00002", "00002", "00101"]
+	enemy_hand = ["00058", "00058", "00058", "00058", "00058"]
 	#print("--------------------------------------------------")
 	#for card in enemy_hand:
 	#	print(CardList.card_list[card].card_name, "// ATK: ", CardList.card_list[card].atk, " DEF: ", CardList.card_list[card].def)
@@ -524,6 +524,11 @@ func enemy_main_phase():
 					if COM_monsters_available_for_battle.size() == 0:
 						break
 					
+					#Catch the case of COM not having enough LP to justify attacking with monsters that cost it
+					if CardList.card_list[COM_attacker.this_card_id].effect.size() > 1 and CardList.card_list[COM_attacker.this_card_id].effect[1] == "lifepoint_cost":
+						if int(get_node("../../user_interface/top_info_box/com_info/lifepoints").text) <= 3000: #Arbitrary min LP value to not excuse the attack
+							break
+					
 					var atk_of_COM = int(COM_attacker.get_node("card_design/monster_features/atk_def/atk").text)
 					
 					#Correct the math for monsters that Debuff the opponent when they attack
@@ -559,6 +564,11 @@ func enemy_main_phase():
 					
 					if COM_monsters_available_for_battle.size() == 0 or list_of_COM_monsters.size() == 0:
 						break
+					
+					#Catch the case of COM not having enough LP to justify attacking with monsters that cost it
+					if CardList.card_list[monster.this_card_id].effect.size() > 1 and CardList.card_list[monster.this_card_id].effect[1] == "lifepoint_cost":
+						if int(get_node("../../user_interface/top_info_box/com_info/lifepoints").text) <= 1500: #Arbitrary min LP value to not excuse the attack
+							break
 					
 					if monster.this_card_flags.has_battled == false:
 						#Timer for better workflow before each monster iteraction

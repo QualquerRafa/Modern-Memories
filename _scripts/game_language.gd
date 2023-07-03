@@ -787,8 +787,8 @@ var burn = {
 		"pt" : "Ele causa dano aos Pontos de Vida do oponente igual a "
 	},
 	"monster_atk_dmg" : {
-		"en" : "the base ATK of the destroyed Monster.",
-		"pt" : "o ATK base do Monstro destruído."
+		"en" : "the base ATK of the attacked Monster.",
+		"pt" : "o ATK base do Monstro atacado."
 	}
 }
 var lifepoint_change = {

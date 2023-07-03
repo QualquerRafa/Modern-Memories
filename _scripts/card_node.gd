@@ -196,7 +196,8 @@ func _on_card_node_button_up():
 			#What to do when effects.gd activated an equip card from the field and is waiting for the player to pick it's target
 			elif GAME_LOGIC.GAME_PHASE == "activating_equip_from_field":
 				if self.get_parent().get_name().find("player") != -1: #can only click on your own card
-					print(CardList.card_list[self.this_card_id].card_name)
+					GAME_LOGIC.GAME_PHASE = "between"
+					#print(CardList.card_list[self.this_card_id].card_name)
 					GAME_LOGIC.get_node("effects").equip_from_field_to_target(self) #pass itself as the target_node to continue the effect
 		
 		_: #No scene defined

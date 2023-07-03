@@ -91,7 +91,7 @@ func player_draw_phase():
 			player_deck.remove(0) #remove from the deck that same card
 		else:
 			print("player deck out")
-			GAME_LOGIC.check_for_game_end("deck_out")
+			GAME_LOGIC.check_for_game_end("PLAYER_deck_out")
 			return "exit game"
 	
 	#Update the card_nodes visually to match cards in hand
@@ -395,6 +395,10 @@ func summon_final_card(final_card_to_summon, field_slot_to_summon):
 	
 	#Update information on the invisible node waiting on the field, then show it
 	var node_slot_to_change = get_node("../../duel_field/player_side_zones/" + kind_of_card + "_" + String(field_slot_to_summon))
+	
+	#Force traps to always be facedown!
+	if CardList.card_list[final_card_to_summon.this_card_id].attribute == "trap":
+		final_card_to_summon.this_card_flags.is_facedown = true
 	
 	#Change the necessary flags to reflect the new card
 	node_slot_to_change.this_card_flags = final_card_to_summon.this_card_flags

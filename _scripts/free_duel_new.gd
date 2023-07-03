@@ -77,7 +77,7 @@ func update_duelist_cards(duelist_name):
 	var duelist_ref = $npc_decks_gd.list_of_decks[duelist_name]
 	
 	#Starting by making visible only the nodes that are needed
-	var total_cards_displayed = 200 #duelist_ref.UR.size() + duelist_ref.SR.size() + duelist_ref.R.size() + duelist_ref.C.size()
+	var total_cards_displayed = containter_for_cards.get_child_count() #duelist_ref.UR.size() + duelist_ref.SR.size() + duelist_ref.R.size() + duelist_ref.C.size()
 	for i in range(total_cards_displayed):
 		containter_for_cards.get_child(i).show()
 	

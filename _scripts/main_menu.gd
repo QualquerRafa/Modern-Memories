@@ -1,7 +1,7 @@
 extends Node2D
 
 #Easy acess to game version text indicator
-var GAME_VERSION_TEXT = "0.1.000"
+var GAME_VERSION_TEXT = "0.1.010"
 
 func _ready():
 	#Animate the transition when starting this scene

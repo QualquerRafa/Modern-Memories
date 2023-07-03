@@ -98,19 +98,17 @@ func equip_fusion(card_1 : String, card_2 : String):
 	elif equip_restriction == "any":
 		equip_result = [monster_card_id, [CardList.card_list[equip_card_id].effect[0], CardList.card_list[equip_card_id].effect[1]] ]
 	elif equip_restriction == "special_case": #MAGE POWER, count spelltraps on callers field and give stats of 500 times that
-		var spelltrap_count_on_field = 0
-
+		var spelltrap_count_on_field = 0.00000000001
 		var spell_caller = "player"
 		if get_node("../").GAME_PHASE != "checking_for_fusions":
 			spell_caller = "enemy"
-
 		var target_side_of_field = get_node("../").get_parent().get_node("duel_field/" + spell_caller + "_side_zones")
 		for i in range(5):
 			var card_being_checked = target_side_of_field.get_node("spelltrap_" + String(i))
 			if card_being_checked.is_visible():
 				spelltrap_count_on_field += 1
 		
-		equip_result = [monster_card_id, [CardList.card_list[equip_card_id].effect[0], CardList.card_list[equip_card_id].effect[1] * spelltrap_count_on_field]]
+		equip_result = [monster_card_id, [CardList.card_list[equip_card_id].effect[0], CardList.card_list[equip_card_id].effect[1] * spelltrap_count_on_field] ]
 	else:
 		#print("fusions.gd failed to equip: restriction = ", equip_restriction)
 		var special_check_is_ritual = equip_card_id == "00991"
