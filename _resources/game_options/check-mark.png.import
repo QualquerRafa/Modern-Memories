@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/PermittedMemories-logo.png-49f0826bb3bcee15ed5536bc76d7f64b.stex"
+path="res://.import/check-mark.png-bc71ea80ef2af647fcf1c156a67eba06.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://_resources/menu_screen/PermittedMemories-logo.png"
-dest_files=[ "res://.import/PermittedMemories-logo.png-49f0826bb3bcee15ed5536bc76d7f64b.stex" ]
+source_file="res://_resources/game_options/check-mark.png"
+dest_files=[ "res://.import/check-mark.png-bc71ea80ef2af647fcf1c156a67eba06.stex" ]
 
 [params]
 
@@ -21,7 +21,7 @@ compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
 flags/filter=true
-flags/mipmaps=false
+flags/mipmaps=true
 flags/anisotropic=false
 flags/srgb=2
 process/fix_alpha_border=true
