@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/lohweo_game_over.mp3-e1506dd37bc7a07ecdc74129a117a27d.mp3str"
+
+[deps]
+
+source_file="res://_resources/_audio/music/lohweo_game_over.mp3"
+dest_files=[ "res://.import/lohweo_game_over.mp3-e1506dd37bc7a07ecdc74129a117a27d.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

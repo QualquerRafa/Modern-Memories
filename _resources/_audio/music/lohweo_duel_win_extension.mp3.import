@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/lohweo_duel_win_extension.mp3-30a94cd45cbc0307fbde628309c8d4fc.mp3str"
+
+[deps]
+
+source_file="res://_resources/_audio/music/lohweo_duel_win_extension.mp3"
+dest_files=[ "res://.import/lohweo_duel_win_extension.mp3-30a94cd45cbc0307fbde628309c8d4fc.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

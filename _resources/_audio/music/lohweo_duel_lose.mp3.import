@@ -11,5 +11,5 @@ dest_files=[ "res://.import/lohweo_duel_lose.mp3-bb9d438ce89aa8057ff0caa1f0930e2
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0
