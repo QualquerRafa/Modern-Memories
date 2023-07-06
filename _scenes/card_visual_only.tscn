@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://_scripts/card_visual_only.gd" type="Script" id=1]
 [ext_resource path="res://_resources/fonts/kaiu.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://_resources/fonts/Yu-Gi-Oh! Matrix Regular Small Caps 2.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://_resources/_attributes/divine.png" type="Texture" id=4]
+[ext_resource path="res://_resources/_card_artwork/00000.png" type="Texture" id=5]
 [ext_resource path="res://_resources/card_design/frame_monster.png" type="Texture" id=6]
 [ext_resource path="res://_resources/card_design/texture_back.png" type="Texture" id=8]
 [ext_resource path="res://_resources/card_design/star_level.png" type="Texture" id=9]
@@ -57,6 +58,7 @@ texture = ExtResource( 15 )
 [node name="artwork" type="Sprite" parent="card_design"]
 position = Vector2( 164, 240 )
 scale = Vector2( 1.02, 1.02 )
+texture = ExtResource( 5 )
 
 [node name="card_frame" type="Sprite" parent="card_design"]
 position = Vector2( 165, 240 )
@@ -231,3 +233,5 @@ scale = Vector2( 1.01064, 1.01042 )
 texture = ExtResource( 8 )
 
 [node name="card_self_tween" type="Tween" parent="."]
+
+[connection signal="mouse_entered" from="." to="." method="_on_card_visual_only_mouse_entered"]

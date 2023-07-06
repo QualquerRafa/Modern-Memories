@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://_resources/scene_duel/top_info_box.png" type="Texture" id=1]
 [ext_resource path="res://_scenes/card_info_box.tscn" type="PackedScene" id=2]
@@ -9,7 +9,7 @@
 [ext_resource path="res://_resources/card_shop/starchip.png" type="Texture" id=7]
 [ext_resource path="res://_resources/reward_scene/duel_cards_used.png" type="Texture" id=8]
 [ext_resource path="res://_scripts/duel_rewards.gd" type="Script" id=9]
-[ext_resource path="res://_scenes/scene_transitioner.tscn" type="PackedScene" id=10]
+[ext_resource path="res://_resources/reward_scene/gradientbg.png" type="Texture" id=10]
 [ext_resource path="res://_scripts/save_load_logic.gd" type="Script" id=11]
 
 [sub_resource type="DynamicFont" id=7]
@@ -27,6 +27,12 @@ outline_color = Color( 0, 0, 0, 1 )
 use_mipmaps = true
 use_filter = true
 extra_spacing_char = -4
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 42
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=5]
@@ -60,7 +66,14 @@ font_data = ExtResource( 3 )
 [node name="reward_scene" type="Node2D"]
 script = ExtResource( 9 )
 
+[node name="dark_over" type="Sprite" parent="."]
+position = Vector2( 640, 360.5 )
+scale = Vector2( 10, 5.63281 )
+z_index = 2
+texture = ExtResource( 4 )
+
 [node name="BIG_LETTERS" type="Node2D" parent="."]
+position = Vector2( 0, -1 )
 z_index = 1
 
 [node name="bg_dark" type="Sprite" parent="BIG_LETTERS"]
@@ -159,6 +172,31 @@ margin_top = 0.0
 margin_right = 1054.0
 margin_bottom = 480.0
 rect_min_size = Vector2( 330, 480 )
+
+[node name="new_indicators" type="Node2D" parent="cards_reward"]
+visible = false
+
+[node name="indicator_1" type="Label" parent="cards_reward/new_indicators"]
+margin_left = 119.0
+margin_top = 450.0
+margin_right = 284.0
+margin_bottom = 495.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+custom_fonts/font = SubResource( 8 )
+text = "NEW"
+align = 1
+valign = 1
+
+[node name="Gradientbg" type="Sprite" parent="cards_reward/new_indicators/indicator_1"]
+modulate = Color( 1, 1, 1, 0.588235 )
+show_behind_parent = true
+position = Vector2( 80, 24 )
+scale = Vector2( 0.165426, 0.1 )
+texture = ExtResource( 10 )
+region_enabled = true
+region_rect = Rect2( 23, -220, 1209, 1118 )
 
 [node name="duel_info" type="Node2D" parent="."]
 position = Vector2( 81, 253 )
@@ -331,9 +369,6 @@ flat = true
 [node name="tween_4" type="Tween" parent="tweens"]
 
 [node name="timer" type="Timer" parent="tweens/tween_4"]
-
-[node name="scene_transitioner" parent="." instance=ExtResource( 10 )]
-visible = false
 
 [node name="final_timer" type="Timer" parent="."]
 

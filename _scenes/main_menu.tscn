@@ -236,6 +236,7 @@ valign = 1
 visible = false
 margin_right = 1280.0
 margin_bottom = 720.0
+mouse_filter = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
 margin_left = 371.0
@@ -644,7 +645,7 @@ margin_top = 685.0
 margin_right = 646.0
 margin_bottom = 721.0
 custom_fonts/font = SubResource( 2 )
-text = "version 0.1.010"
+text = "version 1.1.111"
 autowrap = true
 
 [node name="version_update_warning" type="Label" parent="game_version"]
