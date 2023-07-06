@@ -60,7 +60,20 @@ func language_checkmark_update():
 
 #---------------------------------------------------------------------------------------------------
 func _on_back_button_button_up():
+	SoundControl.play_sound("poc_decide")
+	
 	save_options_file()
+	
+	#Animate the button being clicked
+	var small_scale = Vector2(0.9 , 0.9)
+	var normal_scale = Vector2(1 , 1)
+	
+	$user_interface/UI_tween.interpolate_property($user_interface/back_button, "rect_scale", $user_interface/back_button.rect_scale, small_scale, 0.1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$user_interface/UI_tween.start()
+	yield($user_interface/UI_tween, "tween_completed")
+	$user_interface/UI_tween.interpolate_property($user_interface/back_button, "rect_scale", $user_interface/back_button.rect_scale, normal_scale, 0.1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$user_interface/UI_tween.start()
+	
 	$scene_transitioner.scene_transition("main_menu")
 
 func save_options_file():

@@ -5,7 +5,7 @@ func _ready():
 	#Animate the transition when starting this scene
 	$scene_transitioner.entering_this_scene()
 	
-	#Reload all "zeroed" stuff into playerdata, for the case of a new game
+	#Reload all "zeroed" stuff into playerdata
 	reset_player_data_to_empty_status()
 	
 	$timer.start(9.5); yield($timer, "timeout")

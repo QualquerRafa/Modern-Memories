@@ -14,8 +14,9 @@ var this_card_flags : Dictionary = {
 
 #-------------------------------------------------------------------------------
 func _ready():
-	this_card_id = generate_random_card()
-	update_card_information("00000")
+	pass
+	#this_card_id = generate_random_card()
+	#update_card_information("00000")
 	
 	#generate_card_for_printScreen()
 #func generate_card_for_printScreen():
@@ -120,3 +121,11 @@ func update_card_information(card_id : String):
 		$card_design/card_back.show()
 	else:
 		$card_design/card_back.hide()
+
+#-----------------------------------------------------------
+func _on_card_visual_only_mouse_entered():
+	#UPDATE USER INTERFACE
+	var current_scene_ref = get_tree().get_current_scene()
+	if current_scene_ref.get_name() == "duel_scene":
+		var user_interface_node = current_scene_ref.get_node("user_interface/card_info_box")
+		user_interface_node.update_user_interface(self)

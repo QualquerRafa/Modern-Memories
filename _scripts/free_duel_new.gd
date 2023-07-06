@@ -53,6 +53,9 @@ func duelist_face_clicked(duelist_name):
 	#yield($panel_right/tween, "tween_completed")
 
 func _on_defocus_button_button_up():
+	defocus_duelist()
+
+func defocus_duelist():
 	#Put stuff on 'card_info_box' hidden
 	$user_interface/card_info_box/colored_bar.hide()
 	$user_interface/card_info_box/card_name.hide()
@@ -145,8 +148,10 @@ func _on_back_button_button_up():
 	$user_interface/UI_tween.interpolate_property($user_interface/back_button, "rect_scale", $user_interface/back_button.rect_scale, normal_scale, 0.1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$user_interface/UI_tween.start()
 	
-	#Return to Main Menu screen
-	$scene_transitioner.scene_transition("main_menu")
+	if $panel_right.is_visible(): #If duelist is on focus, unfocus
+		defocus_duelist()
+	else: #On usual cases, return to main menu
+		$scene_transitioner.scene_transition("main_menu")
 
 
 

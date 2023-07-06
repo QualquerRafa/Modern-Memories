@@ -1,7 +1,8 @@
 extends Node2D
 
 #Easy acess to game version text indicator
-var GAME_VERSION_TEXT = "0.1.010"
+var GAME_VERSION_TEXT = "0.1.100"
+var site_version = "k" #set by "http request"
 
 func _ready():
 	#Animate the transition when starting this scene
@@ -12,11 +13,11 @@ func _ready():
 	if options_file.file_exists("user://gameoptions.save"):
 		auto_load_options_file()
 	
-	#Properly load the text in the correct language
-	load_text_in_correct_language()
-	
 	#Check for updates
 	look_for_updates()
+	
+	#Properly load the text in the correct language
+	load_text_in_correct_language()
 	
 	#Check for a savegame file to enable the load button or not
 	var save_file = File.new()
@@ -80,6 +81,7 @@ func load_text_in_correct_language():
 	$CenterContainer2/VBoxContainer/btn_load_game/button_text.text = GameLanguage.main_menu.load_game[PlayerData.game_language]
 	$CenterContainer2/VBoxContainer/btn_options/button_text.text = GameLanguage.main_menu.options[PlayerData.game_language]
 	$game_version.text = GameLanguage.main_menu.version[PlayerData.game_language] + GAME_VERSION_TEXT
+	$save_load_overlay/loading_indicator.text = GameLanguage.system.loading[PlayerData.game_language] + " . . ."
 	
 	#The "second" main screen, with all the buttons for different scenes
 	$CenterContainer/VBoxContainer/btn_campaign/button_text.text = GameLanguage.main_menu.campaign[PlayerData.game_language]
@@ -100,7 +102,7 @@ func look_for_updates():
 
 func _on_HTTPRequest_request_completed(result, _response_code, _headers, body):
 	if result == 0: #RESULT_SUCCESS
-		var site_version_return = body.get_string_from_utf8()
+		var site_version_return = body.get_string_from_utf8().trim_suffix("\n")
 		var game_version_string = $game_version.text.split(" ")[1]
 		
 		if site_version_return != game_version_string:
@@ -109,11 +111,11 @@ func _on_HTTPRequest_request_completed(result, _response_code, _headers, body):
 		else:
 			print("Game Version matched the current version fetched from the Site: ", site_version_return)
 			$game_version/version_update_warning.hide()
+		
 	else:
 		print("Request wasn't completed, result enum: ", result)
 		$game_version/version_update_warning.text = GameLanguage.main_menu.unable_to_check_for_updates[PlayerData.game_language]
 		$game_version/version_update_warning.show()
-
 
 #---------------------------------------------------------------------------------------------------
 func save_game():
@@ -147,7 +149,7 @@ func load_game():
 	
 	#Call for the Load Game function
 	$save_load_logic.load_game()
-	$timer.start(1); yield($timer, "timeout") #give it some time
+	$timer.start(0.6); yield($timer, "timeout") #give it some time
 	PlayerData.game_loaded = true
 	
 	$save_load_overlay/tween.interpolate_property($save_load_overlay/darker_screen, "modulate", Color(1,1,1,0.8), Color(1,1,1,0), 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
@@ -197,6 +199,9 @@ func separation_of_boxes():
 #CLICKING THE BUTTONS
 func _on_website_button_button_up():
 	animate_button($website_button)
+	var _open_website = OS.shell_open("https://permitted-memories.github.io/")
+func _on_force_website_button_up():
+	animate_button($force_update_overlay/force_website)
 	var _open_website = OS.shell_open("https://permitted-memories.github.io/")
 
 func _on_btn_new_game_button_up():
@@ -259,6 +264,7 @@ func animate_button(node : Node):
 func change_scene(scene_to_go_to : String):
 	$scene_transitioner.scene_transition(scene_to_go_to)
 
+
 #---------------------------------------------------------------------------------------------------
 #HOVERING OVER BUTTONS
 func _on_btn_campaign_mouse_entered():
@@ -284,6 +290,8 @@ func _on_btn_options_mouse_entered():
 	hovering_over_button($CenterContainer2/VBoxContainer/btn_options)
 func _on_website_button_mouse_entered():
 	hovering_over_button($website_button)
+func _on_force_website_mouse_entered():
+	hovering_over_button($force_update_overlay/force_website)
 
 
 func _on_btn_campaign_mouse_exited():
@@ -308,6 +316,8 @@ func _on_btn_options_mouse_exited():
 	unhover_button($CenterContainer2/VBoxContainer/btn_options)
 func _on_website_button_mouse_exited():
 	unhover_button($website_button)
+func _on_force_website_mouse_exited():
+	unhover_button($force_update_overlay/force_website)
 
 
 func hovering_over_button(button : Node):
@@ -315,7 +325,3 @@ func hovering_over_button(button : Node):
 		get_node(String(button.get_path()) + "/white_over").show()
 func unhover_button(button : Node):
 	get_node(String(button.get_path()) + "/white_over").hide()
-
-
-
-

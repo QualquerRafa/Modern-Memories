@@ -101,6 +101,12 @@ func call_effect(card_node : Node, type_of_activation : String): #The 'card_node
 	if card_attribute in ["spell", "trap"]:
 		clear_card_after_activation(card_node)
 	
+	#Force the card face up after it's effect activates
+	if card_node.this_card_flags.has_activated_effect and card_node.this_card_flags.is_facedown:
+		#print("Force face up after effect!")
+		card_node.this_card_flags.is_facedown = false
+		card_node.update_card_information(card_node.this_card_id)
+	
 	#Return to the Duel with this info after the effects are executed
 	if card_type != "equip": #equips will emit this signal at it's own moment, since it needs to wait for player input
 		emit_signal("effect_fully_executed")
@@ -408,11 +414,11 @@ func equip_from_field_to_target(target_card_node : Node):
 	else:
 		print("Failed to equip. Results: ", equip_result)
 	
-	#Facedown cards will be forced face up, and probably trigger on_flip/on_summon effects
+	#Facedown cards will be forced face up, and trigger on_summon effects (Removed the ability to self trigger flip effects)
 	target_card_node.this_card_flags.is_facedown = false
 	target_card_node.update_card_information(target_card_node.this_card_id)
 	
-	if CardList.card_list[target_card_node.this_card_id].effect.size() > 0 and CardList.card_list[target_card_node.this_card_id].effect[0] in ["on_summon", "on_flip"] and target_card_node.this_card_flags.has_activated_effect == false:
+	if CardList.card_list[target_card_node.this_card_id].effect.size() > 0 and CardList.card_list[target_card_node.this_card_id].effect[0] in ["on_summon"] and target_card_node.this_card_flags.has_activated_effect == false:
 		call_effect(target_card_node, CardList.card_list[target_card_node.this_card_id].effect[0])
 	
 	#Go back to regular main phase and FORCE the buttons to be shown
@@ -733,7 +739,8 @@ func activate_trap(card_node : Node):
 	var current_attacker = GAME_LOGIC.card_ready_to_attack
 	var current_defender = GAME_LOGIC.card_ready_to_defend
 	
-	if current_attacker == null:
+	if current_attacker == null or not card_node.is_visible():
+		print("escaping from problematic trap activation")
 		return "Fail"
 	
 	match type_of_effect:
@@ -773,6 +780,7 @@ func activate_trap(card_node : Node):
 		"copy_as_token":
 			#Summon a copy of the attacking monster as a Token on player's side of the field
 			var target_side_of_field = GAME_LOGIC.get_parent().get_node("duel_field/" + caller_and_target[0] + "_side_zones")
+			#print("copy_as_token caller: ", caller_and_target)
 			
 			for i in [2,1,3,0,4]:
 				var monster_being_checked = target_side_of_field.get_node("monster_" + String(i))
@@ -1813,6 +1821,7 @@ func ritual_effects_activation(card_node : Node, ritual_activation_condition : S
 	var monsters_to_not_animate = [
 		"Five-Headed Dragon", "Arcana Knight Joker", "Valkyrion the Magna Warrior",
 		"Lord of the Red", "Paladin of White Dragon", "Paladin of Dark Dragon", "Knight of Armor Dragon",
+		"Chakra", "Demise, Agent of Armageddon", "Demise, King of Armageddon",
 		"Cyber Angel Natasha", "Cyber Angel Idaten", "Cyber Angel Benten", "Cyber Angel Izana", "Cyber Angel Dakini", "Cyber Angel Vrash",
 		"Blue-Eyes Chaos MAX Dragon", "Gearfried the Swordmaster", "Relinquished"
 	]

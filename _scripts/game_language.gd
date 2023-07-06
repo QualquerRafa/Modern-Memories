@@ -273,6 +273,16 @@ var main_menu = {
 		"en" : "VERSION ",
 		"pt" : "VERSÃO "
 	},
+	"forced_update" : {
+		"line1" : {
+			"en" : "Update to",
+			"pt" : "Atualizar para"
+		},
+		"line3" : {
+			"en" : "is mandatory",
+			"pt" : "é obrigatório"
+		}
+	},
 	
 	#Second Main Screen
 	"campaign" : {
@@ -885,6 +895,10 @@ var monster_destroy_effects = {
 	"random_spelltrap" : {
 		"en" : "It destroys a Random Spell or Trap card on your opponent's side of the Field.",
 		"pt" : "Ele destrói uma Carta de Magia ou Armadilha Aleatória no Campo do seu adversário."
+	},
+	"all_enemy_spelltraps" : {
+		"en" : "It destroys all Spell and Trap cards on your opponent's side of the Field.",
+		"pt" : "Ele destrói todas as Carta de Magia e Armadilha no Campo do seu adversário."
 	},
 	"atk_highest" : {
 		"en" : "It destroys the Strongest Monster on your opponent's side of the Field.",

@@ -36,17 +36,6 @@ func play_sound(sound_name : String, sfx_or_music = "sfx"):
 		#Update the final sound_file path
 		sound_file = load("res://_resources/_audio/music/" + sound_name + ".mp3")
 	
-	#For the 'reward_scene' the file changes between WIN and LOSE
-	if sound_name == "lohweo_reward_scene":
-		match get_node("../reward_scene").duel_winner:
-			"player":
-				sound_name = "lohweo_duel_win"
-			_:
-				sound_name = "lohweo_duel_lose"
-		
-		#Update the final sound_file path
-		sound_file = load("res://_resources/_audio/music/" + sound_name + ".mp3")
-	
 	#Setup the correct files and names
 	var sound_player_node = get_first_available_audio_player(sfx_or_music)
 	sound_player_node.stream = sound_file
@@ -59,9 +48,12 @@ func play_sound(sound_name : String, sfx_or_music = "sfx"):
 		register_sound_node = [sound_name, sound_player_node]
 	sound_player_node.play()
 
-func bgm_fadeout():
+func bgm_fadeout(long = false):
 	var transition_duration : float = 1.0
 	var transition_type = 1 # TRANS_SINE
+	
+	if long == true:
+		transition_duration = 2.0
 	
 	#print(register_sound_node)
 	var playing_node = register_sound_node[1]

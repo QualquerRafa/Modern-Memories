@@ -16,10 +16,12 @@ var final_turn_count : int
 var final_player_LP : int
 var final_field_atk : int
 
-func _ready():
+
+func start_reward_scene():
+	get_node("../game_logic").GAME_PHASE = "duel_reward"
+	
 	#Animate the transition when starting this scene
-	SoundControl.bgm_fadeout()
-	$scene_transitioner.entering_this_scene()
+	SoundControl.bgm_fadeout(true) #true for longer fadeout
 	
 	#Properly load the text in the correct language
 	$user_interface/top_info_box/window_title.text = GameLanguage.reward_scene.scene_title[PlayerData.game_language]
@@ -28,6 +30,18 @@ func _ready():
 	
 	#Show the YOU WIN/LOSE first
 	show_big_letters()
+	
+	#Hold a little before starting the reward bgm
+	$final_timer.start(0.5); yield($final_timer, "timeout")
+	
+	#Play the correct BGM intro
+	var sound_name = ""
+	match duel_winner:
+		"player":
+			sound_name = "lohweo_duel_win"
+		_:
+			sound_name = "lohweo_duel_lose"
+	SoundControl.play_sound(sound_name, "music")
 	
 	#Show facedown for reward cards
 	$cards_reward/HBoxContainer/reward_1/card_design/card_back.show()
@@ -88,47 +102,55 @@ func get_duel_rank():
 	
 	var final_duel_score : int = 0
 	
-	#For deck count, the more cards still in the deck the better
-	if duel_deck_count > 28: final_duel_score += 3
-	elif duel_deck_count >= 20: final_duel_score += 2
-	elif duel_deck_count <= 3: final_duel_score += 3
-	else: final_duel_score += 1
+	#For deck count
+	if duel_deck_count >= 32: final_duel_score += 4
+	elif duel_deck_count >= 25: final_duel_score += 3
+	elif duel_deck_count >= 15: final_duel_score += 2
+	elif duel_deck_count >= 4: final_duel_score += 1
+	else: final_duel_score += 3
 	
 	#For fusion count, the more the better
-	if duel_fusion_count <= 2: final_duel_score += 1
-	elif duel_fusion_count <= 4: final_duel_score += 2
-	elif duel_fusion_count <= 10: final_duel_score += 3
-	else: final_duel_score += 4
+	if duel_fusion_count >= 10: final_duel_score += 4
+	elif duel_fusion_count >= 8: final_duel_score += 3
+	elif duel_fusion_count >= 4: final_duel_score += 2
+	else: final_duel_score += 1
 	
 	#For effect count, the more the better
-	if duel_effect_count <= 4: final_duel_score += 1
-	elif duel_effect_count <= 8: final_duel_score += 2
-	else: final_duel_score += 3
+	if duel_effect_count >= 7: final_duel_score += 4
+	elif duel_effect_count >= 5: final_duel_score += 3
+	elif duel_effect_count >= 3: final_duel_score += 2
+	else: final_duel_score += 1
 	
 	#For spelltrap count, the more the better
-	if duel_spelltrap_count <= 2: final_duel_score += 1
-	elif duel_spelltrap_count <= 4: final_duel_score += 2
-	else: final_duel_score += 3
+	if duel_spelltrap_count >= 7: final_duel_score += 4
+	elif duel_spelltrap_count >= 5: final_duel_score += 3
+	elif duel_spelltrap_count >= 3: final_duel_score += 2
+	else: final_duel_score += 1
 	
 	#Extra points
-	if final_turn_count <= 3: final_duel_score += 3
-	elif final_duel_score <= 5: final_duel_score += 2
+	if final_turn_count <= 2: final_duel_score += 4
+	elif final_turn_count == 3: final_duel_score += 3
+	elif final_turn_count <= 5: final_duel_score += 2
+	elif final_turn_count >= 6: final_duel_score += 1
+	if final_turn_count >= 33: final_duel_score += 2
 	
-	if final_player_LP > 8000: final_duel_score += 2
-	elif final_player_LP > 6000: final_duel_score += 1
-	elif final_player_LP < 1000: final_duel_score += 2
+	if final_player_LP >= 8000: final_duel_score += 4
+	elif final_player_LP >= 6000: final_duel_score += 3
+	elif final_player_LP >= 4000: final_duel_score += 2
+	else: final_duel_score += 1
+	if final_player_LP < 1000: final_duel_score += 2
 	
-	if final_field_atk > 9000: final_duel_score += 2
-	if final_field_atk > 5000: final_duel_score += 1
+	if final_field_atk > 9000: final_duel_score += 3
+	elif final_field_atk >= 5000: final_duel_score += 2
 	
 	#Get a letter from the score
 	var final_rank_letter : String = ""
 	if final_duel_score <= 4: final_rank_letter = "F"
-	elif final_duel_score <= 5: final_rank_letter = "D"
-	elif final_duel_score <= 7: final_rank_letter = "C"
-	elif final_duel_score <= 9: final_rank_letter = "B"
-	elif final_duel_score <= 11: final_rank_letter = "A"
-	elif final_duel_score >= 12: final_rank_letter = "S"
+	elif final_duel_score <= 6: final_rank_letter = "D"
+	elif final_duel_score <= 9: final_rank_letter = "C"
+	elif final_duel_score <= 12: final_rank_letter = "B"
+	elif final_duel_score <= 15: final_rank_letter = "A"
+	else: final_rank_letter = "S"
 	
 	#Update it visually
 	$rank_info/rank_letter.text = final_rank_letter
@@ -324,18 +346,18 @@ func show_duel_info():
 					$user_interface/card_info_box.update_user_interface($cards_reward/HBoxContainer/reward_3)
 				else:
 					if PlayerData.scene_to_return_after_duel != "":
-						$scene_transitioner.scene_transition(PlayerData.scene_to_return_after_duel)
+						get_node("../scene_transitioner").scene_transition(PlayerData.scene_to_return_after_duel)
 						remove_reward_scene_from_tree()
 					else:
-						$scene_transitioner.scene_transition("main_menu")
+						get_node("../scene_transitioner").scene_transition("main_menu")
 						remove_reward_scene_from_tree()
 			
 			else:
 				if PlayerData.scene_to_return_after_duel != "":
-					$scene_transitioner.scene_transition(PlayerData.scene_to_return_after_duel)
+					get_node("../scene_transitioner").scene_transition(PlayerData.scene_to_return_after_duel)
 					remove_reward_scene_from_tree()
 				else:
-					$scene_transitioner.scene_transition("main_menu")
+					get_node("../scene_transitioner").scene_transition("main_menu")
 					remove_reward_scene_from_tree()
 
 func remove_reward_scene_from_tree():
@@ -345,9 +367,6 @@ func remove_reward_scene_from_tree():
 	#For free duels, reset temporarily stored info in PlayerData
 	if PlayerData.scene_to_return_after_duel == "free_duel":
 		PlayerData.last_duel_result = ""
-	
-	$final_timer.start(2); yield($final_timer, "timeout")
-	get_node("../reward_scene").queue_free()
 
 
 ####################################################################################################
@@ -387,6 +406,19 @@ func register_player_rewards(starchips : int, array_of_3 : Array):
 			PlayerData.player_trunk[card_reward] = 1 #add the first copy as the registering of 'card_reward'
 
 func show_big_letters():
+	#Pre fade in the scene
+	var fade_in_timer = 0.2
+	get_node("../dark_transition").modulate = Color(1,1,1,0)
+	get_node("../dark_transition").show()
+	get_node("../dark_transition/fake_transition_tween").interpolate_property(get_node("../dark_transition"), "modulate", get_node("../dark_transition").modulate, Color(1,1,1,1), fade_in_timer*3, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+	get_node("../dark_transition/fake_transition_tween").start()
+	yield(get_node("../dark_transition/fake_transition_tween"), "tween_completed")
+	self.show() #reward_scene.show()
+	get_node("../dark_transition/fake_transition_tween").interpolate_property(get_node("../dark_transition"), "modulate", get_node("../dark_transition").modulate, Color(1,1,1,0), fade_in_timer, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+	get_node("../dark_transition/fake_transition_tween").start()
+	yield(get_node("../dark_transition/fake_transition_tween"), "tween_completed")
+	
+	#Regular stuff as it was before directly appending this scene to the duel_scene
 	if duel_winner == "player":
 		PlayerData.last_duel_result = "win"
 		$BIG_LETTERS/YOU.add_color_override("font_color","ff0000") #RED
@@ -408,9 +440,12 @@ func show_big_letters():
 	tweener.interpolate_property($BIG_LETTERS/YOU, "rect_position:x", $BIG_LETTERS/YOU.rect_position.x - x_position_offset, $BIG_LETTERS/YOU.rect_position.x, text_timer, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 	tweener.interpolate_property($BIG_LETTERS/win_lose, "rect_position:x", $BIG_LETTERS/win_lose.rect_position.x + x_position_offset, $BIG_LETTERS/win_lose.rect_position.x, text_timer, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 	tweener.start()
+	$dark_over.modulate = Color(1,1,1,1)
+	get_node("../dark_transition/fake_transition_tween").interpolate_property($dark_over, "modulate", $dark_over.modulate, Color(1,1,1,0), 1, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+	get_node("../dark_transition/fake_transition_tween").start()
 	yield(tweener, "tween_completed")
 	
-	$BIG_LETTERS/timer.start(4.5); yield($BIG_LETTERS/timer, "timeout")
+	$BIG_LETTERS/timer.start(3); yield($BIG_LETTERS/timer, "timeout")
 	
 	tweener.interpolate_property($BIG_LETTERS/YOU, "rect_position:x", $BIG_LETTERS/YOU.rect_position.x, $BIG_LETTERS/YOU.rect_position.x + x_position_offset, text_timer, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 	tweener.interpolate_property($BIG_LETTERS/win_lose, "rect_position:x", $BIG_LETTERS/win_lose.rect_position.x, $BIG_LETTERS/win_lose.rect_position.x - x_position_offset, text_timer, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
@@ -438,4 +473,4 @@ func show_big_letters():
 			
 			remove_reward_scene_from_tree()
 			SoundControl.play_sound("lohweo_duel_win_extension", "music")
-			$scene_transitioner.scene_transition(PlayerData.scene_to_return_after_duel)
+			get_node("../scene_transitioner").scene_transition(PlayerData.scene_to_return_after_duel)

@@ -34,7 +34,7 @@ func enemy_draw_phase():
 		return "exit game"
 	
 	#Change enemy Hand for testing purposes
-	enemy_hand = ["00058", "00058", "00058", "00058", "00058"]
+	#enemy_hand = ["00431", "00058", "00058", "00058", "00058"]
 	#print("--------------------------------------------------")
 	#for card in enemy_hand:
 	#	print(CardList.card_list[card].card_name, "// ATK: ", CardList.card_list[card].atk, " DEF: ", CardList.card_list[card].def)
@@ -216,6 +216,9 @@ func get_field_monsters_array(which_player : String):
 				final_monsters_array.append(initial_monster_array[j])
 	final_monsters_array.invert() #for some reason that is unclear to me right now, I had to invert to get the expected order from Highest to Lowest
 	
+	#if which_player == "player":
+	#	print("This is the ", which_player ," monsters array:", final_monsters_array)
+	
 	return final_monsters_array
 
 func get_strongest_monster_in_hand(atk_or_def = "atk"):
@@ -346,6 +349,10 @@ func enemy_play_that_card(card_to_play_array : Array):
 	if is_fusion_summon:
 		result_of_fusion = GAME_LOGIC.fusion_list.check_for_fusion(card_to_play_array[1], card_to_play_array[2])
 		card_being_played = result_of_fusion[0]
+		
+		#Add to the history if it's a successfull monster fusion
+		if typeof(result_of_fusion[1]) == TYPE_BOOL and result_of_fusion[1] == true:
+			get_node("../../side_menu").list_of_fusions_in_this_duel.append([card_to_play_array[1], card_to_play_array[2], result_of_fusion])
 		
 		#Animate the fusing of the two cards
 		var fusion_timer : float = 0.8 #in seconds
@@ -485,7 +492,7 @@ func enemy_main_phase():
 				COM_try_to_attack_with_monster(monster, null) #passing the target as Null makes the attack a Direct Attack
 				yield(self, "after_try_move_ahead")
 	
-	for _i in range(2): #checks 2 times, just to make sure no one is left behind
+	for _i in range(2): #loops 2 times, just to make sure no one is left behind
 		#Update the lists
 		list_of_player_monsters = get_field_monsters_array("player")
 		list_of_COM_monsters = get_field_monsters_array("enemy")
@@ -518,11 +525,22 @@ func enemy_main_phase():
 				#Catch the case of COM being baited by the third or latter monster
 				if list_of_player_monsters.find(target_monster) >= 2:
 					#print("Index is ", list_of_player_monsters.find(target_monster), " should abort battle.")
-					continue #'continue' skips this loop, aborting the battle
+					continue #'continue' skips this loop, aborting the battle with this monster
 				
 				for COM_attacker in COM_monsters_available_for_battle:
 					if COM_monsters_available_for_battle.size() == 0:
 						break
+					
+					#Catch the case of Player's monster being indestructible
+					if CardList.card_list[target_monster.this_card_id].effect.size() > 1 and CardList.card_list[target_monster.this_card_id].effect[1] == "cant_die" and target_monster.this_card_flags.is_defense_position == true:
+						if CardList.card_list[target_monster.this_card_id].effect.size() > 2 and CardList.card_list[COM_attacker.this_card_id].attribute == CardList.card_list[target_monster.this_card_id].effect[2]:
+							#If it matches the exception some of those have, ignore
+							pass
+						elif CardList.card_list[COM_attacker.this_card_id].effect.size() > 1 and CardList.card_list[COM_attacker.this_card_id].effect[1] == "piercing":
+							#If com has Piercing, go for the attack
+							pass
+						else:
+							continue #'continue' skips this loop, aborting the battle with this monster
 					
 					#Catch the case of COM not having enough LP to justify attacking with monsters that cost it
 					if CardList.card_list[COM_attacker.this_card_id].effect.size() > 1 and CardList.card_list[COM_attacker.this_card_id].effect[1] == "lifepoint_cost":
@@ -562,6 +580,13 @@ func enemy_main_phase():
 					#Update the lists
 					list_of_COM_monsters = get_field_monsters_array("enemy")
 					
+					#This was implemented mostly because of 'Cloning' Token being ignored by COM. Will probably be useful for any time player summons a new monster mid-battle.
+					var recheck_player_monsters = get_field_monsters_array("player")
+					if recheck_player_monsters.size() != 0:
+						print("Safe Recheck found a monster on player side, restarting enemy main phase just to be safe.")
+						enemy_main_phase()
+						return
+					
 					if COM_monsters_available_for_battle.size() == 0 or list_of_COM_monsters.size() == 0:
 						break
 					
@@ -575,7 +600,7 @@ func enemy_main_phase():
 						var battle_timer : float = 1.0
 						$enemy_timer.start(battle_timer*0.8); yield($enemy_timer, "timeout")
 						
-						if monster.this_card_flags.is_defense_position == true:
+						if monster.this_card_flags.is_defense_position == true and int(monster.get_node("card_design/monster_features/atk_def/atk").text) > 0:
 							monster.toggle_battle_position()
 							$enemy_timer.start(battle_timer/2); yield($enemy_timer, "timeout")
 						
@@ -627,6 +652,9 @@ func COM_try_to_attack_with_monster(COM_attacking_monster : Node, player_defendi
 	if player_defending_monster != null and not player_defending_monster.is_visible():
 		emit_signal("after_try_move_ahead")
 		return false
+	if COM_attacking_monster.this_card_flags.has_battled == true:
+		emit_signal("after_try_move_ahead")
+		return false
 	
 	#Update bottom bar so it reflects the current "active" monster
 	if COM_attacking_monster.this_card_flags.is_facedown == false:
@@ -643,7 +671,6 @@ func COM_try_to_attack_with_monster(COM_attacking_monster : Node, player_defendi
 	#Timer for better workflow before each monster iteraction
 	var battle_timer : float = 1.0
 	$enemy_timer.start(battle_timer*0.8); yield($enemy_timer, "timeout")
-	
 	
 	#Check for fear of Spelltraps, independent if it's battling a monster or direct attacking
 	var fear_of_spelltraps : float
@@ -675,7 +702,7 @@ func COM_try_to_attack_with_monster(COM_attacking_monster : Node, player_defendi
 				emit_signal("after_try_move_ahead")
 				return false #Not enough for Toon to attack diretly without COM dying itself
 		
-		if COM_attacking_monster.this_card_flags.is_defense_position == true:
+		if COM_attacking_monster.this_card_flags.is_defense_position == true and int(COM_attacking_monster.get_node("card_design/monster_features/atk_def/atk").text) > 0:
 			COM_attacking_monster.toggle_battle_position()
 			$enemy_timer.start(battle_timer/2); yield($enemy_timer, "timeout")
 		GAME_LOGIC.do_direct_attack(COM_attacking_monster)
@@ -716,7 +743,7 @@ func COM_try_to_attack_with_monster(COM_attacking_monster : Node, player_defendi
 				return false #chicken out of combat
 		
 		#If it didn't return out of combat already, finally do the battle
-		if COM_attacking_monster.this_card_flags.is_defense_position == true:
+		if COM_attacking_monster.this_card_flags.is_defense_position == true and int(COM_attacking_monster.get_node("card_design/monster_features/atk_def/atk").text) > 0:
 			COM_attacking_monster.toggle_battle_position()
 			$enemy_timer.start(battle_timer/2); yield($enemy_timer, "timeout")
 		GAME_LOGIC.do_battle(COM_attacking_monster, player_defending_monster)

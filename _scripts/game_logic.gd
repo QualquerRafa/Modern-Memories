@@ -52,6 +52,10 @@ func fusing_cards_logic(card_1 : Node, card_2 : Node):
 	var fusion_result : Array #[ID:String, Extra Info]
 	fusion_result = fusion_list.check_for_fusion(card_1_id, card_2_id)
 	
+	#Add to the history if it's a successfull monster fusion
+	if typeof(fusion_result[1]) == TYPE_BOOL and fusion_result[1] == true:
+		get_node("../side_menu").list_of_fusions_in_this_duel.append([card_1_id, card_2_id, fusion_result])
+	
 	return fusion_result
 
 #------------------------------------------------------------------------------
@@ -73,12 +77,10 @@ func reset_a_card_node_properties(card_node_to_reset):
 
 func destroy_a_card(card_node_to_destroy):
 	#If it's a ritual monster, check for it's on_ritual_death effects
-	if card_node_to_destroy.this_card_flags.fusion_type == "ritual":
-		#Wait some time if it's in a battle
-		if card_ready_to_attack == card_node_to_destroy or card_ready_to_defend == card_node_to_destroy:
-			$effects/effect_timer_node.start(0.5); yield($effects/effect_timer_node, "timeout")
-		
+	if card_node_to_destroy.this_card_flags.fusion_type == "ritual" and CardList.card_list[card_node_to_destroy.this_card_id].card_name in ["Five-Headed Dragon", "Arcana Knight Joker", "Valkyrion the Magna Warrior", "Lord of the Red", "Paladin of White Dragon", "Paladin of Dark Dragon", "Knight of Armor Dragon", "Chakra", "Demise, Agent of Armageddon", "Demise, King of Armageddon",
+																																			"Cyber Angel Natasha", "Cyber Angel Idaten", "Cyber Angel Benten", "Cyber Angel Izana", "Cyber Angel Dakini", "Cyber Angel Vrash"]:
 		$effects.ritual_effects_activation(card_node_to_destroy, "on_ritual_death")
+		#yield($effects, "effect_fully_executed")
 	
 	#first reset the nodes properties so it's wiped clean
 	reset_a_card_node_properties(card_node_to_destroy)
@@ -96,6 +98,7 @@ func destroy_a_card(card_node_to_destroy):
 	get_node("../user_interface/card_info_box/atk_def").hide()
 	get_node("../user_interface/card_info_box/extra_icons").hide()
 	get_node("../user_interface/card_info_box/card_text").hide()
+	
 
 #------------------------------------------------------------------------------
 var card_ready_to_attack : Node #passed by a card node entering in 'selecting_combat_target'
@@ -136,11 +139,32 @@ func do_battle(attacking_card : Node, defending_card : Node):
 	if CardList.card_list[attacking_card.this_card_id].effect.size() > 1 and CardList.card_list[attacking_card.this_card_id].effect[1] == "multiple_attacker" and attacking_card.this_card_flags.multiple_attacks == 0:
 		attacking_card.get_node("card_design/darken_card").hide()
 	
-	#Catch end of Flip Effect
-	if not attacking_card.is_visible() or not defending_card.is_visible():
-		emit_signal("battle_finished")
+	#Check for Trap Card activations before battle
+	var fell_into_trap : Node = check_for_trap_cards(attacking_card)
+	if fell_into_trap != null:
+		effect_activation(fell_into_trap, "on_flip")
+		yield($effects, "effect_fully_executed")
+		
+		#Set the attacker flags
+		attacking_card.this_card_flags.has_battled = true
+		attacking_card.get_node("card_design/darken_card").show()
+		attacking_card.this_card_flags.is_facedown = false
+		attacking_card.update_card_information(attacking_card.this_card_id)
+		
 		check_for_camera_movement_on_effect_return(attacking_card)
-		return #battle logic has to stop since one of the involveds in battle is no longer on the field
+		
+		#Check if the trap won't stop battle. By default it does.
+		if CardList.card_list[fell_into_trap.this_card_id].effect.size() > 1 and typeof(CardList.card_list[fell_into_trap.this_card_id].effect[1]) == TYPE_STRING and CardList.card_list[fell_into_trap.this_card_id].effect[1] == "non_interrupt_battle":
+			pass
+		else:
+			emit_signal("battle_finished")
+			return #battle logic is stopped, since most traps will AT LEAST negate the attack (can do more, but that's on effects.gd to solve)
+	
+#	#Catch end of Flip Effect
+#	if not attacking_card.is_visible() or not defending_card.is_visible():
+#		emit_signal("battle_finished")
+#		check_for_camera_movement_on_effect_return(attacking_card)
+#		return #battle logic has to stop since one of the involveds in battle is no longer on the field
 	
 	if defending_card.this_card_flags.is_facedown == true and CardList.card_list[defending_card.this_card_id].effect.size() > 0 and CardList.card_list[defending_card.this_card_id].effect[0] in ["on_flip", "on_summon"] and defending_card.this_card_flags.has_activated_effect == false:
 		#Check for attacker having the "anti_flip" effect
@@ -189,28 +213,6 @@ func do_battle(attacking_card : Node, defending_card : Node):
 		effect_activation(defending_card, "on_defend")
 		yield($effects, "effect_fully_executed")
 		$battle_visuals/battle_timer_node.start(0.3); yield($battle_visuals/battle_timer_node, "timeout")
-	
-	#Check for Trap Card activations before battle
-	var fell_into_trap : Node = check_for_trap_cards(attacking_card)
-	if fell_into_trap != null:
-		effect_activation(fell_into_trap, "on_flip")
-		yield($effects, "effect_fully_executed")
-		
-		#Set the attacker flags
-		attacking_card.this_card_flags.has_battled = true
-		attacking_card.get_node("card_design/darken_card").show()
-		attacking_card.this_card_flags.is_facedown = false
-		attacking_card.update_card_information(attacking_card.this_card_id)
-		
-		
-		check_for_camera_movement_on_effect_return(attacking_card)
-		
-		#Check if the trap won't stop battle. By default it does.
-		if CardList.card_list[fell_into_trap.this_card_id].effect.size() > 1 and typeof(CardList.card_list[fell_into_trap.this_card_id].effect[1]) == TYPE_STRING and CardList.card_list[fell_into_trap.this_card_id].effect[1] == "non_interrupt_battle":
-			pass
-		else:
-			emit_signal("battle_finished")
-			return #battle logic is stopped, since most traps will AT LEAST negate the attack (can do more, but that's on effects.gd to solve)
 	
 	var battle_timer_node = $battle_visuals/battle_timer_node
 	var battle_timer : float = 0.2 #in seconds
@@ -314,6 +316,10 @@ func do_battle(attacking_card : Node, defending_card : Node):
 	if defending_card.this_card_flags.fusion_type == "ritual" and CardList.card_list[defending_card.this_card_id].card_name == "Relinquished":
 		fix_for_relinquished_ritual_effect = true
 	
+	#start the variable
+	var card_to_be_destroyed = null
+	var two_destroys = false
+	
 	if attacker_stats > defender_stats:
 		#Check for "on_defend" cant_die
 		if CardList.card_list[defending_card.this_card_id].effect.size() > 1 and CardList.card_list[defending_card.this_card_id].effect[1] == "cant_die":
@@ -322,16 +328,17 @@ func do_battle(attacking_card : Node, defending_card : Node):
 			#Check for special cases where the monster can die by a fragile attribute
 			if CardList.card_list[defending_card.this_card_id].effect.size() > 2 and CardList.card_list[defending_card.this_card_id].effect[2] == CardList.card_list[attacking_card.this_card_id].attribute:
 				#Destroy defender
-				destroy_a_card(defending_card)
+				card_to_be_destroyed = defending_card
 			
 		else:
 			#Destroy defender
-			destroy_a_card(defending_card)
+			card_to_be_destroyed = defending_card
 		
 	elif attacker_stats == defender_stats:
 		#If the stats are equal, destroy neither or both, depending on defender battle position
 		if defending_card.this_card_flags.is_defense_position == false: #atk pos, destroy both
-			destroy_a_card(attacking_card)
+			card_to_be_destroyed = attacking_card
+			
 			
 			#Check for "on_defend" cant_die
 			if CardList.card_list[defending_card.this_card_id].effect.size() > 1 and CardList.card_list[defending_card.this_card_id].effect[1] == "cant_die":
@@ -340,10 +347,12 @@ func do_battle(attacking_card : Node, defending_card : Node):
 				#Check for special cases where the monster can die by a fragile attribute
 				if CardList.card_list[defending_card.this_card_id].effect.size() > 2 and CardList.card_list[defending_card.this_card_id].effect[2] == CardList.card_list[attacking_card.this_card_id].attribute:
 					#Destroy defender
-					destroy_a_card(defending_card)
+					card_to_be_destroyed = defending_card
+					two_destroys = true
 				
 			else:
-				destroy_a_card(defending_card)
+				card_to_be_destroyed = defending_card
+				two_destroys = true
 			
 		else: #just flip defense card face up
 			defending_card.this_card_flags.is_facedown = false
@@ -352,7 +361,8 @@ func do_battle(attacking_card : Node, defending_card : Node):
 	elif attacker_stats < defender_stats:
 		#If attacker lost, only destroy it if defender is not in defense position
 		if defending_card.this_card_flags.is_defense_position == false:
-			destroy_a_card(attacking_card)
+			card_to_be_destroyed = attacking_card
+			
 		defending_card.this_card_flags.is_facedown = false
 		defending_card.get_node("card_design/card_back").hide()
 	
@@ -381,12 +391,29 @@ func do_battle(attacking_card : Node, defending_card : Node):
 		$battle_visuals/tween_battle.start()
 	battle_timer_node.start(battle_timer); yield(battle_timer_node, "timeout")
 	
+	#Finally destroy the card
+	var store_fusion_info = ""
+	if card_to_be_destroyed != null:
+		store_fusion_info = card_to_be_destroyed.this_card_flags.fusion_type
+		
+		#Check for mutual destruction
+		if two_destroys == true:
+			destroy_a_card(attacking_card)
+		
+		destroy_a_card(card_to_be_destroyed)
+	
 	#Battle scene fadeout
 	$battle_visuals/tween_battle.interpolate_property($battle_visuals, "modulate", Color(1,1,1, 1), Color(1,1,1, 0), battle_timer, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$battle_visuals/tween_battle.start()
 	battle_timer_node.start(battle_timer*2); yield(battle_timer_node, "timeout")
 	$battle_visuals/LP_damage.hide()
 	$battle_visuals.hide()
+	
+	#Add some extra time for ritual cards that have on_death effects
+	if store_fusion_info == "ritual" and CardList.card_list[card_to_be_destroyed.this_card_id].card_name in ["Five-Headed Dragon", "Arcana Knight Joker", "Valkyrion the Magna Warrior", "Lord of the Red", "Paladin of White Dragon", "Paladin of Dark Dragon", "Knight of Armor Dragon", "Chakra", "Demise, Agent of Armageddon", "Demise, King of Armageddon",
+																																			"Cyber Angel Natasha", "Cyber Angel Idaten", "Cyber Angel Benten", "Cyber Angel Izana", "Cyber Angel Dakini", "Cyber Angel Vrash"]:
+		battle_timer_node.start(3);
+		yield(battle_timer_node, "timeout")
 	
 	#Finish Battle phase in different ways depending on whose turn it is
 	if attacking_card.get_parent().get_name().find("player") != -1: #it's players turn
@@ -489,7 +516,9 @@ func _on_direct_attack_area_button_up():
 		return
 	
 	#prevent clicking for a direct outside of the battle phase
-	if GAME_PHASE != "selecting_combat_target" or GAME_PHASE == "damage_phase":
+	if GAME_PHASE != "selecting_combat_target":
+		return
+	if GAME_PHASE == "damage_phase":
 		return
 	
 	#Check if the player can direct attack the enemy (only when 0 monsters on the field)
@@ -497,6 +526,7 @@ func _on_direct_attack_area_button_up():
 	for i in range(5):
 		if get_node("../duel_field/enemy_side_zones/monster_" + String(i)).is_visible():
 			enemy_monsters_on_field += 1
+			break
 	
 	if enemy_monsters_on_field == 0 or CardList.card_list[card_ready_to_attack.this_card_id].effect.size() > 1 and CardList.card_list[card_ready_to_attack.this_card_id].effect[1] in ["can_direct", "toon"]:
 		if CardList.card_list[card_ready_to_attack.this_card_id].effect.size() > 1 and CardList.card_list[card_ready_to_attack.this_card_id].effect[1] == "toon":
@@ -541,22 +571,6 @@ func do_direct_attack(attacking_card):
 	if CardList.card_list[attacking_card.this_card_id].effect.size() > 1 and CardList.card_list[attacking_card.this_card_id].effect[1] == "multiple_attacker" and attacking_card.this_card_flags.multiple_attacks == 0:
 		attacking_card.get_node("card_design/darken_card").hide()
 	
-	#Check for on_attack effects right before battle starts
-	if CardList.card_list[attacking_card.this_card_id].effect.size() > 0 and CardList.card_list[attacking_card.this_card_id].effect[0] == "on_attack" and CardList.card_list[attacking_card.this_card_id].effect[1] != "piercing":
-		effect_activation(attacking_card, "on_attack")
-		yield($effects, "effect_fully_executed")
-		$battle_visuals/battle_timer_node.start(0.3); yield($battle_visuals/battle_timer_node, "timeout")
-	#Check for Ritual Monsters Attack effects
-	if attacking_card.this_card_flags.fusion_type == "ritual" and CardList.card_list[attacking_card.this_card_id].card_name in ["Blue-Eyes Chaos MAX Dragon", "Gearfried the Swordmaster"]:
-		effect_activation(attacking_card, "on_attack")
-		yield($effects, "effect_fully_executed")
-		$battle_visuals/battle_timer_node.start(0.3); yield($battle_visuals/battle_timer_node, "timeout")
-		
-	#Catch end of Attack Effect
-	if not attacking_card.is_visible():
-		emit_signal("battle_finished")
-		return #battle logic has to stop since at least one of the involveds in battle is no longer on the field
-	
 	#Check for Trap Card activations before battle
 	var fell_into_trap : Node = check_for_trap_cards(attacking_card)
 	if fell_into_trap != null:
@@ -582,6 +596,22 @@ func do_direct_attack(attacking_card):
 		else:
 			emit_signal("battle_finished")
 			return #battle logic is stopped, since most traps will AT LEAST negate the attack (can do more, but that's on effects.gd to solve)
+	
+	#Check for on_attack effects right before battle starts
+	if CardList.card_list[attacking_card.this_card_id].effect.size() > 0 and CardList.card_list[attacking_card.this_card_id].effect[0] == "on_attack" and CardList.card_list[attacking_card.this_card_id].effect[1] != "piercing":
+		effect_activation(attacking_card, "on_attack")
+		yield($effects, "effect_fully_executed")
+		$battle_visuals/battle_timer_node.start(0.3); yield($battle_visuals/battle_timer_node, "timeout")
+	#Check for Ritual Monsters Attack effects
+	if attacking_card.this_card_flags.fusion_type == "ritual" and CardList.card_list[attacking_card.this_card_id].card_name in ["Blue-Eyes Chaos MAX Dragon", "Gearfried the Swordmaster"]:
+		effect_activation(attacking_card, "on_attack")
+		yield($effects, "effect_fully_executed")
+		$battle_visuals/battle_timer_node.start(0.3); yield($battle_visuals/battle_timer_node, "timeout")
+		
+	#Catch end of Attack Effect
+	if not attacking_card.is_visible():
+		emit_signal("battle_finished")
+		return #battle logic has to stop since at least one of the involveds in battle is no longer on the field
 	
 	#First thing is to update the cards involved in battle so I can use them as references for calculations and stuff
 	$battle_visuals/visual_cardA.this_card_flags = attacking_card.this_card_flags
@@ -712,6 +742,10 @@ func change_lifepoints(target : String, LP_damage : int, adding = false):
 	
 	tween_LP.interpolate_method(self, "LP_method_for_tween", int(LP_info_node.get_text()), LP_result, constant_timer, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	tween_LP.start()
+	
+	if LP_result <= 0:
+		if target == "enemy": target = "com"
+		check_for_game_end(target + "_lp_out")
 
 func LP_method_for_tween(value : int):
 	LP_info_node.text = String(value)
@@ -724,7 +758,12 @@ func check_for_camera_movement_on_effect_return(attacking_card : Node):
 		GAME_PHASE = "main_phase"
 
 #---------------------------------------------------------------------------------------------------
+var game_end_defined = false
 func check_for_game_end(optional_passed_condition : String = "nothing"):
+	#Check for game end only if game_ended hasn't been triggered yet 
+	if game_end_defined == true:
+		return
+	
 	#COM will always have the losing priority over player
 	var game_loser : String = "" #COM or Player
 	
@@ -747,7 +786,8 @@ func check_for_game_end(optional_passed_condition : String = "nothing"):
 	#Decide what to do next
 	var reward_scene
 	if game_loser != "":
-		reward_scene = preload("res://_scenes/reward_scene.tscn").instance()
+		game_end_defined = true
+		reward_scene = get_node("../reward_scene")
 		
 		match game_loser:
 			"COM": #COM lost, go to the rewards screen
@@ -773,23 +813,11 @@ func check_for_game_end(optional_passed_condition : String = "nothing"):
 				return
 		
 		#Go to the reward scene
-		var scene_transitioner = get_node("../scene_transitioner")
-		#get_node("../scene_transitioner").scene_transition(reward_scene)
-		
-		scene_transitioner.show()
-		scene_transitioner.get_node("loading_indicator").show()
-		
-		scene_transitioner.get_node("transitioner_tween").interpolate_property(scene_transitioner.get_node("darker_screen"), "modulate", Color(0,0,0, 0.1), Color(0,0,0, 1), 0.8/1.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-		scene_transitioner.get_node("transitioner_tween").start()
-		yield(scene_transitioner.get_node("transitioner_tween"), "tween_completed")
-		scene_transitioner.hide()
-		
-		#var _scene_change = get_tree().change_scene("res://_scenes/" + scene + ".tscn")
-		get_tree().get_root().add_child(reward_scene)
+		reward_scene.start_reward_scene()
 		
 		#Important stuff to get removed after the duel ended
 		PlayerData.going_to_duel = ""
-		get_tree().get_root().get_node("duel_scene").queue_free()
+		
 		
 		return "endscreen"
 

@@ -383,6 +383,11 @@ func call_fusion_logic(passing_field_slot_to_summon):
 	#Recursive check until there aren't any more Fusions to do
 	if fusion_order.size() <= 1:
 		fusion_order.clear()
+		
+		#Flip monsters as result of fusion are always forced Face up, but they shouldn't activate their effects
+		if CardList.card_list[fusion_result.this_card_id].effect.size() > 0 and CardList.card_list[fusion_result.this_card_id].effect[0] == "on_flip":
+			fusion_result.this_card_flags.has_activated_effect = true
+		
 		summon_final_card(fusion_result, passing_field_slot_to_summon)
 	else:
 		call_fusion_logic(passing_field_slot_to_summon)
@@ -415,8 +420,14 @@ func summon_final_card(final_card_to_summon, field_slot_to_summon):
 
 	#Check if it is to be placed with facedown
 	var card_back = node_slot_to_change.get_node("card_design/card_back")
-	if node_slot_to_change.this_card_flags.is_facedown == true: card_back.show()
-	else: card_back.hide()
+	if node_slot_to_change.this_card_flags.is_facedown == true:
+		card_back.show()
+	else: 
+		card_back.hide()
+		
+		#Safeguard for flip effects
+		if CardList.card_list[node_slot_to_change.this_card_id].effect.size() > 0 and CardList.card_list[node_slot_to_change.this_card_id].effect[0] == "on_flip":
+			node_slot_to_change.this_card_flags.has_activated_effect = true
 
 	#Small animation just so it's pretty
 	var tween_field_cards = get_node("../../duel_field/player_side_zones/tween_field_cards")
@@ -451,9 +462,10 @@ func summon_final_card(final_card_to_summon, field_slot_to_summon):
 	#If it's facedown, do an extra animation of card back transparency toggling
 	if node_slot_to_change.this_card_flags.is_facedown == true:
 		node_slot_to_change.facedown_transparency_animation("make_transparent")
+		
 	#If it's not facedown, check if it has an effect to activate
 	else:
-		if CardList.card_list[final_card_to_summon.this_card_id].effect.size() > 0:
+		if CardList.card_list[final_card_to_summon.this_card_id].effect.size() > 0 and final_card_to_summon.this_card_flags.has_activated_effect == false:
 			GAME_LOGIC.effect_activation(node_slot_to_change, "on_summon") #important to pass 'node_slot_to_change' so effects can target the exact card on the field
 			yield(get_node("../effects"), "effect_fully_executed")
 	

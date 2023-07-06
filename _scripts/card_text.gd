@@ -218,7 +218,7 @@ func get_card_text(card_id : String):
 						"destroy_card":
 							#Varies by type of target
 							match card_on_CardList.effect[2]:
-								"all_enemy_monsters", "atk_highest", "random_monster", "random_spelltrap":
+								"all_enemy_monsters", "atk_highest", "random_monster", "random_spelltrap", "all_enemy_spelltraps":
 									line1 = GameLanguage.on_summon_first[PlayerData.game_language] + GameLanguage.monster_destroy_effects[card_on_CardList.effect[2]][PlayerData.game_language]
 								_: #Monster Types
 									var monster_type = card_on_CardList.effect[2]
@@ -263,6 +263,7 @@ func get_card_text(card_id : String):
 									line1 = GameLanguage.on_summon_first[PlayerData.game_language] + GameLanguage.self_power_up.part1[PlayerData.game_language] + String(boost_value) + GameLanguage.self_power_up.part2[PlayerData.game_language]
 	
 	#For ritual summoned monsters on the field, make their line2 be their "secret ritual effect"
+	var is_line2_ritual = false
 	if self.get_node("../../../../").has_node("duel_scene"):
 		var sketchy_as_hell_scene_node = self.get_node("../../../../").get_node("duel_scene")
 		var even_sketchier_colored_bar_resource_path = sketchy_as_hell_scene_node.get_node("user_interface/card_info_box/colored_bar").texture.resource_path
@@ -270,6 +271,7 @@ func get_card_text(card_id : String):
 		var from_texture_path_card_type = step1[step1.size()-1].trim_suffix(".png").split("_")[1]
 		
 		if from_texture_path_card_type == "ritual" and not CardList.card_list[card_id].attribute in ["spell", "trap"]:
+			is_line2_ritual = true
 			var ritual_monster_name = CardList.card_list[card_id].card_name
 			match ritual_monster_name:
 				#ON SUMMON
@@ -315,5 +317,7 @@ func get_card_text(card_id : String):
 		full_card_text = line1
 	if line2 != null:
 		full_card_text += "\n" + line2
+	if is_line2_ritual:
+		full_card_text = line1 + " " + line2
 	
 	return full_card_text
