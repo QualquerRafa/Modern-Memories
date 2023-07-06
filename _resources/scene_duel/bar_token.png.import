@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/duel_cards_used.png-cdeb064500e8eba5a295d6e0d2105cdb.stex"
+path="res://.import/bar_token.png-78b83955b92d110d8360a60ce1ef3065.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://_resources/reward_scene/duel_cards_used.png"
-dest_files=[ "res://.import/duel_cards_used.png-cdeb064500e8eba5a295d6e0d2105cdb.stex" ]
+source_file="res://_resources/scene_duel/bar_token.png"
+dest_files=[ "res://.import/bar_token.png-78b83955b92d110d8360a60ce1ef3065.stex" ]
 
 [params]
 
