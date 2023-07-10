@@ -54,7 +54,12 @@ func fusing_cards_logic(card_1 : Node, card_2 : Node):
 	
 	#Add to the history if it's a successfull monster fusion
 	if typeof(fusion_result[1]) == TYPE_BOOL and fusion_result[1] == true:
-		get_node("../side_menu").list_of_fusions_in_this_duel.append([card_1_id, card_2_id, fusion_result])
+		get_node("../side_menu").list_of_fusions_in_this_duel.append([card_1_id, card_2_id, fusion_result[0]])
+	elif typeof(fusion_result[1]) == TYPE_ARRAY and fusion_result[1][1] != 0:
+		var monster_involved = card_1_id
+		if CardList.card_list[card_1_id].attribute in ["spell", "trap"]:
+			monster_involved = card_2_id
+		get_node("../side_menu").list_of_fusions_in_this_duel.append([card_1_id, card_2_id, monster_involved])
 	
 	return fusion_result
 
@@ -139,27 +144,6 @@ func do_battle(attacking_card : Node, defending_card : Node):
 	if CardList.card_list[attacking_card.this_card_id].effect.size() > 1 and CardList.card_list[attacking_card.this_card_id].effect[1] == "multiple_attacker" and attacking_card.this_card_flags.multiple_attacks == 0:
 		attacking_card.get_node("card_design/darken_card").hide()
 	
-	#Check for Trap Card activations before battle
-	var fell_into_trap : Node = check_for_trap_cards(attacking_card)
-	if fell_into_trap != null:
-		effect_activation(fell_into_trap, "on_flip")
-		yield($effects, "effect_fully_executed")
-		
-		#Set the attacker flags
-		attacking_card.this_card_flags.has_battled = true
-		attacking_card.get_node("card_design/darken_card").show()
-		attacking_card.this_card_flags.is_facedown = false
-		attacking_card.update_card_information(attacking_card.this_card_id)
-		
-		check_for_camera_movement_on_effect_return(attacking_card)
-		
-		#Check if the trap won't stop battle. By default it does.
-		if CardList.card_list[fell_into_trap.this_card_id].effect.size() > 1 and typeof(CardList.card_list[fell_into_trap.this_card_id].effect[1]) == TYPE_STRING and CardList.card_list[fell_into_trap.this_card_id].effect[1] == "non_interrupt_battle":
-			pass
-		else:
-			emit_signal("battle_finished")
-			return #battle logic is stopped, since most traps will AT LEAST negate the attack (can do more, but that's on effects.gd to solve)
-	
 #	#Catch end of Flip Effect
 #	if not attacking_card.is_visible() or not defending_card.is_visible():
 #		emit_signal("battle_finished")
@@ -205,6 +189,27 @@ func do_battle(attacking_card : Node, defending_card : Node):
 		emit_signal("battle_finished")
 		check_for_camera_movement_on_effect_return(attacking_card)
 		return #battle logic has to stop since at least one of the involveds in battle is no longer on the field
+	
+	#Check for Trap Card activations before battle
+	var fell_into_trap : Node = check_for_trap_cards(attacking_card)
+	if fell_into_trap != null:
+		effect_activation(fell_into_trap, "on_flip")
+		yield($effects, "effect_fully_executed")
+		
+		#Set the attacker flags
+		attacking_card.this_card_flags.has_battled = true
+		attacking_card.get_node("card_design/darken_card").show()
+		attacking_card.this_card_flags.is_facedown = false
+		attacking_card.update_card_information(attacking_card.this_card_id)
+		
+		check_for_camera_movement_on_effect_return(attacking_card)
+		
+		#Check if the trap won't stop battle. By default it does.
+		if CardList.card_list[fell_into_trap.this_card_id].effect.size() > 1 and typeof(CardList.card_list[fell_into_trap.this_card_id].effect[1]) == TYPE_STRING and CardList.card_list[fell_into_trap.this_card_id].effect[1] == "non_interrupt_battle":
+			pass
+		else:
+			emit_signal("battle_finished")
+			return #battle logic is stopped, since most traps will AT LEAST negate the attack (can do more, but that's on effects.gd to solve)
 	
 	#Check for SOME on_defend effects that should happen at the start of battle
 	var on_defend_before_battle = ["debuff", "ehero_core"]
@@ -571,6 +576,22 @@ func do_direct_attack(attacking_card):
 	if CardList.card_list[attacking_card.this_card_id].effect.size() > 1 and CardList.card_list[attacking_card.this_card_id].effect[1] == "multiple_attacker" and attacking_card.this_card_flags.multiple_attacks == 0:
 		attacking_card.get_node("card_design/darken_card").hide()
 	
+	#Check for on_attack effects right before battle starts
+	if CardList.card_list[attacking_card.this_card_id].effect.size() > 0 and CardList.card_list[attacking_card.this_card_id].effect[0] == "on_attack" and CardList.card_list[attacking_card.this_card_id].effect[1] != "piercing":
+		effect_activation(attacking_card, "on_attack")
+		yield($effects, "effect_fully_executed")
+		$battle_visuals/battle_timer_node.start(0.3); yield($battle_visuals/battle_timer_node, "timeout")
+	#Check for Ritual Monsters Attack effects
+	if attacking_card.this_card_flags.fusion_type == "ritual" and CardList.card_list[attacking_card.this_card_id].card_name in ["Blue-Eyes Chaos MAX Dragon", "Gearfried the Swordmaster"]:
+		effect_activation(attacking_card, "on_attack")
+		yield($effects, "effect_fully_executed")
+		$battle_visuals/battle_timer_node.start(0.3); yield($battle_visuals/battle_timer_node, "timeout")
+		
+	#Catch end of Attack Effect
+	if not attacking_card.is_visible():
+		emit_signal("battle_finished")
+		return #battle logic has to stop since at least one of the involveds in battle is no longer on the field
+	
 	#Check for Trap Card activations before battle
 	var fell_into_trap : Node = check_for_trap_cards(attacking_card)
 	if fell_into_trap != null:
@@ -596,22 +617,6 @@ func do_direct_attack(attacking_card):
 		else:
 			emit_signal("battle_finished")
 			return #battle logic is stopped, since most traps will AT LEAST negate the attack (can do more, but that's on effects.gd to solve)
-	
-	#Check for on_attack effects right before battle starts
-	if CardList.card_list[attacking_card.this_card_id].effect.size() > 0 and CardList.card_list[attacking_card.this_card_id].effect[0] == "on_attack" and CardList.card_list[attacking_card.this_card_id].effect[1] != "piercing":
-		effect_activation(attacking_card, "on_attack")
-		yield($effects, "effect_fully_executed")
-		$battle_visuals/battle_timer_node.start(0.3); yield($battle_visuals/battle_timer_node, "timeout")
-	#Check for Ritual Monsters Attack effects
-	if attacking_card.this_card_flags.fusion_type == "ritual" and CardList.card_list[attacking_card.this_card_id].card_name in ["Blue-Eyes Chaos MAX Dragon", "Gearfried the Swordmaster"]:
-		effect_activation(attacking_card, "on_attack")
-		yield($effects, "effect_fully_executed")
-		$battle_visuals/battle_timer_node.start(0.3); yield($battle_visuals/battle_timer_node, "timeout")
-		
-	#Catch end of Attack Effect
-	if not attacking_card.is_visible():
-		emit_signal("battle_finished")
-		return #battle logic has to stop since at least one of the involveds in battle is no longer on the field
 	
 	#First thing is to update the cards involved in battle so I can use them as references for calculations and stuff
 	$battle_visuals/visual_cardA.this_card_flags = attacking_card.this_card_flags
@@ -783,6 +788,10 @@ func check_for_game_end(optional_passed_condition : String = "nothing"):
 	if optional_passed_condition == "DEBUG_END_DUEL":
 		game_loser = "COM"
 	
+	#Forfeit button on side_menu
+	if optional_passed_condition == "player_forfeit":
+		game_loser = "player"
+	
 	#Decide what to do next
 	var reward_scene
 	if game_loser != "":
@@ -801,12 +810,17 @@ func check_for_game_end(optional_passed_condition : String = "nothing"):
 				
 				reward_scene.final_turn_count = int(self.get_parent().get_node("user_interface/top_info_box/field_info/turn").get_text().split(" ")[1])
 				reward_scene.final_player_LP = int(self.get_parent().get_node("user_interface/top_info_box/player_info/lifepoints").get_text())
+				var total_field_atk = 0
 				for i in range(5):
 					var checking_node = self.get_parent().get_node("duel_field/player_side_zones/monster_" + String(i))
 					if checking_node.is_visible():
-						reward_scene.final_field_atk += int(checking_node.get_node("card_design/monster_features/atk_def/atk").get_text())
+						total_field_atk += int(checking_node.get_node("card_design/monster_features/atk_def/atk").get_text())
+				reward_scene.final_field_atk = total_field_atk
 			
 			"player": #Player lost, go to game over screen
+				#Stop COM turn
+				$enemy_logic.enemy_end_turn()
+				
 				reward_scene.duel_winner = "COM"
 			
 			_: #no one lost yet, do nothing
@@ -814,10 +828,6 @@ func check_for_game_end(optional_passed_condition : String = "nothing"):
 		
 		#Go to the reward scene
 		reward_scene.start_reward_scene()
-		
-		#Important stuff to get removed after the duel ended
-		PlayerData.going_to_duel = ""
-		
 		
 		return "endscreen"
 

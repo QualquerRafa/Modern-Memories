@@ -9,7 +9,8 @@ func save_game():
 		"player_trunk" : PlayerData.player_trunk, #Dictionary
 		"player_starchips" : PlayerData.player_starchips, #Int
 		"password_bought_cards" : PlayerData.password_bought_cards, #Array
-		"recorded_duels" : PlayerData.recorded_duels #Dictionary
+		"recorded_duels" : PlayerData.recorded_duels, #Dictionary
+		"last_reward_cards" : PlayerData.last_reward_cards, #Array
 		
 		#Story Progression information
 		#TODO
@@ -45,6 +46,7 @@ func load_game():
 		["player_starchips", "int"],
 		["password_bought_cards", "array"],
 		["recorded_duels", "dictionary"],
+		["last_reward_cards", "array"],
 	]
 	
 	for i in range(saved_info.size()):
@@ -60,6 +62,8 @@ func load_game():
 					PlayerData[saved_info[i][0]] = Array(info_to_load[saved_info[i][0]])
 				"dictionary":
 					PlayerData[saved_info[i][0]] = Dictionary(info_to_load[saved_info[i][0]])
+		else:
+			print("savefile didnt have '", saved_info[i][0], "'. This is just a warning, no problem with it.")
 	
 	return "sucess"
 

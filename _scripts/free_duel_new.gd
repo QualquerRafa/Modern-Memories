@@ -27,6 +27,7 @@ func _ready():
 func duelist_face_clicked(duelist_name):
 	#Update with the correct duelist information
 	$duelist_focus/duelist_body.texture = load("res://_resources/character_bodys/" + duelist_name + "0.png")
+	#$duelist_focus/duelist_name_label.text = duelist_name
 	if PlayerData.recorded_duels.keys().has(duelist_name):
 		$duelist_focus/duelist_wins.text = language_wins + String(PlayerData.recorded_duels[duelist_name].W)
 		$duelist_focus/duelist_losses.text = language_losses + String(PlayerData.recorded_duels[duelist_name].L)

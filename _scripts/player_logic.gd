@@ -33,6 +33,10 @@ func _ready():
 
 #-------------------------------------------------------------------------------
 func start_player_turn():
+	#If the game has ended, stop everything
+	if get_node("../../reward_scene").is_visible():
+		return 
+	
 	#Increment the turn counter
 	turn_count += 1
 	get_node("../../user_interface/top_info_box/field_info/turn").text = GameLanguage.duel_scene.turn[PlayerData.game_language] + " " + String(turn_count)
@@ -65,6 +69,9 @@ func start_player_turn():
 	#Reset this at the start of the turn in case needed
 	if GAME_LOGIC.waboku_protection == true:
 		GAME_LOGIC.waboku_protection = false
+	
+	#Show the history button
+	GAME_LOGIC.get_parent().get_node("side_menu").history_button_in()
 	
 	#Wait timer just for DEV reasons
 	$player_timer.start(0.2); yield($player_timer, "timeout")

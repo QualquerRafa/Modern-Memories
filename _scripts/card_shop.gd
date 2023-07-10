@@ -93,6 +93,7 @@ var flip_time = 0.2
 func update_shop_card(card_id : String, card_price : int):
 	#If the player already bought the card from this password, don't even show it
 	if PlayerData.password_bought_cards.has(card_id):
+		SoundControl.play_sound("poc_unable")
 		return
 	
 	#Update visual stuff on screen

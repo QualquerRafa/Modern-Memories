@@ -1,7 +1,7 @@
 extends Node2D
 
 #Easy acess to game version text indicator
-var GAME_VERSION_TEXT = "0.1.100"
+var GAME_VERSION_TEXT = "0.1.022"
 var site_version = "k" #set by "http request"
 
 func _ready():
@@ -205,6 +205,9 @@ func _on_force_website_button_up():
 	var _open_website = OS.shell_open("https://permitted-memories.github.io/")
 
 func _on_btn_new_game_button_up():
+	if PlayerData.game_loaded == true:
+		return
+	
 	animate_button($CenterContainer2/VBoxContainer/btn_new_game)
 	
 	#Create a new Player Deck
@@ -216,11 +219,17 @@ func _on_btn_new_game_button_up():
 	separation_of_boxes()
 
 func _on_btn_load_game_button_up():
+	if PlayerData.game_loaded == true:
+		return
+	
 	if $CenterContainer2/VBoxContainer/btn_load_game.modulate == Color(1,1,1,1):
 		animate_button($CenterContainer2/VBoxContainer/btn_load_game)
 		load_game() #will emit the signal 'game_loaded' once everything is properly loaded
 
 func _on_btn_options_button_up():
+	if PlayerData.game_loaded == true:
+		return
+	
 	animate_button($CenterContainer2/VBoxContainer/btn_options)
 	change_scene("options_scene")
 

@@ -2,6 +2,8 @@ extends Node2D
 
 onready var npc_decks_gd_script = preload("res://_scripts/npc_decks.gd")
 onready var npc_decks_gd = npc_decks_gd_script.new()
+var exiting_reward = false #prevent multiple clicking
+
 
 #These are passed by the Duel Logic
 var duel_winner : String
@@ -18,11 +20,13 @@ var final_field_atk : int
 
 
 func start_reward_scene():
+	#Reset game speed in case the psycopath of a player speed it up. Ah essa geração tik tok viu...
+	Engine.set_time_scale(1.0)
+	
 	get_node("../game_logic").GAME_PHASE = "duel_reward"
 	
 	#Animate the transition when starting this scene
 	SoundControl.bgm_fadeout(true) #true for longer fadeout
-	
 	#Properly load the text in the correct language
 	$user_interface/top_info_box/window_title.text = GameLanguage.reward_scene.scene_title[PlayerData.game_language]
 	$BIG_LETTERS/YOU.text = GameLanguage.reward_scene.you[PlayerData.game_language]
@@ -30,7 +34,6 @@ func start_reward_scene():
 	
 	#Show the YOU WIN/LOSE first
 	show_big_letters()
-	
 	#Hold a little before starting the reward bgm
 	$final_timer.start(0.5); yield($final_timer, "timeout")
 	
@@ -104,13 +107,13 @@ func get_duel_rank():
 	
 	#For deck count
 	if duel_deck_count >= 32: final_duel_score += 4
-	elif duel_deck_count >= 25: final_duel_score += 3
-	elif duel_deck_count >= 15: final_duel_score += 2
-	elif duel_deck_count >= 4: final_duel_score += 1
+	elif duel_deck_count >= 27: final_duel_score += 3
+	elif duel_deck_count >= 16: final_duel_score += 2
+	elif duel_deck_count >= 3: final_duel_score += 1
 	else: final_duel_score += 3
 	
 	#For fusion count, the more the better
-	if duel_fusion_count >= 10: final_duel_score += 4
+	if duel_fusion_count >= 11: final_duel_score += 4
 	elif duel_fusion_count >= 8: final_duel_score += 3
 	elif duel_fusion_count >= 4: final_duel_score += 2
 	else: final_duel_score += 1
@@ -129,19 +132,19 @@ func get_duel_rank():
 	
 	#Extra points
 	if final_turn_count <= 2: final_duel_score += 4
-	elif final_turn_count == 3: final_duel_score += 3
-	elif final_turn_count <= 5: final_duel_score += 2
-	elif final_turn_count >= 6: final_duel_score += 1
+	elif final_turn_count <= 4: final_duel_score += 3
+	elif final_turn_count <= 6: final_duel_score += 2
+	elif final_turn_count >= 7: final_duel_score += 1
 	if final_turn_count >= 33: final_duel_score += 2
 	
-	if final_player_LP >= 8000: final_duel_score += 4
-	elif final_player_LP >= 6000: final_duel_score += 3
-	elif final_player_LP >= 4000: final_duel_score += 2
-	else: final_duel_score += 1
+	if final_player_LP >= 8000: final_duel_score += 3
+	elif final_player_LP >= 6000: final_duel_score += 2
+	elif final_player_LP >= 4000: final_duel_score += 1
 	if final_player_LP < 1000: final_duel_score += 2
 	
-	if final_field_atk > 9000: final_duel_score += 3
-	elif final_field_atk >= 5000: final_duel_score += 2
+	if final_field_atk > 9000: final_duel_score += 4
+	elif final_field_atk >= 5500: final_duel_score += 3
+	elif final_field_atk >= 4500: final_duel_score += 2
 	
 	#Get a letter from the score
 	var final_rank_letter : String = ""
@@ -337,6 +340,10 @@ func show_duel_info():
 			phase_of_reveal += 1
 		
 		_:
+			#prevent multiple clicking, set to true by remove_reward_scene_from_tree()
+			if exiting_reward == true:
+				return
+			
 			if get_viewport().get_mouse_position().y >= 75 and get_viewport().get_mouse_position().y <= 562:
 				if get_viewport().get_mouse_position().x >= 179 and get_viewport().get_mouse_position().x <= 511:
 					$user_interface/card_info_box.update_user_interface($cards_reward/HBoxContainer/reward_1)
@@ -361,12 +368,16 @@ func show_duel_info():
 					remove_reward_scene_from_tree()
 
 func remove_reward_scene_from_tree():
-	#As the last thing to do, call the auto_save function (it does all the needed checks)
-	auto_save()
+	exiting_reward = true
 	
 	#For free duels, reset temporarily stored info in PlayerData
 	if PlayerData.scene_to_return_after_duel == "free_duel":
+		#PlayerData.scene_to_return_after_duel = ""
+		PlayerData.going_to_duel = ""
 		PlayerData.last_duel_result = ""
+	
+	#As the last thing to do, call the auto_save function (it does all the needed checks)
+	auto_save()
 
 
 ####################################################################################################
@@ -404,6 +415,9 @@ func register_player_rewards(starchips : int, array_of_3 : Array):
 			PlayerData.player_trunk[card_reward] += 1 #register another copy to an already existing 'card_reward' in player's trunk
 		else:
 			PlayerData.player_trunk[card_reward] = 1 #add the first copy as the registering of 'card_reward'
+	
+	#Register to be shown first in deck trunk
+	PlayerData.last_reward_cards = array_of_3
 
 func show_big_letters():
 	#Pre fade in the scene
@@ -472,5 +486,5 @@ func show_big_letters():
 			$BIG_LETTERS.z_index = 0
 			
 			remove_reward_scene_from_tree()
-			SoundControl.play_sound("lohweo_duel_win_extension", "music")
+			#SoundControl.play_sound("lohweo_duel_win_extension", "music")
 			get_node("../scene_transitioner").scene_transition(PlayerData.scene_to_return_after_duel)

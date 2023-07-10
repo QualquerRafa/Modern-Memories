@@ -110,6 +110,12 @@ func generate_necessary_left_side_nodes():
 
 #---------------------------------------------------------------------------------------------------
 func update_left_panel(player_trunk_as_array):
+	#Show newest cards first
+	if PlayerData.last_reward_cards.size() != 0:
+		for card in PlayerData.last_reward_cards:
+			player_trunk_as_array.erase(card)
+			player_trunk_as_array.push_front(card)
+	
 	if current_highlighted_card != null:
 		var node_onScreen_position_X = current_highlighted_card.get_global_transform_with_canvas()[2][0]
 		if node_onScreen_position_X <= 1280/2:

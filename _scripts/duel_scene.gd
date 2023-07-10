@@ -51,6 +51,8 @@ func put_middle_card_in_hand():
 	var recorded_rotation = $game_logic/player_logic.card_references["card_"+ card_in_the_middle_id +"_references"].rect_rotation
 	var recorded_scale : Vector2 = Vector2(0.524, 0.524) #Scale for cards in hand is slightly bigger than on field
 	
+	$game_logic.reset_a_card_node_properties(card_in_the_middle)
+	
 	$player_hand/darken_screen.hide()
 	get_node("player_hand/card_" + String(card_in_the_middle_id) + "/summon_controls").hide()
 	$player_hand/hand_tween.interpolate_property(card_in_the_middle, "rect_position", card_in_the_middle.rect_position, recorded_position, to_middle_time, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
@@ -201,6 +203,9 @@ func _on_turn_end_button_button_up():
 	#Animate these buttons out so player doesn't control anything anymore
 	toggle_visibility_of_turn_end_button()
 	toggle_visibility_of_change_field_view_button()
+	
+	#Hide the history button
+	get_node("side_menu").history_button_out()
 	
 	#At the end of player's turn, remove the darken layer from the monsters that battled this turn
 	for i in range(5):

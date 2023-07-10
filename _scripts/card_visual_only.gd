@@ -20,7 +20,7 @@ func _ready():
 	
 	#generate_card_for_printScreen()
 #func generate_card_for_printScreen():
-	#update_card_information("00078")
+	#update_card_information("00120")
 	#self.rect_position = Vector2(480, 100)
 
 #-------------------------------------------------------------------------------

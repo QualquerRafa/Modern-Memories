@@ -10,6 +10,7 @@ var player_trunk: Dictionary = {} #populated by {ID:String : COPIES:int}
 var player_starchips : int = 0
 var password_bought_cards : Array = [] #populated by ID:String
 var recorded_duels : Dictionary = {} #populated by {duelist_name : {W:int, L:int}}
+var last_reward_cards : Array = [] #populated by ID:String
 
 #Game Settings, stored in a separate file
 var game_language : String = "en" #default is english
@@ -19,7 +20,6 @@ var game_autosave : bool = false #starts as false, player can opt in
 #Variables that aren't persistent
 var game_loaded : bool = false #set to true after the 'savefile' has been correctly loaded
 
-var last_reward_cards : Array = [] #populated by ID:String
 var scene_to_return_after_duel : String = ""
 var going_to_duel : String = "" #populated by a Duelist Name from 'npc_decks.gd'
 var last_duel_result : String = "" #win or lose passed by the reward_scene

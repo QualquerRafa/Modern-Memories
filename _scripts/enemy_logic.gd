@@ -34,7 +34,7 @@ func enemy_draw_phase():
 		return "exit game"
 	
 	#Change enemy Hand for testing purposes
-	#enemy_hand = ["00431", "00058", "00058", "00058", "00058"]
+	#enemy_hand = ["00430", "00430", "00430", "00430", "00430"]
 	#print("--------------------------------------------------")
 	#for card in enemy_hand:
 	#	print(CardList.card_list[card].card_name, "// ATK: ", CardList.card_list[card].atk, " DEF: ", CardList.card_list[card].def)
@@ -352,7 +352,12 @@ func enemy_play_that_card(card_to_play_array : Array):
 		
 		#Add to the history if it's a successfull monster fusion
 		if typeof(result_of_fusion[1]) == TYPE_BOOL and result_of_fusion[1] == true:
-			get_node("../../side_menu").list_of_fusions_in_this_duel.append([card_to_play_array[1], card_to_play_array[2], result_of_fusion])
+			get_node("../../side_menu").list_of_fusions_in_this_duel.append([card_to_play_array[1], card_to_play_array[2], result_of_fusion[0]])
+		elif typeof(result_of_fusion[1]) == TYPE_ARRAY:
+			var monster_involved = card_to_play_array[1]
+			if CardList.card_list[card_to_play_array[1]].attribute in ["spell", "trap"]:
+				monster_involved = card_to_play_array[2]
+			get_node("../../side_menu").list_of_fusions_in_this_duel.append([card_to_play_array[1], card_to_play_array[2], monster_involved])
 		
 		#Animate the fusing of the two cards
 		var fusion_timer : float = 0.8 #in seconds
@@ -555,6 +560,9 @@ func enemy_main_phase():
 							stat_of_target -= 500
 						elif CardList.card_list[COM_attacker.this_card_id].effect[1] == "injection_fairy" and int(get_node("../../user_interface/top_info_box/com_info/lifepoints").text) > 2000:
 							stat_of_target -= 3000
+					#Monsters with mutual banish will ignore opponent's atk value
+					if CardList.card_list[COM_attacker.this_card_id].effect.size() > 1 and CardList.card_list[COM_attacker.this_card_id].effect[1] == "mutual_banish":
+						stat_of_target = 0
 					
 					if atk_of_COM > stat_of_target:
 						var _did_battle = COM_try_to_attack_with_monster(COM_attacker, target_monster)
@@ -758,7 +766,8 @@ func enemy_end_turn():
 	#Wait some time before actually ending the turn for better game flow
 	$enemy_timer.start(1); yield($enemy_timer, "timeout")
 	
-	SoundControl.play_sound("poc_turn_end")
+	if not get_node("../../reward_scene").is_visible():
+		SoundControl.play_sound("poc_turn_end")
 	
 	#At the end of the turn, remove the darken layer from the monsters that battled this turn
 	for i in range(5):

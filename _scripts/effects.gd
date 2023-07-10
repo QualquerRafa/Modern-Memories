@@ -1229,9 +1229,9 @@ func monster_on_summon(card_node : Node):
 			#Update the copycat card
 			if highest_atk > 0:
 				#I have to subtract the original atk before adding the new one
-				card_node.this_card_flags.atk_up -= int(card_node.get_node("card_design/monster_features/atk_def/atk").text)
+				card_node.this_card_flags.atk_up -= CardList.card_list[card_node.this_card_id].atk #int(card_node.get_node("card_design/monster_features/atk_def/atk").text)
 				card_node.this_card_flags.atk_up += highest_atk
-				card_node.this_card_flags.def_up -= int(card_node.get_node("card_design/monster_features/atk_def/def").text)
+				card_node.this_card_flags.def_up -= CardList.card_list[card_node.this_card_id].def #int(card_node.get_node("card_design/monster_features/atk_def/def").text)
 				card_node.this_card_flags.def_up += associated_def
 				card_node.update_card_information(card_node.this_card_id)
 			

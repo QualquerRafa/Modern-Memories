@@ -452,6 +452,16 @@ var duel_scene = {
 	"no_field_bonus" : {
 		"en" : "No Field Bonus",
 		"pt" : "Sem Bônus de Campo"
+	},
+	"side_menu" : {
+		"fusion_history" : {
+			"en" : "Fusion History",
+			"pt" : "Histórico de Fusão"
+		},
+		"forfeit" : {
+			"en" : "Forfeit",
+			"pt" : "Desistir",
+		}
 	}
 }
 
@@ -926,8 +936,8 @@ var attribute_booster = {
 		"pt" : " em 500 pontos e diminui o ATK de Monstros "
 	},
 	"part3" : {
-		"en" : " by 400 points.",
-		"pt" : " em 400 pontos."
+		"en" : " by 400 points on both sides of the Field.",
+		"pt" : " em 400 pontos nos dois lados do Campo."
 	},
 }
 var attribute_reptile = {
