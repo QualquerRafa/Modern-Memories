@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://_resources/scene_duel/yellow_background.png" type="Texture" id=1]
 [ext_resource path="res://_resources/scene_duel/top_info_box.png" type="Texture" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://_scripts/side_menu.gd" type="Script" id=9]
 [ext_resource path="res://_scenes/card_node.tscn" type="PackedScene" id=10]
 [ext_resource path="res://_scripts/duel_scene.gd" type="Script" id=11]
+[ext_resource path="res://_resources/scene_deck_building/big_button.png" type="Texture" id=12]
 [ext_resource path="res://_scripts/player_logic.gd" type="Script" id=13]
 [ext_resource path="res://_resources/scene_duel/darken_bg.png" type="Texture" id=14]
 [ext_resource path="res://_scripts/game_logic.gd" type="Script" id=15]
@@ -74,7 +75,14 @@ font_data = ExtResource( 5 )
 [sub_resource type="DynamicFont" id=9]
 size = 120
 outline_size = 2
+use_mipmaps = true
+use_filter = true
 font_data = ExtResource( 8 )
+
+[sub_resource type="DynamicFont" id=10]
+size = 20
+outline_size = 2
+font_data = ExtResource( 5 )
 
 [node name="duel_scene" type="Node2D"]
 script = ExtResource( 11 )
@@ -2037,9 +2045,10 @@ texture = ExtResource( 18 )
 [node name="tween" type="Tween" parent="back_to_hand"]
 
 [node name="debug_menu" type="Control" parent="."]
-margin_top = 56.0
+visible = false
+margin_top = 128.0
 margin_right = 40.0
-margin_bottom = 96.0
+margin_bottom = 168.0
 script = ExtResource( 16 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="debug_menu"]
@@ -2097,11 +2106,11 @@ text = "Mill COM"
 [node name="debug_timer" type="Timer" parent="debug_menu"]
 
 [node name="history_button" type="Button" parent="."]
-margin_left = -19.0
-margin_top = 276.0
-margin_right = 93.0
-margin_bottom = 366.0
-rect_scale = Vector2( -1, 1 )
+margin_left = -23.0
+margin_top = 39.0
+margin_right = 89.0
+margin_bottom = 129.0
+rect_scale = Vector2( -0.666, 0.666 )
 rect_pivot_offset = Vector2( 56, 45 )
 focus_mode = 0
 enabled_focus_mode = 0
@@ -2128,6 +2137,7 @@ texture = ExtResource( 6 )
 
 [node name="side_menu" type="Node2D" parent="."]
 visible = false
+z_index = 1
 script = ExtResource( 9 )
 
 [node name="block_clicks_behind" type="Button" parent="side_menu"]
@@ -2150,11 +2160,23 @@ position = Vector2( 1061.5, 362 )
 scale = Vector2( 16.5859, 5.59375 )
 texture = ExtResource( 14 )
 
-[node name="duel_rank_indicator" type="Label" parent="side_menu"]
-margin_left = 32.0
-margin_top = 52.0
-margin_right = 120.0
-margin_bottom = 82.0
+[node name="top_row" type="HBoxContainer" parent="side_menu"]
+margin_top = 51.0
+margin_right = 278.0
+margin_bottom = 153.0
+alignment = 1
+
+[node name="rank_indicator" type="Control" parent="side_menu/top_row"]
+margin_left = 29.0
+margin_right = 129.0
+margin_bottom = 102.0
+rect_min_size = Vector2( 100, 100 )
+
+[node name="duel_rank_indicator" type="Label" parent="side_menu/top_row/rank_indicator"]
+margin_top = 3.0
+margin_right = 100.0
+margin_bottom = 103.0
+rect_min_size = Vector2( 100, 100 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 3
@@ -2162,17 +2184,16 @@ custom_constants/shadow_offset_y = 3
 custom_fonts/font = SubResource( 3 )
 text = "Rank"
 align = 1
-valign = 2
 
-[node name="rank_letter" type="Label" parent="side_menu/duel_rank_indicator"]
-anchor_left = -1.44318
-anchor_top = -10.1
-anchor_right = -0.534091
-anchor_bottom = -10.1
-margin_left = 93.0
-margin_top = 326.0
-margin_right = 223.0
-margin_bottom = 446.0
+[node name="rank_letter" type="Label" parent="side_menu/top_row/rank_indicator"]
+anchor_left = -1.97348
+anchor_top = -2.43018
+anchor_right = -1.94348
+anchor_bottom = -2.43018
+margin_left = 197.348
+margin_top = 270.879
+margin_right = 327.348
+margin_bottom = 390.879
 rect_scale = Vector2( 0.666, 0.666 )
 rect_pivot_offset = Vector2( 22, 0 )
 custom_colors/font_color = Color( 0.721569, 0.721569, 0.721569, 1 )
@@ -2188,19 +2209,70 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="button_speed" type="Button" parent="side_menu"]
-margin_left = 152.0
-margin_top = 65.0
-margin_right = 235.0
-margin_bottom = 96.0
-text = "Speed: 1x"
+[node name="buttons" type="Control" parent="side_menu/top_row"]
+margin_left = 133.0
+margin_right = 249.0
+margin_bottom = 102.0
+rect_min_size = Vector2( 116, 100 )
 
-[node name="button_giveup" type="Button" parent="side_menu"]
-margin_left = 152.0
-margin_top = 108.0
-margin_right = 235.0
-margin_bottom = 139.0
+[node name="button_speed" type="Button" parent="side_menu/top_row/buttons"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 112.0
+margin_bottom = 53.0
+rect_min_size = Vector2( 108, 49 )
+rect_pivot_offset = Vector2( 54, 24 )
+focus_mode = 0
+enabled_focus_mode = 0
+text = "Speed: 1x"
+flat = true
+
+[node name="BigButton" type="Sprite" parent="side_menu/top_row/buttons/button_speed"]
+position = Vector2( 3, 2 )
+texture = ExtResource( 12 )
+centered = false
+
+[node name="label" type="Label" parent="side_menu/top_row/buttons/button_speed"]
+margin_right = 106.0
+margin_bottom = 47.0
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+custom_fonts/font = SubResource( 3 )
+text = "1X"
+align = 1
+valign = 1
+
+[node name="button_giveup" type="Button" parent="side_menu/top_row/buttons"]
+margin_left = -1.0
+margin_top = 51.0
+margin_right = 115.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 116, 49 )
+rect_pivot_offset = Vector2( 58, 24 )
+focus_mode = 0
+enabled_focus_mode = 0
+text = "Speed: 1x"
+flat = true
+
+[node name="BigButton" type="Sprite" parent="side_menu/top_row/buttons/button_giveup"]
+position = Vector2( 3, 2 )
+scale = Vector2( 1.1, 1 )
+texture = ExtResource( 12 )
+centered = false
+
+[node name="label" type="Label" parent="side_menu/top_row/buttons/button_giveup"]
+margin_right = 113.0
+margin_bottom = 47.0
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+custom_fonts/font = SubResource( 10 )
 text = "Forfeit"
+align = 1
+valign = 1
 
 [node name="cards_of_fusion" type="Node2D" parent="side_menu"]
 position = Vector2( 0, 17 )
@@ -2271,5 +2343,5 @@ centered = false
 [connection signal="button_up" from="debug_menu/VBoxContainer/mill_Com" to="debug_menu" method="_on_mill_Com_button_up"]
 [connection signal="button_up" from="history_button" to="side_menu" method="_on_history_button_button_up"]
 [connection signal="button_up" from="side_menu/block_clicks_behind" to="side_menu" method="_on_block_clicks_behind_button_up"]
-[connection signal="button_up" from="side_menu/button_speed" to="side_menu" method="_on_button_speed_button_up"]
-[connection signal="button_up" from="side_menu/button_giveup" to="side_menu" method="_on_button_giveup_button_up"]
+[connection signal="button_up" from="side_menu/top_row/buttons/button_speed" to="side_menu" method="_on_button_speed_button_up"]
+[connection signal="button_up" from="side_menu/top_row/buttons/button_giveup" to="side_menu" method="_on_button_giveup_button_up"]

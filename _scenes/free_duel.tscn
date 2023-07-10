@@ -307,6 +307,17 @@ text = "Duel"
 align = 1
 valign = 1
 
+[node name="duelist_name_label" type="Label" parent="duelist_focus"]
+visible = false
+margin_left = 10.0
+margin_top = 489.0
+margin_right = 260.0
+margin_bottom = 556.0
+custom_fonts/font = SubResource( 13 )
+text = "SHADI"
+autowrap = true
+uppercase = true
+
 [node name="duelist_wins" type="Label" parent="duelist_focus"]
 margin_left = 10.0
 margin_top = 521.0
