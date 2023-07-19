@@ -240,13 +240,12 @@ mouse_filter = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
 margin_left = 371.0
-margin_top = 8.0
+margin_top = 67.0
 margin_right = 909.0
-margin_bottom = 712.0
+margin_bottom = 653.0
 alignment = 1
 
 [node name="btn_campaign" type="Button" parent="CenterContainer/VBoxContainer"]
-modulate = Color( 0.392157, 0.392157, 0.392157, 1 )
 margin_right = 538.0
 margin_bottom = 114.0
 rect_pivot_offset = Vector2( 269, 57 )
@@ -284,6 +283,7 @@ texture = ExtResource( 1 )
 centered = false
 
 [node name="btn_tournament" type="Button" parent="CenterContainer/VBoxContainer"]
+visible = false
 margin_top = 118.0
 margin_right = 538.0
 margin_bottom = 232.0
@@ -649,9 +649,9 @@ text = "version 1.1.111"
 autowrap = true
 
 [node name="version_update_warning" type="Label" parent="game_version"]
-margin_left = -9.0
+margin_left = -3.0
 margin_top = -93.0
-margin_right = 279.0
+margin_right = 274.0
 margin_bottom = 1.0
 custom_colors/font_color = Color( 1, 0, 0, 1 )
 custom_fonts/font = SubResource( 9 )

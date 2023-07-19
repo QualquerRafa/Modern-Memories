@@ -2045,7 +2045,6 @@ texture = ExtResource( 18 )
 [node name="tween" type="Tween" parent="back_to_hand"]
 
 [node name="debug_menu" type="Control" parent="."]
-visible = false
 margin_top = 128.0
 margin_right = 40.0
 margin_bottom = 168.0
@@ -2101,7 +2100,7 @@ margin_top = 185.0
 margin_right = 100.0
 margin_bottom = 218.0
 rect_min_size = Vector2( 100, 33 )
-text = "Mill COM"
+text = "lose duel"
 
 [node name="debug_timer" type="Timer" parent="debug_menu"]
 
