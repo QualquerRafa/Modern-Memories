@@ -76,6 +76,11 @@ func start_reward_scene():
 		else:
 			PlayerData.recorded_duels[PlayerData.going_to_duel] = {"W":0, "L":0}
 			PlayerData.recorded_duels[PlayerData.going_to_duel][win_or_lose] = 1
+	
+	#If it's campaign mode, store all duel results so Dialogic can do the proper checks. And yes, the "true" here has to be a String. I hate dialogic.
+	if PlayerData.scene_to_return_after_duel == "game_dialog" and duel_winner == "player":
+		var make_dialogic_var_name = "campaign_defeat_" + PlayerData.going_to_duel.to_upper()
+		Dialogic.set_variable(make_dialogic_var_name, "true")
 
 ####################################################################################################
 func auto_save():

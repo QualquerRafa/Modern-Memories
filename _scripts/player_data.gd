@@ -12,6 +12,8 @@ var password_bought_cards : Array = [] #populated by ID:String
 var recorded_duels : Dictionary = {} #populated by {duelist_name : {W:int, L:int}}
 var last_reward_cards : Array = [] #populated by ID:String
 
+var recorded_dialogs : Array = [] #populated by Dialogic Timeline Names
+
 #Game Settings, stored in a separate file
 var game_language : String = "en" #default is english
 var game_volume : float = 0.1 #0 to 1, 'linear2db' converts it into db in 'sound_control.gd'

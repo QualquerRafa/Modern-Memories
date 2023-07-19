@@ -11,6 +11,10 @@ func play_sound(sound_name : String, sfx_or_music = "sfx"):
 	if sound_name.find("@") != -1 and sound_name.find("reward") != -1:
 		sound_name = "lohweo_reward_scene"
 	
+	#For Game Dialog, select the correct initial music based on last recorded Dialog
+	match PlayerData.recorded_dialogs:
+		_: pass
+	
 	#Get the correct sound file from the name passed
 	var sound_file
 	match sfx_or_music:

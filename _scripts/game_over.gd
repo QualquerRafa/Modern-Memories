@@ -24,6 +24,9 @@ func reset_player_data_to_empty_status():
 	PlayerData.player_starchips = 0
 	PlayerData.password_bought_cards = []
 	PlayerData.recorded_duels = {}
+	PlayerData.last_reward_cards = []
+	
+	PlayerData.recorded_dialogs = []
 
 	PlayerData.game_loaded = false
 	

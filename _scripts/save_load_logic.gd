@@ -13,7 +13,7 @@ func save_game():
 		"last_reward_cards" : PlayerData.last_reward_cards, #Array
 		
 		#Story Progression information
-		#TODO
+		"recorded_dialogs" : PlayerData.recorded_dialogs, #Array
 	}
 	
 	#Start the file to be written
@@ -47,6 +47,7 @@ func load_game():
 		["password_bought_cards", "array"],
 		["recorded_duels", "dictionary"],
 		["last_reward_cards", "array"],
+		["recorded_dialogs", "array"],
 	]
 	
 	for i in range(saved_info.size()):

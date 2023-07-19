@@ -32,6 +32,26 @@ var system = {
 		"en" : "cards",
 		"pt" : "cartas"
 	},
+	"done" : {
+		"en" : "Done",
+		"pt" : "Pronto",
+	},
+	"player_name" : {
+		"en" : "PLAYER NAME",
+		"pt" : "NOME DO JOGADOR"
+	},
+	"pop_up_save" : {
+		"en" : "Do you want to save your progress?",
+		"pt" : "Você quer salvar o seu progresso?"
+	},
+	"yes" : {
+		"en" : "YES",
+		"pt" : "SIM",
+	},
+	"no" : {
+		"en" : "NO",
+		"pt" : "NÃO"
+	}
 }
 
 var types = {
@@ -315,8 +335,8 @@ var main_menu = {
 		"pt" : "Tem certeza que quer Salvar seu jogo?\nIsso vai sobrescrever seu Save anterior."
 	},
 	"save_path_indicator" : {
-		"en" : "File is stored at %appdata%/Godot/app_userdata/Modern Memories",
-		"pt" : "Arquivo salvo em %appdata%/Godot/app_userdata/Modern Memories"
+		"en" : "File is stored at %appdata%/Godot/app_userdata/Permitted Memories",
+		"pt" : "Arquivo salvo em %appdata%/Godot/app_userdata/Permitted Memories"
 	}
 }
 

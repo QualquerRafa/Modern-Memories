@@ -1,7 +1,7 @@
 extends Node2D
 
 #Easy acess to game version text indicator
-var GAME_VERSION_TEXT = "0.1.022"
+var GAME_VERSION_TEXT = "0.1.100"
 var site_version = "k" #set by "http request"
 
 func _ready():
@@ -234,7 +234,8 @@ func _on_btn_options_button_up():
 	change_scene("options_scene")
 
 func _on_btn_campaign_button_up():
-	SoundControl.play_sound("poc_unable")
+	animate_button($CenterContainer/VBoxContainer/btn_campaign)
+	change_scene("game_dialog")
 func _on_btn_tournament_button_up():
 	animate_button($CenterContainer/VBoxContainer/btn_tournament)
 	change_scene("tournament_scene")
@@ -277,7 +278,7 @@ func change_scene(scene_to_go_to : String):
 #---------------------------------------------------------------------------------------------------
 #HOVERING OVER BUTTONS
 func _on_btn_campaign_mouse_entered():
-	pass #hovering_over_button($CenterContainer/VBoxContainer/btn_campaign)
+	hovering_over_button($CenterContainer/VBoxContainer/btn_campaign)
 func _on_btn_tournament_mouse_entered():
 	hovering_over_button($CenterContainer/VBoxContainer/btn_tournament)
 func _on_btn_free_duel_mouse_entered():
