@@ -1,0 +1,37 @@
+{
+	"color": "#fff08aff",
+	"description": "",
+	"display_name": "Tea",
+	"display_name_bool": true,
+	"id": "character-1688959202.json",
+	"mirror_portraits": false,
+	"name": "tea_boneco",
+	"nickname": "",
+	"nickname_bool": false,
+	"offset_x": 0,
+	"offset_y": -35,
+	"portraits": [
+		{
+			"name": "Default",
+			"path": "res://_resources/character_bodys/tea0.png"
+		},
+		{
+			"name": "tea_angry",
+			"path": "res://_resources/character_bodys/tea_angry.png"
+		},
+		{
+			"name": "tea_sad",
+			"path": "res://_resources/character_bodys/tea_sad.png"
+		},
+		{
+			"name": "tea_surprise",
+			"path": "res://_resources/character_bodys/tea_surprise.png"
+		},
+		{
+			"name": "tea_smile",
+			"path": "res://_resources/character_bodys/tea_smile.png"
+		}
+	],
+	"scale": 100,
+	"theme": "default-theme.cfg"
+}

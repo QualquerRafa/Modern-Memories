@@ -1,0 +1,21 @@
+{
+	"color": "#ff080808",
+	"description": "",
+	"display_name": "Darknite",
+	"display_name_bool": true,
+	"id": "character-1688964881.json",
+	"mirror_portraits": false,
+	"name": "darknite_face",
+	"nickname": "",
+	"nickname_bool": false,
+	"offset_x": -135,
+	"offset_y": -260,
+	"portraits": [
+		{
+			"name": "Default",
+			"path": "res://_resources/character_faces/darknite0.png"
+		}
+	],
+	"scale": 150,
+	"theme": ""
+}

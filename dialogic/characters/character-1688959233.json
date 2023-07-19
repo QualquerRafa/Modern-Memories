@@ -1,0 +1,21 @@
+{
+	"color": "#ffff4646",
+	"description": "",
+	"display_name": "Duke",
+	"display_name_bool": true,
+	"id": "character-1688959233.json",
+	"mirror_portraits": false,
+	"name": "duke_boneco",
+	"nickname": "",
+	"nickname_bool": false,
+	"offset_x": 0,
+	"offset_y": -35,
+	"portraits": [
+		{
+			"name": "Default",
+			"path": "res://_resources/character_bodys/duke0.png"
+		}
+	],
+	"scale": 100,
+	"theme": "default-theme.cfg"
+}

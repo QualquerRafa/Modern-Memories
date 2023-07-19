@@ -1,0 +1,25 @@
+{
+	"color": "#ffffffff",
+	"description": "",
+	"display_name": "Bakura",
+	"display_name_bool": true,
+	"id": "character-1688959262.json",
+	"mirror_portraits": false,
+	"name": "bakura_boneco",
+	"nickname": "",
+	"nickname_bool": false,
+	"offset_x": 0,
+	"offset_y": -35,
+	"portraits": [
+		{
+			"name": "Default",
+			"path": "res://_resources/character_bodys/bakura0.png"
+		},
+		{
+			"name": "bakura_sad",
+			"path": "res://_resources/character_bodys/bakura_sad.png"
+		}
+	],
+	"scale": 100,
+	"theme": "default-theme.cfg"
+}

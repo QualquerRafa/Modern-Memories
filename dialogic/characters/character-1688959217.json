@@ -1,0 +1,29 @@
+{
+	"color": "#ff8f4c16",
+	"description": "",
+	"display_name": "Tristan",
+	"display_name_bool": true,
+	"id": "character-1688959217.json",
+	"mirror_portraits": false,
+	"name": "tristan_boneco",
+	"nickname": "",
+	"nickname_bool": false,
+	"offset_x": 0,
+	"offset_y": -35,
+	"portraits": [
+		{
+			"name": "Default",
+			"path": "res://_resources/character_bodys/tristan0.png"
+		},
+		{
+			"name": "tristan_smile",
+			"path": "res://_resources/character_bodys/tristan_smile.png"
+		},
+		{
+			"name": "tristan_surprise",
+			"path": "res://_resources/character_bodys/tristan_surprise.png"
+		}
+	],
+	"scale": 100,
+	"theme": "default-theme.cfg"
+}

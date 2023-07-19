@@ -1,0 +1,103 @@
+{
+	"glossary": [
+
+	],
+	"variables": [
+		{
+			"id": "1688964396-141",
+			"name": "Player Name",
+			"type": 0,
+			"value": "PlayerData.player_name"
+		},
+		{
+			"id": "1689189994-787",
+			"name": "campaign_defeat_SHADI",
+			"type": 0,
+			"value": "false"
+		},
+		{
+			"id": "1689190029-366",
+			"name": "campaign_defeat_YUGI",
+			"type": 0,
+			"value": "false"
+		},
+		{
+			"id": "1689709056-305",
+			"name": "campaign_defeat_JOEY",
+			"type": 0,
+			"value": "false"
+		},
+		{
+			"id": "1689723628-648",
+			"name": "act2_tristan",
+			"type": 0,
+			"value": "false"
+		},
+		{
+			"id": "1689723653-787",
+			"name": "campaign_defeat_TRISTAN",
+			"type": 0,
+			"value": "false"
+		},
+		{
+			"id": "1689724779-265",
+			"name": "loop_return_to",
+			"type": 0,
+			"value": "tea"
+		},
+		{
+			"id": "1689709577-867",
+			"name": "act2_tea",
+			"type": 0,
+			"value": "false"
+		},
+		{
+			"id": "1689709643-424",
+			"name": "campaign_defeat_TEA",
+			"type": 0,
+			"value": "false"
+		},
+		{
+			"id": "1689725953-501",
+			"name": "act2_bakura",
+			"type": 0,
+			"value": "false"
+		},
+		{
+			"id": "1689725965-701",
+			"name": "campaign_defeat_BAKURA",
+			"type": 0,
+			"value": "false"
+		},
+		{
+			"id": "1689726163-233",
+			"name": "act2_duke",
+			"type": 0,
+			"value": "false"
+		},
+		{
+			"id": "1689726171-133",
+			"name": "campaign_defeat_DUKE",
+			"type": 0,
+			"value": "false"
+		},
+		{
+			"id": "1689726570-451",
+			"name": "act2_grandpa",
+			"type": 0,
+			"value": "false"
+		},
+		{
+			"id": "1689726577-934",
+			"name": "campaign_defeat_GRANDPA",
+			"type": 0,
+			"value": "false"
+		},
+		{
+			"id": "1689709256-622",
+			"name": "displayed_joey_result",
+			"type": 0,
+			"value": "false"
+		}
+	]
+}

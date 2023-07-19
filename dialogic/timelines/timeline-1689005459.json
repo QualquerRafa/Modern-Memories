@@ -1,0 +1,54 @@
+{
+	"events": [
+		{
+			"background": "res://_resources/backgrounds/bg_space.jpg",
+			"event_id": "dialogic_021",
+			"fade_duration": 0.5
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Então foi você, [Player Name], o único dentre milhares a aceitar o meu chamado.\nVocê está aqui para uma missão muito importante. O meu, o seu, e todos os outros universos agora dependem de você!"
+		},
+		{
+			"background": "res://_resources/backgrounds/black.png",
+			"event_id": "dialogic_021"
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": false,
+			"wait_seconds": 0.1
+		},
+		{
+			"call_node": {
+				"arguments": [
+					"dlg_002"
+				],
+				"method_name": "record_dialog_on_PlayerData",
+				"target_node_path": "game_dialog"
+			},
+			"event_id": "dialogic_042"
+		},
+		{
+			"call_node": {
+				"arguments": [
+					"dlg_003",
+					"fade"
+				],
+				"method_name": "enter_new_dialog_from_fade",
+				"target_node_path": "game_dialog"
+			},
+			"event_id": "dialogic_042"
+		},
+		{
+			"event_id": "dialogic_022",
+			"transition_duration": 0
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.4.5",
+		"file": "timeline-1689005459.json",
+		"name": "dlg_002"
+	}
+}

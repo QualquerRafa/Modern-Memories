@@ -1,0 +1,29 @@
+{
+	"color": "#ff39796a",
+	"description": "",
+	"display_name": "Vovô",
+	"display_name_bool": true,
+	"id": "character-1688959154.json",
+	"mirror_portraits": false,
+	"name": "grandpa_boneco",
+	"nickname": "",
+	"nickname_bool": false,
+	"offset_x": 0,
+	"offset_y": -35,
+	"portraits": [
+		{
+			"name": "Default",
+			"path": "res://_resources/character_bodys/grandpa0.png"
+		},
+		{
+			"name": "grandpa_surprise",
+			"path": "res://_resources/character_bodys/grandpa_surprise.png"
+		},
+		{
+			"name": "grandpa_sad",
+			"path": "res://_resources/character_bodys/grandpa_sad.png"
+		}
+	],
+	"scale": 100,
+	"theme": "default-theme.cfg"
+}

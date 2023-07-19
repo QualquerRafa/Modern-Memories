@@ -1,0 +1,33 @@
+{
+	"color": "#ffa923d9",
+	"description": "",
+	"display_name": "Yugi",
+	"display_name_bool": true,
+	"id": "character-1688959133.json",
+	"mirror_portraits": false,
+	"name": "yugi_boneco",
+	"nickname": "",
+	"nickname_bool": false,
+	"offset_x": 0,
+	"offset_y": -33,
+	"portraits": [
+		{
+			"name": "Default",
+			"path": "res://_resources/character_bodys/yugi0.png"
+		},
+		{
+			"name": "yugi_angry",
+			"path": "res://_resources/character_bodys/yugi_angry.png"
+		},
+		{
+			"name": "yugi_sad",
+			"path": "res://_resources/character_bodys/yugi_sad.png"
+		},
+		{
+			"name": "yugi_surprise",
+			"path": "res://_resources/character_bodys/yugi_surprise.png"
+		}
+	],
+	"scale": 100,
+	"theme": "default-theme.cfg"
+}

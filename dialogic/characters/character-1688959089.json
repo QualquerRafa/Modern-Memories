@@ -1,0 +1,29 @@
+{
+	"color": "#ffe0c722",
+	"description": "",
+	"display_name": "Shadi",
+	"display_name_bool": true,
+	"id": "character-1688959089.json",
+	"mirror_portraits": false,
+	"name": "shadi_boneco",
+	"nickname": "",
+	"nickname_bool": false,
+	"offset_x": 0,
+	"offset_y": -35,
+	"portraits": [
+		{
+			"name": "Default",
+			"path": "res://_resources/character_bodys/shadi0.png"
+		},
+		{
+			"name": "shadi_smile",
+			"path": "res://_resources/character_bodys/shadi_smile.png"
+		},
+		{
+			"name": "shadi_sad",
+			"path": "res://_resources/character_bodys/shadi_sad.png"
+		}
+	],
+	"scale": 100,
+	"theme": "default-theme.cfg"
+}

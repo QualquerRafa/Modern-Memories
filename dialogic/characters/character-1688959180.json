@@ -1,0 +1,33 @@
+{
+	"color": "#ff298d00",
+	"description": "",
+	"display_name": "Joey",
+	"display_name_bool": true,
+	"id": "character-1688959180.json",
+	"mirror_portraits": false,
+	"name": "joey_boneco",
+	"nickname": "",
+	"nickname_bool": false,
+	"offset_x": 0,
+	"offset_y": -35,
+	"portraits": [
+		{
+			"name": "Default",
+			"path": "res://_resources/character_bodys/joey0.png"
+		},
+		{
+			"name": "joey_surprise",
+			"path": "res://_resources/character_bodys/joey_surprise.png"
+		},
+		{
+			"name": "joey_angry",
+			"path": "res://_resources/character_bodys/joey_angry.png"
+		},
+		{
+			"name": "joey_smile",
+			"path": "res://_resources/character_bodys/joey_smile.png"
+		}
+	],
+	"scale": 100,
+	"theme": ""
+}
