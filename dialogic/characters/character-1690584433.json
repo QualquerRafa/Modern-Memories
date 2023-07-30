@@ -1,0 +1,21 @@
+{
+	"color": "#ff455b9b",
+	"description": "",
+	"display_name": "Bonz",
+	"display_name_bool": true,
+	"id": "character-1690584433.json",
+	"mirror_portraits": false,
+	"name": "bonz_boneco",
+	"nickname": "",
+	"nickname_bool": false,
+	"offset_x": 0,
+	"offset_y": -35,
+	"portraits": [
+		{
+			"name": "Default",
+			"path": "res://_resources/character_bodys/bonz0.png"
+		}
+	],
+	"scale": 100,
+	"theme": ""
+}

@@ -1,0 +1,21 @@
+{
+	"color": "#ff3cf0c6",
+	"description": "",
+	"display_name": "Espa Roba",
+	"display_name_bool": true,
+	"id": "character-1690584395.json",
+	"mirror_portraits": false,
+	"name": "espa_boneco",
+	"nickname": "",
+	"nickname_bool": false,
+	"offset_x": 0,
+	"offset_y": -35,
+	"portraits": [
+		{
+			"name": "Default",
+			"path": "res://_resources/character_bodys/espa0.png"
+		}
+	],
+	"scale": 100,
+	"theme": ""
+}

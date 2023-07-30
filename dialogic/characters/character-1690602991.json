@@ -1,0 +1,37 @@
+{
+	"color": "#ffff0f0f",
+	"description": "",
+	"display_name": "Pegasus",
+	"display_name_bool": true,
+	"id": "character-1690602991.json",
+	"mirror_portraits": false,
+	"name": "pegasus_boneco",
+	"nickname": "",
+	"nickname_bool": false,
+	"offset_x": 0,
+	"offset_y": 0,
+	"portraits": [
+		{
+			"name": "Default",
+			"path": "res://_resources/character_bodys/pegasus.png"
+		},
+		{
+			"name": "pegasus_angry",
+			"path": "res://_resources/character_bodys/pegasus_angry.png"
+		},
+		{
+			"name": "pegasus_sad",
+			"path": "res://_resources/character_bodys/pegasus_sad.png"
+		},
+		{
+			"name": "pegasus_smile",
+			"path": "res://_resources/character_bodys/pegasus_smile.png"
+		},
+		{
+			"name": "pegasus_surprise",
+			"path": "res://_resources/character_bodys/pegasus_surprise.png"
+		}
+	],
+	"scale": 80,
+	"theme": ""
+}

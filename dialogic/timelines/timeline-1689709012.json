@@ -1312,6 +1312,16 @@
 			"set_value": "false"
 		},
 		{
+			"call_node": {
+				"arguments": [
+
+				],
+				"method_name": "save_game",
+				"target_node_path": "game_dialog"
+			},
+			"event_id": "dialogic_042"
+		},
+		{
 			"character": "character-1688959154.json",
 			"event_id": "dialogic_001",
 			"portrait": "Default",

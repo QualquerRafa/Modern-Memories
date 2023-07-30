@@ -1,0 +1,21 @@
+{
+	"color": "#ff000000",
+	"description": "",
+	"display_name": "Nitemare",
+	"display_name_bool": true,
+	"id": "character-1690744965.json",
+	"mirror_portraits": false,
+	"name": "nitemare_boneco",
+	"nickname": "",
+	"nickname_bool": false,
+	"offset_x": 35,
+	"offset_y": -35,
+	"portraits": [
+		{
+			"name": "Default",
+			"path": "res://_resources/character_bodys/nitemare0.png"
+		}
+	],
+	"scale": 100,
+	"theme": ""
+}

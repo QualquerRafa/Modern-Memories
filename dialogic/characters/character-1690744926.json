@@ -1,0 +1,21 @@
+{
+	"color": "#ff000000",
+	"description": "",
+	"display_name": "Darknite",
+	"display_name_bool": true,
+	"id": "character-1690744926.json",
+	"mirror_portraits": false,
+	"name": "darknite_boneco",
+	"nickname": "",
+	"nickname_bool": false,
+	"offset_x": 100,
+	"offset_y": 0,
+	"portraits": [
+		{
+			"name": "Default",
+			"path": "res://_resources/character_bodys/darknite0.png"
+		}
+	],
+	"scale": 100,
+	"theme": ""
+}

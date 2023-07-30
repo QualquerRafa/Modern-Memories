@@ -1,0 +1,29 @@
+{
+	"color": "#ff9df221",
+	"description": "",
+	"display_name": "Weevil",
+	"display_name_bool": true,
+	"id": "character-1690253735.json",
+	"mirror_portraits": false,
+	"name": "weevil_boneco",
+	"nickname": "",
+	"nickname_bool": false,
+	"offset_x": 0,
+	"offset_y": -35,
+	"portraits": [
+		{
+			"name": "Default",
+			"path": "res://_resources/character_bodys/weevil0.png"
+		},
+		{
+			"name": "weevil_angry",
+			"path": "res://_resources/character_bodys/weevil_angry.png"
+		},
+		{
+			"name": "weevil_smile",
+			"path": "res://_resources/character_bodys/weevil_smile.png"
+		}
+	],
+	"scale": 100,
+	"theme": ""
+}

@@ -1,0 +1,33 @@
+{
+	"color": "#ffc960ff",
+	"description": "",
+	"display_name": "Mai",
+	"display_name_bool": true,
+	"id": "character-1690247120.json",
+	"mirror_portraits": false,
+	"name": "mai_boneco",
+	"nickname": "",
+	"nickname_bool": false,
+	"offset_x": 0,
+	"offset_y": -35,
+	"portraits": [
+		{
+			"name": "Default",
+			"path": "res://_resources/character_bodys/mai0.png"
+		},
+		{
+			"name": "mai_angry",
+			"path": "res://_resources/character_bodys/mai_angry.png"
+		},
+		{
+			"name": "mai_smile",
+			"path": "res://_resources/character_bodys/mai_smile.png"
+		},
+		{
+			"name": "mai_surprise",
+			"path": "res://_resources/character_bodys/mai_surprise.png"
+		}
+	],
+	"scale": 100,
+	"theme": ""
+}

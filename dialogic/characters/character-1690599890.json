@@ -1,0 +1,29 @@
+{
+	"color": "#ffbbf4ff",
+	"description": "",
+	"display_name": "Kaiba",
+	"display_name_bool": true,
+	"id": "character-1690599890.json",
+	"mirror_portraits": false,
+	"name": "kaiba_boneco",
+	"nickname": "",
+	"nickname_bool": false,
+	"offset_x": 0,
+	"offset_y": -35,
+	"portraits": [
+		{
+			"name": "Default",
+			"path": "res://_resources/character_bodys/kaiba0.png"
+		},
+		{
+			"name": "kaiba_angry",
+			"path": "res://_resources/character_bodys/kaiba_angry.png"
+		},
+		{
+			"name": "kaiba_surprise",
+			"path": "res://_resources/character_bodys/kaiba_surprise.png"
+		}
+	],
+	"scale": 100,
+	"theme": ""
+}

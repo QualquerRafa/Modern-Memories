@@ -1,0 +1,89 @@
+{
+	"events": [
+		{
+			"condition": "",
+			"definition": "1689190029-366",
+			"event_id": "dialogic_012",
+			"value": "true"
+		},
+		{
+			"event_id": "dialogic_015",
+			"id": "anchor-1634488067",
+			"index": 0,
+			"name": "Derrotou Yugi == Vai pra Kaiba Corp"
+		},
+		{
+			"call_node": {
+				"arguments": [
+					"dlg_016"
+				],
+				"method_name": "record_dialog_on_PlayerData",
+				"target_node_path": "game_dialog"
+			},
+			"event_id": "dialogic_042"
+		},
+		{
+			"call_node": {
+				"arguments": [
+					"dlg_017",
+					"fade"
+				],
+				"method_name": "enter_new_dialog_from_fade",
+				"target_node_path": "game_dialog"
+			},
+			"event_id": "dialogic_042"
+		},
+		{
+			"event_id": "dialogic_022",
+			"transition_duration": 0
+		},
+		{
+			"event_id": "dialogic_013"
+		},
+		{
+			"condition": "",
+			"definition": "1689190029-366",
+			"event_id": "dialogic_012",
+			"value": "false"
+		},
+		{
+			"event_id": "dialogic_015",
+			"id": "anchor-1634488067",
+			"index": 0,
+			"name": "Não derrotou Yugi == Vai pra Ilusões Industriais"
+		},
+		{
+			"call_node": {
+				"arguments": [
+					"dlg_016"
+				],
+				"method_name": "record_dialog_on_PlayerData",
+				"target_node_path": "game_dialog"
+			},
+			"event_id": "dialogic_042"
+		},
+		{
+			"call_node": {
+				"arguments": [
+					"dlg_019",
+					"fade"
+				],
+				"method_name": "enter_new_dialog_from_fade",
+				"target_node_path": "game_dialog"
+			},
+			"event_id": "dialogic_042"
+		},
+		{
+			"event_id": "dialogic_022",
+			"transition_duration": 0
+		},
+		{
+			"event_id": "dialogic_013"
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.4.5",
+		"file": "timeline-1690587574.json",
+		"name": "dlg_016"
+	}
+}

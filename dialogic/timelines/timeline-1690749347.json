@@ -1,0 +1,326 @@
+{
+	"events": [
+		{
+			"call_node": {
+				"arguments": [
+
+				],
+				"method_name": "fake_box_moving_up",
+				"target_node_path": "game_dialog"
+			},
+			"event_id": "dialogic_042"
+		},
+		{
+			"call_node": {
+				"arguments": [
+					"lohweo_forest_shrine"
+				],
+				"method_name": "change_background_music",
+				"target_node_path": "game_dialog"
+			},
+			"event_id": "dialogic_042"
+		},
+		{
+			"background": "res://_resources/backgrounds/bg_street_night.jpg",
+			"event_id": "dialogic_021",
+			"fade_duration": 1
+		},
+		{
+			"animation": "[Default]",
+			"animation_length": 0,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1690744965.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": true,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"condition": "",
+			"definition": "1690749369-787",
+			"event_id": "dialogic_012",
+			"value": "true"
+		},
+		{
+			"character": "character-1690744965.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "NÃÃÃÃÃÃÃÃÃÃÃÃÃÃÃÃÃOOOOOOOOOOOOOO!!!!!!! EU NÃO ACREDDITO QUE ISSO ACONTECEU DE NOVO!"
+		},
+		{
+			"event_id": "dialogic_015",
+			"id": "anchor-1634488067",
+			"index": 0,
+			"name": "Fazer o Fake Ending 1 aqui ein"
+		},
+		{
+			"event_id": "dialogic_013"
+		},
+		{
+			"character": "character-1690744965.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "HA HA HA HA! Isso é apenas o inicio de tudo! Sua punição será continuar vivo para testemunhar sua falha!\nE finalmente te derrotar me deu ainda mais força! Tome seus amigos patéticos e sofram todos juntos!"
+		},
+		{
+			"animation": "4-fade_out.gd",
+			"animation_length": 0.5,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1690744965.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		},
+		{
+			"background": "res://_resources/backgrounds/white.png",
+			"event_id": "dialogic_021",
+			"fade_duration": 1
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 1.5
+		},
+		{
+			"background": "res://_resources/backgrounds/bg_street_night.jpg",
+			"event_id": "dialogic_021",
+			"fade_duration": 1.5
+		},
+		{
+			"animation": "[Default]",
+			"animation_length": 0,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1688959133.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": true,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1688959133.json",
+			"event_id": "dialogic_001",
+			"portrait": "yugi_sad",
+			"text": "Ah... O que aconteceu? Onde está o Darknite?"
+		},
+		{
+			"animation": "slide_in_right.gd",
+			"animation_length": 0.5,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1688959202.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": true
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1688959202.json",
+			"event_id": "dialogic_001",
+			"portrait": "tea_surprise",
+			"text": "Yugi! Que bom que vocês voltaram!"
+		},
+		{
+			"character": "character-1688959202.json",
+			"event_id": "dialogic_001",
+			"portrait": "tea_sad",
+			"text": "Mas... o Darknite venceu..."
+		},
+		{
+			"animation": "[Default]",
+			"animation_length": 0,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1688959133.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		},
+		{
+			"animation": "slide_out_right.gd",
+			"animation_length": 0.5,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1688959202.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		},
+		{
+			"animation": "[Default]",
+			"animation_length": 0,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1690602991.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": true,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1690602991.json",
+			"event_id": "dialogic_001",
+			"portrait": "pegasus_sad",
+			"text": "Nessa forma ele se chama Nitemare. E assim ele tem acesso ao poder total de seu Jogo das Trevas, copiando até mesmo nossas cartas Ultra Raras!\nAcho que nem mesmo [Player Name] consegue enfrentá-lo de igual para igual."
+		},
+		{
+			"animation": "slide_in_right.gd",
+			"animation_length": 0.5,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1690599890.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": true
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1690599890.json",
+			"event_id": "dialogic_001",
+			"portrait": "kaiba_angry",
+			"text": "Vocês envergonham Monstros de Duelo dessa forma! Para duelistas lendários vocês são bem lerdos em captar a essencia desse novo jogo.\nMesmo o Deck de quarta categoria de [Player Name] tem um potencial escondido.\nClaramente as fusões são ferramentas indispensáveis que deixam até mesmo Decks fraquíssimos atingirem altos níveis de poder."
+		},
+		{
+			"character": "character-1690602991.json",
+			"event_id": "dialogic_001",
+			"portrait": "pegasus_surprise",
+			"text": "Bem observado, Kaiba!"
+		},
+		{
+			"character": "character-1690602991.json",
+			"event_id": "dialogic_001",
+			"portrait": "Default",
+			"text": "E se estamos falando de fusões, eu conheço um jovem muito habilidoso com elas e que pode nos ajudar."
+		},
+		{
+			"character": "character-1690599890.json",
+			"event_id": "dialogic_001",
+			"portrait": "kaiba_surprise",
+			"text": "Não é possível que você esteja falando dele...\nUm repetente preguiçoso que por qualquer motivo se destacou na minha academia!"
+		},
+		{
+			"character": "character-1690602991.json",
+			"event_id": "dialogic_001",
+			"portrait": "pegasus_smile",
+			"text": "É até irônico ir atrás de Heróis numa situação como essas!"
+		},
+		{
+			"character": "character-1690599890.json",
+			"event_id": "dialogic_001",
+			"portrait": "Default",
+			"text": "Que seja... Vocês vão atrás dele enquanto eu tento resolver as coisas por aqui.\nRoland! Prepare o Dirigível para o Pegasus. Eles irão até a Academia de Duelos."
+		},
+		{
+			"call_node": {
+				"arguments": [
+
+				],
+				"method_name": "pop_up_save",
+				"target_node_path": "game_dialog"
+			},
+			"event_id": "dialogic_042"
+		},
+		{
+			"call_node": {
+				"arguments": [
+					"dlg_022"
+				],
+				"method_name": "record_dialog_on_PlayerData",
+				"target_node_path": "game_dialog"
+			},
+			"event_id": "dialogic_042"
+		},
+		{
+			"event_id": "dialogic_022",
+			"transition_duration": 0.5
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": ""
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.4.5",
+		"file": "timeline-1690749347.json",
+		"name": "dlg_022"
+	}
+}

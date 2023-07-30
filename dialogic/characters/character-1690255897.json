@@ -1,0 +1,25 @@
+{
+	"color": "#ff794700",
+	"description": "",
+	"display_name": "Rex",
+	"display_name_bool": true,
+	"id": "character-1690255897.json",
+	"mirror_portraits": false,
+	"name": "rex_boneco",
+	"nickname": "",
+	"nickname_bool": false,
+	"offset_x": 0,
+	"offset_y": -35,
+	"portraits": [
+		{
+			"name": "Default",
+			"path": "res://_resources/character_bodys/rex0.png"
+		},
+		{
+			"name": "rex_surprise",
+			"path": "res://_resources/character_bodys/rex_surprise.png"
+		}
+	],
+	"scale": 100,
+	"theme": ""
+}

@@ -4,10 +4,10 @@
 	],
 	"variables": [
 		{
-			"id": "1688964396-141",
-			"name": "Player Name",
+			"id": "1689723653-787",
+			"name": "campaign_defeat_TRISTAN",
 			"type": 0,
-			"value": "PlayerData.player_name"
+			"value": "false"
 		},
 		{
 			"id": "1689189994-787",
@@ -22,28 +22,10 @@
 			"value": "false"
 		},
 		{
-			"id": "1689709056-305",
-			"name": "campaign_defeat_JOEY",
+			"id": "1689709256-622",
+			"name": "displayed_joey_result",
 			"type": 0,
 			"value": "false"
-		},
-		{
-			"id": "1689723628-648",
-			"name": "act2_tristan",
-			"type": 0,
-			"value": "false"
-		},
-		{
-			"id": "1689723653-787",
-			"name": "campaign_defeat_TRISTAN",
-			"type": 0,
-			"value": "false"
-		},
-		{
-			"id": "1689724779-265",
-			"name": "loop_return_to",
-			"type": 0,
-			"value": "tea"
 		},
 		{
 			"id": "1689709577-867",
@@ -56,6 +38,18 @@
 			"name": "campaign_defeat_TEA",
 			"type": 0,
 			"value": "false"
+		},
+		{
+			"id": "1689723628-648",
+			"name": "act2_tristan",
+			"type": 0,
+			"value": "false"
+		},
+		{
+			"id": "1689724779-265",
+			"name": "loop_return_to",
+			"type": 0,
+			"value": "tea"
 		},
 		{
 			"id": "1689725953-501",
@@ -94,8 +88,74 @@
 			"value": "false"
 		},
 		{
-			"id": "1689709256-622",
-			"name": "displayed_joey_result",
+			"id": "1689709056-305",
+			"name": "campaign_defeat_JOEY",
+			"type": 0,
+			"value": "false"
+		},
+		{
+			"id": "1690254527-787",
+			"name": "campaign_defeat_WEEVIL",
+			"type": 0,
+			"value": "false"
+		},
+		{
+			"id": "1690254541-366",
+			"name": "campaign_defeat_REX",
+			"type": 0,
+			"value": "false"
+		},
+		{
+			"id": "1690249415-648",
+			"name": "campaign_defeat_MAI",
+			"type": 0,
+			"value": "false"
+		},
+		{
+			"id": "1690585010-787",
+			"name": "campaign_defeat_MAKO",
+			"type": 0,
+			"value": "false"
+		},
+		{
+			"id": "1688964396-141",
+			"name": "Player Name",
+			"type": 0,
+			"value": "PlayerData.player_name"
+		},
+		{
+			"id": "1690585024-366",
+			"name": "campaign_defeat_ESPA",
+			"type": 0,
+			"value": "false"
+		},
+		{
+			"id": "1690586608-146",
+			"name": "campaign_defeat_BONZ",
+			"type": 0,
+			"value": "false"
+		},
+		{
+			"id": "1690738579-648",
+			"name": "campaign_defeat_PEGASUS",
+			"type": 0,
+			"value": "false"
+		},
+		{
+			"id": "1690256556-146",
+			"name": "act_3_pick_local",
+			"type": 0,
+			"value": "Kaiba Corp"
+		},
+		{
+			"id": "1690600597-918",
+			"name": "campaign_defeat_KAIBA",
+			"type": 0,
+			"value": "false"
+		},
+		{
+			"id": "1690749369-787",
+			"name": "campaign_defeate_NITEMARE",
 			"type": 0,
 			"value": "false"
 		}

@@ -1,0 +1,21 @@
+{
+	"color": "#ff000000",
+	"description": "",
+	"display_name": "Duelista Aleatório",
+	"display_name_bool": true,
+	"id": "character-1690248649.json",
+	"mirror_portraits": false,
+	"name": "generic3",
+	"nickname": "",
+	"nickname_bool": false,
+	"offset_x": 0,
+	"offset_y": -85,
+	"portraits": [
+		{
+			"name": "Default",
+			"path": "res://_resources/character_bodys/boy3.png"
+		}
+	],
+	"scale": 80,
+	"theme": ""
+}

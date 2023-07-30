@@ -1,0 +1,21 @@
+{
+	"color": "#ff5be6fd",
+	"description": "",
+	"display_name": "Mako",
+	"display_name_bool": true,
+	"id": "character-1690584372.json",
+	"mirror_portraits": false,
+	"name": "mako_bonecoc",
+	"nickname": "",
+	"nickname_bool": false,
+	"offset_x": 0,
+	"offset_y": -35,
+	"portraits": [
+		{
+			"name": "Default",
+			"path": "res://_resources/character_bodys/mako0.png"
+		}
+	],
+	"scale": 100,
+	"theme": ""
+}

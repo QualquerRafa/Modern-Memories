@@ -1,0 +1,21 @@
+{
+	"color": "#ff000000",
+	"description": "",
+	"display_name": "Duelista Aleatória",
+	"display_name_bool": true,
+	"id": "character-1690248634.json",
+	"mirror_portraits": false,
+	"name": "generic2",
+	"nickname": "",
+	"nickname_bool": false,
+	"offset_x": 0,
+	"offset_y": -35,
+	"portraits": [
+		{
+			"name": "Default",
+			"path": "res://_resources/character_bodys/girl1.png"
+		}
+	],
+	"scale": 90,
+	"theme": ""
+}

@@ -13,37 +13,104 @@
 				"character-1688959217.json",
 				"character-1688959233.json",
 				"character-1688959262.json",
-				"character-1688964881.json"
+				"character-1688964881.json",
+				"character-1690247120.json",
+				"character-1690248432.json",
+				"character-1690248634.json",
+				"character-1690248649.json",
+				"character-1690248666.json",
+				"character-1690253735.json",
+				"character-1690255897.json",
+				"character-1690584372.json",
+				"character-1690584395.json",
+				"character-1690584433.json",
+				"character-1690599890.json",
+				"character-1690602991.json",
+				"character-1690744926.json",
+				"character-1690744965.json"
 			],
 			"folders": {
 
 			},
 			"metadata": {
 				"color": null,
-				"folded": false
+				"folded": true
 			}
 		},
 		"Definitions": {
 			"files": [
-				"1688964396-141",
-				"1689189994-787",
-				"1689190029-366",
-				"1689709056-305",
-				"1689709256-622",
-				"1689709577-867",
-				"1689709643-424",
-				"1689723628-648",
-				"1689723653-787",
-				"1689724779-265",
-				"1689725953-501",
-				"1689725965-701",
-				"1689726163-233",
-				"1689726171-133",
-				"1689726570-451",
-				"1689726577-934"
+				"1688964396-141"
 			],
 			"folders": {
+				"act1": {
+					"files": [
+						"1689189994-787",
+						"1689190029-366"
+					],
+					"folders": {
 
+					},
+					"metadata": {
+						"color": null,
+						"folded": true
+					}
+				},
+				"act2": {
+					"files": [
+						"1689709056-305",
+						"1689709256-622",
+						"1689709577-867",
+						"1689709643-424",
+						"1689723628-648",
+						"1689723653-787",
+						"1689724779-265",
+						"1689725953-501",
+						"1689725965-701",
+						"1689726163-233",
+						"1689726171-133",
+						"1689726570-451",
+						"1689726577-934"
+					],
+					"folders": {
+
+					},
+					"metadata": {
+						"color": null,
+						"folded": true
+					}
+				},
+				"act3": {
+					"files": [
+						"1690249415-648",
+						"1690254527-787",
+						"1690254541-366",
+						"1690256556-146",
+						"1690585010-787",
+						"1690585024-366",
+						"1690586608-146"
+					],
+					"folders": {
+
+					},
+					"metadata": {
+						"color": null,
+						"folded": true
+					}
+				},
+				"act4": {
+					"files": [
+						"1690600597-918",
+						"1690738579-648",
+						"1690749369-787"
+					],
+					"folders": {
+
+					},
+					"metadata": {
+						"color": null,
+						"folded": true
+					}
+				}
 			},
 			"metadata": {
 				"color": null,
@@ -64,16 +131,75 @@
 		},
 		"Timelines": {
 			"files": [
-				"timeline-1688959080.json",
-				"timeline-1689005459.json",
-				"timeline-1689006281.json",
-				"timeline-1689179473.json",
-				"timeline-1689179774.json",
-				"timeline-1689707658.json",
-				"timeline-1689709012.json"
+
 			],
 			"folders": {
+				"act1": {
+					"files": [
+						"timeline-1688959080.json",
+						"timeline-1689005459.json",
+						"timeline-1689006281.json",
+						"timeline-1689179473.json",
+						"timeline-1689179774.json"
+					],
+					"folders": {
 
+					},
+					"metadata": {
+						"color": null,
+						"folded": true
+					}
+				},
+				"act2": {
+					"files": [
+						"timeline-1689707658.json",
+						"timeline-1689709012.json"
+					],
+					"folders": {
+
+					},
+					"metadata": {
+						"color": null,
+						"folded": true
+					}
+				},
+				"act3": {
+					"files": [
+						"timeline-1690244847.json",
+						"timeline-1690252973.json",
+						"timeline-1690254702.json",
+						"timeline-1690256177.json",
+						"timeline-1690256651.json",
+						"timeline-1690584980.json",
+						"timeline-1690586053.json",
+						"timeline-1690586577.json",
+						"timeline-1690587574.json"
+					],
+					"folders": {
+
+					},
+					"metadata": {
+						"color": null,
+						"folded": true
+					}
+				},
+				"act4": {
+					"files": [
+						"timeline-1690597401.json",
+						"timeline-1690600558.json",
+						"timeline-1690602343.json",
+						"timeline-1690738564.json",
+						"timeline-1690740621.json",
+						"timeline-1690749347.json"
+					],
+					"folders": {
+
+					},
+					"metadata": {
+						"color": null,
+						"folded": false
+					}
+				}
 			},
 			"metadata": {
 				"color": null,
