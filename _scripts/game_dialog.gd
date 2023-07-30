@@ -9,7 +9,7 @@ func _ready():
 	
 	#When entering this scene, check which is the Dialog to load
 	if PlayerData.recorded_dialogs.size() == 0:
-		enter_new_dialog_from_fade("dlg_006", "no_fade")
+		enter_new_dialog_from_fade("dlg_021", "no_fade")
 	else:
 		match PlayerData.recorded_dialogs[-1]: #based on the last recorded one, figure out the next to play
 			_:
@@ -88,7 +88,7 @@ func pop_up_save():
 func _on_button_yes_button_up():
 	animate_button($additional_screen_elements/pop_up_save/button_yes)
 	
-	$additional_screen_elements/pop_up_save/save_logic.save_game()
+	save_game()
 	$general_timer.start(0.5); yield($general_timer, "timeout")
 	$scene_transitioner.scene_transition("game_dialog")
 	
@@ -98,6 +98,9 @@ func _on_button_no_button_up():
 	animate_button($additional_screen_elements/pop_up_save/button_no)
 	$scene_transitioner.scene_transition("game_dialog")
 	$additional_screen_elements/pop_up_save.hide()
+
+func save_game():
+	$additional_screen_elements/pop_up_save/save_logic.save_game()
 
 #---------------------------------------------------------------------------------------------------
 # ANIMATION RELATED STUFF
@@ -162,7 +165,7 @@ func show_special_background(background_name : String, special_animation = "none
 	animate_bg(background_node, special_animation)
 	
 	#Hide the other ones preemptively
-	var list_of_specials = ["shop_out", "vs_darknite", "king_throne", "none"]
+	var list_of_specials = ["shop_out", "vs_darknite", "king_throne", "street_night", "none"]
 	for bg in list_of_specials:
 		if bg != background_name:
 			get_node("additional_screen_elements/special_backgrounds/" + bg).hide()

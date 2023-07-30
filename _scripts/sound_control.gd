@@ -70,7 +70,7 @@ func bgm_fadeout(long = false):
 
 
 func adjust_sound_volume(volume : float):
-	var converted_volume : float = linear2db(volume)
+	var converted_volume : float = linear2db(volume*0.3)
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), converted_volume)
 
 func get_first_available_audio_player(sfx_or_music : String):
