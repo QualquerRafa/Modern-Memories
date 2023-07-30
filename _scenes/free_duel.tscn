@@ -159,12 +159,11 @@ margin_top = 0.0
 margin_right = 258.0
 margin_bottom = 126.0
 
-[node name="duelist_grandpa" parent="duelist_faces/duelist_buttons/GridContainer" instance=ExtResource( 16 )]
+[node name="duelist_joey" parent="duelist_faces/duelist_buttons/GridContainer" instance=ExtResource( 16 )]
 margin_left = 264.0
 margin_top = 0.0
 margin_right = 390.0
 margin_bottom = 126.0
-asset = ExtResource( 10 )
 
 [node name="duelist_tea" parent="duelist_faces/duelist_buttons/GridContainer" instance=ExtResource( 16 )]
 margin_left = 396.0
@@ -172,49 +171,50 @@ margin_top = 0.0
 margin_right = 522.0
 margin_bottom = 126.0
 
-[node name="duelist_joey" parent="duelist_faces/duelist_buttons/GridContainer" instance=ExtResource( 16 )]
+[node name="duelist_tristan" parent="duelist_faces/duelist_buttons/GridContainer" instance=ExtResource( 16 )]
 margin_left = 528.0
 margin_top = 0.0
 margin_right = 654.0
 margin_bottom = 126.0
 
-[node name="duelist_tristan" parent="duelist_faces/duelist_buttons/GridContainer" instance=ExtResource( 16 )]
+[node name="duelist_bakura" parent="duelist_faces/duelist_buttons/GridContainer" instance=ExtResource( 16 )]
 margin_left = 660.0
 margin_top = 0.0
 margin_right = 786.0
 margin_bottom = 126.0
 
-[node name="duelist_bakura" parent="duelist_faces/duelist_buttons/GridContainer" instance=ExtResource( 16 )]
+[node name="duelist_duke" parent="duelist_faces/duelist_buttons/GridContainer" instance=ExtResource( 16 )]
 margin_left = 792.0
 margin_top = 0.0
 margin_right = 918.0
 margin_bottom = 126.0
 
-[node name="duelist_duke" parent="duelist_faces/duelist_buttons/GridContainer" instance=ExtResource( 16 )]
+[node name="duelist_grandpa" parent="duelist_faces/duelist_buttons/GridContainer" instance=ExtResource( 16 )]
 margin_left = 924.0
 margin_top = 0.0
 margin_right = 1050.0
 margin_bottom = 126.0
+asset = ExtResource( 10 )
 
-[node name="duelist_weevil" parent="duelist_faces/duelist_buttons/GridContainer" instance=ExtResource( 16 )]
+[node name="duelist_mai" parent="duelist_faces/duelist_buttons/GridContainer" instance=ExtResource( 16 )]
 margin_left = 1056.0
 margin_top = 0.0
 margin_right = 1182.0
 margin_bottom = 126.0
 
-[node name="duelist_rex" parent="duelist_faces/duelist_buttons/GridContainer" instance=ExtResource( 16 )]
+[node name="duelist_weevil" parent="duelist_faces/duelist_buttons/GridContainer" instance=ExtResource( 16 )]
 margin_left = 0.0
 margin_top = 132.0
 margin_right = 126.0
 margin_bottom = 258.0
 
-[node name="duelist_mako" parent="duelist_faces/duelist_buttons/GridContainer" instance=ExtResource( 16 )]
+[node name="duelist_rex" parent="duelist_faces/duelist_buttons/GridContainer" instance=ExtResource( 16 )]
 margin_left = 132.0
 margin_top = 132.0
 margin_right = 258.0
 margin_bottom = 258.0
 
-[node name="duelist_mai" parent="duelist_faces/duelist_buttons/GridContainer" instance=ExtResource( 16 )]
+[node name="duelist_mako" parent="duelist_faces/duelist_buttons/GridContainer" instance=ExtResource( 16 )]
 margin_left = 264.0
 margin_top = 132.0
 margin_right = 390.0
@@ -232,25 +232,25 @@ margin_top = 132.0
 margin_right = 654.0
 margin_bottom = 258.0
 
-[node name="duelist_tenma" parent="duelist_faces/duelist_buttons/GridContainer" instance=ExtResource( 16 )]
+[node name="duelist_kaiba" parent="duelist_faces/duelist_buttons/GridContainer" instance=ExtResource( 16 )]
 margin_left = 660.0
 margin_top = 132.0
 margin_right = 786.0
 margin_bottom = 258.0
 
-[node name="duelist_kaiba" parent="duelist_faces/duelist_buttons/GridContainer" instance=ExtResource( 16 )]
+[node name="duelist_pegasus" parent="duelist_faces/duelist_buttons/GridContainer" instance=ExtResource( 16 )]
 margin_left = 792.0
 margin_top = 132.0
 margin_right = 918.0
 margin_bottom = 258.0
 
-[node name="duelist_pegasus" parent="duelist_faces/duelist_buttons/GridContainer" instance=ExtResource( 16 )]
+[node name="duelist_nitemare" parent="duelist_faces/duelist_buttons/GridContainer" instance=ExtResource( 16 )]
 margin_left = 924.0
 margin_top = 132.0
 margin_right = 1050.0
 margin_bottom = 258.0
 
-[node name="duelist_nitemare" parent="duelist_faces/duelist_buttons/GridContainer" instance=ExtResource( 16 )]
+[node name="duelist_tenma" parent="duelist_faces/duelist_buttons/GridContainer" instance=ExtResource( 16 )]
 margin_left = 1056.0
 margin_top = 132.0
 margin_right = 1182.0

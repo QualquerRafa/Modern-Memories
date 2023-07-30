@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://_resources/tournament/dialogue_box.png" type="Texture" id=1]
 [ext_resource path="res://_scripts/game_dialog.gd" type="Script" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://_resources/backgrounds/bg2.jpg" type="Texture" id=9]
 [ext_resource path="res://_resources/backgrounds/bg3.jpg" type="Texture" id=10]
 [ext_resource path="res://_scripts/save_load_logic.gd" type="Script" id=11]
+[ext_resource path="res://_resources/backgrounds/bg_street_night.jpg" type="Texture" id=12]
 
 [sub_resource type="StyleBoxTexture" id=1]
 texture = ExtResource( 5 )
@@ -239,6 +240,14 @@ visible = false
 position = Vector2( 0, -500 )
 texture = ExtResource( 10 )
 centered = false
+
+[node name="street_night" type="Sprite" parent="additional_screen_elements/special_backgrounds"]
+visible = false
+position = Vector2( -33, -21 )
+scale = Vector2( 1.05, 1.07639 )
+texture = ExtResource( 12 )
+centered = false
+region_rect = Rect2( 263, 2, 806, 679 )
 
 [node name="none" type="Sprite" parent="additional_screen_elements/special_backgrounds"]
 visible = false
