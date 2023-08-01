@@ -9,7 +9,7 @@ func _ready():
 	
 	#When entering this scene, check which is the Dialog to load
 	if PlayerData.recorded_dialogs.size() == 0:
-		enter_new_dialog_from_fade("dlg_021", "no_fade")
+		enter_new_dialog_from_fade("dlg_001", "no_fade")
 	else:
 		match PlayerData.recorded_dialogs[-1]: #based on the last recorded one, figure out the next to play
 			_:

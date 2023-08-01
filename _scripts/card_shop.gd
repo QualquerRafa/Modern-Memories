@@ -193,6 +193,7 @@ func _on_buy_card_button_up():
 			
 			PlayerData.player_starchips -= get_price_from_displayer
 			PlayerData.password_bought_cards.append(get_card_id_from_displayed)
+			PlayerData.last_reward_cards.append(get_card_id_from_displayed)
 			
 			reset_scene_after_buy()
 	#print("Password Bought Cards (ids): ", PlayerData.password_bought_cards)

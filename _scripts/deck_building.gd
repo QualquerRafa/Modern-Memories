@@ -2,6 +2,7 @@ extends Node2D
 
 var player_trunk : Dictionary = PlayerData.player_trunk
 var current_highlighted_card : Node
+var initial_new_count = PlayerData.last_reward_cards.size()
 
 func _ready():
 	#Animate the transition when starting this scene
@@ -110,11 +111,19 @@ func generate_necessary_left_side_nodes():
 
 #---------------------------------------------------------------------------------------------------
 func update_left_panel(player_trunk_as_array):
-	#Show newest cards first
-	if PlayerData.last_reward_cards.size() != 0:
+	#If sorting by Name, show the Newest cards first
+	for i in range(player_trunk_as_array.size()):
+		if $panel_left/ScrollContainer/MarginContainer/GridContainer.get_child(i).get_node("z_indexer/new_indicator").is_visible():
+			$panel_left/ScrollContainer/MarginContainer/GridContainer.get_child(i).get_node("z_indexer/new_indicator").hide()
+	
+	if PlayerData.last_reward_cards.size() != 0 and $panel_left/sortables.last_sorted_type == "name":
 		for card in PlayerData.last_reward_cards:
 			player_trunk_as_array.erase(card)
 			player_trunk_as_array.push_front(card)
+		
+		#Make their "new_indicator" visible
+		for i in range(PlayerData.last_reward_cards.size()):
+			$panel_left/ScrollContainer/MarginContainer/GridContainer.get_child(i).get_node("z_indexer/new_indicator").show()
 	
 	if current_highlighted_card != null:
 		var node_onScreen_position_X = current_highlighted_card.get_global_transform_with_canvas()[2][0]
@@ -175,6 +184,7 @@ func about_to_duel_correct_buttons():
 func _on_go_duel_button_up():
 	#Check if the player deck has 40 cards
 	if PlayerData.player_deck.size() == 40:
+		
 		button_click_animation("panel_right/deck_buttons/button_go_duel")
 		$scene_transitioner.scene_transition("duel_scene")
 	else:

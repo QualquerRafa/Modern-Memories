@@ -101,6 +101,13 @@ func _on_0175card_button_up():
 	#Reset previous card, if any
 	reset_highlighted_card()
 	
+	#If the card is one of the "New" cards, move the indicator a little bit
+	if $z_indexer/new_indicator.is_visible():
+		var start_pos = Vector2(29, -10) #[Vector2(194,144), Vector2(132, 144), Vector2(70,144)]
+		var final_pos = Vector2(22, -22) #[Vector2(187,132), Vector2(125, 132), Vector2(63,132)]
+		$card_self_tween2.interpolate_property($z_indexer/new_indicator, "position", start_pos, final_pos, 0.1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+		$card_self_tween2.start()
+	
 	#The first click should highlight the card, and a second one move it to the other side
 	card_info_box.current_highlighted_card = self
 	card_info_box.update_user_interface(self)
@@ -130,6 +137,7 @@ func _on_0175card_button_up():
 		reset_highlighted_card()
 		deck_building_root.update_left_panel(newly_sorted_trunk)
 		deck_building_root.update_right_panel()
+		
 	else:
 		SoundControl.play_sound("poc_cursor")
 	
@@ -153,3 +161,12 @@ func reset_highlighted_card():
 		var original_counter_position = Vector2(-1, 54)
 		$card_self_tween2.interpolate_property(card_info_box.current_highlighted_card.get_node("z_indexer/trunk_counter"), "rect_position", card_info_box.current_highlighted_card.get_node("z_indexer/trunk_counter").rect_position, original_counter_position, 0.1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 		$card_self_tween2.start()
+		
+		#Reset any "New" indicator that has been interacted with
+		var final_pos = Vector2(29, -10)
+		var start_pos = Vector2(22, -22)
+		$card_self_tween2.interpolate_property(card_info_box.current_highlighted_card.get_node("z_indexer/new_indicator"), "position", start_pos, final_pos, 0.1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+		$card_self_tween2.start()
+		
+		card_info_box.current_highlighted_card.get_node("z_indexer/new_indicator").hide()
+		PlayerData.last_reward_cards.erase(card_info_box.current_highlighted_card.this_card_id)

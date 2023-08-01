@@ -416,13 +416,16 @@ func register_player_rewards(starchips : int, array_of_3 : Array):
 	
 	#Register the 3 rewarded cards in the Player's Trunk
 	for card_reward in array_of_3:
+		#append each new card to the list
+		PlayerData.last_reward_cards.append(card_reward)
+		
 		if card_reward in PlayerData.player_trunk:
 			PlayerData.player_trunk[card_reward] += 1 #register another copy to an already existing 'card_reward' in player's trunk
 		else:
 			PlayerData.player_trunk[card_reward] = 1 #add the first copy as the registering of 'card_reward'
 	
 	#Register to be shown first in deck trunk
-	PlayerData.last_reward_cards = array_of_3
+	#PlayerData.last_reward_cards = array_of_3
 
 func show_big_letters():
 	#Pre fade in the scene
