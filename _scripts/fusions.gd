@@ -145,7 +145,7 @@ func attribute_fusion(card_1 : String, card_2 : String):
 	var fusion_result : Array
 	
 	#Cards with these keywords on it's name will have attribute fusions
-	var card_name_keywords = ["Mask Change", "Elemental HERO", "Gem-Knight", "Dharc", "Lyna", "Aussa", "Hiita", "Eria", "Wynn"]
+	var card_name_keywords = ["Mask Change", "Elemental HERO", "Destiny HERO", "Gem-Knight", "Dharc", "Lyna", "Aussa", "Hiita", "Eria", "Wynn"]
 	
 	#Check if Card_1 or Card_2 has a Keyword on it's name
 	var attribute_holder : String
@@ -318,6 +318,7 @@ var specific_fusion_list = {
 	"00077_00339" : "00340",                                                        #Baby Dragon + Alligator's Sword = Alligator's Sword Dragon
 	"00088_00152" : "00381",                                                        #Two-Headed King Rex + Crawling Dragon #2 = Bracchio-raidus
 	"00383_00383" : "00384",                                                        #Black Tyranno + Black Tyranno = Ultimate Tyranno
+	"00379_00379" : "00380",                                                        #Cyber Dinosaur + Cyber Dinosaur = Super Conductor Tyranno
 	"00386_00387" : "00363",                                                        #Oxygeddon + Hydrogeddon = Water Dragon
 	"00078_00079" : "00425",                                                        #Time Wizard + Dark Sage = Sorcerer of Dark Magic
 	"00080_00426" : "00427",                                                        #Dark Magician + Black Luster Soldier = Dark Master of Chaos
@@ -404,6 +405,25 @@ var specific_fusion_list = {
 	"00129_01380" : "01364",                                                        #Skull Servant + Wightbaking = King of the Skull Servants
 	"01381_01381" : "01367",                                                        #Wightprincess + Wightprincess = The Lady in Wight
 	"01399_01412" : "01398",                                                        #Beast King Barbaros + Machine Lord Ur = Beast Machine King Barbaros Ur
+	"01045_01047" : "01418",                                                        #Sanga of the Thunder + Kazejin = Gate Guardian of Thunder and Wind
+	"01045_01046" : "01419",                                                        #Sanga of the Thunder + Suijin = Gate Guardian of Water and Thunder
+	"01046_01047" : "01420",                                                        #Suijin + Kazejin = Gate Guardian of Wind and Water
+	"01045_01420" : "01042",                                                        #Sanga of the Thunder + Gate Guardian of Wind and Water = Gate Guardian
+	"01046_01418" : "01042",                                                        #Suijin + Gate Guardian of Thunder and Wind = Gate Guardian
+	"01047_01419" : "01042",                                                        #Kazejin + Gate Guardian of Water and Thunder = Gate Guardian
+	"00190_01430" : "01429",                                                        #XYZ-Dragon Cannon + ABC-Dragon Buster = A-to-Z Dragon Buster Cannon
+	"01439_01440" : "01441",                                                        #Soul Tiger + Decayed Commander = Zombie Tiger
+	"00424_01447" : "01446",                                                        #Valkyrion the Magna Warrior + Berserkion the Electromagna Warrior = Imperion Magnum the Superconductive Battlebot
+	"01462_01463" : "01447",                                                        #Delta the Magnet Warrior + Epsilon the Magnet Warrior = Berserkion the Electromagna Warrior
+	"01458_01458" : "00498",                                                        #Carboneddon + Carboneddon = Hyozanryu
+	"00498_01458" : "01450",                                                        #Hyozanryu + Carboneddon = Diamond Head Dragon
+	"00498_00498" : "01450",                                                        #Hyozanryu + Hyozanryu = Diamond Head Dragon
+	"01373_01467" : "01365",                                                        #Gozuki + Mezuki = Ushi Oni
+	"00849_00849" : "00850",                                                        #Bokoichi the Freightening Car + Bokoichi the Freightening Car = Dekoichi the Battlechanted Locomotive
+	"00643_01497" : "01490",                                                        #Red-Eyes Black Flare Dragon + Black Metal Dragon = Red-Eyes Flare Metal Dragon
+	"00073_01497" : "01490",                                                        #Red-Eyes Black Dragon + Black Metal Dragon = Red-Eyes Flare Metal Dragon
+	"01503_01509" : "01504",                                                        #Destiny HERO - Dogma + Destiny HERO - Plasma = Destiny End Dragoon
+	"00703_00775" : "00681",                                                        #Elemental HERO Neos + Rainbow Dragon = Rainbow Neos
 	
 	#Fang of Critias
 	"00240_00506" : "00483",                                                        #Fang of Critias + Blue-Eyes White Dragon = Blue-Eyes Tyrant Dragon
@@ -445,7 +465,7 @@ var specific_fusion_list = {
 	"00240_00582" : "00549",                                                        #Toon World + Blue-Eyes White Dragon = Blue-Eyes Toon Dragon
 	"00072_00582" : "00550",                                                        #Toon World + Summoned Skull = Toon Summoned Skull
 	"00426_00582" : "00553",                                                        #Toon World + Black Luster Soldier = Toon Black Luster Soldier
-	"00554_00582" : "00554",                                                        #Toon World + Buster Blader = Toon Buster Blader
+	"00235_00582" : "00554",                                                        #Toon World + Buster Blader = Toon Buster Blader
 	"00080_00582" : "00555",                                                        #Toon World + Dark Magician = Toon Dark Magician
 	"00559_00582" : "00560",                                                        #Toon World + Ryu-Ran = Manga Ryu-Ran
 	"00570_00582" : "00561",                                                        #Toon World + Gemini Elf = Toon Gemini Elf
@@ -457,6 +477,7 @@ var specific_fusion_list = {
 	"00574_00582" : "00573",                                                        #Toon World + Cannon Soldier = Toon Cannon Soldier
 	"00582_00593" : "00576",                                                        #Toon World + Harpie Lady = Toon Harpie Lady
 	"00582_00823" : "00565",                                                        #Toon World + Cyber Dragon = Toon Cyber Dragon
+	"00582_01201" : "00552",                                                        #Toon World + Barrel Dragon = Toon Barrel Dragon
 	
 }
 
@@ -468,6 +489,8 @@ var attribute_fusion_list = {
 						"light": ["00769"],                                                         # Elemental HERO + Light = Elemental Hero The Shinig
 						"water": ["00770"],                                                         # Elemental HERO + Water = Elemental Hero Absolute Zero
 						"dark" : ["00771"]},                                                        # Elemental HERO + Dark = Elemental Hero Escuridao
+	
+	"Destiny HERO" : {"dark" : ["01514"]},                                                          #Destiny HERO + Dark = Destiny HERO - Dangerous
 	
 	"Mask Change" : {"wind": ["00710", "00690"],                                                    # Mask Change + Wind = Masked HERO Blast, Masked HERO Divine Wind
 					"fire" : ["00711"],                                                             # Mask Change + Fire = Masked HERO Goka
@@ -616,7 +639,7 @@ var special_fusion_list = {
 	"01209" : {"machine" : ["01205", "01204", "01200"]},                          #Flint Lock + Machine = B.E.S. Big Core, MK2 and MK3
 	"01205" : {"machine" : ["01204", "01200"]},                                   #B.E.S. Big Core + Machine = MK2 and MK3
 	"01204" : {"machine" : ["01200"]},                                            #B.E.S. Big Core MK2 + Machine = MK3
-	"00182" : {"insect" : ["01247"]},                                             #Great Moth + insect = Ultimate Great Insect
+	#"00182" : {"insect" : ["01247"]},                                             #Great Moth + insect = Ultimate Great Insect
 	"01255" : {"insect" : ["01249"]},                                             #Flying Kamakiri #2 + Insect = Grasschopper
 	"00096" : {"machine" : ["01266"]},                                            #Killer Needle + Machine = Armored Bee
 	"01261" : {"insect" : ["01260"]},                                             #Kuwagata A + insect = Kuwagar Hercules
@@ -644,6 +667,27 @@ var special_fusion_list = {
 			   "zombie": ["01116"]},                                              #Zeradias + Zombie = Alghoul Mazera
 	"01409" : {"fairy" : ["01405"]},                                              #Angel O1 + Fairy = Angel O7
 	"00642" : {"fairy" : ["01405"]},                                              #Divine Knight Ishzark + Fairy = Angel O7
+	"01437" : {"warrior" : ["00926"]},                                            #Armed Dragon, the Armored Dragon + Warrior = Dragonic Knight
+	"01473" : {"zombie" : ["01449"]},                                             #Abaki + Zombie = Red Ogre
+	"00999" : {"dragon" : ["00978"]},                                             #White Night Queen + Dragon = White Night Dragon
+	"01478" : {"female" : ["00982"]},                                             #Cosmo Brain + Female = Cosmo Queen
+	"01482" : {"crystal" : ["00775"]},                                            #Crystal Beast Rainbow Dragon + Crystal = Rainbow Dragon
+	"01498" : {"winged beast" : ["01495"],                                        #Transforming Sphere + Winged Beast = The Atmosphere
+			   "dragon" : ["01495"]},                                             #Transforming Sphere + Dragon = The Atmosphere
+	"00646" : {"zombie" : ["01491"]},                                             #Red-Eyes Zombie Dragon + Zombie = Red-Eyes Zombie Dragon Lord
+	"01492" : {"zombie" : ["01491"]},                                             #Red-Eyes Zombie Necro Dragon + Zombie = Red-Eyes Zombie Dragon Lord
+	"01507" : {"d-hero" : ["01506"]},                                             #Destiny HERO - Dystopia + D-Hero = Destiny HERO - Dominance
+	"01514" : {"d-hero" : ["01506"]},                                             #Destiny HERO - Dangerous + D-Hero = Destiny HERO - Dominance
+	"01508" : {"d-hero" : ["01506"]},                                             #Destiny HERO - Destroyer Phoenix Enforcer + D-Hero = Destiny HERO - Dominance
+	"01506" : {"d-hero" : ["01505"]},                                             #Destiny HERO - Dominance + D-Hero = Destiny HERO - Dusktopia
+	"01513" : {"d-hero" : ["01510"],                                              #Vision HERO Trinity + D-Hero = Vision HERO Adoration
+			   "v-hero" : ["01510"]},                                             #Vision HERO Trinity + V-Hero = Vision HERO Adoration
+	"00757" : {"warrior" : ["00736"]},                                            #Chrysalis Dolphin + Warrior = Neo-Spacian Aqua Dolphin
+	"00758" : {"warrior" : ["00732"]},                                            #Chrysalis Chicky + Warrior = Neo-Spacian Air Hummingbird
+	"00759" : {"warrior" : ["00733"]},                                            #Chrysalis Larva + Warrior = Neo-Spacian Flare Scarab
+	"00760" : {"warrior" : ["00734"]},                                            #Chrysalis Mole + Warrior = Neo-Spacian Grand Mole
+	"00761" : {"warrior" : ["00737"]},                                            #Chrysalis Pantail + Warrior = Neo-Spacian Dark Panther
+	"00762" : {"warrior" : ["00735"]},                                            #Chrysalis Pinny + Warrior = Neo-Spacian Glow Moss
 }
 
 
@@ -689,6 +733,8 @@ var generic_fusion_list = {
 	"cyber_dragon" : ["00899", "00823"],                                          #Proto-Cyber Dragon, Cyber Dragon
 	"cyber_cyber" : ["00894"],                                                    #Chimeratech Rampage Dragon
 	"cyberdark_cyberdark" : ["00895"],                                            #Cyberdarkness Dragon
+	
+	"crystal_crystal" : ["01482"],                                                #Crystal Beast Rainbow Dragon
 
 	"dinosaur_fiend":       ["00382", "00383"],                                    #Destroyersaurus, Black Tyranno
 	"dinosaur_machine":     ["00052", "00379"],                                    #Cyber Saurus, Cyber Dinosaur
@@ -708,6 +754,9 @@ var generic_fusion_list = {
 	"dragon_vampire":     ["01057"],                                              #Vampire Dragon
 	"dragon_warrior":     ["00001", "00002", "00003", "00004", "01179"],          #Dragon Statue, Dragoness the Wicked Knight, D. Human, Sword Arm of Dragon, Mikazukinoyaiba
 	"dragon_zombie":      ["00011", "00012", "00013"],                              #Dragon Zombie, Skelgon, Curse of Dragon
+	
+	"d-hero_d-hero" :     ["01507"],                                                #Dystopia
+	"d-hero_v-hero" :     ["01513"],                                                #Vision HERO Trinity
 	
 	"fairy_female":       ["00060", "00212", "00216"],                              #Dark Witch, St. Joan, Amaterasu
 	"fairy_insect":       ["00400", "00401"],                                      #Millennium Scorpion, Mystical Beast of Serket
@@ -794,6 +843,8 @@ var generic_fusion_list = {
 	"turtle_zombie" : ["00615"],                                                  #Pyramid Turtle
 	
 	"vampire_vampire" : ["01055", "00501", "01059"],                               #Vampire Baby, Vampire Lord, Vampire Genesis
-
+	
+	"v-hero_v-hero" :   ["01513"],                                                #Vision HERO Trinity
+	
 	"warrior_zombie": ["00008", "00009", "00411", "01049"]                        #Zombie Warrior, Armored Zombie, Master Kyonshee, Skull Knight
 }

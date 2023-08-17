@@ -11,15 +11,12 @@ func _on_DebugAddAll_button_up():
 	update_panels()
 
 func _on_debug_add_random_button_up():
-	for _i in range(128):
-		randomize()
-		var random_card_id = randi()%CardList.card_list.keys().size()
-		var card_to_add = String(random_card_id).pad_zeros(5)
-		
-		if card_to_add in PlayerData.player_trunk:
-			PlayerData.player_trunk[card_to_add] += 1 #register another copy of the card to the already existing id key
+	print(CardList.general_card_pool.size())
+	for card in CardList.general_card_pool:
+		if card in PlayerData.player_trunk:
+			PlayerData.player_trunk[card] += 1 #register another copy of the card to the already existing id key
 		else: 
-			PlayerData.player_trunk[card_to_add] = 1 #card is not in trunk, so add it's key:value pair as id:count
+			PlayerData.player_trunk[card] = 1 #card is not in trunk, so add it's key:value pair as id:count
 	
 	update_panels()
 

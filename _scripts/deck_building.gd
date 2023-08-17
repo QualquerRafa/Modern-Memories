@@ -317,4 +317,3 @@ func button_click_animation(button_node_path : String):
 	$user_interface/UI_tween.interpolate_property(get_node(button_node_path), "rect_scale", get_node(button_node_path).rect_scale, normal_scale, 0.1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$user_interface/UI_tween.start()
 
-

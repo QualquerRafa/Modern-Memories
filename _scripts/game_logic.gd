@@ -123,16 +123,16 @@ func do_battle(attacking_card : Node, defending_card : Node):
 	card_ready_to_attack = attacking_card
 	card_ready_to_defend = defending_card
 	
-#	#Check for Flip Effects before battle
-#	if attacking_card.this_card_flags.is_facedown == true and CardList.card_list[attacking_card.this_card_id].effect.size() > 0 and CardList.card_list[attacking_card.this_card_id].effect[0] in ["on_flip", "on_summon"] and attacking_card.this_card_flags.has_activated_effect == false:
-#		match CardList.card_list[attacking_card.this_card_id].effect[0]:
-#			"on_flip":
-#				effect_activation(attacking_card, "on_flip")
-#			"on_summon":
-#				attacking_card.this_card_flags.is_facedown = false
-#				effect_activation(attacking_card, "on_summon")
-#		yield($effects, "effect_fully_executed")
-#		$battle_visuals/battle_timer_node.start(0.3); yield($battle_visuals/battle_timer_node, "timeout")
+	#Check for ON_SUMMON Effects before battle when a card is self flipped. 'on_flip' were intentionally removed from this check so player can't trigger it's own on flips
+	if attacking_card.this_card_flags.is_facedown == true and CardList.card_list[attacking_card.this_card_id].effect.size() > 0 and CardList.card_list[attacking_card.this_card_id].effect[0] in ["on_summon"] and attacking_card.this_card_flags.has_activated_effect == false:
+		match CardList.card_list[attacking_card.this_card_id].effect[0]:
+			#"on_flip":
+			#	effect_activation(attacking_card, "on_flip")
+			"on_summon":
+				attacking_card.this_card_flags.is_facedown = false
+				effect_activation(attacking_card, "on_summon")
+		yield($effects, "effect_fully_executed")
+		$battle_visuals/battle_timer_node.start(0.3); yield($battle_visuals/battle_timer_node, "timeout")
 	
 	#Attacker flags
 	attacking_card.this_card_flags.has_battled = true

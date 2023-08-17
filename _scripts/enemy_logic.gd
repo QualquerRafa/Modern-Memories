@@ -34,7 +34,7 @@ func enemy_draw_phase():
 		return "exit game"
 	
 	#Change enemy Hand for testing purposes
-	#enemy_hand = ["00430", "00430", "00430", "00430", "00430"]
+	#enemy_hand = ["00119", "00119", "00119", "00119", "00119"]
 	#print("--------------------------------------------------")
 	#for card in enemy_hand:
 	#	print(CardList.card_list[card].card_name, "// ATK: ", CardList.card_list[card].atk, " DEF: ", CardList.card_list[card].def)
@@ -114,7 +114,9 @@ func enemy_choosing_card_to_play():
 	
 	elif player_has_more_monsters_than_com == true:
 		#Look for monsters with destroy_all_enemy_monsters that it can play
-		if player_monster_list.size() >= 2:
+		randomize()
+		var rand_chance_of_destroy_all = randf()
+		if player_monster_list.size() >= 2 and rand_chance_of_destroy_all >= 0.6:
 			for card_id in enemy_hand:
 				if not CardList.card_list[card_id].attribute in ["spell", "trap"] and CardList.card_list[card_id].effect.size() > 2 and typeof(CardList.card_list[card_id].effect[2]) == TYPE_STRING and CardList.card_list[card_id].effect[2] == "all_enemy_monsters":
 					final_card_to_play = ["monster", card_id]

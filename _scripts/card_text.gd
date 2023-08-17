@@ -49,8 +49,24 @@ func get_card_text(card_id : String):
 		
 		line1 = correct_language_monster_type + GameLanguage.type_can_fuse_with[PlayerData.game_language] + correct_language_fusion_friends.trim_suffix(", ") + "."
 		
+		#Hide the mode toggle button
+		#get_node("../card_text/toggle_img_txt").show()
+		
+		#Create the IMG version of the same text as above
+		#var img_description_line = get_node("../card_text/Container_images/description_line1")
+		#img_description_line.bbcode_text = "[img=26]res://_resources/_types/" + card_on_CardList.type + ".png[/img]" + GameLanguage.type_can_fuse_with[PlayerData.game_language]
+		#for friendly_type in fusion_friends[card_on_CardList.type]:
+		#	img_description_line.bbcode_text += "[img=26]res://_resources/_types/" + friendly_type + ".png[/img] "
+		#if card_on_CardList.count_as != null:
+		#	var correct_language_count_as_type = GameLanguage.types[card_on_CardList.count_as][PlayerData.game_language]
+		#	img_description_line.bbcode_text += "\n" + GameLanguage.count_as_part1[PlayerData.game_language] + correct_language_count_as_type + GameLanguage.count_as_part2[PlayerData.game_language]
+		
+		
 	#WITH EFFECT: The description will be base on what kind of effect the card has
 	elif card_on_CardList.effect.size() > 0:
+		#Hide the mode toggle button
+		get_node("../card_text/toggle_img_txt").hide()
+		
 		#EQUIP SPELLS
 		if card_on_CardList.type == "equip":
 			var type_or_attribute = "types"

@@ -11,6 +11,9 @@ var player_starchips : int = 0
 var password_bought_cards : Array = [] #populated by ID:String
 var recorded_duels : Dictionary = {} #populated by {duelist_name : {W:int, L:int}}
 var last_reward_cards : Array = [] #populated by ID:String
+var list_of_player_decks : Dictionary = {} #populated by {deck_name:String : {deck:Array, color:Color(1,1,1,1)}}
+var active_deck_name : String = ""
+var registered_freeduel_speed : float = 1.0 #to keep between duels
 
 var recorded_dialogs : Array = [] #populated by Dialogic Timeline Names
 
@@ -88,6 +91,19 @@ func create_player_deck():
 	#Complete the deck with random cards from the General Card Pool (MONSTERS ONLY)
 	var general_card_pool : Array = CardList.general_card_pool
 	fill_deck_with_cards(general_card_pool)
+	
+	#Register this deck as "Start" on 'list_of_player_decks'
+	active_deck_name = "Elmnt"
+	list_of_player_decks[active_deck_name] = {"deck":[], "color":Color(1,1,1,0.333)}
+	list_of_player_decks[active_deck_name].deck = player_deck
+	
+	var starter_deck_color = Color(1,1,1,0.333)
+	match picked_elemental_base:
+		earth_base: starter_deck_color = Color(148/255.0, 85/255.0, 22/255.0, 1)
+		fire_base:  starter_deck_color = Color(212/255.0, 54/255.0, 36/255.0, 1)
+		water_base: starter_deck_color = Color(41/255.0, 127/255.0, 194/255.0, 1)
+		wind_base:  starter_deck_color = Color(147/255.0, 237/255.0, 210/255.0, 1)
+	list_of_player_decks[active_deck_name].color = starter_deck_color
 	
 	register_deck_on_trunk()
 	return player_deck

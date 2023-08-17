@@ -9,7 +9,7 @@ func _ready():
 	
 	#When entering this scene, check which is the Dialog to load
 	if PlayerData.recorded_dialogs.size() == 0:
-		enter_new_dialog_from_fade("dlg_001", "no_fade")
+		enter_new_dialog_from_fade("dlg_040", "no_fade")
 	else:
 		match PlayerData.recorded_dialogs[-1]: #based on the last recorded one, figure out the next to play
 			_:
@@ -81,6 +81,7 @@ func pop_up_save():
 	$additional_screen_elements/pop_up_save/pop_up_text.text = GameLanguage.system.pop_up_save[PlayerData.game_language]
 	$additional_screen_elements/pop_up_save/button_yes/label.text = GameLanguage.system.yes[PlayerData.game_language]
 	$additional_screen_elements/pop_up_save/button_no/label.text = GameLanguage.system.no[PlayerData.game_language]
+	$additional_screen_elements/pop_up_save/button_return_to_title/label.text = GameLanguage.system.return_to_title[PlayerData.game_language]
 	
 	#Show the pop up box
 	$additional_screen_elements/pop_up_save.show()
@@ -98,6 +99,13 @@ func _on_button_no_button_up():
 	animate_button($additional_screen_elements/pop_up_save/button_no)
 	$scene_transitioner.scene_transition("game_dialog")
 	$additional_screen_elements/pop_up_save.hide()
+
+func _on_button_return_to_title_button_up():
+	animate_button($additional_screen_elements/pop_up_save/button_return_to_title)
+	
+	save_game()
+	$general_timer.start(0.5); yield($general_timer, "timeout")
+	$scene_transitioner.scene_transition("main_menu")
 
 func save_game():
 	$additional_screen_elements/pop_up_save/save_logic.save_game()
@@ -130,12 +138,12 @@ func fade_screen(color): #'black' or 'white'
 	#Animation
 	var fade_time = 1.5 #in seconds
 	
-	print("fading in")
+	#print("fading in")
 	$tween.interpolate_property(fade_color_node, "modulate", Color(1,1,1,0), Color(1,1,1,1), fade_time/2, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 	$tween.start()
 	yield($tween, "tween_completed")
 	
-	print("fading out")
+	#print("fading out")
 	$tween.interpolate_property(fade_color_node, "modulate", Color(1,1,1,1), Color(1,1,1,0), fade_time/2, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
 	$tween.start()
 	yield($tween, "tween_completed")
@@ -233,6 +241,9 @@ func animate_bg(background_node, special_animation):
 			
 			#Hide the BG
 			background_node.hide()
+
+
+
 
 
 

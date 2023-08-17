@@ -5469,7 +5469,7 @@ const card_list = {
 	"atk": 1400,
 	"def": 600,
 	"type": "machine",
-	"count_as": null,
+	"count_as": "gadget",
 	"effect": [],
 	"passcode": "41172955"
   },
@@ -5480,7 +5480,7 @@ const card_list = {
 	"atk": 1300,
 	"def": 1500,
 	"type": "machine",
-	"count_as": null,
+	"count_as": "gadget",
 	"effect": [],
 	"passcode": "86445415"
   },
@@ -5491,7 +5491,7 @@ const card_list = {
 	"atk": 1200,
 	"def": 1200,
 	"type": "machine",
-	"count_as": null,
+	"count_as": "gadget",
 	"effect": [],
 	"passcode": "13839120"
   },
@@ -5502,7 +5502,7 @@ const card_list = {
 	"atk": 1700,
 	"def": 800,
 	"type": "machine",
-	"count_as": null,
+	"count_as": "gadget",
 	"effect": [],
 	"passcode": "55010259"
   },
@@ -5513,7 +5513,7 @@ const card_list = {
 	"atk": 1500,
 	"def": 1000,
 	"type": "machine",
-	"count_as": null,
+	"count_as": "gadget",
 	"effect": [],
 	"passcode": "29021114"
   },
@@ -6464,7 +6464,7 @@ const card_list = {
 	"atk": 1800,
 	"def": 2000,
 	"type": "machine",
-	"count_as": "warrior",
+	"count_as": "gadget",
 	"effect": [],
 	"passcode": "86281779"
   },
@@ -6771,7 +6771,7 @@ const card_list = {
 	"atk": 0,
 	"def": 0,
 	"type": "spellcaster",
-	"count_as": null,
+	"count_as": "fiend",
 	"effect": [
 	  "on_summon",
 	  "copy_atk"
@@ -6799,7 +6799,7 @@ const card_list = {
 	"atk": 0,
 	"def": 0,
 	"type": "spellcaster",
-	"count_as": null,
+	"count_as": "fiend",
 	"effect": [
 	  "on_summon",
 	  "copy_atk"
@@ -7379,7 +7379,7 @@ const card_list = {
 	"type": "zombie",
 	"count_as": null,
 	"effect": [
-	  "on_summon",
+	  "on_flip",
 	  "destroy_card",
 	  "all_enemy_monsters"
 	],
@@ -7685,7 +7685,11 @@ const card_list = {
 	"def": 2400,
 	"type": "dragon",
 	"count_as": "machine",
-	"effect": [],
+	"effect": [
+	  "on_summon",
+	  "self_power_up",
+	  300
+	],
 	"passcode": "88264978"
   },
   "00629": {
@@ -8444,9 +8448,8 @@ const card_list = {
 	"type": "warrior",
 	"count_as": null,
 	"effect": [
-	  "on_summon",
-	  "destroy_card",
-	  "all_enemy_monsters"
+	  "on_attack",
+	  "ignore_spelltrap"
 	],
 	"passcode": "17032740"
   },
@@ -9795,7 +9798,7 @@ const card_list = {
 	"atk": 1700,
 	"def": 1600,
 	"type": "beast",
-	"count_as": null,
+	"count_as": "crystal",
 	"effect": [],
 	"passcode": "69937550"
   },
@@ -9806,7 +9809,7 @@ const card_list = {
 	"atk": 600,
 	"def": 2000,
 	"type": "aqua",
-	"count_as": null,
+	"count_as": "crystal",
 	"effect": [],
 	"passcode": "68215963"
   },
@@ -9817,7 +9820,7 @@ const card_list = {
 	"atk": 1800,
 	"def": 1200,
 	"type": "beast",
-	"count_as": null,
+	"count_as": "crystal",
 	"effect": [],
 	"passcode": "07093411"
   },
@@ -9828,7 +9831,7 @@ const card_list = {
 	"atk": 1600,
 	"def": 1000,
 	"type": "beast",
-	"count_as": null,
+	"count_as": "crystal",
 	"effect": [],
 	"passcode": "95600067"
   },
@@ -9839,7 +9842,7 @@ const card_list = {
 	"atk": 300,
 	"def": 300,
 	"type": "fairy",
-	"count_as": null,
+	"count_as": "crystal",
 	"effect": [],
 	"passcode": "32710364"
   },
@@ -9850,7 +9853,7 @@ const card_list = {
 	"atk": 1200,
 	"def": 400,
 	"type": "beast",
-	"count_as": null,
+	"count_as": "crystal",
 	"effect": [],
 	"passcode": "32933942"
   },
@@ -9861,7 +9864,7 @@ const card_list = {
 	"atk": 1400,
 	"def": 800,
 	"type": "winged beast",
-	"count_as": null,
+	"count_as": "crystal",
 	"effect": [],
 	"passcode": "21698716"
   },
@@ -10149,7 +10152,7 @@ const card_list = {
 	"passcode": "54702678"
   },
   "00818": {
-	"card_name": "Stealth Union - Super Vehicroid",
+	"card_name": "Super Vehicroid - Stealth Union",
 	"attribute": "earth",
 	"level": 9,
 	"atk": 3600,
@@ -11039,7 +11042,10 @@ const card_list = {
 	"def": 2100,
 	"type": "machine",
 	"count_as": "cyber",
-	"effect": [],
+	"effect": [
+	  "on_attack",
+	  "multiple_attacker"
+	],
 	"passcode": "74157028"
   },
   "00887": {
@@ -12240,9 +12246,8 @@ const card_list = {
 	"type": "fairy",
 	"count_as": "female",
 	"effect": [
-	  "on_summon",
-	  "destroy_card",
-	  "all_enemy_monsters"
+	  "on_attack",
+	  "multiple_attacker"
 	],
 	"passcode": "78316184"
   },
@@ -12330,7 +12335,11 @@ const card_list = {
 	"def": 1600,
 	"type": "warrior",
 	"count_as": "female",
-	"effect": [],
+	"effect": [
+	  "on_summon",
+	  "destroy_card",
+	  "all_enemy_spelltraps"
+	],
 	"passcode": "02158562"
   },
   "00984": {
@@ -13002,10 +13011,10 @@ const card_list = {
 	"atk": 0,
 	"def": 2000,
 	"type": "machine",
-	"count_as": null,
+	"count_as": "gadget",
 	"effect": [
 	  "on_summon",
-	  "self_power_up",
+	  "count_as_power_up",
 	  1000
 	],
 	"passcode": "13316346"
@@ -13583,9 +13592,9 @@ const card_list = {
 	"type": "fairy",
 	"count_as": "female",
 	"effect": [
-		"on_attack",
-		"burn",
-		600
+	  "on_attack",
+	  "burn",
+	  600
 	],
 	"passcode": "48964966"
   },
@@ -14058,11 +14067,7 @@ const card_list = {
 	"def": 1350,
 	"type": "warrior",
 	"count_as": null,
-	"effect": [
-	  "on_summon",
-	  "destroy_card",
-	  "all_enemy_monsters"
-	],
+	"effect": [],
 	"passcode": "11020863"
   },
   "01111": {
@@ -14109,7 +14114,7 @@ const card_list = {
 	"effect": [
 	  "on_summon",
 	  "destroy_card",
-	  "all_enemy_monsters"
+	  "atk_highest"
 	],
 	"passcode": "18378582"
   },
@@ -14592,7 +14597,7 @@ const card_list = {
 	"effect": [
 	  "on_summon",
 	  "destroy_card",
-	  "all_enemy_monsters"
+	  "random_monster"
 	],
 	"passcode": "97642679"
   },
@@ -14700,9 +14705,9 @@ const card_list = {
 	"type": "spellcaster",
 	"count_as": null,
 	"effect": [
-	  "on_summon",
+	  "on_flip",
 	  "destroy_card",
-	  "all_enemy_monsters"
+	  "both_sides_monsters"
 	],
 	"passcode": "41855169"
   },
@@ -14839,7 +14844,7 @@ const card_list = {
 	"atk": 1900,
 	"def": 1800,
 	"type": "fiend",
-	"count_as": null,
+	"count_as": "warrior",
 	"effect": [
 	  "on_attack",
 	  "anti_flip"
@@ -15829,9 +15834,8 @@ const card_list = {
 	"type": "insect",
 	"count_as": null,
 	"effect": [
-	  "on_summon",
-	  "destroy_card",
-	  "all_enemy_monsters"
+	  "on_defend",
+	  "cant_die"
 	],
 	"passcode": "87804747"
   },
@@ -16665,11 +16669,7 @@ const card_list = {
 	"def": 1500,
 	"type": "sea serpent",
 	"count_as": "dragon",
-	"effect": [
-	  "on_summon",
-	  "destroy_card",
-	  "all_enemy_monsters"
-	],
+	"effect": [],
 	"passcode": "37721209"
   },
   "01312": {
@@ -16805,11 +16805,7 @@ const card_list = {
 	"def": 1700,
 	"type": "sea serpent",
 	"count_as": "dragon",
-	"effect": [
-	  "on_summon",
-	  "destroy_card",
-	  "random_monster"
-	],
+	"effect": [],
 	"passcode": "23931679"
   },
   "01322": {
@@ -17130,7 +17126,7 @@ const card_list = {
 	"effect": [
 	  "on_summon",
 	  "destroy_card",
-	  "all_enemy_monsters"
+	  "random_monster"
 	],
 	"passcode": "16191953"
   },
@@ -17175,7 +17171,7 @@ const card_list = {
 	"effect": [
 	  "on_summon",
 	  "self_power_up",
-	  200
+	  400
 	],
 	"passcode": "74730899"
   },
@@ -17353,7 +17349,7 @@ const card_list = {
 	"atk": 3000,
 	"def": 3000,
 	"type": "fiend",
-	"count_as": "ritual",
+	"count_as": null,
 	"effect": [
 	  "on_summon",
 	  "destroy_card",
@@ -17614,7 +17610,7 @@ const card_list = {
 	"atk": 2300,
 	"def": 1500,
 	"type": "psychic",
-	"count_as": null,
+	"count_as": "warrior",
 	"effect": [
 	  "on_summon",
 	  "destroy_card",
@@ -17787,9 +17783,8 @@ const card_list = {
 	"type": "beast-warrior",
 	"count_as": "machine",
 	"effect": [
-	  "on_summon",
-	  "destroy_card",
-	  "all_enemy_monsters"
+	  "on_defend",
+	  "no_damage"
 	],
 	"passcode": "19028307"
   },
@@ -17819,7 +17814,7 @@ const card_list = {
 	"effect": [
 	  "on_summon",
 	  "destroy_card",
-	  "all_enemy_monsters"
+	  "random_monster"
 	],
 	"passcode": "24857466"
   },
@@ -18055,6 +18050,1861 @@ const card_list = {
 	  "spelltrap_count"
 	],
 	"passcode": "45462639"
+  },
+  "01418": {
+	"card_name": "Gate Guardian of Thunder and Wind",
+	"attribute": "light",
+	"level": 9,
+	"atk": 2500,
+	"def": 2000,
+	"type": "thunder",
+	"count_as": null,
+	"effect": [],
+	"passcode": "34904525"
+  },
+  "01419": {
+	"card_name": "Gate Guardian of Water and Thunder",
+	"attribute": "water",
+	"level": 9,
+	"atk": 2550,
+	"def": 2300,
+	"type": "aqua",
+	"count_as": null,
+	"effect": [],
+	"passcode": "97783338"
+  },
+  "01420": {
+	"card_name": "Gate Guardian of Wind and Water",
+	"attribute": "wind",
+	"level": 9,
+	"atk": 2450,
+	"def": 2300,
+	"type": "spellcaster",
+	"count_as": null,
+	"effect": [],
+	"passcode": "61398234"
+  },
+  "01421": {
+	"card_name": "Goblin Elite Attack Force",
+	"attribute": "earth",
+	"level": 4,
+	"atk": 2200,
+	"def": 1500,
+	"type": "fiend",
+	"count_as": null,
+	"effect": [
+	  "on_attack",
+	  "change_position"
+	],
+	"passcode": "85306040"
+  },
+  "01422": {
+	"card_name": "Insect Knight",
+	"attribute": "earth",
+	"level": 4,
+	"atk": 1900,
+	"def": 1500,
+	"type": "insect",
+	"count_as": "warrior",
+	"effect": [],
+	"passcode": "35052053"
+  },
+  "01423": {
+	"card_name": "Bowganian",
+	"attribute": "dark",
+	"level": 3,
+	"atk": 1300,
+	"def": 1000,
+	"type": "machine",
+	"count_as": null,
+	"effect": [
+	  "on_attack",
+	  "burn",
+	  600
+	],
+	"passcode": "52090844"
+  },
+  "01424": {
+	"card_name": "Chiron the Mage",
+	"attribute": "earth",
+	"level": 4,
+	"atk": 1800,
+	"def": 1000,
+	"type": "beast-warrior",
+	"count_as": null,
+	"effect": [
+	  "on_summon",
+	  "destroy_card",
+	  "random_spelltrap"
+	],
+	"passcode": "16956455"
+  },
+  "01425": {
+	"card_name": "Battle Footballer",
+	"attribute": "fire",
+	"level": 4,
+	"atk": 1000,
+	"def": 2100,
+	"type": "machine",
+	"count_as": null,
+	"effect": [],
+	"passcode": "48094997"
+  },
+  "01426": {
+	"card_name": "Searchlightman",
+	"attribute": "light",
+	"level": 3,
+	"atk": 1000,
+	"def": 1000,
+	"type": "machine",
+	"count_as": null,
+	"effect": [
+	  "on_attack",
+	  "anti_flip"
+	],
+	"passcode": "67646312"
+  },
+  "01427": {
+	"card_name": "Giant Mech-Soldier",
+	"attribute": "earth",
+	"level": 6,
+	"atk": 1750,
+	"def": 1900,
+	"type": "machine",
+	"count_as": null,
+	"effect": [],
+	"passcode": "72299832"
+  },
+  "01428": {
+	"card_name": "The Trojan Horse",
+	"attribute": "earth",
+	"level": 4,
+	"atk": 1600,
+	"def": 1200,
+	"type": "beast",
+	"count_as": null,
+	"effect": [],
+	"passcode": "38479725"
+  },
+  "01429": {
+	"card_name": "A-to-Z Dragon Buster Cannon",
+	"attribute": "light",
+	"level": 10,
+	"atk": 4000,
+	"def": 4000,
+	"type": "machine",
+	"count_as": null,
+	"effect": [
+	  "on_attack",
+	  "ignore_spelltrap"
+	],
+	"passcode": "65172015"
+  },
+  "01430": {
+	"card_name": "ABC-Dragon Buster",
+	"attribute": "light",
+	"level": 8,
+	"atk": 3000,
+	"def": 2800,
+	"type": "machine",
+	"count_as": null,
+	"effect": [
+	  "on_summon",
+	  "destroy_card",
+	  "random_spelltrap"
+	],
+	"passcode": "01561110"
+  },
+  "01431": {
+	"card_name": "Burning Dragon",
+	"attribute": "fire",
+	"level": 8,
+	"atk": 2500,
+	"def": 2100,
+	"type": "dragon",
+	"count_as": "pyro",
+	"effect": [
+	  "on_summon",
+	  "destroy_card",
+	  "all_enemy_spelltraps"
+	],
+	"passcode": "20230320"
+  },
+  "01432": {
+	"card_name": "Legendary Fiend",
+	"attribute": "dark",
+	"level": 6,
+	"atk": 1500,
+	"def": 1800,
+	"type": "fiend",
+	"count_as": null,
+	"effect": [
+	  "on_attack",
+	  "get_power",
+	  700
+	],
+	"passcode": "99747800"
+  },
+  "01433": {
+	"card_name": "Castle Gate",
+	"attribute": "earth",
+	"level": 6,
+	"atk": 0,
+	"def": 2400,
+	"type": "rock",
+	"count_as": null,
+	"effect": [
+	  "on_defend",
+	  "cant_die"
+	],
+	"passcode": "36931229"
+  },
+  "01434": {
+	"card_name": "A-Assault Core",
+	"attribute": "light",
+	"level": 4,
+	"atk": 1900,
+	"def": 200,
+	"type": "machine",
+	"count_as": null,
+	"effect": [],
+	"passcode": "30012506"
+  },
+  "01435": {
+	"card_name": "B-Buster Drake",
+	"attribute": "light",
+	"level": 4,
+	"atk": 1500,
+	"def": 1800,
+	"type": "machine",
+	"count_as": null,
+	"effect": [],
+	"passcode": "77411244"
+  },
+  "01436": {
+	"card_name": "C-Crush Wyvern",
+	"attribute": "light",
+	"level": 4,
+	"atk": 1200,
+	"def": 2000,
+	"type": "machine",
+	"count_as": null,
+	"effect": [],
+	"passcode": "03405259"
+  },
+  "01437": {
+	"card_name": "Armed Dragon, the Armored Dragon",
+	"attribute": "wind",
+	"level": 4,
+	"atk": 1900,
+	"def": 1400,
+	"type": "dragon",
+	"count_as": null,
+	"effect": [],
+	"passcode": "75220074"
+  },
+  "01438": {
+	"card_name": "Wish Dragon",
+	"attribute": "light",
+	"level": 2,
+	"atk": 700,
+	"def": 100,
+	"type": "dragon",
+	"count_as": null,
+	"effect": [],
+	"passcode": "64583600"
+  },
+  "01439": {
+	"card_name": "Soul Tiger",
+	"attribute": "earth",
+	"level": 4,
+	"atk": 0,
+	"def": 2000,
+	"type": "beast",
+	"count_as": null,
+	"effect": [],
+	"passcode": "15734813"
+  },
+  "01440": {
+	"card_name": "Decayed Commander",
+	"attribute": "earth",
+	"level": 4,
+	"atk": 1000,
+	"def": 1500,
+	"type": "zombie",
+	"count_as": "warrior",
+	"effect": [
+	  "on_attack",
+	  "mill",
+	  1
+	],
+	"passcode": "10209545"
+  },
+  "01441": {
+	"card_name": "Zombie Tiger",
+	"attribute": "earth",
+	"level": 3,
+	"atk": 1400,
+	"def": 1600,
+	"type": "zombie",
+	"count_as": "beast",
+	"effect": [
+	  "on_attack",
+	  "mill",
+	  2
+	],
+	"passcode": "47693640"
+  },
+  "01442": {
+	"card_name": "Pandemonium Watchbear",
+	"attribute": "dark",
+	"level": 4,
+	"atk": 1300,
+	"def": 1800,
+	"type": "beast",
+	"count_as": "fiend",
+	"effect": [],
+	"passcode": "75375465"
+  },
+  "01443": {
+	"card_name": "Disc Fighter",
+	"attribute": "earth",
+	"level": 4,
+	"atk": 1000,
+	"def": 1000,
+	"type": "warrior",
+	"count_as": null,
+	"effect": [
+	  "on_attack",
+	  "mutual_banish"
+	],
+	"passcode": "19612721"
+  },
+  "01444": {
+	"card_name": "Catnipped Kitty",
+	"attribute": "earth",
+	"level": 2,
+	"atk": 0,
+	"def": 500,
+	"type": "beast",
+	"count_as": null,
+	"effect": [
+	  "on_defend",
+	  "cant_die"
+	],
+	"passcode": "96501677"
+  },
+  "01445": {
+	"card_name": "The Tyrant Neptune",
+	"attribute": "water",
+	"level": 10,
+	"atk": 0,
+	"def": 0,
+	"type": "reptile",
+	"count_as": "dinosaur",
+	"effect": [
+	  "on_summon",
+	  "get_atk_from_field",
+	  "sum"
+	],
+	"passcode": "88071625"
+  },
+  "01446": {
+	"card_name": "Imperion Magnum the Superconductive Battlebot",
+	"attribute": "earth",
+	"level": 10,
+	"atk": 4000,
+	"def": 4000,
+	"type": "rock",
+	"count_as": "machine",
+	"effect": [
+	  "on_summon",
+	  "destroy_card",
+	  "all_enemy_spelltraps"
+	],
+	"passcode": "04628897"
+  },
+  "01447": {
+	"card_name": "Berserkion the Electromagna Warrior",
+	"attribute": "earth",
+	"level": 8,
+	"atk": 3000,
+	"def": 2800,
+	"type": "rock",
+	"count_as": "machine",
+	"effect": [],
+	"passcode": "42901635"
+  },
+  "01448": {
+	"card_name": "Daidara-Bocchi",
+	"attribute": "earth",
+	"level": 10,
+	"atk": 2900,
+	"def": 2500,
+	"type": "zombie",
+	"count_as": "fiend",
+	"effect": [
+	  "on_summon",
+	  "self_power_up",
+	  200
+	],
+	"passcode": "69133798"
+  },
+  "01449": {
+	"card_name": "Red Ogre",
+	"attribute": "earth",
+	"level": 7,
+	"atk": 2800,
+	"def": 2100,
+	"type": "zombie",
+	"count_as": "fiend",
+	"effect": [
+	  "on_summon",
+	  "destroy_card",
+	  "random_monster"
+	],
+	"passcode": "68722455"
+  },
+  "01450": {
+	"card_name": "Diamond Head Dragon",
+	"attribute": "light",
+	"level": 8,
+	"atk": 0,
+	"def": 2800,
+	"type": "dragon",
+	"count_as": "rock",
+	"effect": [
+	  "on_summon",
+	  "self_power_up",
+	  1000
+	],
+	"passcode": "16519319"
+  },
+  "01451": {
+	"card_name": "The Blazing Mars",
+	"attribute": "fire",
+	"level": 8,
+	"atk": 2600,
+	"def": 2200,
+	"type": "pyro",
+	"count_as": null,
+	"effect": [
+	  "on_attack",
+	  "burn",
+	  500
+	],
+	"passcode": "15033525"
+  },
+  "01452": {
+	"card_name": "Frost and Flame Dragon",
+	"attribute": "water",
+	"level": 6,
+	"atk": 2300,
+	"def": 2000,
+	"type": "dragon",
+	"count_as": null,
+	"effect": [
+	  "on_summon",
+	  "destroy_card",
+	  "random_monster"
+	],
+	"passcode": "55589254"
+  },
+  "01453": {
+	"card_name": "Nine-Tailed Fox",
+	"attribute": "fire",
+	"level": 6,
+	"atk": 2200,
+	"def": 2000,
+	"type": "zombie",
+	"count_as": "beast",
+	"effect": [
+	  "on_attack",
+	  "piercing"
+	],
+	"passcode": "27198001"
+  },
+  "01454": {
+	"card_name": "Goka, the Pyre of Malice",
+	"attribute": "fire",
+	"level": 6,
+	"atk": 2200,
+	"def": 1900,
+	"type": "zombie",
+	"count_as": "pyro",
+	"effect": [
+	  "on_summon",
+	  "self_power_up",
+	  "same_attribute"
+	],
+	"passcode": "23116808"
+  },
+  "01455": {
+	"card_name": "Kasha",
+	"attribute": "earth",
+	"level": 8,
+	"atk": 0,
+	"def": 1000,
+	"type": "zombie",
+	"count_as": "pyro",
+	"effect": [
+	  "on_summon",
+	  "monster_count_boost",
+	  1000
+	],
+	"passcode": "52512994"
+  },
+  "01456": {
+	"card_name": "Litmus Doom Swordsman",
+	"attribute": "dark",
+	"level": 8,
+	"atk": 0,
+	"def": 0,
+	"type": "warrior",
+	"count_as": null,
+	"effect": [
+	  "on_defend",
+	  "cant_die"
+	],
+	"passcode": "72566043"
+  },
+  "01457": {
+	"card_name": "Litmus Doom Ritual",
+	"attribute": "spell",
+	"level": null,
+	"atk": null,
+	"def": null,
+	"type": "ritual",
+	"count_as": null,
+	"effect": [
+	  "ritual",
+	  1456
+	],
+	"passcode": "08955148"
+  },
+  "01458": {
+	"card_name": "Carboneddon",
+	"attribute": "earth",
+	"level": 3,
+	"atk": 800,
+	"def": 600,
+	"type": "dinosaur",
+	"count_as": "rock",
+	"effect": [],
+	"passcode": "15981690"
+  },
+  "01459": {
+	"card_name": "Golden Homunculus",
+	"attribute": "light",
+	"level": 6,
+	"atk": 1500,
+	"def": 1500,
+	"type": "warrior",
+	"count_as": "rock",
+	"effect": [
+	  "on_summon",
+	  "graveyard_power_up",
+	  100
+	],
+	"passcode": "27408609"
+  },
+  "01460": {
+	"card_name": "Mathematician",
+	"attribute": "earth",
+	"level": 3,
+	"atk": 1500,
+	"def": 500,
+	"type": "spellcaster",
+	"count_as": null,
+	"effect": [],
+	"passcode": "41386308"
+  },
+  "01461": {
+	"card_name": "The Calculator",
+	"attribute": "light",
+	"level": 2,
+	"atk": 0,
+	"def": 0,
+	"type": "thunder",
+	"count_as": "machine",
+	"effect": [
+	  "on_summon",
+	  "get_atk_from_field",
+	  "level"
+	],
+	"passcode": "51196174"
+  },
+  "01462": {
+	"card_name": "Delta the Magnet Warrior",
+	"attribute": "earth",
+	"level": 4,
+	"atk": 1600,
+	"def": 1400,
+	"type": "rock",
+	"count_as": "machine",
+	"effect": [],
+	"passcode": "12262393"
+  },
+  "01463": {
+	"card_name": "Epsilon the Magnet Warrior",
+	"attribute": "earth",
+	"level": 4,
+	"atk": 1300,
+	"def": 1500,
+	"type": "rock",
+	"count_as": "machine",
+	"effect": [],
+	"passcode": "52566270"
+  },
+  "01464": {
+	"card_name": "Solar Flare Dragon",
+	"attribute": "fire",
+	"level": 4,
+	"atk": 1500,
+	"def": 1000,
+	"type": "pyro",
+	"count_as": "dragon",
+	"effect": [
+	  "on_attack",
+	  "burn",
+	  500
+	],
+	"passcode": "45985838"
+  },
+  "01465": {
+	"card_name": "Labradorite Dragon",
+	"attribute": "dark",
+	"level": 6,
+	"atk": 0,
+	"def": 2400,
+	"type": "dragon",
+	"count_as": "rock",
+	"effect": [],
+	"passcode": "62514770"
+  },
+  "01466": {
+	"card_name": "Crow Tengu",
+	"attribute": "earth",
+	"level": 4,
+	"atk": 1400,
+	"def": 1200,
+	"type": "zombie",
+	"count_as": "winged beast",
+	"effect": [],
+	"passcode": "64806765"
+  },
+  "01467": {
+	"card_name": "Mezuki",
+	"attribute": "earth",
+	"level": 4,
+	"atk": 1700,
+	"def": 800,
+	"type": "zombie",
+	"count_as": "beast",
+	"effect": [],
+	"passcode": "92826944"
+  },
+  "01468": {
+	"card_name": "Onmoraki",
+	"attribute": "earth",
+	"level": 4,
+	"atk": 1200,
+	"def": 1000,
+	"type": "zombie",
+	"count_as": "winged beast",
+	"effect": [],
+	"passcode": "95990456"
+  },
+  "01469": {
+	"card_name": "Shutendoji",
+	"attribute": "earth",
+	"level": 4,
+	"atk": 1500,
+	"def": 800,
+	"type": "zombie",
+	"count_as": null,
+	"effect": [],
+	"passcode": "65422840"
+  },
+  "01470": {
+	"card_name": "Samurai Skull",
+	"attribute": "dark",
+	"level": 4,
+	"atk": 1700,
+	"def": 0,
+	"type": "zombie",
+	"count_as": "warrior",
+	"effect": [],
+	"passcode": "68989981"
+  },
+  "01471": {
+	"card_name": "Rigorous Reaver",
+	"attribute": "fire",
+	"level": 3,
+	"atk": 1600,
+	"def": 100,
+	"type": "plant",
+	"count_as": "pyro",
+	"effect": [
+	  "on_flip",
+	  "mill",
+	  1
+	],
+	"passcode": "39180960"
+  },
+  "01472": {
+	"card_name": "Barrier Statue of the Drought",
+	"attribute": "earth",
+	"level": 4,
+	"atk": 1000,
+	"def": 1000,
+	"type": "rock",
+	"count_as": null,
+	"effect": [],
+	"passcode": "19740112"
+  },
+  "01473": {
+	"card_name": "Abaki",
+	"attribute": "fire",
+	"level": 4,
+	"atk": 1700,
+	"def": 1000,
+	"type": "fiend",
+	"count_as": "pyro",
+	"effect": [
+	  "on_attack",
+	  "burn",
+	  500
+	],
+	"passcode": "12694768"
+  },
+  "01474": {
+	"card_name": "Meteor Rush - Monochroid",
+	"attribute": "earth",
+	"level": 10,
+	"atk": 0,
+	"def": 0,
+	"type": "machine",
+	"count_as": "roid",
+	"effect": [
+	  "on_summon",
+	  "monster_count_boost",
+	  1000
+	],
+	"passcode": "99748883"
+  },
+  "01475": {
+	"card_name": "Super-Electromagnetic Voltech Dragon",
+	"attribute": "light",
+	"level": 5,
+	"atk": 2400,
+	"def": 1000,
+	"type": "thunder",
+	"count_as": "dragon",
+	"effect": [
+	  "on_attack",
+	  "piercing"
+	],
+	"passcode": "20529766"
+  },
+  "01476": {
+	"card_name": "Thunder Nyan Nyan",
+	"attribute": "light",
+	"level": 4,
+	"atk": 1900,
+	"def": 800,
+	"type": "thunder",
+	"count_as": "female",
+	"effect": [],
+	"passcode": "70797118"
+  },
+  "01477": {
+	"card_name": "Decoyroid",
+	"attribute": "wind",
+	"level": 2,
+	"atk": 300,
+	"def": 500,
+	"type": "machine",
+	"count_as": "roid",
+	"effect": [],
+	"passcode": "25034083"
+  },
+  "01478": {
+	"card_name": "Cosmo Brain",
+	"attribute": "dark",
+	"level": 7,
+	"atk": 1500,
+	"def": 2450,
+	"type": "spellcaster",
+	"count_as": "female",
+	"effect": [
+	  "on_summon",
+	  "get_atk_from_field",
+	  "level"
+	],
+	"passcode": "85679527"
+  },
+  "01479": {
+	"card_name": "Illusion Ice Sculpture",
+	"attribute": "light",
+	"level": 1,
+	"atk": 0,
+	"def": 0,
+	"type": "rock",
+	"count_as": null,
+	"effect": [
+	  "on_summon",
+	  "copy_atk"
+	],
+	"passcode": "49654355"
+  },
+  "01480": {
+	"card_name": "Kelbek",
+	"attribute": "earth",
+	"level": 4,
+	"atk": 1500,
+	"def": 1800,
+	"type": "fairy",
+	"count_as": null,
+	"effect": [
+	  "on_summon",
+	  "destroy_card",
+	  "random_monster"
+	],
+	"passcode": "54878498"
+  },
+  "01481": {
+	"card_name": "Mudora",
+	"attribute": "earth",
+	"level": 4,
+	"atk": 1500,
+	"def": 1800,
+	"type": "fairy",
+	"count_as": "warrior",
+	"effect": [
+	  "on_summon",
+	  "self_power_up",
+	  200
+	],
+	"passcode": "82108372"
+  },
+  "01482": {
+	"card_name": "Crystal Beast Rainbow Dragon",
+	"attribute": "light",
+	"level": 8,
+	"atk": 3000,
+	"def": 0,
+	"type": "dragon",
+	"count_as": null,
+	"effect": [
+	  "on_summon",
+	  "monster_count_boost",
+	  100
+	],
+	"passcode": "36795102"
+  },
+  "01483": {
+	"card_name": "Queen Butterfly Danaus",
+	"attribute": "wind",
+	"level": 8,
+	"atk": 2800,
+	"def": 1900,
+	"type": "insect",
+	"count_as": null,
+	"effect": [
+	  "on_attack",
+	  "anti_flip"
+	],
+	"passcode": "13302026"
+  },
+  "01484": {
+	"card_name": "Crystal Keeper",
+	"attribute": "fire",
+	"level": 4,
+	"atk": 1500,
+	"def": 1800,
+	"type": "warrior",
+	"count_as": "crystal",
+	"effect": [
+	  "on_summon",
+	  "count_as_power_up",
+	  300
+	],
+	"passcode": "14469229"
+  },
+  "01485": {
+	"card_name": "Crystal Master",
+	"attribute": "dark",
+	"level": 3,
+	"atk": 1300,
+	"def": 1000,
+	"type": "spellcaster",
+	"count_as": "crystal",
+	"effect": [
+	  "on_summon",
+	  "count_as_power_up",
+	  100
+	],
+	"passcode": "87475570"
+  },
+  "01486": {
+	"card_name": "Crystal Release",
+	"attribute": "spell",
+	"level": null,
+	"atk": null,
+	"def": null,
+	"type": "equip",
+	"count_as": null,
+	"effect": [
+	  "atk_up",
+	  800,
+	  "crystal"
+	],
+	"passcode": "10004783"
+  },
+  "01487": {
+	"card_name": "Counter Gem",
+	"attribute": "trap",
+	"level": null,
+	"atk": null,
+	"def": null,
+	"type": "trap",
+	"count_as": null,
+	"effect": [
+	  "crystal_spam"
+	],
+	"passcode": "11136371"
+  },
+  "01488": {
+	"card_name": "Rose Papillon",
+	"attribute": "wind",
+	"level": 3,
+	"atk": 1400,
+	"def": 800,
+	"type": "insect",
+	"count_as": null,
+	"effect": [
+	  "on_attack",
+	  "can_direct"
+	],
+	"passcode": "14002332"
+  },
+  "01489": {
+	"card_name": "Cyber Eternity Dragon",
+	"attribute": "light",
+	"level": 10,
+	"atk": 2800,
+	"def": 4000,
+	"type": "machine",
+	"count_as": "cyber",
+	"effect": [
+	  "on_attack",
+	  "anti_flip"
+	],
+	"passcode": "82315403"
+  },
+  "01490": {
+	"card_name": "Red-Eyes Flare Metal Dragon",
+	"attribute": "dark",
+	"level": 7,
+	"atk": 2800,
+	"def": 2400,
+	"type": "dragon",
+	"count_as": "machine",
+	"effect": [
+	  "on_attack",
+	  "burn",
+	  2800
+	],
+	"passcode": "44405066"
+  },
+  "01491": {
+	"card_name": "Red-Eyes Zombie Dragon Lord",
+	"attribute": "dark",
+	"level": 10,
+	"atk": 2800,
+	"def": 2400,
+	"type": "zombie",
+	"count_as": "dragon",
+	"effect": [
+	  "on_summon",
+	  "graveyard_power_up",
+	  200
+	],
+	"passcode": "38192988"
+  },
+  "01492": {
+	"card_name": "Red-Eyes Zombie Necro Dragon",
+	"attribute": "dark",
+	"level": 7,
+	"atk": 2400,
+	"def": 2000,
+	"type": "zombie",
+	"count_as": "dragon",
+	"effect": [
+	  "on_summon",
+	  "graveyard_power_up",
+	  100
+	],
+	"passcode": "28240337"
+  },
+  "01493": {
+	"card_name": "Troposphere",
+	"attribute": "wind",
+	"level": 6,
+	"atk": 2400,
+	"def": 2000,
+	"type": "winged beast",
+	"count_as": null,
+	"effect": [
+	  "on_attack",
+	  "ignore_spelltrap"
+	],
+	"passcode": "72144675"
+  },
+  "01494": {
+	"card_name": "Indomitable Fighter Lei Lei",
+	"attribute": "earth",
+	"level": 4,
+	"atk": 2300,
+	"def": 0,
+	"type": "beast-warrior",
+	"count_as": null,
+	"effect": [
+	  "on_attack",
+	  "change_position"
+	],
+	"passcode": "84173492"
+  },
+  "01495": {
+	"card_name": "The Atmosphere",
+	"attribute": "wind",
+	"level": 8,
+	"atk": 1000,
+	"def": 800,
+	"type": "winged beast",
+	"count_as": "dragon",
+	"effect": [
+	  "on_summon",
+	  "copy_atk"
+	],
+	"passcode": "14466224"
+  },
+  "01496": {
+	"card_name": "Black Dragon's Chick",
+	"attribute": "dark",
+	"level": 1,
+	"atk": 800,
+	"def": 500,
+	"type": "dragon",
+	"count_as": null,
+	"effect": [],
+	"passcode": "36262024"
+  },
+  "01497": {
+	"card_name": "Black Metal Dragon",
+	"attribute": "dark",
+	"level": 1,
+	"atk": 600,
+	"def": 600,
+	"type": "dragon",
+	"count_as": "machine",
+	"effect": [
+	  "on_summon",
+	  "friends_power_up",
+	  100
+	],
+	"passcode": "93969023"
+  },
+  "01498": {
+	"card_name": "Transforming Sphere",
+	"attribute": "wind",
+	"level": 3,
+	"atk": 100,
+	"def": 100,
+	"type": "winged beast",
+	"count_as": null,
+	"effect": [
+	  "on_summon",
+	  "copy_atk"
+	],
+	"passcode": "66094973"
+  },
+  "01499": {
+	"card_name": "Battlestorm",
+	"attribute": "dark",
+	"level": 4,
+	"atk": 1700,
+	"def": 1000,
+	"type": "winged beast",
+	"count_as": null,
+	"effect": [
+	  "on_summon",
+	  "self_power_up",
+	  100
+	],
+	"passcode": "69695704"
+  },
+  "01500": {
+	"card_name": "Hunter Dragon",
+	"attribute": "dark",
+	"level": 3,
+	"atk": 1700,
+	"def": 100,
+	"type": "dragon",
+	"count_as": null,
+	"effect": [],
+	"passcode": "96005454"
+  },
+  "01501": {
+	"card_name": "Mirage Dragon",
+	"attribute": "light",
+	"level": 4,
+	"atk": 1600,
+	"def": 600,
+	"type": "dragon",
+	"count_as": null,
+	"effect": [
+	  "on_attack",
+	  "ignore_spelltrap"
+	],
+	"passcode": "15960641"
+  },
+  "01502": {
+	"card_name": "Pitch-Black Warwolf",
+	"attribute": "dark",
+	"level": 4,
+	"atk": 1600,
+	"def": 600,
+	"type": "beast-warrior",
+	"count_as": null,
+	"effect": [
+	  "on_attack",
+	  "ignore_spelltrap"
+	],
+	"passcode": "88975532"
+  },
+  "01503": {
+	"card_name": "Destiny HERO - Dogma",
+	"attribute": "dark",
+	"level": 8,
+	"atk": 3400,
+	"def": 2400,
+	"type": "warrior",
+	"count_as": "d-hero",
+	"effect": [
+	  "on_summon",
+	  "halve_opp_LP"
+	],
+	"passcode": "17132130"
+  },
+  "01504": {
+	"card_name": "Destiny End Dragoon",
+	"attribute": "dark",
+	"level": 10,
+	"atk": 3000,
+	"def": 3000,
+	"type": "warrior",
+	"count_as": "d-hero",
+	"effect": [
+	  "on_attack",
+	  "burn",
+	  "enemy_atk"
+	],
+	"passcode": "76263644"
+  },
+  "01505": {
+	"card_name": "Destiny HERO - Dusktopia",
+	"attribute": "dark",
+	"level": 10,
+	"atk": 3000,
+	"def": 3000,
+	"type": "warrior",
+	"count_as": "d-hero",
+	"effect": [
+	  "on_defend",
+	  "cant_die"
+	],
+	"passcode": "93657021"
+  },
+  "01506": {
+	"card_name": "Destiny HERO - Dominance",
+	"attribute": "dark",
+	"level": 10,
+	"atk": 2900,
+	"def": 2600,
+	"type": "warrior",
+	"count_as": "d-hero",
+	"effect": [
+	  "on_attack",
+	  "mill",
+	  3
+	],
+	"passcode": "69394324"
+  },
+  "01507": {
+	"card_name": "Destiny HERO - Dystopia",
+	"attribute": "dark",
+	"level": 8,
+	"atk": 2800,
+	"def": 2400,
+	"type": "warrior",
+	"count_as": "d-hero",
+	"effect": [
+	  "on_summon",
+	  "destroy_card",
+	  "random_monster"
+	],
+	"passcode": "90579153"
+  },
+  "01508": {
+	"card_name": "Destiny HERO - Destroyer Phoenix Enforcer",
+	"attribute": "dark",
+	"level": 8,
+	"atk": 2500,
+	"def": 2100,
+	"type": "warrior",
+	"count_as": "d-hero",
+	"effect": [
+	  "on_summon",
+	  "debuff_for_graveyard",
+	  200
+	],
+	"passcode": "60461804"
+  },
+  "01509": {
+	"card_name": "Destiny HERO - Plasma",
+	"attribute": "dark",
+	"level": 8,
+	"atk": 1900,
+	"def": 600,
+	"type": "warrior",
+	"count_as": "d-hero",
+	"effect": [
+	  "on_summon",
+	  "dhero_plasma"
+	],
+	"passcode": "83965310"
+  },
+  "01510": {
+	"card_name": "Vision HERO Adoration",
+	"attribute": "dark",
+	"level": 8,
+	"atk": 2800,
+	"def": 2100,
+	"type": "warrior",
+	"count_as": "v-hero",
+	"effect": [
+	  "on_summon",
+	  "friends_power_up",
+	  300
+	],
+	"passcode": "45170821"
+  },
+  "01511": {
+	"card_name": "Vision HERO Witch Raider",
+	"attribute": "dark",
+	"level": 8,
+	"atk": 2700,
+	"def": 1900,
+	"type": "warrior",
+	"count_as": "v-hero",
+	"effect": [
+	  "on_summon",
+	  "destroy_card",
+	  "all_enemy_spelltraps"
+	],
+	"passcode": "82697428"
+  },
+  "01512": {
+	"card_name": "The Grand Jupiter",
+	"attribute": "dark",
+	"level": 8,
+	"atk": 2500,
+	"def": 2000,
+	"type": "warrior",
+	"count_as": null,
+	"effect": [
+	  "on_summon",
+	  "dhero_plasma"
+	],
+	"passcode": "16255173"
+  },
+  "01513": {
+	"card_name": "Vision HERO Trinity",
+	"attribute": "dark",
+	"level": 8,
+	"atk": 2500,
+	"def": 2000,
+	"type": "warrior",
+	"count_as": "v-hero",
+	"effect": [
+	  "on_attack",
+	  "multiple_attacker"
+	],
+	"passcode": "46759931"
+  },
+  "01514": {
+	"card_name": "Destiny HERO - Dangerous",
+	"attribute": "dark",
+	"level": 6,
+	"atk": 2000,
+	"def": 2600,
+	"type": "warrior",
+	"count_as": "d-hero",
+	"effect": [
+	  "on_summon",
+	  "friends_power_up",
+	  200
+	],
+	"passcode": "30757127"
+  },
+  "01515": {
+	"card_name": "Destiny HERO - Dasher",
+	"attribute": "dark",
+	"level": 6,
+	"atk": 2100,
+	"def": 1000,
+	"type": "warrior",
+	"count_as": "d-hero",
+	"effect": [
+	  "on_attack",
+	  "change_position"
+	],
+	"passcode": "81866673"
+  },
+  "01516": {
+	"card_name": "Destiny HERO - Defender",
+	"attribute": "dark",
+	"level": 4,
+	"atk": 100,
+	"def": 2700,
+	"type": "warrior",
+	"count_as": "d-hero",
+	"effect": [],
+	"passcode": "54749427"
+  },
+  "01517": {
+	"card_name": "Destiny HERO - Dreadmaster",
+	"attribute": "dark",
+	"level": 8,
+	"atk": 0,
+	"def": 0,
+	"type": "warrior",
+	"count_as": "d-hero",
+	"effect": [
+	  "on_summon",
+	  "dreadmaster"
+	],
+	"passcode": "40591390"
+  },
+  "01518": {
+	"card_name": "Destiny HERO - Dynatag",
+	"attribute": "dark",
+	"level": 5,
+	"atk": 1000,
+	"def": 1000,
+	"type": "warrior",
+	"count_as": "d-hero",
+	"effect": [
+	  "on_summon",
+	  "honest"
+	],
+	"passcode": "37780349"
+  },
+  "01519": {
+	"card_name": "Destiny HERO - Blade Master",
+	"attribute": "dark",
+	"level": 3,
+	"atk": 300,
+	"def": 600,
+	"type": "warrior",
+	"count_as": "d-hero",
+	"effect": [
+	  "on_summon",
+	  "count_as_power_up",
+	  800
+	],
+	"passcode": "55461064"
+  },
+  "01520": {
+	"card_name": "Destiny HERO - Celestial",
+	"attribute": "dark",
+	"level": 4,
+	"atk": 1600,
+	"def": 1400,
+	"type": "warrior",
+	"count_as": "d-hero",
+	"effect": [
+	  "on_attack",
+	  "burn",
+	  500
+	],
+	"passcode": "63362460"
+  },
+  "01521": {
+	"card_name": "Destiny HERO - Decider",
+	"attribute": "dark",
+	"level": 4,
+	"atk": 1600,
+	"def": 1000,
+	"type": "warrior",
+	"count_as": "d-hero",
+	"effect": [
+	  "on_defend",
+	  "no_damage"
+	],
+	"passcode": "64184058"
+  },
+  "01522": {
+	"card_name": "Destiny HERO - Denier",
+	"attribute": "dark",
+	"level": 3,
+	"atk": 1100,
+	"def": 600,
+	"type": "warrior",
+	"count_as": "d-hero",
+	"effect": [],
+	"passcode": "16605586"
+  },
+  "01523": {
+	"card_name": "Destiny HERO - Diamond Dude",
+	"attribute": "dark",
+	"level": 4,
+	"atk": 1400,
+	"def": 600,
+	"type": "warrior",
+	"count_as": "d-hero",
+	"effect": [],
+	"passcode": "13093792"
+  },
+  "01524": {
+	"card_name": "Destiny HERO - Double Dude",
+	"attribute": "dark",
+	"level": 6,
+	"atk": 1000,
+	"def": 1000,
+	"type": "warrior",
+	"count_as": "d-hero",
+	"effect": [
+	  "on_attack",
+	  "multiple_attacker"
+	],
+	"passcode": "28355718"
+  },
+  "01525": {
+	"card_name": "Destiny HERO - Drawhand",
+	"attribute": "dark",
+	"level": 4,
+	"atk": 1600,
+	"def": 800,
+	"type": "warrior",
+	"count_as": "d-hero",
+	"effect": [],
+	"passcode": "48150362"
+  },
+  "01526": {
+	"card_name": "Destiny HERO - Drilldark",
+	"attribute": "dark",
+	"level": 4,
+	"atk": 1600,
+	"def": 1200,
+	"type": "warrior",
+	"count_as": "d-hero",
+	"effect": [
+	  "on_attack",
+	  "piercing"
+	],
+	"passcode": "91691605"
+  },
+  "01527": {
+	"card_name": "Destiny HERO - Dunker",
+	"attribute": "dark",
+	"level": 4,
+	"atk": 1200,
+	"def": 1700,
+	"type": "warrior",
+	"count_as": "d-hero",
+	"effect": [
+	  "on_attack",
+	  "burn",
+	  500
+	],
+	"passcode": "93431862"
+  },
+  "01528": {
+	"card_name": "Destiny HERO - Malicious",
+	"attribute": "dark",
+	"level": 6,
+	"atk": 800,
+	"def": 800,
+	"type": "warrior",
+	"count_as": "d-hero",
+	"effect": [],
+	"passcode": "09411399"
+  },
+  "01529": {
+	"card_name": "Destiny HERO - Disk Commander",
+	"attribute": "dark",
+	"level": 1,
+	"atk": 300,
+	"def": 300,
+	"type": "warrior",
+	"count_as": "d-hero",
+	"effect": [],
+	"passcode": "56570271"
+  },
+  "01530": {
+	"card_name": "Destiny HERO - Doom Lord",
+	"attribute": "dark",
+	"level": 3,
+	"atk": 600,
+	"def": 800,
+	"type": "warrior",
+	"count_as": "d-hero",
+	"effect": [
+	  "on_summon",
+	  "destroy_card",
+	  "random_monster"
+	],
+	"passcode": "41613948"
+  },
+  "01531": {
+	"card_name": "Destiny HERO - Dread Servant",
+	"attribute": "dark",
+	"level": 3,
+	"atk": 400,
+	"def": 700,
+	"type": "warrior",
+	"count_as": "d-hero",
+	"effect": [
+	  "on_summon",
+	  "destroy_card",
+	  "random_spelltrap"
+	],
+	"passcode": "36625827"
+  },
+  "01532": {
+	"card_name": "Destiny HERO - Captain Tenacious",
+	"attribute": "dark",
+	"level": 3,
+	"atk": 800,
+	"def": 800,
+	"type": "warrior",
+	"count_as": "d-hero",
+	"effect": [],
+	"passcode": "77608643"
+  },
+  "01533": {
+	"card_name": "Destiny HERO - Dark Angel",
+	"attribute": "dark",
+	"level": 1,
+	"atk": 0,
+	"def": 0,
+	"type": "warrior",
+	"count_as": "d-hero",
+	"effect": [
+	  "on_summon",
+	  "destroy_card",
+	  "random_spelltrap"
+	],
+	"passcode": "26964762"
+  },
+  "01534": {
+	"card_name": "Destiny HERO - Departed",
+	"attribute": "dark",
+	"level": 2,
+	"atk": 1000,
+	"def": 0,
+	"type": "warrior",
+	"count_as": "d-hero",
+	"effect": [
+	  "on_defend",
+	  "cant_die"
+	],
+	"passcode": "39829561"
+  },
+  "01535": {
+	"card_name": "Destiny HERO - Dreamer",
+	"attribute": "dark",
+	"level": 1,
+	"atk": 0,
+	"def": 600,
+	"type": "warrior",
+	"count_as": "d-hero",
+	"effect": [
+	  "on_defend",
+	  "cant_die"
+	],
+	"passcode": "66262416"
+  },
+  "01536": {
+	"card_name": "Destiny HERO - Fear Monger",
+	"attribute": "dark",
+	"level": 4,
+	"atk": 1000,
+	"def": 1000,
+	"type": "warrior",
+	"count_as": "d-hero",
+	"effect": [],
+	"passcode": "80744121"
+  },
+  "01537": {
+	"card_name": "D Cubed",
+	"attribute": "dark",
+	"level": 1,
+	"atk": 0,
+	"def": 0,
+	"type": "machine",
+	"count_as": "v-hero",
+	"effect": [],
+	"passcode": "99357565"
+  },
+  "01538": {
+	"card_name": "Vision HERO Faris",
+	"attribute": "dark",
+	"level": 5,
+	"atk": 1600,
+	"def": 1800,
+	"type": "warrior",
+	"count_as": "v-hero",
+	"effect": [],
+	"passcode": "18094166"
+  },
+  "01539": {
+	"card_name": "Vision HERO Gravito",
+	"attribute": "dark",
+	"level": 4,
+	"atk": 500,
+	"def": 2000,
+	"type": "warrior",
+	"count_as": "v-hero",
+	"effect": [],
+	"passcode": "54185227"
+  },
+  "01540": {
+	"card_name": "Vision HERO Increase",
+	"attribute": "dark",
+	"level": 3,
+	"atk": 900,
+	"def": 1100,
+	"type": "warrior",
+	"count_as": "v-hero",
+	"effect": [
+	  "on_defend",
+	  "no_damage"
+	],
+	"passcode": "22865492"
+  },
+  "01541": {
+	"card_name": "Vision HERO Minimum Ray",
+	"attribute": "dark",
+	"level": 3,
+	"atk": 1200,
+	"def": 700,
+	"type": "warrior",
+	"count_as": "v-hero",
+	"effect": [
+	  "on_defend",
+	  "no_damage"
+	],
+	"passcode": "61320914"
+  },
+  "01542": {
+	"card_name": "Vision HERO Multiply Guy",
+	"attribute": "dark",
+	"level": 3,
+	"atk": 800,
+	"def": 700,
+	"type": "warrior",
+	"count_as": "v-hero",
+	"effect": [
+	  "on_summon",
+	  "friends_power_up",
+	  200
+	],
+	"passcode": "96693371"
+  },
+  "01543": {
+	"card_name": "Vision HERO Poisoner",
+	"attribute": "dark",
+	"level": 3,
+	"atk": 900,
+	"def": 700,
+	"type": "warrior",
+	"count_as": "v-hero",
+	"effect": [
+	  "on_defend",
+	  "debuff",
+	  500
+	],
+	"passcode": "83414006"
+  },
+  "01544": {
+	"card_name": "Vision HERO Vyon",
+	"attribute": "dark",
+	"level": 4,
+	"atk": 1000,
+	"def": 1200,
+	"type": "warrior",
+	"count_as": "v-hero",
+	"effect": [],
+	"passcode": "27780618"
+  },
+  "01545": {
+	"card_name": "Mystical Shine Ball",
+	"attribute": "light",
+	"level": 2,
+	"atk": 500,
+	"def": 500,
+	"type": "fairy",
+	"count_as": null,
+	"effect": [],
+	"passcode": "39552864"
+  },
+  "01546": {
+	"card_name": "Sealmaster Meisei",
+	"attribute": "dark",
+	"level": 3,
+	"atk": 1100,
+	"def": 900,
+	"type": "spellcaster",
+	"count_as": null,
+	"effect": [],
+	"passcode": "02468169"
+  },
+  "01547": {
+	"card_name": "The Agent of Wisdom - Mercury",
+	"attribute": "light",
+	"level": 4,
+	"atk": 0,
+	"def": 1700,
+	"type": "fairy",
+	"count_as": "winged beast",
+	"effect": [],
+	"passcode": "38730226"
+  },
+  "01548": {
+	"card_name": "Phantom Magician",
+	"attribute": "dark",
+	"level": 3,
+	"atk": 600,
+	"def": 700,
+	"type": "spellcaster",
+	"count_as": null,
+	"effect": [],
+	"passcode": "24103628"
+  },
+  "01549": {
+	"card_name": "Dark Horus",
+	"attribute": "dark",
+	"level": 8,
+	"atk": 3000,
+	"def": 1800,
+	"type": "dragon",
+	"count_as": "winged beast",
+	"effect": [
+	  "on_summon",
+	  "destroy_card",
+	  "random_spelltrap"
+	],
+	"passcode": "66214679"
+  },
+  "01550": {
+	"card_name": "The Supremacy Sun",
+	"attribute": "dark",
+	"level": 10,
+	"atk": 3000,
+	"def": 3000,
+	"type": "fiend",
+	"count_as": null,
+	"effect": [
+	  "on_defend",
+	  "cant_die"
+	],
+	"passcode": "51402908"
+  },
+  "01551": {
+	"card_name": "Clear Vice Dragon",
+	"attribute": "dark",
+	"level": 8,
+	"atk": 0,
+	"def": 0,
+	"type": "dragon",
+	"count_as": null,
+	"effect": [
+	  "on_attack",
+	  "clear_vice"
+	],
+	"passcode": "97811903"
+  },
+  "01552": {
+	"card_name": "The Despair Uranus",
+	"attribute": "light",
+	"level": 8,
+	"atk": 2900,
+	"def": 2300,
+	"type": "rock",
+	"count_as": null,
+	"effect": [
+	  "on_summon",
+	  "white_horned"
+	],
+	"passcode": "32588805"
+  },
+  "01553": {
+	"card_name": "Dark Nephthys",
+	"attribute": "dark",
+	"level": 8,
+	"atk": 2400,
+	"def": 1600,
+	"type": "winged beast",
+	"count_as": null,
+	"effect": [
+	  "on_summon",
+	  "destroy_card",
+	  "random_spelltrap"
+	],
+	"passcode": "38107923"
+  },
+  "01554": {
+	"card_name": "The Dark Creator",
+	"attribute": "dark",
+	"level": 8,
+	"atk": 2300,
+	"def": 3000,
+	"type": "thunder",
+	"count_as": null,
+	"effect": [],
+	"passcode": "92719314"
+  },
+  "01555": {
+	"card_name": "Dark General Freed",
+	"attribute": "dark",
+	"level": 5,
+	"atk": 2300,
+	"def": 1700,
+	"type": "warrior",
+	"count_as": null,
+	"effect": [
+	  "on_attack",
+	  "ignore_spelltrap"
+	],
+	"passcode": "70676581"
+  },
+  "01556": {
+	"card_name": "Darknight Parshath",
+	"attribute": "dark",
+	"level": 5,
+	"atk": 1900,
+	"def": 1400,
+	"type": "fairy",
+	"count_as": null,
+	"effect": [
+	  "on_attack",
+	  "get_power",
+	  100
+	],
+	"passcode": "76925842"
   }
 }
-

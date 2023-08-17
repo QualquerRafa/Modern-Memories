@@ -320,6 +320,7 @@ func call_fusion_logic(passing_field_slot_to_summon):
 	fusion_result.this_card_id = fusion_information_array[0]
 	
 	#Depending on the Type of 'fusion' that was done, do appropriate changes
+	var fusion_failled_sound_trigger = false
 	match typeof(fusion_information_array[1]):
 		TYPE_ARRAY: #equip [monster_card_id, [status, value_change]]
 			#The flags for the result of an Equip are exactly the same as the non-spell/trap card used
@@ -359,6 +360,7 @@ func call_fusion_logic(passing_field_slot_to_summon):
 		_: 
 			#Safeguard reset fusion_type after any failed fusion
 			fusion_result.this_card_flags.fusion_type = null
+			fusion_failled_sound_trigger = true
 			
 			#Correction to keep the colored border when a sucessfull Fusion Monster fails to fuse with a spell
 			if $fusion_animation/fusion_order_0.this_card_flags.fusion_type != null or $fusion_animation/fusion_order_1.this_card_flags.fusion_type != null:
@@ -373,7 +375,13 @@ func call_fusion_logic(passing_field_slot_to_summon):
 	$fusion_animation/fusion_result_card.rect_scale = fusion_result_start_size
 	$fusion_animation/fusion_result_card.update_card_information(fusion_result.this_card_id)
 	$fusion_animation/fusion_result_card.show()
-	SoundControl.play_sound("poc_fusion2")
+	
+	#Play the correct sound if Fusion Worked or Fusion Failled
+	if fusion_failled_sound_trigger == false:
+		SoundControl.play_sound("poc_fusion2")
+	else:
+		SoundControl.play_sound("poc_ignore")
+	
 	$fusion_animation/tween_fusion.interpolate_property($fusion_animation/fusion_result_card, "modulate", Color(10, 10, 10), Color(1, 1, 1), fusion_timer*0.8, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$fusion_animation/tween_fusion.interpolate_property($fusion_animation/fusion_result_card, "rect_scale", fusion_result_start_size, fusion_result_final_size, fusion_timer*0.8, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 	$fusion_animation/tween_fusion.start()

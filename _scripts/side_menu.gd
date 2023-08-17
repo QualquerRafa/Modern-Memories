@@ -9,6 +9,12 @@ func _ready():
 	#Only show the Speed Up and forfeit button if it's a Free Duel. TUDO TEM LIMITE NESSA BUDEGA.
 	if PlayerData.scene_to_return_after_duel != "free_duel":
 		$top_row/buttons.hide()
+		Engine.set_time_scale(1.0) #just to be safe
+	
+	#Start free duels with the registered speed up
+	if PlayerData.scene_to_return_after_duel == "free_duel":
+		Engine.set_time_scale(PlayerData.registered_freeduel_speed)
+		$top_row/buttons/button_speed/label.text = String(PlayerData.registered_freeduel_speed) + "X"
 	
 	#Properly load the texts in the correct language
 	$cards_of_fusion/fusion_history_title.text = GameLanguage.duel_scene.side_menu.fusion_history[PlayerData.game_language]
@@ -125,8 +131,12 @@ func update_current_rank():
 	$top_row/rank_indicator/rank_letter.add_color_override("font_color", rank_letter_colors[get_rank_letter][0])
 	$top_row/rank_indicator/rank_letter.add_color_override("font_color_shadow", rank_letter_colors[get_rank_letter][1])
 
-var current_game_speed = 1.0
+var current_game_speed = PlayerData.registered_freeduel_speed
 func _on_button_speed_button_up():
+	if gave_up_game == true:
+		Engine.set_time_scale(1.0)
+		return
+	
 	animate_button($top_row/buttons/button_speed)
 	
 	match current_game_speed:
@@ -136,9 +146,12 @@ func _on_button_speed_button_up():
 			current_game_speed = 1.0
 	
 	$top_row/buttons/button_speed/label.text = String(current_game_speed) + "X"
+	PlayerData.registered_freeduel_speed = current_game_speed
 	Engine.set_time_scale(current_game_speed)
 
+var gave_up_game = false
 func _on_button_giveup_button_up():
+	gave_up_game = true
 	animate_button($top_row/buttons/button_giveup)
 	get_node("../game_logic").check_for_game_end("player_forfeit")
 

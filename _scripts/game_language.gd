@@ -51,6 +51,22 @@ var system = {
 	"no" : {
 		"en" : "NO",
 		"pt" : "NÃO"
+	},
+	"return_to_title" : {
+		"en" : "Yes and return to Menu",
+		"pt" : "Sim e voltar ao Menu"
+	},
+	"new" : {
+		"en" : "New",
+		"pt" : "Novo",
+	},
+	"name" : {
+		"en" : "Name",
+		"pt" : "Nome"
+	},
+	"color" : {
+		"en": "Color",
+		"pt": "Cor"
 	}
 }
 
@@ -208,6 +224,22 @@ var types = {
 	"vampire" : {
 		"en" : "Vampire",
 		"pt" : "Vampiro"
+	},
+	"gadget" : {
+		"en" : "Gadget",
+		"pt" : "Engrenagem"
+	},
+	"crystal" : {
+		"en" : "Crystal",
+		"pt" : "Cristal"
+	},
+	"d-hero" : {
+		"en" : "D-HERO",
+		"pt" : "HERÓI-D"
+	},
+	"v-hero" : {
+		"en" : "V-HERO",
+		"pt" : "HERÓI-V"
 	},
 	
 	#For error prevention
@@ -453,7 +485,13 @@ var free_duel = {
 	"losses" : {
 		"en" : "Losses: ",
 		"pt" : "Derrotas: "
-	}
+	},
+	"duelist_names" : {
+		"grandpa" : {
+			"en" : "Grandpa",
+			"pt" : "Vovô"
+		}
+	},
 }
 
 var duel_scene = {

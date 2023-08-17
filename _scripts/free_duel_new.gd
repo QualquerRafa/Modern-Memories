@@ -26,8 +26,67 @@ func _ready():
 
 func duelist_face_clicked(duelist_name):
 	#Update with the correct duelist information
-	$duelist_focus/duelist_body.texture = load("res://_resources/character_bodys/" + duelist_name + "0.png")
-	#$duelist_focus/duelist_name_label.text = duelist_name
+	$duelist_focus/duelist_body.texture = load("res://_resources/character_bodys/" + duelist_name + ".png")
+	$duelist_focus/duelist_name_label.text = duelist_name
+	
+	#Special Adjusts for each duelist art
+	match duelist_name:
+		"kaiba":
+			$duelist_focus/duelist_body.position = Vector2(215, 380)
+			$duelist_focus/duelist_body.scale = Vector2(1, 1)
+		"pegasus":
+			$duelist_focus/duelist_body.position = Vector2(195, 365)
+			$duelist_focus/duelist_body.scale = Vector2(0.9, 0.9)
+		"nitemare":
+			$duelist_focus/duelist_body.position = Vector2(280, 385)
+			$duelist_focus/duelist_body.scale = Vector2(1.0, 1.0)
+		"crowler":
+			$duelist_focus/duelist_body.position = Vector2(160, 270)
+			$duelist_focus/duelist_body.scale = Vector2(0.8, 0.8)
+		"chazz":
+			$duelist_focus/duelist_body.position = Vector2(185, 220)
+			$duelist_focus/duelist_body.scale = Vector2(0.85, 0.85)
+		"blair":
+			$duelist_focus/duelist_body.position = Vector2(220, 150)
+			$duelist_focus/duelist_body.scale = Vector2(0.9, 0.9)
+		"hassleberry":
+			$duelist_focus/duelist_body.position = Vector2(200, 190)
+			$duelist_focus/duelist_body.scale = Vector2(0.9, 0.9)
+		"bastion":
+			$duelist_focus/duelist_body.position = Vector2(200, 220)
+			$duelist_focus/duelist_body.scale = Vector2(0.85, 0.85)
+		"syrus":
+			$duelist_focus/duelist_body.position = Vector2(200, 170)
+			$duelist_focus/duelist_body.scale = Vector2(0.85, 0.85)
+		"alexis":
+			$duelist_focus/duelist_body.position = Vector2(200, 220)
+			$duelist_focus/duelist_body.scale = Vector2(0.85, 0.85)
+		"jesse":
+			$duelist_focus/duelist_body.position = Vector2(200, 220)
+			$duelist_focus/duelist_body.scale = Vector2(0.85, 0.85)
+		"zane":
+			$duelist_focus/duelist_body.position = Vector2(210, 320)
+			$duelist_focus/duelist_body.scale = Vector2(0.6, 0.6)
+		"atticus":
+			$duelist_focus/duelist_body.position = Vector2(210, 230)
+			$duelist_focus/duelist_body.scale = Vector2(0.85, 0.85)
+		"aster":
+			$duelist_focus/duelist_body.position = Vector2(210, 220)
+			$duelist_focus/duelist_body.scale = Vector2(0.85, 0.85)
+		"jaden":
+			$duelist_focus/duelist_body.position = Vector2(220, 320)
+			$duelist_focus/duelist_body.scale = Vector2(0.65, 0.65)
+		"nightshroud":
+			$duelist_focus/duelist_body.position = Vector2(210, 330)
+			$duelist_focus/duelist_body.scale = Vector2(0.85, 0.85)
+		_: #DEFAULT
+			$duelist_focus/duelist_body.position = Vector2(236, 385)
+			$duelist_focus/duelist_body.scale = Vector2(1.0, 1.0)
+	
+	#Check for duelist names in other languages
+	if GameLanguage.free_duel.duelist_names.keys().has(duelist_name):
+		$duelist_focus/duelist_name_label.text = GameLanguage.free_duel.duelist_names[duelist_name][PlayerData.game_language]
+	
 	if PlayerData.recorded_duels.keys().has(duelist_name):
 		$duelist_focus/duelist_wins.text = language_wins + String(PlayerData.recorded_duels[duelist_name].W)
 		$duelist_focus/duelist_losses.text = language_losses + String(PlayerData.recorded_duels[duelist_name].L)

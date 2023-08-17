@@ -221,6 +221,7 @@ func show_card_combat_controls():
 	
 	#If it's a spell/trap card, hide combat options and show activate option
 	if CardList.card_list[this_card_id].attribute in ["spell", "trap"]:
+		unique_spelltrap_activation = false #reset the ability to click on activation button
 		$combat_controls/attack_button.hide()
 		$combat_controls/defense_button.hide()
 		if CardList.card_list[this_card_id].attribute != "trap":
@@ -520,6 +521,10 @@ func _on_attack_button_button_up():
 	get_node("../../../").change_field_view()
 	get_node("../../../").toggle_visibility_of_change_field_view_button()
 
+var unique_spelltrap_activation = false
 func _on_activate_button_button_up():
-	#This calls for the activation of a facedown spell/trap card on the field
-	GAME_LOGIC.effect_activation(self, "on_flip")
+	if unique_spelltrap_activation == false:
+		unique_spelltrap_activation = true
+	
+		#This calls for the activation of a facedown spell/trap card on the field
+		GAME_LOGIC.effect_activation(self, "on_flip")

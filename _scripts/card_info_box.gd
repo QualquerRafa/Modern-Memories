@@ -7,6 +7,10 @@ func update_user_interface(card_node):
 	#'this_card' is defined by the passed ID when clicking a card on screen
 	var this_card : Dictionary = CardList.card_list[card_node.this_card_id]
 	
+	#On every box update, reset this
+	#container_mode = "TXT"
+	#update_description_mode()
+	
 	#Update the specifics that may vary from card to card
 	match this_card.attribute:
 		"spell", "trap":
@@ -104,3 +108,24 @@ func _on_description_mouse_over_mouse_entered():
 func _on_description_mouse_over_mouse_exited():
 	text_tween.interpolate_property(text_node, "rect_position:y", text_node.rect_position.y, 5, scroll_time/3, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	text_tween.start()
+
+#The button to toggle between the Containers for card description: either show TXT form (classic) or IMG form (testing)
+#var container_mode = "TXT"
+#func _on_toggle_img_txt_button_up():
+#	#Figure out which mode to use
+#	if container_mode == "TXT":
+#		container_mode = "IMG"
+#	elif container_mode == "IMG":
+#		container_mode = "TXT"
+#	update_description_mode()
+	
+#func update_description_mode():
+#	if container_mode == "TXT":
+#		$card_text/Container.show()
+#		$card_text/Container_images.hide()
+#	elif container_mode == "IMG":
+#		$card_text/Container.hide()
+#		$card_text/Container_images.show()
+#
+#	#Update toggle button text
+#	$card_text/toggle_img_txt.text = container_mode
