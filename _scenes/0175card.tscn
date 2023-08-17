@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://_resources/card_design/texture_yellow.png" type="Texture" id=1]
 [ext_resource path="res://_resources/card_design/frame_monster.png" type="Texture" id=2]
@@ -10,6 +10,8 @@
 [ext_resource path="res://_resources/fonts/Yu-Gi-Oh! Matrix Regular Small Caps 2.ttf" type="DynamicFontData" id=8]
 [ext_resource path="res://_resources/fonts/kaiu.ttf" type="DynamicFontData" id=9]
 [ext_resource path="res://_resources/fonts/BankGothic Md BT.ttf" type="DynamicFontData" id=10]
+[ext_resource path="res://_resources/scene_deck_building/new_bg.png" type="Texture" id=11]
+[ext_resource path="res://_resources/scene_deck_building/new_en.png" type="Texture" id=12]
 
 [sub_resource type="DynamicFont" id=1]
 size = 44
@@ -51,13 +53,14 @@ flat = true
 script = ExtResource( 7 )
 
 [node name="z_indexer" type="Node2D" parent="."]
+position = Vector2( 0, -1 )
 z_as_relative = false
 
 [node name="card_design" type="Control" parent="z_indexer"]
 margin_left = -135.875
-margin_top = -201.175
+margin_top = -198.175
 margin_right = 195.125
-margin_bottom = 280.825
+margin_bottom = 283.825
 rect_scale = Vector2( 0.175, 0.175 )
 rect_pivot_offset = Vector2( 165, 241 )
 mouse_filter = 2
@@ -258,6 +261,14 @@ custom_constants/shadow_offset_y = 3
 custom_fonts/font = SubResource( 4 )
 text = "999"
 align = 2
+
+[node name="new_indicator" type="Sprite" parent="z_indexer"]
+visible = false
+position = Vector2( 29, -10 )
+texture = ExtResource( 11 )
+
+[node name="new_en" type="Sprite" parent="z_indexer/new_indicator"]
+texture = ExtResource( 12 )
 
 [node name="card_self_tween" type="Tween" parent="."]
 

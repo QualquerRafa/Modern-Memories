@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://_resources/tournament/dialogue_box.png" type="Texture" id=1]
 [ext_resource path="res://_scripts/game_dialog.gd" type="Script" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://_resources/backgrounds/bg3.jpg" type="Texture" id=10]
 [ext_resource path="res://_scripts/save_load_logic.gd" type="Script" id=11]
 [ext_resource path="res://_resources/backgrounds/bg_street_night.jpg" type="Texture" id=12]
+[ext_resource path="res://_resources/backgrounds/bg_abandoned_dorm_inside.png" type="Texture" id=13]
 
 [sub_resource type="StyleBoxTexture" id=1]
 texture = ExtResource( 5 )
@@ -215,6 +216,36 @@ valign = 1
 
 [node name="tween" type="Tween" parent="additional_screen_elements/pop_up_save/button_no"]
 
+[node name="button_return_to_title" type="Button" parent="additional_screen_elements/pop_up_save"]
+margin_left = 452.0
+margin_top = 412.0
+margin_right = 831.0
+margin_bottom = 463.0
+rect_pivot_offset = Vector2( 189, 25 )
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
+[node name="button_box" type="Panel" parent="additional_screen_elements/pop_up_save/button_return_to_title"]
+margin_top = 3.0
+margin_right = 379.0
+margin_bottom = 48.0
+mouse_filter = 2
+custom_styles/panel = SubResource( 1 )
+
+[node name="label" type="Label" parent="additional_screen_elements/pop_up_save/button_return_to_title"]
+margin_left = 2.0
+margin_top = 5.0
+margin_right = 376.0
+margin_bottom = 45.0
+focus_mode = 2
+custom_fonts/font = SubResource( 6 )
+text = "Yes and return to menu"
+align = 1
+valign = 1
+
+[node name="tween" type="Tween" parent="additional_screen_elements/pop_up_save/button_return_to_title"]
+
 [node name="save_logic" type="Node" parent="additional_screen_elements/pop_up_save"]
 script = ExtResource( 11 )
 
@@ -249,6 +280,14 @@ texture = ExtResource( 12 )
 centered = false
 region_rect = Rect2( 263, 2, 806, 679 )
 
+[node name="ritual_room" type="Sprite" parent="additional_screen_elements/special_backgrounds"]
+visible = false
+position = Vector2( -33, -21 )
+scale = Vector2( 1.05, 1.07639 )
+texture = ExtResource( 13 )
+centered = false
+region_rect = Rect2( 263, 2, 806, 679 )
+
 [node name="none" type="Sprite" parent="additional_screen_elements/special_backgrounds"]
 visible = false
 
@@ -263,3 +302,4 @@ visible = false
 [connection signal="button_up" from="additional_screen_elements/player_name_box/Button" to="." method="_on_Button_button_up"]
 [connection signal="button_up" from="additional_screen_elements/pop_up_save/button_yes" to="." method="_on_button_yes_button_up"]
 [connection signal="button_up" from="additional_screen_elements/pop_up_save/button_no" to="." method="_on_button_no_button_up"]
+[connection signal="button_up" from="additional_screen_elements/pop_up_save/button_return_to_title" to="." method="_on_button_return_to_title_button_up"]

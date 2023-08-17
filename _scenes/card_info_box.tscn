@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://_resources/fonts/BankGothic Md BT.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://_scripts/Container.gd" type="Script" id=2]
@@ -18,7 +18,19 @@ outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 1 )
 
+[sub_resource type="DynamicFont" id=4]
+size = 18
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
 [sub_resource type="DynamicFont" id=2]
+size = 28
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
 size = 28
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
@@ -161,6 +173,18 @@ margin_top = 54.0
 margin_right = 1280.0
 margin_bottom = 132.0
 
+[node name="toggle_img_txt" type="Button" parent="card_text"]
+visible = false
+margin_left = 1227.0
+margin_top = -82.0
+margin_right = 1278.0
+margin_bottom = -56.0
+focus_mode = 0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 4 )
+enabled_focus_mode = 0
+text = "IMG"
+
 [node name="Container" type="Container" parent="card_text"]
 margin_right = 1280.0
 margin_bottom = 78.0
@@ -184,11 +208,40 @@ focus_mode = 0
 enabled_focus_mode = 0
 flat = true
 
+[node name="Container_images" type="Container" parent="card_text"]
+visible = false
+margin_right = 1280.0
+margin_bottom = 78.0
+script = ExtResource( 2 )
+
+[node name="description_line1" type="RichTextLabel" parent="card_text/Container_images"]
+margin_left = 10.0
+margin_top = 5.0
+margin_right = 1273.0
+margin_bottom = 72.0
+custom_fonts/normal_font = SubResource( 3 )
+bbcode_enabled = true
+bbcode_text = "[img=26]res://_resources/_types/dragon.png[/img] can fuse with"
+meta_underlined = false
+text = " can fuse with"
+scroll_active = false
+
+[node name="description_mouse_over" type="Button" parent="card_text/Container_images"]
+margin_right = 12.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 1280, 77 )
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+
 [node name="text_scroll_timer" type="Timer" parent="card_text"]
 
 [node name="description_tween" type="Tween" parent="card_text"]
 
 [node name="interface_timer" type="Timer" parent="."]
 
+[connection signal="button_up" from="card_text/toggle_img_txt" to="." method="_on_toggle_img_txt_button_up"]
 [connection signal="mouse_entered" from="card_text/Container/description_mouse_over" to="." method="_on_description_mouse_over_mouse_entered"]
 [connection signal="mouse_exited" from="card_text/Container/description_mouse_over" to="." method="_on_description_mouse_over_mouse_exited"]
+[connection signal="mouse_entered" from="card_text/Container_images/description_mouse_over" to="." method="_on_description_mouse_over_mouse_entered"]
+[connection signal="mouse_exited" from="card_text/Container_images/description_mouse_over" to="." method="_on_description_mouse_over_mouse_exited"]

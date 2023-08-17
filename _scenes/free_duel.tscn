@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://_resources/scene_deck_building/back_button.png" type="Texture" id=1]
 [ext_resource path="res://_resources/scene_duel/top_info_box.png" type="Texture" id=2]
@@ -7,7 +7,6 @@
 [ext_resource path="res://_scenes/scene_transitioner.tscn" type="PackedScene" id=5]
 [ext_resource path="res://_resources/character_faces/shadi0.png" type="Texture" id=6]
 [ext_resource path="res://_resources/scene_duel/darken_bg.png" type="Texture" id=7]
-[ext_resource path="res://_resources/character_bodys/shadi0.png" type="Texture" id=8]
 [ext_resource path="res://_resources/free_duel/focus_shadow.png" type="Texture" id=9]
 [ext_resource path="res://_resources/character_faces/grandpa0.png" type="Texture" id=10]
 [ext_resource path="res://_scripts/free_duel_new.gd" type="Script" id=11]
@@ -131,9 +130,9 @@ texture = ExtResource( 15 )
 
 [node name="duelist_buttons" type="ScrollContainer" parent="duelist_faces"]
 margin_left = 33.0
-margin_top = 63.0
+margin_top = 61.0
 margin_right = 1257.0
-margin_bottom = 577.0
+margin_bottom = 583.0
 rect_min_size = Vector2( 0, 443 )
 mouse_filter = 1
 theme = SubResource( 14 )
@@ -141,7 +140,7 @@ scroll_horizontal_enabled = false
 
 [node name="GridContainer" type="GridContainer" parent="duelist_faces/duelist_buttons"]
 margin_right = 1182.0
-margin_bottom = 258.0
+margin_bottom = 522.0
 custom_constants/vseparation = 6
 custom_constants/hseparation = 6
 columns = 9
@@ -256,6 +255,84 @@ margin_top = 132.0
 margin_right = 1182.0
 margin_bottom = 258.0
 
+[node name="duelist_crowler" parent="duelist_faces/duelist_buttons/GridContainer" instance=ExtResource( 16 )]
+margin_left = 0.0
+margin_top = 264.0
+margin_right = 126.0
+margin_bottom = 390.0
+
+[node name="duelist_chazz" parent="duelist_faces/duelist_buttons/GridContainer" instance=ExtResource( 16 )]
+margin_left = 132.0
+margin_top = 264.0
+margin_right = 258.0
+margin_bottom = 390.0
+
+[node name="duelist_blair" parent="duelist_faces/duelist_buttons/GridContainer" instance=ExtResource( 16 )]
+margin_left = 264.0
+margin_top = 264.0
+margin_right = 390.0
+margin_bottom = 390.0
+
+[node name="duelist_hassleberry" parent="duelist_faces/duelist_buttons/GridContainer" instance=ExtResource( 16 )]
+margin_left = 396.0
+margin_top = 264.0
+margin_right = 522.0
+margin_bottom = 390.0
+
+[node name="duelist_bastion" parent="duelist_faces/duelist_buttons/GridContainer" instance=ExtResource( 16 )]
+margin_left = 528.0
+margin_top = 264.0
+margin_right = 654.0
+margin_bottom = 390.0
+
+[node name="duelist_syrus" parent="duelist_faces/duelist_buttons/GridContainer" instance=ExtResource( 16 )]
+margin_left = 660.0
+margin_top = 264.0
+margin_right = 786.0
+margin_bottom = 390.0
+
+[node name="duelist_alexis" parent="duelist_faces/duelist_buttons/GridContainer" instance=ExtResource( 16 )]
+margin_left = 792.0
+margin_top = 264.0
+margin_right = 918.0
+margin_bottom = 390.0
+
+[node name="duelist_jesse" parent="duelist_faces/duelist_buttons/GridContainer" instance=ExtResource( 16 )]
+margin_left = 924.0
+margin_top = 264.0
+margin_right = 1050.0
+margin_bottom = 390.0
+
+[node name="duelist_zane" parent="duelist_faces/duelist_buttons/GridContainer" instance=ExtResource( 16 )]
+margin_left = 1056.0
+margin_top = 264.0
+margin_right = 1182.0
+margin_bottom = 390.0
+
+[node name="duelist_atticus" parent="duelist_faces/duelist_buttons/GridContainer" instance=ExtResource( 16 )]
+margin_left = 0.0
+margin_top = 396.0
+margin_right = 126.0
+margin_bottom = 522.0
+
+[node name="duelist_aster" parent="duelist_faces/duelist_buttons/GridContainer" instance=ExtResource( 16 )]
+margin_left = 132.0
+margin_top = 396.0
+margin_right = 258.0
+margin_bottom = 522.0
+
+[node name="duelist_jaden" parent="duelist_faces/duelist_buttons/GridContainer" instance=ExtResource( 16 )]
+margin_left = 264.0
+margin_top = 396.0
+margin_right = 390.0
+margin_bottom = 522.0
+
+[node name="duelist_nightshroud" parent="duelist_faces/duelist_buttons/GridContainer" instance=ExtResource( 16 )]
+margin_left = 396.0
+margin_top = 396.0
+margin_right = 522.0
+margin_bottom = 522.0
+
 [node name="duelist_focus" type="Node2D" parent="."]
 visible = false
 
@@ -267,7 +344,6 @@ texture = ExtResource( 7 )
 
 [node name="duelist_body" type="Sprite" parent="duelist_focus"]
 position = Vector2( 236, 385 )
-texture = ExtResource( 8 )
 
 [node name="FocusShadow" type="Sprite" parent="duelist_focus"]
 modulate = Color( 1, 1, 1, 0.964706 )
@@ -308,7 +384,6 @@ align = 1
 valign = 1
 
 [node name="duelist_name_label" type="Label" parent="duelist_focus"]
-visible = false
 margin_left = 10.0
 margin_top = 489.0
 margin_right = 260.0
