@@ -108,6 +108,7 @@
 		{
 			"animation": "[Default]",
 			"animation_length": 0,
+			"animation_wait": true,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1688959180.json",
@@ -154,6 +155,7 @@
 		{
 			"animation": "[Default]",
 			"animation_length": 0,
+			"animation_wait": true,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1690255897.json",
@@ -176,6 +178,27 @@
 			"event_id": "dialogic_001",
 			"portrait": "",
 			"text": "Não achou que eu ficaria de fora da festa, né Wheeler?\nMas eu também estou atrás de [Player Name]!"
+		},
+		{
+			"animation": "4-fade_out.gd",
+			"animation_length": 0.3,
+			"animation_wait": true,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1690255897.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
 		},
 		{
 			"call_node": {

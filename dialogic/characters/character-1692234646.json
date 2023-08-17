@@ -1,0 +1,33 @@
+{
+	"color": "#ffd5dbdb",
+	"description": "",
+	"display_name": "",
+	"display_name_bool": false,
+	"id": "character-1692234646.json",
+	"mirror_portraits": false,
+	"name": "Aster",
+	"nickname": "",
+	"nickname_bool": false,
+	"offset_x": 0,
+	"offset_y": -140,
+	"portraits": [
+		{
+			"name": "Default",
+			"path": "res://_resources/character_bodys/aster.png"
+		},
+		{
+			"name": "aster_angry",
+			"path": "res://_resources/character_bodys/aster_angry.png"
+		},
+		{
+			"name": "aster_sad",
+			"path": "res://_resources/character_bodys/aster_sad.png"
+		},
+		{
+			"name": "aster_smile",
+			"path": "res://_resources/character_bodys/aster_smile.png"
+		}
+	],
+	"scale": 75,
+	"theme": ""
+}

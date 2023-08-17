@@ -1,0 +1,208 @@
+{
+	"events": [
+		{
+			"call_node": {
+				"arguments": [
+
+				],
+				"method_name": "fake_box_moving_up",
+				"target_node_path": "game_dialog"
+			},
+			"event_id": "dialogic_042"
+		},
+		{
+			"call_node": {
+				"arguments": [
+					"lohweo_forest_shrine"
+				],
+				"method_name": "change_background_music",
+				"target_node_path": "game_dialog"
+			},
+			"event_id": "dialogic_042"
+		},
+		{
+			"background": "res://_resources/backgrounds/bg_abandoned_dorm.png",
+			"event_id": "dialogic_021"
+		},
+		{
+			"animation": "[Default]",
+			"animation_length": 0,
+			"animation_wait": false,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1692234341.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": true,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"condition": "",
+			"definition": "1692237742-648",
+			"event_id": "dialogic_012",
+			"value": "false"
+		},
+		{
+			"character": "character-1692234341.json",
+			"event_id": "dialogic_001",
+			"portrait": "atticus_smile",
+			"text": "Viu essa, Joey? Nosso Dragão é imbatível!"
+		},
+		{
+			"animation": "4-fade_out.gd",
+			"animation_length": 0.3,
+			"animation_wait": true,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1692234341.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		},
+		{
+			"call_node": {
+				"arguments": [
+
+				],
+				"method_name": "call_game_over",
+				"target_node_path": "game_dialog"
+			},
+			"event_id": "dialogic_042"
+		},
+		{
+			"event_id": "dialogic_022",
+			"transition_duration": 0.5
+		},
+		{
+			"event_id": "dialogic_013"
+		},
+		{
+			"character": "character-1692234341.json",
+			"event_id": "dialogic_001",
+			"portrait": "atticus_surprise",
+			"text": "Que duelo incrível! Eu entendo perfeitamente porque estão confiando tanto em você."
+		},
+		{
+			"animation": "slide_in_right.gd",
+			"animation_length": 0.5,
+			"animation_wait": true,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1692234391.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "zane_smile",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": true
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1692234391.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Não fique tão confiante assim. O Atticus sempre foi o segundo melhor. Se prepare pra enfrentar o primeiro!"
+		},
+		{
+			"animation": "4-fade_out.gd",
+			"animation_length": 0.5,
+			"animation_wait": false,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1692234341.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		},
+		{
+			"animation": "4-fade_out.gd",
+			"animation_length": 0.5,
+			"animation_wait": true,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1692234391.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": false,
+			"wait_seconds": 0.1
+		},
+		{
+			"call_node": {
+				"arguments": [
+					"dlg_037"
+				],
+				"method_name": "record_dialog_on_PlayerData",
+				"target_node_path": "game_dialog"
+			},
+			"event_id": "dialogic_042"
+		},
+		{
+			"call_node": {
+				"arguments": [
+					"zane"
+				],
+				"method_name": "call_duel",
+				"target_node_path": "game_dialog"
+			},
+			"event_id": "dialogic_042"
+		},
+		{
+			"event_id": "dialogic_022",
+			"transition_duration": 0.5
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.4.5",
+		"file": "timeline-1692237692.json",
+		"name": "dlg_037"
+	}
+}

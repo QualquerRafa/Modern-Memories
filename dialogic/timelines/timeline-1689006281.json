@@ -32,12 +32,12 @@
 			"text": "O meu Jogo das Trevas. . . O que fizeram com ele?"
 		},
 		{
-			"animation": "back_in_up.gd",
+			"animation": "[Default]",
 			"animation_length": 0.5,
 			"animation_wait": true,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
-			"character": "character-1688964881.json",
+			"character": "character-1690744926.json",
 			"event_id": "dialogic_002",
 			"mirror_portrait": false,
 			"portrait": "Default",
@@ -53,18 +53,18 @@
 			"z_index": 0
 		},
 		{
-			"character": "character-1688964881.json",
+			"character": "character-1690744926.json",
 			"event_id": "dialogic_001",
 			"portrait": "",
 			"text": "Não irei permitir que tal ofensa continue. . ."
 		},
 		{
-			"animation": "back_out_up.gd",
+			"animation": "[Default]",
 			"animation_length": 0.5,
 			"animation_wait": true,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
-			"character": "character-1688964881.json",
+			"character": "character-1690744926.json",
 			"event_id": "dialogic_002",
 			"mirror_portrait": false,
 			"portrait": "",
@@ -107,7 +107,7 @@
 		{
 			"animation": "[Default]",
 			"animation_length": 0,
-			"animation_wait": false,
+			"animation_wait": true,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1688959133.json",
@@ -155,7 +155,7 @@
 		{
 			"animation": "[Default]",
 			"animation_length": 0,
-			"animation_wait": false,
+			"animation_wait": true,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1688959154.json",
@@ -274,6 +274,7 @@
 		{
 			"animation": "slide_in_right.gd",
 			"animation_length": 0.5,
+			"animation_wait": false,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1688959089.json",
@@ -321,7 +322,7 @@
 		{
 			"animation": "slide_out_right.gd",
 			"animation_length": 0.5,
-			"animation_wait": false,
+			"animation_wait": true,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1688959089.json",
@@ -355,6 +356,7 @@
 		{
 			"animation": "[Default]",
 			"animation_length": 0,
+			"animation_wait": true,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1688959133.json",
@@ -387,6 +389,7 @@
 		{
 			"animation": "slide_in_right.gd",
 			"animation_length": 0.5,
+			"animation_wait": true,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1688959089.json",
@@ -431,6 +434,7 @@
 		{
 			"animation": "[Default]",
 			"animation_length": 0,
+			"animation_wait": false,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1688959133.json",
@@ -451,6 +455,7 @@
 		{
 			"animation": "slide_out_right.gd",
 			"animation_length": 0.5,
+			"animation_wait": false,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1688959089.json",
@@ -544,7 +549,7 @@
 		{
 			"animation": "[Default]",
 			"animation_length": 0,
-			"animation_wait": true,
+			"animation_wait": false,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1688959089.json",
@@ -575,8 +580,8 @@
 			"text": "Yugi, eu e [Player Name] iremos te mostrar como esse novo jogo funciona."
 		},
 		{
-			"animation": "[Default]",
-			"animation_length": 0,
+			"animation": "4-fade_out.gd",
+			"animation_length": 0.3,
 			"animation_wait": true,
 			"change_mirror_portrait": false,
 			"change_z_index": false,

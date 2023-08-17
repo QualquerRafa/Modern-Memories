@@ -13,7 +13,7 @@
 	"portraits": [
 		{
 			"name": "Default",
-			"path": "res://_resources/character_bodys/mai0.png"
+			"path": "res://_resources/character_bodys/mai.png"
 		},
 		{
 			"name": "mai_angry",

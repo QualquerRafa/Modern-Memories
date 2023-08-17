@@ -13,7 +13,7 @@
 	"portraits": [
 		{
 			"name": "Default",
-			"path": "res://_resources/character_bodys/duke0.png"
+			"path": "res://_resources/character_bodys/duke.png"
 		}
 	],
 	"scale": 100,

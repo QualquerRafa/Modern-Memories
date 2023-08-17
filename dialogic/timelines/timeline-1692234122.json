@@ -1,0 +1,387 @@
+{
+	"events": [
+		{
+			"call_node": {
+				"arguments": [
+
+				],
+				"method_name": "fake_box_moving_up",
+				"target_node_path": "game_dialog"
+			},
+			"event_id": "dialogic_042"
+		},
+		{
+			"call_node": {
+				"arguments": [
+					"lohweo_forest_shrine"
+				],
+				"method_name": "change_background_music",
+				"target_node_path": "game_dialog"
+			},
+			"event_id": "dialogic_042"
+		},
+		{
+			"background": "res://_resources/backgrounds/bg_abandoned_dorm.png",
+			"event_id": "dialogic_021"
+		},
+		{
+			"animation": "[Default]",
+			"animation_length": 0.5,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1690602991.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": true,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1690602991.json",
+			"event_id": "dialogic_001",
+			"portrait": "pegasus_sad",
+			"text": "Então esse é o dormitório no qual aqueles acidentes aconteceram..."
+		},
+		{
+			"animation": "slide_in_right.gd",
+			"animation_length": 0.5,
+			"animation_wait": true,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1688959180.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "joey_surprise",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": true
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1688959180.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Acidentes? Dormitório Abandonado?! NÃO ME DIGA QUE ELE É ASSOMBRADO!"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Talvez se fossem só fantasmas a gente não precisaria se preocupar tanto."
+		},
+		{
+			"animation": "[Default]",
+			"animation_length": 0,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1690602991.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		},
+		{
+			"animation": "slide_out_right.gd",
+			"animation_length": 0,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1688959180.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		},
+		{
+			"animation": "[Default]",
+			"animation_length": 0,
+			"animation_wait": true,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1692234341.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": true,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1692234341.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Alguns anos atrás um colega de classe se envolveu com o Jogo das Trevas e trouxe pra nossa academia um mal que ninguem esperava."
+		},
+		{
+			"animation": "slide_in_right.gd",
+			"animation_length": 0.5,
+			"animation_wait": true,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1692234391.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": true
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1692234391.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Nós eramos os 3 duelistas mais admirados na Academia, mas desde aquele dia nada mais foi o mesmo."
+		},
+		{
+			"character": "character-1692234341.json",
+			"event_id": "dialogic_001",
+			"portrait": "atticus_sad",
+			"text": "Eu que o diga..."
+		},
+		{
+			"animation": "slide_out_right.gd",
+			"animation_length": 0.5,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1692234391.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		},
+		{
+			"character": "character-1692234341.json",
+			"event_id": "dialogic_001",
+			"portrait": "atticus_smile",
+			"text": "Mas o que duelistas lendários estão querendo por aqui?"
+		},
+		{
+			"animation": "slide_in_right.gd",
+			"animation_length": 0.5,
+			"animation_wait": true,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1688959180.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": true
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1688959180.json",
+			"event_id": "dialogic_001",
+			"portrait": "joey_smile",
+			"text": "Tô adorando finalmente ter o reconhecimento que mereço!"
+		},
+		{
+			"character": "character-1692234341.json",
+			"event_id": "dialogic_001",
+			"portrait": "Default",
+			"text": "Como um duelista que também usa os Olhos Vermelhos, é uma honra encontrá-lo pessoalmente!"
+		},
+		{
+			"animation": "slide_out_right.gd",
+			"animation_length": 0.5,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1688959180.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		},
+		{
+			"animation": "slide_in_right.gd",
+			"animation_length": 0.5,
+			"animation_wait": true,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1690602991.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": true
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1690602991.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Nós estamos atrás de Jaden Yuki. Infelizmente o criador do Jogo das Trevas veio ao nosso mundo e o segredo para derrotá-lo está em dominar as Fusões de monstros."
+		},
+		{
+			"character": "character-1690602991.json",
+			"event_id": "dialogic_001",
+			"portrait": "pegasus_smile",
+			"text": "[Player Name]... Já sabe o que eu vou fazer, não é?\nTemos aqui dois dos melhores duelistas que a Academia já teve! Ambos mestres em fusões!"
+		},
+		{
+			"character": "character-1690602991.json",
+			"event_id": "dialogic_001",
+			"portrait": "Default",
+			"text": "O Dragão Negro de Olhos Vermelhos e seu potencial para atingir o poder, e os Dragões Cibernéticos com sua multitude de combinações!\nDe todos os duelos que [Player Name] já fez nessa academia, esses dois certamente serão os mais importantes logo atrás do Jaden."
+		},
+		{
+			"character": "character-1692234341.json",
+			"event_id": "dialogic_001",
+			"portrait": "Default",
+			"text": "Claro, sem problemas! Eu adoraria mostrar a vocês o poder do meu Deck!"
+		},
+		{
+			"animation": "4-fade_out.gd",
+			"animation_length": 0.5,
+			"animation_wait": false,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1690602991.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		},
+		{
+			"animation": "4-fade_out.gd",
+			"animation_length": 0.5,
+			"animation_wait": true,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1692234341.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": false,
+			"wait_seconds": 0.1
+		},
+		{
+			"call_node": {
+				"arguments": [
+					"dlg_036"
+				],
+				"method_name": "record_dialog_on_PlayerData",
+				"target_node_path": "game_dialog"
+			},
+			"event_id": "dialogic_042"
+		},
+		{
+			"call_node": {
+				"arguments": [
+					"atticus"
+				],
+				"method_name": "call_duel",
+				"target_node_path": "game_dialog"
+			},
+			"event_id": "dialogic_042"
+		},
+		{
+			"event_id": "dialogic_022",
+			"transition_duration": 0.5
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.4.5",
+		"file": "timeline-1692234122.json",
+		"name": "dlg_036"
+	}
+}

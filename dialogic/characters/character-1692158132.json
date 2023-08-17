@@ -1,0 +1,37 @@
+{
+	"color": "#ff291f36",
+	"description": "",
+	"display_name": "",
+	"display_name_bool": false,
+	"id": "character-1692158132.json",
+	"mirror_portraits": false,
+	"name": "Chazz",
+	"nickname": "",
+	"nickname_bool": false,
+	"offset_x": 0,
+	"offset_y": -140,
+	"portraits": [
+		{
+			"name": "Default",
+			"path": "res://_resources/character_bodys/chazz.png"
+		},
+		{
+			"name": "chazz_angry",
+			"path": "res://_resources/character_bodys/chazz_angry.png"
+		},
+		{
+			"name": "chazz_sad",
+			"path": "res://_resources/character_bodys/chazz_sad.png"
+		},
+		{
+			"name": "chazz_smile",
+			"path": "res://_resources/character_bodys/chazz_smile.png"
+		},
+		{
+			"name": "chazz_surprise",
+			"path": "res://_resources/character_bodys/chazz_surprise.png"
+		}
+	],
+	"scale": 80,
+	"theme": ""
+}

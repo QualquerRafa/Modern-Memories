@@ -33,6 +33,7 @@
 		{
 			"animation": "[Default]",
 			"animation_length": 0,
+			"animation_wait": false,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1688959089.json",
@@ -55,6 +56,27 @@
 			"event_id": "dialogic_001",
 			"portrait": "",
 			"text": "Parece que você não é quem eu estava procurando..."
+		},
+		{
+			"animation": "4-fade_out.gd",
+			"animation_length": 0.3,
+			"animation_wait": true,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1688959089.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "shadi_sad",
+			"portrait_definition": "",
+			"position": {
+				"0": true,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
 		},
 		{
 			"call_node": {
@@ -103,6 +125,7 @@
 		{
 			"animation": "slide_in_right.gd",
 			"animation_length": 0.5,
+			"animation_wait": false,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1688959089.json",
@@ -133,7 +156,7 @@
 
 			],
 			"portrait": "Default",
-			"question": "Eu acho que entendo melhor se eu jogar. Vamos duelar, [Player Name]?"
+			"question": "Eu acho que entendo melhor se eu puder jogar. Quer me enfrentar, [Player Name]?"
 		},
 		{
 			"choice": "SIM",
@@ -141,6 +164,53 @@
 			"definition": "",
 			"event_id": "dialogic_011",
 			"value": ""
+		},
+		{
+			"animation": "4-fade_out.gd",
+			"animation_length": 0.5,
+			"animation_wait": false,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1688959133.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		},
+		{
+			"animation": "4-fade_out.gd",
+			"animation_length": 0.5,
+			"animation_wait": true,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1688959089.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": false,
+			"wait_seconds": 0.1
 		},
 		{
 			"call_node": {

@@ -33,6 +33,7 @@
 		{
 			"animation": "[Default]",
 			"animation_length": 0,
+			"animation_wait": false,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1690602991.json",
@@ -57,6 +58,27 @@
 			"text": "Oh! Parece que eu vi coisas demais em você..."
 		},
 		{
+			"animation": "4-fade_out.gd",
+			"animation_length": 0.3,
+			"animation_wait": true,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1690602991.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		},
+		{
 			"call_node": {
 				"arguments": [
 
@@ -76,6 +98,7 @@
 		{
 			"animation": "[Default]",
 			"animation_length": 0,
+			"animation_wait": false,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1690602991.json",
@@ -102,6 +125,7 @@
 		{
 			"animation": "slide_in_right.gd",
 			"animation_length": 0.5,
+			"animation_wait": true,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1688959180.json",
@@ -148,6 +172,7 @@
 		{
 			"animation": "slide_in_right.gd",
 			"animation_length": 0.5,
+			"animation_wait": true,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1688959217.json",
@@ -194,6 +219,7 @@
 		{
 			"animation": "slide_in_right.gd",
 			"animation_length": 0.5,
+			"animation_wait": true,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1688959133.json",
@@ -225,7 +251,7 @@
 		},
 		{
 			"animation": "slide_out_right.gd",
-			"animation_length": 0,
+			"animation_length": 0.5,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1688959133.json",
@@ -246,6 +272,7 @@
 		{
 			"animation": "slide_in_right.gd",
 			"animation_length": 0.5,
+			"animation_wait": true,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1688959262.json",
@@ -347,7 +374,8 @@
 		},
 		{
 			"animation": "[Default]",
-			"animation_length": 0,
+			"animation_length": 0.5,
+			"animation_wait": true,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1688959133.json",
@@ -356,11 +384,11 @@
 			"portrait": "Default",
 			"portrait_definition": "",
 			"position": {
-				"0": false,
+				"0": true,
 				"1": false,
 				"2": false,
 				"3": false,
-				"4": true
+				"4": false
 			},
 			"type": 0,
 			"z_index": 0
@@ -370,6 +398,27 @@
 			"event_id": "dialogic_001",
 			"portrait": "Default",
 			"text": "Então já sabemos nossa próxima parada."
+		},
+		{
+			"animation": "4-fade_out.gd",
+			"animation_length": 0.3,
+			"animation_wait": true,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1688959133.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
 		},
 		{
 			"call_node": {
@@ -382,22 +431,64 @@
 			"event_id": "dialogic_042"
 		},
 		{
+			"background": "res://_resources/backgrounds/black.png",
+			"event_id": "dialogic_021"
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 1
+		},
+		{
+			"change_timeline": "timeline-1690597401.json",
+			"event_id": "dialogic_020"
+		},
+		{
+			"event_id": "dialogic_013"
+		},
+		{
+			"animation": "4-fade_out.gd",
+			"animation_length": 0.3,
+			"animation_wait": true,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1690602991.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		},
+		{
 			"call_node": {
 				"arguments": [
-					"dlg_017",
-					"fade"
+					"dlg_022"
 				],
-				"method_name": "enter_new_dialog_from_fade",
+				"method_name": "record_dialog_on_PlayerData",
 				"target_node_path": "game_dialog"
 			},
 			"event_id": "dialogic_042"
 		},
 		{
-			"event_id": "dialogic_022",
-			"transition_duration": 0
+			"background": "res://_resources/backgrounds/black.png",
+			"event_id": "dialogic_021"
 		},
 		{
-			"event_id": "dialogic_013"
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 1
+		},
+		{
+			"change_timeline": "timeline-1690740621.json",
+			"event_id": "dialogic_020"
 		}
 	],
 	"metadata": {

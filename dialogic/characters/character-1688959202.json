@@ -13,7 +13,7 @@
 	"portraits": [
 		{
 			"name": "Default",
-			"path": "res://_resources/character_bodys/tea0.png"
+			"path": "res://_resources/character_bodys/tea.png"
 		},
 		{
 			"name": "tea_angry",

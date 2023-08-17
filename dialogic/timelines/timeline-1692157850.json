@@ -1,0 +1,403 @@
+{
+	"events": [
+		{
+			"call_node": {
+				"arguments": [
+
+				],
+				"method_name": "fake_box_moving_up",
+				"target_node_path": "game_dialog"
+			},
+			"event_id": "dialogic_042"
+		},
+		{
+			"call_node": {
+				"arguments": [
+					"lohweo_forest_shrine"
+				],
+				"method_name": "change_background_music",
+				"target_node_path": "game_dialog"
+			},
+			"event_id": "dialogic_042"
+		},
+		{
+			"background": "res://_resources/backgrounds/bg_slifer_dorm.jpg",
+			"event_id": "dialogic_021"
+		},
+		{
+			"animation": "[Default]",
+			"animation_length": 0,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1688959217.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": true,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1688959217.json",
+			"event_id": "dialogic_001",
+			"portrait": "tristan_surprise",
+			"text": "Mesmo as piores acomodações dessa ilha parecem mais confortáveis do que a minha casa."
+		},
+		{
+			"animation": "slide_in_right.gd",
+			"animation_length": 0.5,
+			"animation_wait": true,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1688959180.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": true
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1688959180.json",
+			"event_id": "dialogic_001",
+			"portrait": "joey_angry",
+			"text": "E pensar que o Pegasus fez a gente dormir no chão durante o Reino dos Duelistas!"
+		},
+		{
+			"animation": "[Default]",
+			"animation_length": 0,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1688959217.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		},
+		{
+			"animation": "[Default]",
+			"animation_length": 0,
+			"animation_wait": true,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1690602991.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "pegasus_surprise",
+			"portrait_definition": "",
+			"position": {
+				"0": true,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1690602991.json",
+			"event_id": "dialogic_001",
+			"portrait": "(Don't change)",
+			"text": "Eu... Era outra pessoa naquela época..."
+		},
+		{
+			"animation": "[Default]",
+			"animation_length": 0,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1690602991.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		},
+		{
+			"animation": "slide_out_right.gd",
+			"animation_length": 0.5,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1688959180.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		},
+		{
+			"animation": "[Default]",
+			"animation_length": 0,
+			"animation_wait": true,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1688959133.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "yugi_sad",
+			"portrait_definition": "",
+			"position": {
+				"0": true,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1688959133.json",
+			"event_id": "dialogic_001",
+			"portrait": "(Don't change)",
+			"text": "Chega de papo pessoal. Vamos nos dividir pelos andares pra procurar pelo Jaden."
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "yugi_sad",
+			"text": "Eu também achei que ele estaria aqui, mas talvez tenha ido direto ao Rá Amarelo procurar o Syrus e o Hassleberry..."
+		},
+		{
+			"animation": "slide_in_right.gd",
+			"animation_length": 0.5,
+			"animation_wait": true,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1688959180.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": true
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1688959180.json",
+			"event_id": "dialogic_001",
+			"portrait": "joey_surprise",
+			"text": "Rá Amarelo? Isso me trás más lembranças..."
+		},
+		{
+			"animation": "[Default]",
+			"animation_length": 0,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1688959133.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		},
+		{
+			"animation": "slide_out_right.gd",
+			"animation_length": 0.5,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1688959180.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		},
+		{
+			"animation": "[Default]",
+			"animation_length": 0,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1692158132.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": true,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1692158132.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Joey Wheeler e Yugi Muto, sou um grande fã dos dois! Assisti várias e várias vezes os duelos de vocês!"
+		},
+		{
+			"animation": "slide_in_right.gd",
+			"animation_length": 0.5,
+			"animation_wait": true,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1690602991.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "pegasus_smile",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": true
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1690602991.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Ora, jovem Chazz. Você também é um Pro-Duelista de destaque! Merece a mesma admiração de volta.\nInclusive... Não seria nada mal se você pudesse mostrar a [Player Name] o que é ensinado nessa escola!"
+		},
+		{
+			"character": "character-1692158132.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "No que eu puder ajudar lendas como vocês, contém comigo!\n[Player Name], né? Vamos lá!"
+		},
+		{
+			"animation": "4-fade_out.gd",
+			"animation_length": 0.5,
+			"animation_wait": false,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1690602991.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		},
+		{
+			"animation": "4-fade_out.gd",
+			"animation_length": 0.5,
+			"animation_wait": true,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1692158132.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": false,
+			"wait_seconds": 0.1
+		},
+		{
+			"call_node": {
+				"arguments": [
+					"dlg_027"
+				],
+				"method_name": "record_dialog_on_PlayerData",
+				"target_node_path": "game_dialog"
+			},
+			"event_id": "dialogic_042"
+		},
+		{
+			"call_node": {
+				"arguments": [
+					"chazz"
+				],
+				"method_name": "call_duel",
+				"target_node_path": "game_dialog"
+			},
+			"event_id": "dialogic_042"
+		},
+		{
+			"event_id": "dialogic_022",
+			"transition_duration": 0.5
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.4.5",
+		"file": "timeline-1692157850.json",
+		"name": "dlg_027"
+	}
+}

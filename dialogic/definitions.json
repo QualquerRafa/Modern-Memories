@@ -46,12 +46,6 @@
 			"value": "false"
 		},
 		{
-			"id": "1689724779-265",
-			"name": "loop_return_to",
-			"type": 0,
-			"value": "tea"
-		},
-		{
 			"id": "1689725953-501",
 			"name": "act2_bakura",
 			"type": 0,
@@ -118,12 +112,6 @@
 			"value": "false"
 		},
 		{
-			"id": "1688964396-141",
-			"name": "Player Name",
-			"type": 0,
-			"value": "PlayerData.player_name"
-		},
-		{
 			"id": "1690585024-366",
 			"name": "campaign_defeat_ESPA",
 			"type": 0,
@@ -154,8 +142,116 @@
 			"value": "false"
 		},
 		{
+			"id": "1689724779-265",
+			"name": "loop_return_to",
+			"type": 0,
+			"value": "tea"
+		},
+		{
+			"id": "1688964396-141",
+			"name": "Player Name",
+			"type": 0,
+			"value": "Rafa"
+		},
+		{
 			"id": "1690749369-787",
-			"name": "campaign_defeate_NITEMARE",
+			"name": "campaign_defeat_NITEMARE",
+			"type": 0,
+			"value": "false"
+		},
+		{
+			"id": "1692154352-648",
+			"name": "campaign_defeat_TENMA",
+			"type": 0,
+			"value": "false"
+		},
+		{
+			"id": "1692154653-787",
+			"name": "chose_to_duel_tenma",
+			"type": 0,
+			"value": "false"
+		},
+		{
+			"id": "1692159102-146",
+			"name": "campaign_defeat_CHAZZ",
+			"type": 0,
+			"value": "false"
+		},
+		{
+			"id": "1692157439-366",
+			"name": "campaign_defeat_CROWLER",
+			"type": 0,
+			"value": "false"
+		},
+		{
+			"id": "1692159687-918",
+			"name": "campaign_defeat_BLAIR",
+			"type": 0,
+			"value": "false"
+		},
+		{
+			"id": "1692162986-483",
+			"name": "campaign_defeat_HASSLEBERRY",
+			"type": 0,
+			"value": "false"
+		},
+		{
+			"id": "1692163604-970",
+			"name": "campaign_defeat_BASTION",
+			"type": 0,
+			"value": "false"
+		},
+		{
+			"id": "1692166723-339",
+			"name": "campaign_defeat_ALEXIS",
+			"type": 0,
+			"value": "false"
+		},
+		{
+			"id": "1692165349-713",
+			"name": "campaign_defeat_SYRUS",
+			"type": 0,
+			"value": "false"
+		},
+		{
+			"id": "1692237742-648",
+			"name": "campaign_defeat_ATTICUS",
+			"type": 0,
+			"value": "false"
+		},
+		{
+			"id": "1692237974-787",
+			"name": "campaign_defeat_ZANE",
+			"type": 0,
+			"value": "false"
+		},
+		{
+			"id": "1692239862-366",
+			"name": "campaign_defeat_ASTER",
+			"type": 0,
+			"value": "false"
+		},
+		{
+			"id": "1692239872-146",
+			"name": "chose_to_fight_aster",
+			"type": 0,
+			"value": "false"
+		},
+		{
+			"id": "1692244154-918",
+			"name": "campaign_defeat_JESSE",
+			"type": 0,
+			"value": "false"
+		},
+		{
+			"id": "1692245536-483",
+			"name": "campaign_defeat_JADEN",
+			"type": 0,
+			"value": "false"
+		},
+		{
+			"id": "1692248210-970",
+			"name": "campaign_defeat_NIGHTSHROUD",
 			"type": 0,
 			"value": "false"
 		}

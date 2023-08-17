@@ -1,0 +1,458 @@
+{
+	"events": [
+		{
+			"call_node": {
+				"arguments": [
+
+				],
+				"method_name": "fake_box_moving_up",
+				"target_node_path": "game_dialog"
+			},
+			"event_id": "dialogic_042"
+		},
+		{
+			"call_node": {
+				"arguments": [
+					"lohweo_forest_shrine"
+				],
+				"method_name": "change_background_music",
+				"target_node_path": "game_dialog"
+			},
+			"event_id": "dialogic_042"
+		},
+		{
+			"background": "res://_resources/backgrounds/bg_abandoned_dorm_inside.png",
+			"event_id": "dialogic_021"
+		},
+		{
+			"animation": "[Default]",
+			"animation_length": 0,
+			"animation_wait": false,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1692244441.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": true,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"condition": "",
+			"definition": "1692245536-483",
+			"event_id": "dialogic_012",
+			"value": "false"
+		},
+		{
+			"character": "character-1692244441.json",
+			"event_id": "dialogic_001",
+			"portrait": "jadenyubel_sad",
+			"text": "Duelar já não me traz mais a mesma alegria que um dia trouxe..."
+		},
+		{
+			"animation": "4-fade_out.gd",
+			"animation_length": 0.3,
+			"animation_wait": true,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1692244441.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		},
+		{
+			"call_node": {
+				"arguments": [
+
+				],
+				"method_name": "call_game_over",
+				"target_node_path": "game_dialog"
+			},
+			"event_id": "dialogic_042"
+		},
+		{
+			"event_id": "dialogic_022",
+			"transition_duration": 0.5
+		},
+		{
+			"event_id": "dialogic_013"
+		},
+		{
+			"character": "character-1692244441.json",
+			"event_id": "dialogic_001",
+			"portrait": "jadenyubel_smile",
+			"text": "Eu não me sentia assim num duelo desde que enfrentei o Yugi!"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Tantas coisas em desequilíbrio..."
+		},
+		{
+			"animation": "4-fade_out.gd",
+			"animation_length": 0.4,
+			"animation_wait": true,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1692244441.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		},
+		{
+			"background": "res://_resources/backgrounds/black.png",
+			"event_id": "dialogic_021"
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 1.1
+		},
+		{
+			"background": "",
+			"event_id": "dialogic_021",
+			"fade_duration": 1
+		},
+		{
+			"call_node": {
+				"arguments": [
+					"ritual_room",
+					"shake"
+				],
+				"method_name": "show_special_background",
+				"target_node_path": "game_dialog"
+			},
+			"event_id": "dialogic_042"
+		},
+		{
+			"animation": "[Default]",
+			"animation_length": 0,
+			"animation_wait": true,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1692244506.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": true,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1692244506.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Mais uma vez os humanos nessa escola estão indo contra a verdade que guia esse mundo."
+		},
+		{
+			"animation": "slide_in_right.gd",
+			"animation_length": 0.5,
+			"animation_wait": true,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1692244441.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "jaden_angry",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": true
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1692244441.json",
+			"event_id": "dialogic_001",
+			"portrait": "(Don't change)",
+			"text": "Nightshroud! Eu sabia que você estaria por trás disso!"
+		},
+		{
+			"animation": "slide_out_right.gd",
+			"animation_length": 0.5,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1692244441.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		},
+		{
+			"animation": "slide_in_right.gd",
+			"animation_length": 0.5,
+			"animation_wait": true,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1688959133.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "yugi_surprise",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": true
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1688959133.json",
+			"event_id": "dialogic_001",
+			"portrait": "(Don't change)",
+			"text": "Mais um vilão?! Já não basta o Nitemare?!"
+		},
+		{
+			"animation": "4-fade_out.gd",
+			"animation_length": 0.5,
+			"animation_wait": true,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "[All]",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		},
+		{
+			"background": "res://_resources/backgrounds/black.png",
+			"event_id": "dialogic_021"
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 1.1
+		},
+		{
+			"background": "res://_resources/backgrounds/bg_abandoned_dorm_inside.png",
+			"event_id": "dialogic_021",
+			"fade_duration": 1
+		},
+		{
+			"animation": "[Default]",
+			"animation_length": 0,
+			"animation_wait": true,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1692244506.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": true,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1692244506.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Vilão? Não, descendente do Faraó sem Nome. Eu apenas busco o equilíbrio no Universo.\nEquilíbrio esse que foi perturbado diversas vezes pelos alunos dessa escola, neste terreno profanado.\nEu aceitei minha derrota ao contrapor a presença de duas almas em um mesmo corpo, mas seres multidimensionais ameaçando outras realidades, isso vai contra o futuro que um dia eu observei."
+		},
+		{
+			"animation": "slide_in_right.gd",
+			"animation_length": 0.5,
+			"animation_wait": true,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1692244441.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "jaden_angry",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": true
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1692244441.json",
+			"event_id": "dialogic_001",
+			"portrait": "(Don't change)",
+			"text": "Quer dizer que o que está acontecendo agora não é o futuro que você me mostrou?"
+		},
+		{
+			"character": "character-1692244506.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "O futuro destruido pelos monstros de Duelo é uma constante que deve ser respeitada, mas a presença de Darknite vai contra a evolução natural das coisas.\nVocês ex-portadores das relíquias do milênio entenderam errado. As Fusões são poderosas, mas apenas um degrau para o tipo de invocação que trará o futuro que previ.\nMas com as mudanças feitas por Darknite, fundir monstros é uma técnica que será abandonada. Elas são inúteis quando essas mesmas cartas podem ser jogadas diretamente."
+		},
+		{
+			"character": "character-1692244441.json",
+			"event_id": "dialogic_001",
+			"portrait": "jaden_sad",
+			"text": "Você tem razão... Eu e o Yugi já vimos uma vez uma forma diferente de \"Fusão\", uma que destruiu o futuro."
+		},
+		{
+			"character": "character-1692244441.json",
+			"event_id": "dialogic_001",
+			"portrait": "jaden_angry",
+			"text": "Mas os seres humanos deram a volta por cima e aprenderam a controlar esse poder!"
+		},
+		{
+			"character": "character-1692244506.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Eu previ a destruição, não o que acontecerá depois. Meu papel é garantir que ela aconteça.\nDarknite tira forças da origem do jogo das trevas: os rituais egípcios que uniam a alma dos humanos com o Caos Universal.\n[Player Name], eu sou contra a sua presença fora de sua própria dimensão, mas assim como eu aprendi em minha última vísita a essa escola... Somente uma aberração pode controlar outra."
+		},
+		{
+			"character": "character-1692244441.json",
+			"event_id": "dialogic_001",
+			"portrait": "jaden_smile",
+			"text": "Quer dizer que você está do nosso lado dessa vez?"
+		},
+		{
+			"animation": "slide_in_right.gd",
+			"animation_length": 0.5,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1692246606.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "yubel_smile",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": true,
+				"4": false
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1692244441.json",
+			"event_id": "dialogic_001",
+			"portrait": "jadenyubel_smile",
+			"text": "Aproveite a oportunidade [Player Name]. Nightshroud pode te oferecer qualquer carta direto da fonte do Caos Universal!"
+		},
+		{
+			"animation": "4-fade_out.gd",
+			"animation_length": 0.5,
+			"animation_wait": true,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "[All]",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": false,
+			"wait_seconds": 0.1
+		},
+		{
+			"call_node": {
+				"arguments": [
+					"dlg_042"
+				],
+				"method_name": "record_dialog_on_PlayerData",
+				"target_node_path": "game_dialog"
+			},
+			"event_id": "dialogic_042"
+		},
+		{
+			"call_node": {
+				"arguments": [
+					"nightshroud"
+				],
+				"method_name": "call_duel",
+				"target_node_path": "game_dialog"
+			},
+			"event_id": "dialogic_042"
+		},
+		{
+			"event_id": "dialogic_022",
+			"transition_duration": 0.5
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.4.5",
+		"file": "timeline-1692245553.json",
+		"name": "dlg_042"
+	}
+}

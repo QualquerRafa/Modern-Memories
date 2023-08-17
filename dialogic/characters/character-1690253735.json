@@ -13,7 +13,7 @@
 	"portraits": [
 		{
 			"name": "Default",
-			"path": "res://_resources/character_bodys/weevil0.png"
+			"path": "res://_resources/character_bodys/weevil.png"
 		},
 		{
 			"name": "weevil_angry",

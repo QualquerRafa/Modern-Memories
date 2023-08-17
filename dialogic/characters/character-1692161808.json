@@ -1,0 +1,29 @@
+{
+	"color": "#ffe5cd2e",
+	"description": "",
+	"display_name": "",
+	"display_name_bool": false,
+	"id": "character-1692161808.json",
+	"mirror_portraits": false,
+	"name": "Hassleberry",
+	"nickname": "",
+	"nickname_bool": false,
+	"offset_x": 0,
+	"offset_y": -200,
+	"portraits": [
+		{
+			"name": "Default",
+			"path": "res://_resources/character_bodys/hassleberry.png"
+		},
+		{
+			"name": "hassleberry_angry",
+			"path": "res://_resources/character_bodys/hassleberry_angry.png"
+		},
+		{
+			"name": "hassleberry_sad",
+			"path": "res://_resources/character_bodys/hassleberry_sad.png"
+		}
+	],
+	"scale": 70,
+	"theme": ""
+}

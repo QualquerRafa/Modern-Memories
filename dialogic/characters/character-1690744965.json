@@ -13,7 +13,7 @@
 	"portraits": [
 		{
 			"name": "Default",
-			"path": "res://_resources/character_bodys/nitemare0.png"
+			"path": "res://_resources/character_bodys/nitemare.png"
 		}
 	],
 	"scale": 100,

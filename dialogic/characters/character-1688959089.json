@@ -13,7 +13,7 @@
 	"portraits": [
 		{
 			"name": "Default",
-			"path": "res://_resources/character_bodys/shadi0.png"
+			"path": "res://_resources/character_bodys/shadi.png"
 		},
 		{
 			"name": "shadi_smile",

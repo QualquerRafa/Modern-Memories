@@ -13,7 +13,7 @@
 	"portraits": [
 		{
 			"name": "Default",
-			"path": "res://_resources/character_bodys/joey0.png"
+			"path": "res://_resources/character_bodys/joey.png"
 		},
 		{
 			"name": "joey_surprise",

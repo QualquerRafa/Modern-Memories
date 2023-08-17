@@ -13,7 +13,7 @@
 	"portraits": [
 		{
 			"name": "Default",
-			"path": "res://_resources/character_bodys/grandpa0.png"
+			"path": "res://_resources/character_bodys/grandpa.png"
 		},
 		{
 			"name": "grandpa_surprise",

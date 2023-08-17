@@ -13,7 +13,7 @@
 	"portraits": [
 		{
 			"name": "Default",
-			"path": "res://_resources/character_bodys/yugi0.png"
+			"path": "res://_resources/character_bodys/yugi.png"
 		},
 		{
 			"name": "yugi_angry",

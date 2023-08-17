@@ -1,0 +1,45 @@
+{
+	"color": "#fff9f514",
+	"description": "",
+	"display_name": "",
+	"display_name_bool": false,
+	"id": "character-1692156193.json",
+	"mirror_portraits": false,
+	"name": "Crowler",
+	"nickname": "",
+	"nickname_bool": false,
+	"offset_x": 0,
+	"offset_y": -140,
+	"portraits": [
+		{
+			"name": "Default",
+			"path": "res://_resources/character_bodys/crowler.png"
+		},
+		{
+			"name": "crowler_angry",
+			"path": "res://_resources/character_bodys/crowler_angry.png"
+		},
+		{
+			"name": "crowler_pain",
+			"path": "res://_resources/character_bodys/crowler_pain.png"
+		},
+		{
+			"name": "crowler_sad",
+			"path": "res://_resources/character_bodys/crowler_sad.png"
+		},
+		{
+			"name": "crowler_scream",
+			"path": "res://_resources/character_bodys/crowler_scream.png"
+		},
+		{
+			"name": "crowler_smile",
+			"path": "res://_resources/character_bodys/crowler_smile.png"
+		},
+		{
+			"name": "crowler_surprise",
+			"path": "res://_resources/character_bodys/crowler_surprise.png"
+		}
+	],
+	"scale": 70,
+	"theme": ""
+}

@@ -1,0 +1,343 @@
+{
+	"events": [
+		{
+			"call_node": {
+				"arguments": [
+
+				],
+				"method_name": "fake_box_moving_up",
+				"target_node_path": "game_dialog"
+			},
+			"event_id": "dialogic_042"
+		},
+		{
+			"call_node": {
+				"arguments": [
+					"lohweo_forest_shrine"
+				],
+				"method_name": "change_background_music",
+				"target_node_path": "game_dialog"
+			},
+			"event_id": "dialogic_042"
+		},
+		{
+			"background": "res://_resources/backgrounds/bg_abandoned_dorm_inside.png",
+			"event_id": "dialogic_021"
+		},
+		{
+			"animation": "[Default]",
+			"animation_length": 0,
+			"animation_wait": false,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1692243736.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": true,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"condition": "",
+			"definition": "1692244154-918",
+			"event_id": "dialogic_012",
+			"value": "false"
+		},
+		{
+			"character": "character-1692243736.json",
+			"event_id": "dialogic_001",
+			"portrait": "jesse_surprise",
+			"text": "Você deveria confiar mais nas suas cartas..."
+		},
+		{
+			"animation": "4-fade_out.gd",
+			"animation_length": 0.3,
+			"animation_wait": true,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1692243736.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		},
+		{
+			"call_node": {
+				"arguments": [
+
+				],
+				"method_name": "call_game_over",
+				"target_node_path": "game_dialog"
+			},
+			"event_id": "dialogic_042"
+		},
+		{
+			"event_id": "dialogic_022",
+			"transition_duration": 0.5
+		},
+		{
+			"event_id": "dialogic_013"
+		},
+		{
+			"character": "character-1692243736.json",
+			"event_id": "dialogic_001",
+			"portrait": "jesse_smile",
+			"text": "Os espiritos dos seus monstros tem orgulho de lutar ao seu lado!"
+		},
+		{
+			"animation": "slide_in_right.gd",
+			"animation_length": 0,
+			"animation_wait": true,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1688959180.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": true
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1688959180.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Mas ainda nada do tal Jaden, né?"
+		},
+		{
+			"animation": "[Default]",
+			"animation_length": 0,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1692243736.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		},
+		{
+			"animation": "[Default]",
+			"animation_length": 0,
+			"animation_wait": true,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1692244441.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "jaden_smile",
+			"portrait_definition": "",
+			"position": {
+				"0": true,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1692244441.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Não, eu também estou aqui. Os espiritos já me disseram que você estão atrás de mim."
+		},
+		{
+			"character": "character-1688959180.json",
+			"event_id": "dialogic_001",
+			"portrait": "joey_surprise",
+			"text": "Espiritos?"
+		},
+		{
+			"character": "character-1692244441.json",
+			"event_id": "dialogic_001",
+			"portrait": "Default",
+			"text": "Dos monstros de duelo. Aposto que vocês já conhecem alguns deles."
+		},
+		{
+			"animation": "slide_out_right.gd",
+			"animation_length": 0.5,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1688959180.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		},
+		{
+			"animation": "slide_in_right.gd",
+			"animation_length": 0.5,
+			"animation_wait": true,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1688959133.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": true
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1688959133.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Jaden! Que bom te rever!"
+		},
+		{
+			"character": "character-1692244441.json",
+			"event_id": "dialogic_001",
+			"portrait": "Default",
+			"text": "Eu que o diga!"
+		},
+		{
+			"character": "character-1692244441.json",
+			"event_id": "dialogic_001",
+			"portrait": "jaden_sad",
+			"text": "Uma pena que seja esse o motivo..."
+		},
+		{
+			"character": "character-1692244441.json",
+			"event_id": "dialogic_001",
+			"portrait": "jaden_angry",
+			"text": "Com a volta do verdadeiro Jogo das Trevas eu imaginei que o Nightshroud estaria envolvido nisso mais uma vez, então vim direto ao dormitório abandonado."
+		},
+		{
+			"character": "character-1692244441.json",
+			"event_id": "dialogic_001",
+			"portrait": "jaden_smile",
+			"text": "E ai os espiritos de monstros de duelo me falaram sobre [Player Name]. Vindo de outra dimensão, não é?"
+		},
+		{
+			"animation": "slide_out_right.gd",
+			"animation_length": 0.5,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1688959133.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		},
+		{
+			"character": "character-1692244441.json",
+			"event_id": "dialogic_001",
+			"portrait": "jadenyubel_smile",
+			"text": "Consigo ver um grande potencial em você! Os monstros que lutam ao seu lado te respeitam muito.\nNós adorariamos te ajudar a conseguir o poder que busca."
+		},
+		{
+			"animation": "4-fade_out.gd",
+			"animation_length": 0.5,
+			"animation_wait": true,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1692244441.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": false,
+			"wait_seconds": 0.1
+		},
+		{
+			"call_node": {
+				"arguments": [
+					"dlg_041"
+				],
+				"method_name": "record_dialog_on_PlayerData",
+				"target_node_path": "game_dialog"
+			},
+			"event_id": "dialogic_042"
+		},
+		{
+			"call_node": {
+				"arguments": [
+					"jaden"
+				],
+				"method_name": "call_duel",
+				"target_node_path": "game_dialog"
+			},
+			"event_id": "dialogic_042"
+		},
+		{
+			"event_id": "dialogic_022",
+			"transition_duration": 0.5
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.4.5",
+		"file": "timeline-1692244083.json",
+		"name": "dlg_041"
+	}
+}

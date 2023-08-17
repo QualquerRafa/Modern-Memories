@@ -1,0 +1,45 @@
+{
+	"color": "#ffd3391b",
+	"description": "",
+	"display_name": "",
+	"display_name_bool": false,
+	"id": "character-1692244441.json",
+	"mirror_portraits": false,
+	"name": "Jaden",
+	"nickname": "",
+	"nickname_bool": false,
+	"offset_x": 0,
+	"offset_y": -140,
+	"portraits": [
+		{
+			"name": "Default",
+			"path": "res://_resources/character_bodys/jaden.png"
+		},
+		{
+			"name": "jadenyubel_fierce",
+			"path": "res://_resources/character_bodys/jadenyubel_fierce.png"
+		},
+		{
+			"name": "jadenyubel_sad",
+			"path": "res://_resources/character_bodys/jadenyubel_sad.png"
+		},
+		{
+			"name": "jadenyubel_smile",
+			"path": "res://_resources/character_bodys/jadenyubel_smile.png"
+		},
+		{
+			"name": "jaden_angry",
+			"path": "res://_resources/character_bodys/jaden_angry.png"
+		},
+		{
+			"name": "jaden_sad",
+			"path": "res://_resources/character_bodys/jaden_sad.png"
+		},
+		{
+			"name": "jaden_smile",
+			"path": "res://_resources/character_bodys/jaden_smile.png"
+		}
+	],
+	"scale": 60,
+	"theme": ""
+}

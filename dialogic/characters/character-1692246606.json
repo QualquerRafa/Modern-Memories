@@ -1,0 +1,29 @@
+{
+	"color": "#ff8b1ff7",
+	"description": "",
+	"display_name": "",
+	"display_name_bool": false,
+	"id": "character-1692246606.json",
+	"mirror_portraits": false,
+	"name": "Yubel",
+	"nickname": "",
+	"nickname_bool": false,
+	"offset_x": 0,
+	"offset_y": -240,
+	"portraits": [
+		{
+			"name": "Default",
+			"path": "res://_resources/character_bodys/yubel.png"
+		},
+		{
+			"name": "yubel_smile",
+			"path": "res://_resources/character_bodys/yubel_smile.png"
+		},
+		{
+			"name": "yubel_surprise",
+			"path": "res://_resources/character_bodys/yubel_surprise.png"
+		}
+	],
+	"scale": 70,
+	"theme": ""
+}

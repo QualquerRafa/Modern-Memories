@@ -1,0 +1,33 @@
+{
+	"color": "#ff24b5a1",
+	"description": "",
+	"display_name": "",
+	"display_name_bool": false,
+	"id": "character-1692243736.json",
+	"mirror_portraits": false,
+	"name": "Jesse",
+	"nickname": "",
+	"nickname_bool": false,
+	"offset_x": 0,
+	"offset_y": -150,
+	"portraits": [
+		{
+			"name": "Default",
+			"path": "res://_resources/character_bodys/jesse.png"
+		},
+		{
+			"name": "jesse_angry",
+			"path": "res://_resources/character_bodys/jesse_angry.png"
+		},
+		{
+			"name": "jesse_smile",
+			"path": "res://_resources/character_bodys/jesse_smile.png"
+		},
+		{
+			"name": "jesse_surprise",
+			"path": "res://_resources/character_bodys/jesse_surprise.png"
+		}
+	],
+	"scale": 75,
+	"theme": ""
+}

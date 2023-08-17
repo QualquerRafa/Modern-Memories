@@ -13,7 +13,7 @@
 	"portraits": [
 		{
 			"name": "Default",
-			"path": "res://_resources/character_bodys/kaiba0.png"
+			"path": "res://_resources/character_bodys/kaiba.png"
 		},
 		{
 			"name": "kaiba_angry",

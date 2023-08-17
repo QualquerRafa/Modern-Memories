@@ -1,0 +1,37 @@
+{
+	"color": "#ff1170d4",
+	"description": "",
+	"display_name": "",
+	"display_name_bool": false,
+	"id": "character-1692165554.json",
+	"mirror_portraits": false,
+	"name": "Alexis",
+	"nickname": "",
+	"nickname_bool": false,
+	"offset_x": 0,
+	"offset_y": -140,
+	"portraits": [
+		{
+			"name": "Default",
+			"path": "res://_resources/character_bodys/alexis.png"
+		},
+		{
+			"name": "alexis_angry",
+			"path": "res://_resources/character_bodys/alexis_angry.png"
+		},
+		{
+			"name": "alexis_sad",
+			"path": "res://_resources/character_bodys/alexis_sad.png"
+		},
+		{
+			"name": "alexis_smile",
+			"path": "res://_resources/character_bodys/alexis_smile.png"
+		},
+		{
+			"name": "alexis_surprise",
+			"path": "res://_resources/character_bodys/alexis_surprise.png"
+		}
+	],
+	"scale": 75,
+	"theme": ""
+}

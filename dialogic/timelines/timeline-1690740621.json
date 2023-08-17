@@ -39,6 +39,7 @@
 		{
 			"animation": "[Default]",
 			"animation_length": 0,
+			"animation_wait": false,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1688959133.json",
@@ -65,6 +66,7 @@
 		{
 			"animation": "slide_in_right.gd",
 			"animation_length": 0.5,
+			"animation_wait": true,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1688959180.json",
@@ -131,6 +133,7 @@
 		{
 			"animation": "[Default]",
 			"animation_length": 0,
+			"animation_wait": true,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1690599890.json",
@@ -157,6 +160,7 @@
 		{
 			"animation": "slide_in_right.gd",
 			"animation_length": 0.5,
+			"animation_wait": true,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1690602991.json",
@@ -223,6 +227,7 @@
 		{
 			"animation": "[Default]",
 			"animation_length": 0,
+			"animation_wait": true,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1688959262.json",
@@ -275,6 +280,7 @@
 		{
 			"animation": "[Default]",
 			"animation_length": 0,
+			"animation_wait": true,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1688959089.json",
@@ -301,6 +307,7 @@
 		{
 			"animation": "4-fade_out.gd",
 			"animation_length": 0.5,
+			"animation_wait": true,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1688959089.json",
@@ -336,6 +343,7 @@
 		{
 			"animation": "[Default]",
 			"animation_length": 0,
+			"animation_wait": false,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1690744926.json",
@@ -362,6 +370,7 @@
 		{
 			"animation": "slide_in_right.gd",
 			"animation_length": 0.5,
+			"animation_wait": true,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1688959133.json",
@@ -414,6 +423,7 @@
 		{
 			"animation": "slide_in_right.gd",
 			"animation_length": 0.5,
+			"animation_wait": true,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1690599890.json",
@@ -466,6 +476,7 @@
 		{
 			"animation": "slide_in_right.gd",
 			"animation_length": 0.5,
+			"animation_wait": true,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1688959262.json",
@@ -518,6 +529,7 @@
 		{
 			"animation": "4-fade_out.gd",
 			"animation_length": 0.5,
+			"animation_wait": true,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1688959262.json",
@@ -553,6 +565,7 @@
 		{
 			"animation": "[Default]",
 			"animation_length": 0,
+			"animation_wait": false,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1688959202.json",
@@ -579,6 +592,7 @@
 		{
 			"animation": "slide_in_right.gd",
 			"animation_length": 0.5,
+			"animation_wait": true,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1690599890.json",
@@ -645,6 +659,7 @@
 		{
 			"animation": "[Default]",
 			"animation_length": 0,
+			"animation_wait": true,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1690744965.json",
@@ -671,6 +686,7 @@
 		{
 			"animation": "4-fade_out.gd",
 			"animation_length": 0.5,
+			"animation_wait": true,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1690744965.json",
@@ -706,6 +722,7 @@
 		{
 			"animation": "slide_in_right.gd",
 			"animation_length": 0.5,
+			"animation_wait": false,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1688959233.json",
@@ -752,6 +769,7 @@
 		{
 			"animation": "[Default]",
 			"animation_length": 0,
+			"animation_wait": true,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1690744965.json",
@@ -774,6 +792,27 @@
 			"event_id": "dialogic_001",
 			"portrait": "",
 			"text": "Oh, sim, [Player Name], tente salvar seus amigos e falhe miseravelmente! HA HA HA HA\nÉ hora do mundo sucumbir ao meu Jogo das Trevas!"
+		},
+		{
+			"animation": "4-fade_out.gd",
+			"animation_length": 0.3,
+			"animation_wait": true,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1690744965.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
 		},
 		{
 			"call_node": {

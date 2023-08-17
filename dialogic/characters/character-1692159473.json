@@ -1,0 +1,37 @@
+{
+	"color": "#fff33636",
+	"description": "",
+	"display_name": "",
+	"display_name_bool": false,
+	"id": "character-1692159473.json",
+	"mirror_portraits": false,
+	"name": "Blair",
+	"nickname": "",
+	"nickname_bool": false,
+	"offset_x": 0,
+	"offset_y": -140,
+	"portraits": [
+		{
+			"name": "Default",
+			"path": "res://_resources/character_bodys/blair.png"
+		},
+		{
+			"name": "blair_angry",
+			"path": "res://_resources/character_bodys/blair_angry.png"
+		},
+		{
+			"name": "blair_sad",
+			"path": "res://_resources/character_bodys/blair_sad.png"
+		},
+		{
+			"name": "blair_smile",
+			"path": "res://_resources/character_bodys/blair_smile.png"
+		},
+		{
+			"name": "blair_surprise",
+			"path": "res://_resources/character_bodys/blair_surprise.png"
+		}
+	],
+	"scale": 80,
+	"theme": ""
+}

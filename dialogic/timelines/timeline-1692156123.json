@@ -1,0 +1,299 @@
+{
+	"events": [
+		{
+			"call_node": {
+				"arguments": [
+
+				],
+				"method_name": "fake_box_moving_up",
+				"target_node_path": "game_dialog"
+			},
+			"event_id": "dialogic_042"
+		},
+		{
+			"call_node": {
+				"arguments": [
+					"lohweo_forest_shrine"
+				],
+				"method_name": "change_background_music",
+				"target_node_path": "game_dialog"
+			},
+			"event_id": "dialogic_042"
+		},
+		{
+			"background": "res://_resources/backgrounds/bg_duel_academy.jpg",
+			"event_id": "dialogic_021"
+		},
+		{
+			"animation": "[Default]",
+			"animation_length": 0,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1692156193.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "crowler_smile",
+			"portrait_definition": "",
+			"position": {
+				"0": true,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1692156193.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Senhor Pegasus, é uma honra recebê-lo em nossa escola mais uma vez!"
+		},
+		{
+			"animation": "slide_in_right.gd",
+			"animation_length": 0.5,
+			"animation_wait": true,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1690602991.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "pegasus_smile",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": true
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1690602991.json",
+			"event_id": "dialogic_001",
+			"portrait": "(Don't change)",
+			"text": "Professor Crowler! É uma pena que essa visita seja num momento tão complicado."
+		},
+		{
+			"character": "character-1692156193.json",
+			"event_id": "dialogic_001",
+			"portrait": "crowler_smile",
+			"text": "Não há lugar melhor do que a nossa Academia de Duelos para preparar duelistas para o mundo!\nTodas as crises que já tivemos por aqui foram resolvidas pelos nossos melhores estudantes!"
+		},
+		{
+			"character": "character-1690602991.json",
+			"event_id": "dialogic_001",
+			"portrait": "Default",
+			"text": "É exatamente de um deles que estamos precisando, o jovem Jaden Yuki."
+		},
+		{
+			"character": "character-1692156193.json",
+			"event_id": "dialogic_001",
+			"portrait": "Default",
+			"text": "Sim, o Slifer... Ele e todos os amigos daquela época já se formaram, mas logo que essa crise começou todos eles voltaram para nos visitar.\nTalvez buscando reviver aquele tempo precioso e dias de glória..."
+		},
+		{
+			"animation": "slide_out_right.gd",
+			"animation_length": 0.5,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1690602991.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		},
+		{
+			"animation": "slide_in_right.gd",
+			"animation_length": 0.5,
+			"animation_wait": true,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1688959133.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": true
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1688959133.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Com licença, professor. Onde podemos encontrar o Jaden?"
+		},
+		{
+			"character": "character-1692156193.json",
+			"event_id": "dialogic_001",
+			"portrait": "crowler_smile",
+			"text": "Yugi Muto! E amigos, claro! Vocês são convidados de honra na minha escola e podem ficar nos melhores dormitórios."
+		},
+		{
+			"character": "character-1692156193.json",
+			"event_id": "dialogic_001",
+			"portrait": "crowler_sad",
+			"text": "Já o Jaden... Ele provavelmente voltou para as acomodações dos Slifers. Então vocês devem encontrá-lo por lá."
+		},
+		{
+			"animation": "slide_out_right.gd",
+			"animation_length": 0.5,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1688959133.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		},
+		{
+			"character": "character-1692156193.json",
+			"event_id": "dialogic_001",
+			"portrait": "crowler_angry",
+			"text": "Ahn... E você ai atrás, quem é? Não estou te reconhecendo, então não sei se posso extender meu convite para dormir no Obelisco Azul."
+		},
+		{
+			"animation": "slide_in_right.gd",
+			"animation_length": 0.5,
+			"animation_wait": true,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1690602991.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "pegasus_smile",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": true
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1690602991.json",
+			"event_id": "dialogic_001",
+			"portrait": "Default",
+			"text": "Eu não faria isso, Crowler. [Player Name] é a nossa unica esperança de parar o Nitemare!\nEle me derrotou e derrotou até Seto Kaiba! Nós viemos aqui justamente para que o jovem Jaden o treine um pouco."
+		},
+		{
+			"character": "character-1692156193.json",
+			"event_id": "dialogic_001",
+			"portrait": "crowler_surprise",
+			"text": "Ah!! Mil perdões jovem [Player Name]!"
+		},
+		{
+			"character": "character-1692156193.json",
+			"event_id": "dialogic_001",
+			"portrait": "crowler_smile",
+			"text": "Mas se você quer aprender mais sobre Duelos, o recomendado é um professor de verdade!"
+		},
+		{
+			"animation": "4-fade_out.gd",
+			"animation_length": 0.5,
+			"animation_wait": false,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1692156193.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		},
+		{
+			"animation": "4-fade_out.gd",
+			"animation_length": 0.5,
+			"animation_wait": true,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1690602991.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": false,
+			"wait_seconds": 0.1
+		},
+		{
+			"call_node": {
+				"arguments": [
+					"dlg_025"
+				],
+				"method_name": "record_dialog_on_PlayerData",
+				"target_node_path": "game_dialog"
+			},
+			"event_id": "dialogic_042"
+		},
+		{
+			"call_node": {
+				"arguments": [
+					"crowler"
+				],
+				"method_name": "call_duel",
+				"target_node_path": "game_dialog"
+			},
+			"event_id": "dialogic_042"
+		},
+		{
+			"event_id": "dialogic_022",
+			"transition_duration": 0.5
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.4.5",
+		"file": "timeline-1692156123.json",
+		"name": "dlg_025"
+	}
+}

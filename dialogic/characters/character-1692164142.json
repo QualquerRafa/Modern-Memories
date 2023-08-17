@@ -1,0 +1,33 @@
+{
+	"color": "#ff3aa5ec",
+	"description": "",
+	"display_name": "",
+	"display_name_bool": false,
+	"id": "character-1692164142.json",
+	"mirror_portraits": false,
+	"name": "Syrus",
+	"nickname": "",
+	"nickname_bool": false,
+	"offset_x": 0,
+	"offset_y": -170,
+	"portraits": [
+		{
+			"name": "Default",
+			"path": "res://_resources/character_bodys/syrus.png"
+		},
+		{
+			"name": "syrus_angry",
+			"path": "res://_resources/character_bodys/syrus_angry.png"
+		},
+		{
+			"name": "syrus_scream",
+			"path": "res://_resources/character_bodys/syrus_scream.png"
+		},
+		{
+			"name": "syrus_surprise",
+			"path": "res://_resources/character_bodys/syrus_surprise.png"
+		}
+	],
+	"scale": 70,
+	"theme": ""
+}

@@ -33,6 +33,7 @@
 		{
 			"animation": "[Default]",
 			"animation_length": 0,
+			"animation_wait": false,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1690599890.json",
@@ -57,6 +58,27 @@
 			"text": "Patético. Eu sabia que estavam exagerando sobre você. Chega de me fazer perder tempo!"
 		},
 		{
+			"animation": "4-fade_out.gd",
+			"animation_length": 0.3,
+			"animation_wait": true,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1690599890.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		},
+		{
 			"call_node": {
 				"arguments": [
 
@@ -76,6 +98,7 @@
 		{
 			"animation": "[Default]",
 			"animation_length": 0,
+			"animation_wait": false,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1690599890.json",
@@ -102,6 +125,7 @@
 		{
 			"animation": "slide_in_right.gd",
 			"animation_length": 0.5,
+			"animation_wait": true,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1688959180.json",
@@ -148,6 +172,7 @@
 		{
 			"animation": "slide_in_right.gd",
 			"animation_length": 0.5,
+			"animation_wait": true,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1688959133.json",
@@ -230,6 +255,7 @@
 		{
 			"animation": "[Default]",
 			"animation_length": 0,
+			"animation_wait": true,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1688959262.json",
@@ -260,6 +286,48 @@
 			"text": "Então já sabemos nossa próxima parada."
 		},
 		{
+			"animation": "4-fade_out.gd",
+			"animation_length": 0.3,
+			"animation_wait": false,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1688959133.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		},
+		{
+			"animation": "4-fade_out.gd",
+			"animation_length": 0.3,
+			"animation_wait": true,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1688959262.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		},
+		{
 			"call_node": {
 				"arguments": [
 					"dlg_018"
@@ -270,22 +338,84 @@
 			"event_id": "dialogic_042"
 		},
 		{
+			"background": "res://_resources/backgrounds/black.png",
+			"event_id": "dialogic_021"
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 1
+		},
+		{
+			"change_timeline": "timeline-1690602343.json",
+			"event_id": "dialogic_020"
+		},
+		{
+			"event_id": "dialogic_013"
+		},
+		{
+			"animation": "4-fade_out.gd",
+			"animation_length": 0.3,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1690599890.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		},
+		{
+			"animation": "4-fade_out.gd",
+			"animation_length": 0.3,
+			"animation_wait": true,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1688959133.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		},
+		{
 			"call_node": {
 				"arguments": [
-					"dlg_019",
-					"fade"
+					"dlg_018"
 				],
-				"method_name": "enter_new_dialog_from_fade",
+				"method_name": "record_dialog_on_PlayerData",
 				"target_node_path": "game_dialog"
 			},
 			"event_id": "dialogic_042"
 		},
 		{
-			"event_id": "dialogic_022",
-			"transition_duration": 0
+			"background": "res://_resources/backgrounds/black.png",
+			"event_id": "dialogic_021"
 		},
 		{
-			"event_id": "dialogic_013"
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 1
+		},
+		{
+			"change_timeline": "timeline-1690740621.json",
+			"event_id": "dialogic_020"
 		}
 	],
 	"metadata": {

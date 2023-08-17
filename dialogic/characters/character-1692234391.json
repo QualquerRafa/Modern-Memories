@@ -1,0 +1,33 @@
+{
+	"color": "#ff265d5d",
+	"description": "",
+	"display_name": "",
+	"display_name_bool": false,
+	"id": "character-1692234391.json",
+	"mirror_portraits": false,
+	"name": "Zane",
+	"nickname": "",
+	"nickname_bool": false,
+	"offset_x": 0,
+	"offset_y": -180,
+	"portraits": [
+		{
+			"name": "Default",
+			"path": "res://_resources/character_bodys/zane.png"
+		},
+		{
+			"name": "zane_angry",
+			"path": "res://_resources/character_bodys/zane_angry.png"
+		},
+		{
+			"name": "zane_smile",
+			"path": "res://_resources/character_bodys/zane_smile.png"
+		},
+		{
+			"name": "zane_surprise",
+			"path": "res://_resources/character_bodys/zane_surprise.png"
+		}
+	],
+	"scale": 50,
+	"theme": ""
+}

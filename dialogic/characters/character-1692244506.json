@@ -1,0 +1,21 @@
+{
+	"color": "#ff351966",
+	"description": "",
+	"display_name": "",
+	"display_name_bool": false,
+	"id": "character-1692244506.json",
+	"mirror_portraits": false,
+	"name": "Nightshroud",
+	"nickname": "",
+	"nickname_bool": false,
+	"offset_x": -20,
+	"offset_y": -120,
+	"portraits": [
+		{
+			"name": "Default",
+			"path": "res://_resources/character_bodys/nightshroud.png"
+		}
+	],
+	"scale": 80,
+	"theme": ""
+}

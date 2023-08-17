@@ -1,0 +1,21 @@
+{
+	"color": "#ff35c9bb",
+	"description": "",
+	"display_name": "Tenma",
+	"display_name_bool": true,
+	"id": "character-1692153269.json",
+	"mirror_portraits": false,
+	"name": "tenma_boneco",
+	"nickname": "",
+	"nickname_bool": false,
+	"offset_x": 0,
+	"offset_y": -35,
+	"portraits": [
+		{
+			"name": "Default",
+			"path": "res://_resources/character_bodys/tenma.png"
+		}
+	],
+	"scale": 100,
+	"theme": ""
+}

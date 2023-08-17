@@ -13,6 +13,7 @@
 		{
 			"animation": "[Default]",
 			"animation_length": 0,
+			"animation_wait": false,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1688959133.json",
@@ -48,6 +49,7 @@
 		{
 			"animation": "[Default]",
 			"animation_length": 0,
+			"animation_wait": false,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1688959133.json",
@@ -77,6 +79,7 @@
 		{
 			"animation": "[Default]",
 			"animation_length": 0,
+			"animation_wait": true,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1688959133.json",
@@ -96,7 +99,7 @@
 		},
 		{
 			"event_id": "dialogic_023",
-			"hide_dialogbox": false,
+			"hide_dialogbox": true,
 			"wait_seconds": 0.2
 		},
 		{
@@ -115,7 +118,7 @@
 		},
 		{
 			"event_id": "dialogic_023",
-			"hide_dialogbox": false,
+			"hide_dialogbox": true,
 			"wait_seconds": 1.5
 		},
 		{
@@ -146,7 +149,7 @@
 		{
 			"animation": "[Default]",
 			"animation_length": 0,
-			"animation_wait": false,
+			"animation_wait": true,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1688959180.json",
@@ -173,6 +176,7 @@
 		{
 			"animation": "slide_in_right.gd",
 			"animation_length": 0.5,
+			"animation_wait": true,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1688959217.json",
@@ -205,7 +209,7 @@
 		{
 			"animation": "slide_out_right.gd",
 			"animation_length": 0.5,
-			"animation_wait": false,
+			"animation_wait": true,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1688959217.json",
@@ -232,7 +236,7 @@
 		{
 			"animation": "slide_in_right.gd",
 			"animation_length": 0.5,
-			"animation_wait": false,
+			"animation_wait": true,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1688959133.json",
@@ -259,6 +263,7 @@
 		{
 			"animation": "[Default]",
 			"animation_length": 0,
+			"animation_wait": true,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1688959180.json",
@@ -279,7 +284,7 @@
 		{
 			"animation": "[Default]",
 			"animation_length": 0,
-			"animation_wait": false,
+			"animation_wait": true,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1688959202.json",
@@ -312,6 +317,7 @@
 		{
 			"animation": "[Default]",
 			"animation_length": 0,
+			"animation_wait": false,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1688959180.json",
@@ -332,6 +338,7 @@
 		{
 			"animation": "[Default]",
 			"animation_length": 0,
+			"animation_wait": true,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1688959217.json",
@@ -424,6 +431,7 @@
 		{
 			"animation": "slide_out_right.gd",
 			"animation_length": 0.5,
+			"animation_wait": true,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1688959133.json",
@@ -450,6 +458,7 @@
 		{
 			"animation": "[Default]",
 			"animation_length": 0,
+			"animation_wait": true,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1688959233.json",
@@ -476,6 +485,7 @@
 		{
 			"animation": "slide_in_right.gd",
 			"animation_length": 0.5,
+			"animation_wait": true,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1688959262.json",
@@ -522,6 +532,7 @@
 		{
 			"animation": "slide_out_right.gd",
 			"animation_length": 0.5,
+			"animation_wait": true,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1688959262.json",
@@ -542,6 +553,7 @@
 		{
 			"animation": "[Default]",
 			"animation_length": 0,
+			"animation_wait": true,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1688959089.json",
@@ -564,6 +576,27 @@
 			"event_id": "dialogic_001",
 			"portrait": "shadi_smile",
 			"text": "Ah, os amigos todos reunidos... Não poderia ser mais perfeito! Yugi e [Player Name], vocês cuidam das coisas por aqui.\nEu ainda preciso visitar duas outras pessoas muito importantes..."
+		},
+		{
+			"animation": "4-fade_out.gd",
+			"animation_length": 0.3,
+			"animation_wait": true,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1688959089.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
 		},
 		{
 			"call_node": {

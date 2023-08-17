@@ -13,7 +13,7 @@
 	"portraits": [
 		{
 			"name": "Default",
-			"path": "res://_resources/character_bodys/darknite0.png"
+			"path": "res://_resources/character_bodys/darknite.png"
 		}
 	],
 	"scale": 100,
