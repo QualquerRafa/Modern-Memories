@@ -81,6 +81,7 @@ func start_reward_scene():
 	if PlayerData.scene_to_return_after_duel == "game_dialog" and duel_winner == "player":
 		var make_dialogic_var_name = "campaign_defeat_" + PlayerData.going_to_duel.to_upper()
 		Dialogic.set_variable(make_dialogic_var_name, "true")
+		PlayerData.recorded_campaign_defeats.append(make_dialogic_var_name)
 
 ####################################################################################################
 func auto_save():
@@ -108,7 +109,7 @@ func get_duel_rank():
 		"F" : ["b8b8b8", "4f4f4f"], #cinza
 	}
 	
-	var final_duel_score : int = 0
+	var final_duel_score : int = 100 #Debug value is 100, for release is 0
 	
 	#For deck count
 	if duel_deck_count >= 32: final_duel_score += 4
@@ -182,7 +183,7 @@ func get_starchips_reward():
 	return final_stars
 
 func get_card_rewards():
-	#S: GCR, RS, SU
+	#S: GCR, RS, RSU
 	#A: GC, CR, RS
 	#B: GC, CR, CR
 	#C,D: GC, GCR, CR
@@ -211,7 +212,10 @@ func get_card_rewards():
 		"B", "A":
 			pool_for_reward_2 = npc_card_pool.C + npc_card_pool.R
 		"S":
-			pool_for_reward_2 = npc_card_pool.R + npc_card_pool.SR
+			pool_for_reward_2 = npc_card_pool.R 
+			var chance_for_SR = 0.5
+			if randi() <= chance_for_SR:
+				pool_for_reward_2 = pool_for_reward_2 + npc_card_pool.SR
 	var random_card_index_2 = randi()%pool_for_reward_2.size()
 	reward_2 = pool_for_reward_2[random_card_index_2].pad_zeros(5)
 	$cards_reward/HBoxContainer/reward_2.update_card_information(reward_2)
@@ -226,13 +230,26 @@ func get_card_rewards():
 		"C", "D", "B":
 			pool_for_reward_3 = npc_card_pool.C + npc_card_pool.R
 		"A":
-			pool_for_reward_3 = npc_card_pool.R + npc_card_pool.SR
+			pool_for_reward_3 = npc_card_pool.R
+			var chance_for_SR = 0.8
+			if randi() <= chance_for_SR:
+				pool_for_reward_3 = pool_for_reward_3 + npc_card_pool.SR
 		"S":
-			pool_for_reward_3 = npc_card_pool.SR + npc_card_pool.UR
+			pool_for_reward_3 = npc_card_pool.R + npc_card_pool.SR + npc_card_pool.SR
+			var chance_for_UR = 0.4
+			if randi() <= chance_for_UR:
+				pool_for_reward_3 = pool_for_reward_3 + npc_card_pool.UR
 	var random_card_index_3 = randi()%pool_for_reward_3.size()
 	reward_3 = pool_for_reward_3[random_card_index_3].pad_zeros(5)
 	$cards_reward/HBoxContainer/reward_3.update_card_information(reward_3)
 	$cards_reward/HBoxContainer/reward_3/card_design/card_back.show()
+	
+	#Check for duplicates and change the card if it happened
+#	randomize()
+#	if reward_3 == reward_1 or reward_3 == reward_2:
+#		reward_3 = pool_for_reward_3[randi()%pool_for_reward_3.size()].pad_zeros(5)
+#	if reward_2 == reward_1 or reward_2 == reward_3:
+#		reward_2 = pool_for_reward_2[randi()%pool_for_reward_2.size()].pad_zeros(5)
 	
 	return [reward_1, reward_2, reward_3]
 
@@ -376,10 +393,10 @@ func remove_reward_scene_from_tree():
 	exiting_reward = true
 	
 	#For free duels, reset temporarily stored info in PlayerData
-	if PlayerData.scene_to_return_after_duel == "free_duel":
+	#if PlayerData.scene_to_return_after_duel == "free_duel":
 		#PlayerData.scene_to_return_after_duel = ""
-		PlayerData.going_to_duel = ""
-		PlayerData.last_duel_result = ""
+	PlayerData.going_to_duel = ""
+	PlayerData.last_duel_result = ""
 	
 	#As the last thing to do, call the auto_save function (it does all the needed checks)
 	auto_save()

@@ -393,13 +393,9 @@ var options_scene = {
 		"en" : "Auto-Save after Duels",
 		"pt" : "Auto-Salvar após Duelos"
 	},
-	"credits_soundtrack" : {
-		"en" : "Soundtrack: youtube.com/@lohweo",
-		"pt" : "Trilha Sonora: youtube.com/@lohweo"
-	},
-	"credits_everything" : {
-		"en" : "Everything else: youtube.com/@Rafa_SCN",
-		"pt" : "Qualquer outra Coisa: youtube.com/@Rafa_SCN"
+	"credits" : {
+		"en" : "Game Credits",
+		"pt" : "Créditos"
 	}
 }
 
@@ -543,6 +539,47 @@ var reward_scene = {
 	"duel_info" : {
 		"en" : "Duel Info",
 		"pt" : "Informação"
+	}
+}
+
+var credits_scene = {
+	"created" : {
+		"en" : "Created by",
+		"pt" : "Criado por"
+	},
+	"general" : {
+		"en" : "Concept, Programming, Design",
+		"pt" : "Conceito, Programação, Design"
+	},
+	"translate_pt" : {
+		"en" : "English-Portuguese Translation",
+		"pt" : "Tradução do Inglês-Português"
+	},
+	"art" : {
+		"en" : "Legacy of the Duelist Image rips",
+		"pt" : "Imagens Extraidas do Legacy of the Duelist"
+	},
+	"godot" : {
+		"en" : "Game made with",
+		"pt" : "Jogo feito usando"
+	},
+	"testing" : {
+		"part1" : {
+			"en" : "Testing and Bug reporting",
+			"pt" : "Testes e relatório de Bugs"
+		},
+		"part2" : {
+			"en" : "You!",
+			"pt" : "Você!"
+		}
+	},
+	"disclaimer" : {
+		"en" : "All artworks, names, characters\nbelong to their original creators",
+		"pt" : "Todas as artes, nomes, personagens\npertencem ao seus criadores originais"
+	},
+	"takahashi" : {
+		"en" : "Rest In Peace Mr. Kazuki Takahashi",
+		"pt" : "Descanse em Paz Sr. Kazuki Takahashi"
 	}
 }
 
@@ -1192,8 +1229,38 @@ var wicked_eraser = {
 	"en" : "It's ATK and DEF becomes 1000 times the total number of Cards on your opponent's side of the Field.",
 	"pt" : "Seu ATK e DEF se tornam 1000 vezes o número total de Cartas no lado do Campo do seu oponente."
 }
-
-
+var get_atk_from_field = {
+	"sum" : {
+		"en" : "It's ATK becomes the Sum of all other Monster's ATK on your side of the field.",
+		"pt" : "Seu ATK se torna a Soma do ATK de todos os outros Monstros no seu lado do campo."
+	},
+	"level" : {
+		"en" : "It's ATK becomes the 100 times the Sum of all Monster's Levels on your side of the field.",
+		"pt" : "Seu ATK se torna 100 vezes a Soma do Nível de todos os Monstros no seu lado do campo."
+	}
+}
+var halve_opp_LP = {
+	"en" : "It cuts in half the opponent's Life Points.",
+	"pt" : "Ele corta pela metade os Pontos de Vida do oponente."
+}
+var debuff_for_graveyard = {
+	"part1" : {
+		"en" : "It decreases all of your opponent's Monsters ATK by ",
+		"pt" : "Ele diminui o ATK de todos os monstros do seu oponente em "
+	},
+	"part2" : {
+		"en" : " points for each card out of your Deck.",
+		"pt" : " pontos para cada carta fora do seu Deck."
+	}
+}
+var dhero_plasma = {
+	"en" : "It destroys the Strongest Monster on your opponent's side of the Field and steals half of it's ATK.",
+	"pt" : "Ele destrói o Monstro mais Forte no Campo do seu adversário e rouba metade de seu ATK."
+}
+var clear_vice = {
+	"en" : "It copies the ATK the strongest Monster on your opponent's side of the field until the end of the battle.",
+	"pt" : "Ele copia o ATK do Monstro mais forte no lado do Campo do seu oponente até o final da batalha."
+}
 
 
 #Ritual Monsters effects
@@ -1273,6 +1340,10 @@ var ritual_double_ATK = {
 var ritual_return_damage = {
 	"en" : "The opposing player takes the same Battle Damage as you do.",
 	"pt" : "O jogador adversário leva o mesmo Dano de Batalha que você."
+}
+var ritual_litmus = {
+	"en" : "It's ATK and DEF is increased by 300 times the number of Spells and Traps originally in the Deck.",
+	"pt" : "Seu ATK e DEF aumentam em 300 vezes o número de Magias e Armadilhas originalmente no Deck."
 }
 
 

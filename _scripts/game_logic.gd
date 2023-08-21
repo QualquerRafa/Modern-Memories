@@ -475,13 +475,18 @@ func do_battle(attacking_card : Node, defending_card : Node):
 				change_lifepoints("enemy", LP_damage)
 	
 	#Revert some temporary effects
-	if attacking_card.is_visible() and CardList.card_list[attacking_card.this_card_id].effect.size() > 1 and CardList.card_list[attacking_card.this_card_id].effect[1] in ["injection_fairy"]:
+	if attacking_card.is_visible() and CardList.card_list[attacking_card.this_card_id].effect.size() > 1 and CardList.card_list[attacking_card.this_card_id].effect[1] in ["injection_fairy", "clear_vice"]:
 		match CardList.card_list[attacking_card.this_card_id].effect[1]:
 			#Remove the 3000 ATK boost from Injection Fairy Lily
 			"injection_fairy":
 				if attacking_card.this_card_flags.atk_up >= 3000:
 					 attacking_card.this_card_flags.atk_up -= 3000
 					 attacking_card.update_card_information(attacking_card.this_card_id)
+			#Goes to Zero
+			"clear_vice":
+				if attacking_card.this_card_flags.atk_up >= 0:
+					attacking_card.this_card_flags.atk_up = 0
+					attacking_card.update_card_information(attacking_card.this_card_id)
 	if defending_card.is_visible() and CardList.card_list[defending_card.this_card_id].effect.size() > 1 and CardList.card_list[defending_card.this_card_id].effect[1] in ["ehero_core"]:
 		match CardList.card_list[defending_card.this_card_id].effect[1]:
 			"ehero_core":
@@ -701,13 +706,18 @@ func do_direct_attack(attacking_card):
 		GAME_PHASE = "enemy_main_phase"
 	
 	#Revert some temporary effects
-	if attacking_card.is_visible() and CardList.card_list[attacking_card.this_card_id].effect.size() > 1 and CardList.card_list[attacking_card.this_card_id].effect[1] in ["injection_fairy"]:
+	if attacking_card.is_visible() and CardList.card_list[attacking_card.this_card_id].effect.size() > 1 and CardList.card_list[attacking_card.this_card_id].effect[1] in ["injection_fairy", "clear_vice"]:
 		match CardList.card_list[attacking_card.this_card_id].effect[1]:
 			#Remove the 3000 ATK boost from Injection Fairy Lily
 			"injection_fairy":
 				if attacking_card.this_card_flags.atk_up >= 3000:
 					 attacking_card.this_card_flags.atk_up -= 3000
 					 attacking_card.update_card_information(attacking_card.this_card_id)
+			#Goes to Zero
+			"clear_vice":
+				if attacking_card.this_card_flags.atk_up >= 0:
+					attacking_card.this_card_flags.atk_up = 0
+					attacking_card.update_card_information(attacking_card.this_card_id)
 	#Revert the Ritual battle effects
 	if attacking_card.this_card_flags.fusion_type == "ritual" and CardList.card_list[attacking_card.this_card_id].card_name in ["Blue-Eyes Chaos MAX Dragon", "Gearfried the Swordmaster"]:
 		match CardList.card_list[attacking_card.this_card_id].card_name:

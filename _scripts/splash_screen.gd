@@ -32,7 +32,7 @@ func _ready():
 	
 	#SCN LOGO FADE IN
 	SoundControl.play_sound("logo", "sfx")
-	$tween.interpolate_property($scn_logo, "modulate", Color(1,1,1,0), Color(1,1,1,1), 1.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$tween.interpolate_property($canal, "modulate", Color(1,1,1,0), Color(1,1,1,1), 1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$tween.start()
 	yield($tween, "tween_completed")
 	$timer.start(0.6); yield($timer, "timeout")

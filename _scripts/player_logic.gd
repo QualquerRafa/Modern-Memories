@@ -335,6 +335,7 @@ func call_fusion_logic(passing_field_slot_to_summon):
 				"stats_up":
 					fusion_result.this_card_flags.atk_up += fusion_information_array[1][1]
 					fusion_result.this_card_flags.def_up += fusion_information_array[1][1]
+					fusion_result.this_card_flags.is_facedown = false
 			
 			#"Fusing" with an Equip card will actually count as spelltrap activation
 			GAME_LOGIC.get_node("player_logic").spelltrap_count += 1
@@ -443,7 +444,11 @@ func summon_final_card(final_card_to_summon, field_slot_to_summon):
 		#Safeguard for flip effects
 		if CardList.card_list[node_slot_to_change.this_card_id].effect.size() > 0 and CardList.card_list[node_slot_to_change.this_card_id].effect[0] == "on_flip":
 			node_slot_to_change.this_card_flags.has_activated_effect = true
-
+	
+	if node_slot_to_change.this_card_flags.atk_up != 0:
+		node_slot_to_change.this_card_flags.is_facedown = false
+		card_back.hide()
+	
 	#Small animation just so it's pretty
 	var tween_field_cards = get_node("../../duel_field/player_side_zones/tween_field_cards")
 	var summon_animation_time = 0.1

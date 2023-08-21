@@ -34,7 +34,7 @@ func enemy_draw_phase():
 		return "exit game"
 	
 	#Change enemy Hand for testing purposes
-	#enemy_hand = ["00119", "00119", "00119", "00119", "00119"]
+	#enemy_hand = ["00649", "00624", "00624", "00624", "00624"]
 	#print("--------------------------------------------------")
 	#for card in enemy_hand:
 	#	print(CardList.card_list[card].card_name, "// ATK: ", CardList.card_list[card].atk, " DEF: ", CardList.card_list[card].def)
@@ -77,7 +77,7 @@ func enemy_choosing_card_to_play():
 	if player_has_more_monsters_than_com == false:
 		if com_monster_list.size() != 0:
 			#Look at support spells it can play: Field Spells, Generic Spells, Rituals
-			var acceptable_support_spells = ["Graceful Dice", "Gaia Power", "Molten Destruction", "Rising Air Current", "Umiiruka", "Luminous Spark", "Mystic Plasma Zone",]
+			var acceptable_support_spells = ["Gaia Power", "Molten Destruction", "Rising Air Current", "Umiiruka", "Luminous Spark", "Mystic Plasma Zone",]
 			if player_monster_list.size() >= 2:
 				acceptable_support_spells.push_front("Skull Dice")
 				acceptable_support_spells.push_front("Raigeki")
@@ -85,6 +85,10 @@ func enemy_choosing_card_to_play():
 			for i in range(5):
 				if get_node("../../duel_field/player_side_zones/spelltrap_" + String(i)).is_visible():
 					acceptable_support_spells.push_front("Harpie's Feather Duster")
+					break
+			for i in range(5):
+				if get_node("../../duel_field/enemy_side_zones/monster_" + String(i)).is_visible() and get_node("../../duel_field/enemy_side_zones/monster_" + String(i)).this_card_flags.is_facedown == false:
+					acceptable_support_spells.push_front("Graceful Dice")
 					break
 			
 			for card in enemy_hand: #cards are 'id : String' while in 'enemy_hand'
@@ -116,7 +120,7 @@ func enemy_choosing_card_to_play():
 		#Look for monsters with destroy_all_enemy_monsters that it can play
 		randomize()
 		var rand_chance_of_destroy_all = randf()
-		if player_monster_list.size() >= 2 and rand_chance_of_destroy_all >= 0.6:
+		if player_monster_list.size() >= 2 and rand_chance_of_destroy_all <= 0.35:
 			for card_id in enemy_hand:
 				if not CardList.card_list[card_id].attribute in ["spell", "trap"] and CardList.card_list[card_id].effect.size() > 2 and typeof(CardList.card_list[card_id].effect[2]) == TYPE_STRING and CardList.card_list[card_id].effect[2] == "all_enemy_monsters":
 					final_card_to_play = ["monster", card_id]
@@ -724,7 +728,7 @@ func COM_try_to_attack_with_monster(COM_attacking_monster : Node, player_defendi
 		#Fear for facedown monsters
 		var fear_of_facedown : float
 		if player_defending_monster.this_card_flags.is_facedown:
-			if int(COM_attacking_monster.get_node("card_design/monster_features/atk_def/atk").text) >= 3000: fear_of_facedown = 0.8 #fears for flip destruction
+			if int(COM_attacking_monster.get_node("card_design/monster_features/atk_def/atk").text) >= 3000: fear_of_facedown = 0.3 #fears for flip destruction, but only a little
 			elif int(COM_attacking_monster.get_node("card_design/monster_features/atk_def/atk").text) >= 2000: fear_of_facedown = 0.4 #almost fearless
 			elif int(COM_attacking_monster.get_node("card_design/monster_features/atk_def/atk").text) >= 1000: fear_of_facedown = 0.6 #kinda fear high defense
 			else: fear_of_facedown = 0.9 #fears for high defense

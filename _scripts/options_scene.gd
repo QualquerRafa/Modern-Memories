@@ -15,7 +15,8 @@ func _ready():
 	language_checkmark_update()
 	$CenterContainer/VBoxContainer/option_others/window_title.text = GameLanguage.options_scene.others_window[PlayerData.game_language]
 	$CenterContainer/VBoxContainer/option_others/auto_save.text = GameLanguage.options_scene.others_window_1[PlayerData.game_language]
-	$FocusShadow/game_credits.text = GameLanguage.options_scene.credits_soundtrack[PlayerData.game_language] + "\n" + GameLanguage.options_scene.credits_everything[PlayerData.game_language]
+	#$FocusShadow/game_credits.text = GameLanguage.options_scene.credits_soundtrack[PlayerData.game_language] + "\n" + GameLanguage.options_scene.credits_everything[PlayerData.game_language]
+	$btn_credits/button_text.text = GameLanguage.options_scene.credits[PlayerData.game_language]
 	
 	$CenterContainer/VBoxContainer/option_volume/volume_percent_indicator.text = String(PlayerData.game_volume * 100) + "%"
 	$CenterContainer/VBoxContainer/option_volume/scroller.value = PlayerData.game_volume * 10
@@ -128,13 +129,19 @@ func load_options_file():
 	
 	return "sucess"
 
-
-
-
-
-
-
-
-
-
-
+#---------------------------------------------------------------------------------------------------
+#Credits Button
+func _on_btn_credits_button_up():
+	SoundControl.play_sound("poc_decide")
+	
+	#Animate the button being clicked
+	var small_scale = Vector2(0.6 , 0.6)
+	var normal_scale = Vector2(0.7 , 0.7)
+	
+	$btn_credits/tween.interpolate_property($btn_credits, "rect_scale", $btn_credits.rect_scale, small_scale, 0.1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$btn_credits/tween.start()
+	yield($btn_credits/tween, "tween_completed")
+	$btn_credits/tween.interpolate_property($btn_credits, "rect_scale", $btn_credits.rect_scale, normal_scale, 0.1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	$btn_credits/tween.start()
+	
+	$scene_transitioner.scene_transition("credits_scene")

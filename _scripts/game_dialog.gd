@@ -7,15 +7,20 @@ func _ready():
 	$scene_transitioner.entering_this_scene()
 	$general_timer.start(0.8); yield($general_timer, "timeout")
 	
+	#For game languages other than Brazilian Portuguese, fetch the translated version of Dialogs from Dialogic. I hate how redundant that is...
+	var language_tag = ""
+	if PlayerData.game_language in ["en"]:
+		language_tag = PlayerData.game_language
+	
 	#When entering this scene, check which is the Dialog to load
 	if PlayerData.recorded_dialogs.size() == 0:
-		enter_new_dialog_from_fade("dlg_040", "no_fade")
+		enter_new_dialog_from_fade("dlg_001" + language_tag, "no_fade")
 	else:
 		match PlayerData.recorded_dialogs[-1]: #based on the last recorded one, figure out the next to play
 			_:
 				var last_dlg_number = PlayerData.recorded_dialogs[-1].split("_")[1]
 				var new_dlg_number = String(int(last_dlg_number) + 1).pad_zeros(3)
-				enter_new_dialog_from_fade("dlg_" + new_dlg_number, "no_fade")
+				enter_new_dialog_from_fade("dlg_" + new_dlg_number + language_tag, "no_fade")
 
 #---------------------------------------------------------------------------------------------------
 # FUNCTIONALITY RELATED STUFF
@@ -49,6 +54,10 @@ func call_duel(opponent_name : String):
 func call_game_over():
 	$scene_transitioner.scene_transition("game_over")
 
+func clear_player_campaign_history():
+	print("Player has finished the campaign, resetting the flags so it can be played from start again.")
+	PlayerData.recorded_dialogs.clear()
+
 #---- Player Name Stuff ----#
 func player_input_name():
 	#Load text in the correct language
@@ -59,7 +68,12 @@ func player_input_name():
 	$additional_screen_elements/player_name_box.show()
 func _on_player_name_input_text_changed(_new_text):
 	SoundControl.play_sound("poc_cursor")
+
+var name_click_once = false
 func _on_Button_button_up():
+	if name_click_once == true:
+		return
+	
 	var inputed_name = $additional_screen_elements/player_name_box/player_name_input.text
 	if inputed_name == "" or inputed_name == null:
 		SoundControl.play_sound("poc_unable")
@@ -70,6 +84,7 @@ func _on_Button_button_up():
 	
 	#Set the "Player Name" Dialogic variable as PlayerData.player_name
 	Dialogic.set_variable("Player Name", PlayerData.player_name)
+	name_click_once = true
 	
 	$general_timer.start(0.2); yield($general_timer, "timeout")
 	$additional_screen_elements/player_name_box.hide()
@@ -85,25 +100,38 @@ func pop_up_save():
 	
 	#Show the pop up box
 	$additional_screen_elements/pop_up_save.show()
-	
+
+var save_click_once = false
 func _on_button_yes_button_up():
+	if save_click_once == true:
+		return
+	
 	animate_button($additional_screen_elements/pop_up_save/button_yes)
 	
 	save_game()
+	save_click_once = true
 	$general_timer.start(0.5); yield($general_timer, "timeout")
 	$scene_transitioner.scene_transition("game_dialog")
 	
 	$additional_screen_elements/pop_up_save.hide()
 
 func _on_button_no_button_up():
+	if save_click_once == true:
+		return
+	
 	animate_button($additional_screen_elements/pop_up_save/button_no)
+	save_click_once = true
 	$scene_transitioner.scene_transition("game_dialog")
 	$additional_screen_elements/pop_up_save.hide()
 
 func _on_button_return_to_title_button_up():
+	if save_click_once == true:
+		return
+	
 	animate_button($additional_screen_elements/pop_up_save/button_return_to_title)
 	
 	save_game()
+	save_click_once = true
 	$general_timer.start(0.5); yield($general_timer, "timeout")
 	$scene_transitioner.scene_transition("main_menu")
 
@@ -205,7 +233,7 @@ func animate_bg(background_node, special_animation):
 			yield(tweener, "tween_completed")
 		
 		"shake": 
-			var shake_time = 0.1
+			var shake_time = 0.3
 			var position1 = Vector2(-33, -45)
 			var position2 = Vector2(-60, -45)
 			var position3 = Vector2(-33, -15)

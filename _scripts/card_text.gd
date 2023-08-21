@@ -92,7 +92,8 @@ func get_card_text(card_id : String):
 		elif card_on_CardList.type == "ritual":
 			var ritual_type = CardList.card_list[String(card_on_CardList.effect[1]).pad_zeros(5)].type
 			var ritual_name = CardList.card_list[String(card_on_CardList.effect[1]).pad_zeros(5)].card_name
-			line1 = GameLanguage.ritual_spell.part1[PlayerData.game_language] + GameLanguage.types[ritual_type][PlayerData.game_language] + GameLanguage.ritual_spell.part2[PlayerData.game_language] + ritual_name + GameLanguage.ritual_spell.part3[PlayerData.game_language]
+			var monster_level = String(CardList.card_list[String(card_on_CardList.effect[1]).pad_zeros(5)].level)
+			line1 = GameLanguage.ritual_spell.part1[PlayerData.game_language] + GameLanguage.types[ritual_type][PlayerData.game_language] + GameLanguage.ritual_spell.part2[PlayerData.game_language] + ritual_name + GameLanguage.ritual_spell.part3[PlayerData.game_language] + " ("+ monster_level +")"
 			
 		#ANY OTHER TYPE OF SPELL CARD
 		elif card_on_CardList.type == "spell":
@@ -148,7 +149,7 @@ func get_card_text(card_id : String):
 				#EFFECTS TRIGGERED WHEN THE MONSTER ATTACKS
 				"on_attack":
 					match card_on_CardList.effect[1]:
-						"anti_flip", "ignore_spelltrap", "piercing", "multiple_attacker", "can_direct", "toon", "change_position", "mutual_banish", "injection_fairy", "rocket_warrior":
+						"anti_flip", "ignore_spelltrap", "piercing", "multiple_attacker", "can_direct", "toon", "change_position", "mutual_banish", "injection_fairy", "rocket_warrior", "clear_vice":
 							line1 = GameLanguage.on_attack_first[PlayerData.game_language] + GameLanguage[card_on_CardList.effect[1]][PlayerData.game_language]
 						"burn":
 							if typeof(card_on_CardList.effect[2]) == TYPE_STRING:
@@ -205,7 +206,7 @@ func get_card_text(card_id : String):
 				#EFFECTS TRIGGERED WHEN THE MONSTER IS SUMMONED
 				"on_summon":
 					match card_on_CardList.effect[1]:
-						"air_neos", "castle_power_up", "copy_atk", "cyber_stein", "equip_boost", "flip_enemy_down", "gandora", "stop_defense", "summon_pharaoh", "super_robo", "white_horned", "wicked_avatar", "wicked_dreadroot", "wicked_eraser": #looks for it's own identifier in the language list
+						"air_neos", "castle_power_up", "copy_atk", "cyber_stein", "equip_boost", "flip_enemy_down", "gandora", "stop_defense", "summon_pharaoh", "super_robo", "white_horned", "wicked_avatar", "wicked_dreadroot", "wicked_eraser", "halve_opp_LP", "dhero_plasma": #looks for it's own identifier in the language list
 							line1 = GameLanguage.on_summon_first[PlayerData.game_language] + GameLanguage[card_on_CardList.effect[1]][PlayerData.game_language]
 						"attribute_booster":
 							var monster_attribute = card_on_CardList.attribute
@@ -277,6 +278,13 @@ func get_card_text(card_id : String):
 									line1 = GameLanguage.on_summon_first[PlayerData.game_language] + GameLanguage.self_power_up.part1[PlayerData.game_language] + GameLanguage.self_power_up[boost_value][PlayerData.game_language]
 								_: #just a numerical value
 									line1 = GameLanguage.on_summon_first[PlayerData.game_language] + GameLanguage.self_power_up.part1[PlayerData.game_language] + String(boost_value) + GameLanguage.self_power_up.part2[PlayerData.game_language]
+						"get_atk_from_field":
+							var type_of_count = card_on_CardList.effect[2]
+							line1 = GameLanguage.on_summon_first[PlayerData.game_language] + GameLanguage.get_atk_from_field[type_of_count][PlayerData.game_language]
+						"debuff_for_graveyard":
+							var value = String(card_on_CardList.effect[2])
+							line1 = GameLanguage.on_summon_first[PlayerData.game_language] + GameLanguage.debuff_for_graveyard.part1[PlayerData.game_language] + value + GameLanguage.debuff_for_graveyard.part2[PlayerData.game_language]
+						
 	
 	#For ritual summoned monsters on the field, make their line2 be their "secret ritual effect"
 	var is_line2_ritual = false
@@ -313,6 +321,8 @@ func get_card_text(card_id : String):
 					line2 = GameLanguage.on_ritual_summon[PlayerData.game_language] + GameLanguage.ritual_sword_shield[PlayerData.game_language]
 				"Garma Sword":
 					line2 = GameLanguage.on_ritual_summon[PlayerData.game_language] + GameLanguage.ritual_mill_deck[PlayerData.game_language]
+				"Litmus Doom Swordsman":
+					line2 = GameLanguage.on_ritual_summon[PlayerData.game_language] + GameLanguage.ritual_litmus[PlayerData.game_language]
 				
 				#ON DEATH
 				"Five-Headed Dragon", "Arcana Knight Joker", "Valkyrion the Magna Warrior", "Lord of the Red", "Paladin of White Dragon", "Paladin of Dark Dragon", "Knight of Armor Dragon", "Chakra", "Demise, Agent of Armageddon", "Demise, King of Armageddon", "Cyber Angel Natasha", "Cyber Angel Idaten", "Cyber Angel Benten", "Cyber Angel Izana", "Cyber Angel Dakini", "Cyber Angel Vrash":

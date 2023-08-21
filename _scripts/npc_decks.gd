@@ -178,7 +178,7 @@ var list_of_decks = {
 
 	"jesse" : {
 		"UR" : ["00777", "00775", "00776", "01482", "00778", "00779", "00780", "01483", "01130", "00117", "00429"],
-		"SR" : ["00781", "00786", "00785", "00783", "00784", "00787", "00782", "01484", "01485", "01486", "01487", "00497"],
+		"SR" : ["00781", "00786", "00785", "00783", "00784", "00787", "00782", "01484", "01485", "01486", "00497"],
 		"R" : ["00788", "00789", "00790", "00791", "00792", "00793", "00794", "00801", "00802", "00803", "00804", "00805", "00806", "00807", "00808", "00809", "00810", "00811", "00812", "00813", "00814", "00797", "00798", "00799", "00800", "00106"],
 		"C" : ["00456", "00815", "00579", "00619", "00594", "00402", "00795", "00796", "01488"]
 	},
@@ -232,23 +232,31 @@ func get_a_deck(npc_name):
 	if player_card_count < 40: #Super Easy Mode, valid for at most the first 2 duels the player has
 		rarity_counter = {"UR":0, "SR":1, "R":12, "C":27}
 	if player_card_count >= 40:
-		rarity_counter = {"UR":0, "SR":1, "R":16, "C":23}
-	if player_card_count >= 80:
 		rarity_counter = {"UR":0, "SR":2, "R":20, "C":18}
-	if player_card_count >= 100:
+	if player_card_count >= 55:
 		rarity_counter = {"UR":0, "SR":3, "R":32, "C":5}
-	if player_card_count >= 128:
+	if player_card_count >= 80:
 		rarity_counter = {"UR":1, "SR":6, "R":30, "C":3}
-	if player_card_count >= 256:
+	if player_card_count >= 150:
 		rarity_counter = {"UR":5, "SR":10, "R":25, "C":0}
-	if player_card_count >= 512:
+	if player_card_count >= 200:
 		rarity_counter = {"UR":10, "SR":15, "R":15, "C":0}
-	if player_card_count >= 722:
+	if player_card_count >= 300:
 		rarity_counter = {"UR":15, "SR":15, "R":10, "C":0}
+	if player_card_count >= 450:
+		rarity_counter = {"UR":30, "SR":10, "R":0, "C":0}
 	
-	#depending on the NPC name, generate a very dificult deck
-	if npc_name in ["tenma", "nitemare", "aster"]:
-		rarity_counter = {"UR":15, "SR":15, "R":10, "C":0}
+	#Some fixed NPCs will have a 'lowest difficulty' higher than normal, unless player general difficulty is already bigger than that
+	if rarity_counter.UR < 1 and npc_name in ["kaiba", "pegasus", "crowler"]:
+		rarity_counter = {"UR":1, "SR":6, "R":30, "C":3}
+		
+	if rarity_counter.UR < 5 and npc_name in ["atticus", "zane", "aster", "jesse", "jaden", "nightshroud"]:
+		rarity_counter = {"UR":5, "SR":10, "R":25, "C":0}
+		
+	if npc_name in ["nitemare", "tenma"]:
+		rarity_counter = {"UR":30, "SR":10, "R":0, "C":0}
+	
+	#print(rarity_counter)
 	
 	#Generate the actual deck
 	randomize()

@@ -7,6 +7,14 @@ func _ready():
 	#Load the 'New' in the proper language
 	decks_list_node.get_node("panel/ScrollContainer/MarginContainer/GridContainer/new_deck/deck_name").text = GameLanguage.system.new[PlayerData.game_language]
 	
+	#Transform the registered color for decks because when it's loaded from a save file it come as a String with RGBA concatenated lol
+	for deck in PlayerData.list_of_player_decks:
+		if typeof(PlayerData.list_of_player_decks[deck].color) != TYPE_COLOR:
+			var color_as_string = PlayerData.list_of_player_decks[deck].color
+			var separated_colors = color_as_string.split(",")
+			var corrected_as_color_type = Color(separated_colors[0], separated_colors[1], separated_colors[2], separated_colors[3])
+			PlayerData.list_of_player_decks[deck].color = corrected_as_color_type
+	
 	#For the main button, show the Active Deck information
 	if self.get_parent().get_name() == "panel_right":
 		$deck_name.text = PlayerData.active_deck_name
@@ -16,7 +24,6 @@ func _ready():
 		$edit_deckbox/O.add_color_override("font_outline_modulate", PlayerData.list_of_player_decks[PlayerData.active_deck_name].color)
 		$edit_deckbox/O.add_color_override("font_color_shadow", PlayerData.list_of_player_decks[PlayerData.active_deck_name].color)
 		$edit_deckbox.show()
-
 
 func _on_deck_slot_button_up():
 	#Show the deck list window

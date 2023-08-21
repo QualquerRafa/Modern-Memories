@@ -121,8 +121,13 @@ func update_left_panel(player_trunk_as_array):
 			player_trunk_as_array.erase(card)
 			player_trunk_as_array.push_front(card)
 		
+		#Create a array that contains no duplicates for propper size checking and preventing adding the "New" tag on wrong cards in deck building
+		var unique_reward_indexes : Array = []
+		for card_id in PlayerData.last_reward_cards:
+			if not unique_reward_indexes.has(card_id):
+				unique_reward_indexes.append(card_id)
 		#Make their "new_indicator" visible
-		for i in range(PlayerData.last_reward_cards.size()):
+		for i in range(unique_reward_indexes.size()):
 			$panel_left/ScrollContainer/MarginContainer/GridContainer.get_child(i).get_node("z_indexer/new_indicator").show()
 	
 	if current_highlighted_card != null:

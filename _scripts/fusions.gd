@@ -86,7 +86,7 @@ func equip_fusion(card_1 : String, card_2 : String):
 	var attributes : Array = ["dark", "light", "water", "fire", "earth", "wind"]
 	var types : Array = ["aqua", "beast", "beast-warrior", "dinosaur", "dragon", "fairy", "fiend", "fish", "insect", "machine", "plant",
 				 "pyro", "reptile", "rock", "sea serpent", "spellcaster", "thunder", "warrior", "winged beast", "zombie"]
-	var secondary_types : Array = ["harpie"]
+	var secondary_types : Array = ["harpie", "crystal"]
 	
 	var equip_restriction : String = CardList.card_list[equip_card_id].effect[2]
 	if equip_restriction in attributes and CardList.card_list[monster_card_id].attribute == equip_restriction:
@@ -671,7 +671,8 @@ var special_fusion_list = {
 	"01473" : {"zombie" : ["01449"]},                                             #Abaki + Zombie = Red Ogre
 	"00999" : {"dragon" : ["00978"]},                                             #White Night Queen + Dragon = White Night Dragon
 	"01478" : {"female" : ["00982"]},                                             #Cosmo Brain + Female = Cosmo Queen
-	"01482" : {"crystal" : ["00775"]},                                            #Crystal Beast Rainbow Dragon + Crystal = Rainbow Dragon
+	"01482" : {"crystal" : ["00775"],                                             #Crystal Beast Rainbow Dragon + Crystal = Rainbow Dragon
+			   "gem" : ["00775"]},                                                #Crystal Beast Rainbow Dragon + Gem = Rainbow Dragon
 	"01498" : {"winged beast" : ["01495"],                                        #Transforming Sphere + Winged Beast = The Atmosphere
 			   "dragon" : ["01495"]},                                             #Transforming Sphere + Dragon = The Atmosphere
 	"00646" : {"zombie" : ["01491"]},                                             #Red-Eyes Zombie Dragon + Zombie = Red-Eyes Zombie Dragon Lord
@@ -735,6 +736,7 @@ var generic_fusion_list = {
 	"cyberdark_cyberdark" : ["00895"],                                            #Cyberdarkness Dragon
 	
 	"crystal_crystal" : ["01482"],                                                #Crystal Beast Rainbow Dragon
+	"crystal_gem" : ["01482"],                                                    #Crystal Beast Rainbow Dragon
 
 	"dinosaur_fiend":       ["00382", "00383"],                                    #Destroyersaurus, Black Tyranno
 	"dinosaur_machine":     ["00052", "00379"],                                    #Cyber Saurus, Cyber Dinosaur

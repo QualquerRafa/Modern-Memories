@@ -2,20 +2,16 @@ extends Button
 
 var duelist_name : String
 
-#Export the texture so I can change it in the editor and be more visual
-export(Texture) var asset setget my_func
-func my_func(pass_duelist_name : String):
-	asset = load("res://_resources/character_faces/" + pass_duelist_name + "0.png")
-	get_node("visuals/face").texture = asset
-
 #---------------------------------------------------------------------------------------------------
 func _ready():
 	duelist_name = self.get_name().split("_")[1]
-	my_func(duelist_name)
+	get_node("visuals/face").texture = load("res://_resources/character_faces/" + duelist_name + "0.png")
 	
-	#Just for the video, hide the spoilers
-	#if duelist_name in ["tenma", "nitemare"]:
-		#$visuals.hide()
+	#Only show the duelist button IF the player has fought it in the campaign mode
+	var is_debug = false
+	$visuals.hide()
+	if is_debug or PlayerData.recorded_campaign_defeats.has("campaign_defeat_" + duelist_name.to_upper()) or duelist_name == "shadi":
+		$visuals.show()
 
 func _on_duelist_face_button_up():
 	#Animate the button click

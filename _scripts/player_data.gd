@@ -1,7 +1,7 @@
 extends Node
 
 #ON UPDATE PLAYER REWARDS <3
-var update_reward_ids = ["00000"]
+var update_reward_ids = ["00703"]
 
 #Player Variables that are stored within the save
 var player_name : String
@@ -15,6 +15,7 @@ var list_of_player_decks : Dictionary = {} #populated by {deck_name:String : {de
 var active_deck_name : String = ""
 var registered_freeduel_speed : float = 1.0 #to keep between duels
 
+var recorded_campaign_defeats : Array = [] #populated by Dialogic's variables "campaign_defeat_NAME"
 var recorded_dialogs : Array = [] #populated by Dialogic Timeline Names
 
 #Game Settings, stored in a separate file

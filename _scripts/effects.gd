@@ -296,15 +296,24 @@ func activate_spell_field(card_node : Node):
 	var card_id = card_node.this_card_id
 	var field_element = CardList.card_list[card_id].effect[0]
 	
+	#Do the visual changes on the field and text at top
+	make_the_field_change(field_element)
+	
+	#Call for the field bonus function to update all monsters that will benefit from the new field
+	field_bonus(field_element)
+	
+	return field_element
+
+func make_the_field_change(attribute : String):
 	#Change the text at the top
 	if PlayerData.game_language == "en":
-		GAME_LOGIC.get_parent().get_node("user_interface/top_info_box/field_info/field_name").text = GameLanguage.attributes[field_element][PlayerData.game_language].capitalize() + " Field"
+		GAME_LOGIC.get_parent().get_node("user_interface/top_info_box/field_info/field_name").text = GameLanguage.attributes[attribute][PlayerData.game_language].capitalize() + " Field"
 	elif PlayerData.game_language == "pt":
-		GAME_LOGIC.get_parent().get_node("user_interface/top_info_box/field_info/field_name").text = "Campo de " + GameLanguage.attributes[field_element][PlayerData.game_language].capitalize()
+		GAME_LOGIC.get_parent().get_node("user_interface/top_info_box/field_info/field_name").text = "Campo de " + GameLanguage.attributes[attribute][PlayerData.game_language].capitalize()
 	
 	#Change the color of the field to visually represent Field Change
 	var new_field_color
-	match field_element.to_lower():
+	match attribute.to_lower():
 		"fire":  new_field_color = Color("ff4a4a")
 		"earth": new_field_color = Color("0ca528")
 		"water": new_field_color = Color("1c68ff")
@@ -319,11 +328,6 @@ func activate_spell_field(card_node : Node):
 	var field_texture2 = GAME_LOGIC.get_parent(). get_node("duel_field/enemy_side_zones")
 	field_texture1.self_modulate = new_field_color
 	field_texture2.self_modulate = new_field_color
-	
-	#Call for the field bonus function to update all monsters that will benefit from the new field
-	field_bonus(field_element)
-	
-	return field_element
 
 #This function can be called at any moment a new card might need to update it's field bonus, such as when it is summoned. Not only for when a field spell is activated.
 func field_bonus(field_element : String):
@@ -578,6 +582,23 @@ func activate_spell_generic(card_node : Node):
 						monster_being_checked.show()
 						break
 			
+			#Check for field bonus to update the tokens, since their "summoning" happens after this check is done by player_logic
+			var field_name : String
+			var field_element_colors = {
+				"fire":  Color("ff4a4a"),
+				"earth": Color("0ca528"),
+				"water": Color("1c68ff"),
+				"wind":  Color("4dedff"),
+				"dark":  Color("5100ff"),
+				"light": Color("ffef00"),
+			}
+			for attribute in field_element_colors.keys():
+				var color = field_element_colors[attribute]
+				if GAME_LOGIC.get_parent().get_node("duel_field/player_side_zones").self_modulate == color:
+					field_name = attribute
+					break
+			field_bonus(field_name)
+			
 			return "tokens"
 		
 		"tokens_for_life", "tokens_for_damage":
@@ -715,7 +736,20 @@ func activate_spell_ritual(card_node : Node):
 		sacrificial_monster.show()
 		
 		#Call for monster field bonus and effects
-		var field_name = GAME_LOGIC.get_parent().get_node("user_interface/top_info_box/field_info/field_name").text.split(" ", true)[0].to_lower()
+		var field_name : String
+		var field_element_colors = {
+			"fire":  Color("ff4a4a"),
+			"earth": Color("0ca528"),
+			"water": Color("1c68ff"),
+			"wind":  Color("4dedff"),
+			"dark":  Color("5100ff"),
+			"light": Color("ffef00"),
+		}
+		for attribute in field_element_colors.keys():
+			var color = field_element_colors[attribute]
+			if GAME_LOGIC.get_parent().get_node("duel_field/player_side_zones").self_modulate == color:
+				field_name = attribute
+				break
 		field_bonus(field_name)
 		
 		if CardList.card_list[ritual_result_monster_id].effect.size() > 0:
@@ -1517,6 +1551,74 @@ func monster_on_summon(card_node : Node):
 			card_node.update_card_information(card_node.this_card_id)
 			
 			return "wicked_eraser"
+		
+		"get_atk_from_field":
+			var target_side_of_field = GAME_LOGIC.get_parent().get_node("duel_field/" + caller_and_target[0] + "_side_zones")
+			var type_of_count = CardList.card_list[card_node.this_card_id].effect[2] #sum, level
+			
+			var final_atk_gain = 0
+			for i in range(5):
+				var card_being_checked = target_side_of_field.get_node("monster_" + String(i))
+				if card_being_checked.is_visible() and card_being_checked.this_card_flags.is_facedown == false:
+					match type_of_count:
+						"sum"   : final_atk_gain += int(card_being_checked.get_node("card_design/monster_features/atk_def/atk").text)
+						"level" : final_atk_gain += int(CardList.card_list[card_being_checked.this_card_id].level) * 100
+			
+			card_node.this_card_flags.atk_up += final_atk_gain
+			card_node.update_card_information(card_node.this_card_id)
+			
+			return "get_atk_from_field"
+		
+		"halve_opp_LP":
+			var lifepoints : int = int(GAME_LOGIC.get_parent().get_node("user_interface/top_info_box/com_info/lifepoints").get_text())
+			if caller_and_target[0] == "enemy":
+				lifepoints = int(GAME_LOGIC.get_parent().get_node("user_interface/top_info_box/player_info/lifepoints").get_text())
+			
+			#Halve the opponent's life points
+			GAME_LOGIC.change_lifepoints(caller_and_target[1], float(lifepoints)/2)
+			
+			return "halved opp LP"
+		
+		"debuff_for_graveyard":
+			#Get the remaining cards on the deck when this effect is activated
+			var who_is = caller_and_target[0]
+			if who_is == "enemy":
+				who_is = "com"
+			var current_deck_size = get_node("../../user_interface/top_info_box/"+ who_is +"_info/deck").get_text()
+			
+			#Effect was simplified to just be Deck - Out of Deck * value
+			var card_count = 40 - int(current_deck_size)
+			var debuff_value = card_count * CardList.card_list[card_node.this_card_id].effect[2]
+			
+			var target_side_of_field = GAME_LOGIC.get_parent().get_node("duel_field/" + caller_and_target[1] + "_side_zones")
+			for i in range(5):
+				var card_being_checked = target_side_of_field.get_node("monster_" + String(i))
+				if card_being_checked.is_visible() and card_being_checked.this_card_flags.is_facedown == false:
+					card_being_checked.this_card_flags.atk_up -= debuff_value
+					card_being_checked.update_card_information(card_being_checked.this_card_id)
+			
+			return "debuffed for gy"
+		
+		"dhero_plasma":
+			var target_side_of_field = GAME_LOGIC.get_parent().get_node("duel_field/" + caller_and_target[1] + "_side_zones")
+			
+			#List all of the targetable monsters
+			var highest_atk = 0
+			var keep_monster_node = null
+			for i in range(5):
+				var card_being_checked = target_side_of_field.get_node("monster_" + String(i))
+				if card_being_checked.is_visible() and card_being_checked.this_card_flags.is_facedown == false:
+					if int(card_being_checked.get_node("card_design/monster_features/atk_def/atk").text) >= highest_atk:
+						highest_atk = int(card_being_checked.get_node("card_design/monster_features/atk_def/atk").text)
+						keep_monster_node = card_being_checked
+			
+			if keep_monster_node != null:
+				card_node.this_card_flags.atk_up += float(highest_atk)/2
+				card_node.update_card_information(card_node.this_card_id)
+				GAME_LOGIC.destroy_a_card(keep_monster_node)
+			
+			return "plasma killed and copied"
+			
 	
 	return card_id #generic return
 
@@ -1776,6 +1878,24 @@ func monster_on_attack(card_node : Node):
 			card_node.update_card_information(card_node.this_card_id)
 			
 			return "powered up"
+		
+		"clear_vice":
+			var target_side_of_field = GAME_LOGIC.get_parent().get_node("duel_field/" + caller_and_target[1] + "_side_zones")
+			
+			#List all of the targetable monsters
+			var highest_atk = 0
+			for i in range(5):
+				var card_being_checked = target_side_of_field.get_node("monster_" + String(i))
+				if card_being_checked.is_visible() and card_being_checked.this_card_flags.is_facedown == false:
+					if int(card_being_checked.get_node("card_design/monster_features/atk_def/atk").text) >= highest_atk:
+						highest_atk = int(card_being_checked.get_node("card_design/monster_features/atk_def/atk").text)
+			
+			#Update the copycat card
+			if highest_atk > 0:
+				card_node.this_card_flags.atk_up += highest_atk
+				card_node.update_card_information(card_node.this_card_id)
+			
+			return "clear_vice"
 	
 	return "generic return" #for breaking prevention
 
@@ -1963,6 +2083,18 @@ func ritual_effects_activation(card_node : Node, ritual_activation_condition : S
 					boost_value = boost_value * count_type_on_field
 					
 					card_node.this_card_flags.atk_up += boost_value
+					card_node.update_card_information(card_node.this_card_id)
+				
+				#on_summon, power up itself by spelltrap count in deck
+				"Litmus Doom Swordsman":
+					var value_boost = 300
+					var spelltrap_count = 0
+					for card in PlayerData.player_deck:
+						if CardList.card_list[card].attribute in ["spell", "trap"]:
+							spelltrap_count += 1
+					
+					card_node.this_card_flags.atk_up += value_boost * spelltrap_count
+					card_node.this_card_flags.def_up += value_boost * spelltrap_count
 					card_node.update_card_information(card_node.this_card_id)
 				
 				#on_summon, Sword and Shield

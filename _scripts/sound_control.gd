@@ -32,6 +32,14 @@ func play_sound(sound_name : String, sfx_or_music = "sfx"):
 					sound_name = "lohweo_duel_tournament_rematch"
 			"free_duel":
 				sound_name = "lohweo_duel_free_pre"
+			"game_dialog": #campaign duels might have special soundtrack for certain characters
+				var npc_name = PlayerData.going_to_duel
+				if npc_name in ["kaiba", "pegasus", "nitemare", "tenma"]:
+					sound_name = "lohweo_" + npc_name + "_duel"
+				if npc_name in ["crowler", "chazz", "blair", "hassleberry", "bastion", "syrus", "alexis", "atticus", "zane", "aster", "jesse", "jaden"]:
+					sound_name = "tagforce_tournament2"
+				if npc_name in ["nightshroud"]:
+					sound_name = "tagforce_" + npc_name + "_duel"
 		
 		#Update the final sound_file path
 		sound_file = load("res://_resources/_audio/music/" + sound_name + ".mp3")

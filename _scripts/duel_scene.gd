@@ -20,6 +20,16 @@ func _ready():
 	#Start player turn as the first thing to do
 	$game_logic/player_logic.start_player_turn()
 	
+	#Some duelists will start with an active field
+	if PlayerData.scene_to_return_after_duel == "game_dialog":
+		var duelist_field_list = {
+			"nitemare" : "dark",
+			"tenma" : "light",
+			"nightshroud" : "dark",
+		}
+		if PlayerData.going_to_duel in duelist_field_list.keys():
+			$game_logic/effects.make_the_field_change(duelist_field_list[PlayerData.going_to_duel])
+	
 	#Wait for the intro part to play before playing the actual looping parte of the free_duel theme song
 	if PlayerData.scene_to_return_after_duel == "free_duel":
 		$debug_menu/debug_timer.start(1.5); yield($debug_menu/debug_timer, "timeout")

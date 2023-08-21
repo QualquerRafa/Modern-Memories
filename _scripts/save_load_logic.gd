@@ -11,8 +11,12 @@ func save_game():
 		"password_bought_cards" : PlayerData.password_bought_cards, #Array
 		"recorded_duels" : PlayerData.recorded_duels, #Dictionary
 		"last_reward_cards" : PlayerData.last_reward_cards, #Array
+		"list_of_player_decks" : PlayerData.list_of_player_decks, #Dictionary
+		"active_deck_name" : PlayerData.active_deck_name, #String
+		"registered_freeduel_speed" : PlayerData.registered_freeduel_speed, #Float
 		
 		#Story Progression information
+		"recorded_campaign_defeats" : PlayerData.recorded_campaign_defeats, #Array
 		"recorded_dialogs" : PlayerData.recorded_dialogs, #Array
 	}
 	
@@ -47,7 +51,12 @@ func load_game():
 		["password_bought_cards", "array"],
 		["recorded_duels", "dictionary"],
 		["last_reward_cards", "array"],
+		["list_of_player_decks", "dictionary"],
+		["active_deck_name", "string"],
+		["registered_freeduel_speed", "float"],
+		["recorded_campaign_defeats", "array"],
 		["recorded_dialogs", "array"],
+		
 	]
 	
 	for i in range(saved_info.size()):
