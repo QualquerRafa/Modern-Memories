@@ -221,7 +221,7 @@
 			},
 			"metadata": {
 				"color": null,
-				"folded": true
+				"folded": false
 			}
 		},
 		"Themes": {
@@ -241,6 +241,18 @@
 
 			],
 			"folders": {
+				"New Folder 1692626567": {
+					"files": [
+
+					],
+					"folders": {
+
+					},
+					"metadata": {
+						"color": null,
+						"folded": false
+					}
+				},
 				"act01": {
 					"files": [
 						"timeline-1688959080.json",
@@ -384,7 +396,20 @@
 						"timeline-1692242721.json",
 						"timeline-1692244083.json",
 						"timeline-1692245553.json",
-						"timeline-1692248224.json"
+						"timeline-1692248224.json",
+						"timeline-1692380881.json"
+					],
+					"folders": {
+
+					},
+					"metadata": {
+						"color": null,
+						"folded": true
+					}
+				},
+				"extras": {
+					"files": [
+						"timeline-1692544601.json"
 					],
 					"folders": {
 

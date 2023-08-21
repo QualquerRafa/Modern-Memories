@@ -13,7 +13,7 @@
 		{
 			"call_node": {
 				"arguments": [
-					"lohweo_forest_shrine"
+					"tagforce_ra"
 				],
 				"method_name": "change_background_music",
 				"target_node_path": "game_dialog"

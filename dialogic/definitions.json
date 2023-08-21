@@ -148,12 +148,6 @@
 			"value": "tea"
 		},
 		{
-			"id": "1688964396-141",
-			"name": "Player Name",
-			"type": 0,
-			"value": "Rafa"
-		},
-		{
 			"id": "1690749369-787",
 			"name": "campaign_defeat_NITEMARE",
 			"type": 0,
@@ -254,6 +248,12 @@
 			"name": "campaign_defeat_NIGHTSHROUD",
 			"type": 0,
 			"value": "false"
+		},
+		{
+			"id": "1688964396-141",
+			"name": "Player Name",
+			"type": 0,
+			"value": "??!??"
 		}
 	]
 }

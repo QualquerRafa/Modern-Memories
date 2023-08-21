@@ -13,7 +13,7 @@
 		{
 			"call_node": {
 				"arguments": [
-					"lohweo_forest_shrine"
+					"lohweo_darknite_theme"
 				],
 				"method_name": "change_background_music",
 				"target_node_path": "game_dialog"
@@ -56,13 +56,50 @@
 			"character": "character-1690744965.json",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "NÃÃÃÃÃÃÃÃÃÃÃÃÃÃÃÃÃOOOOOOOOOOOOOO!!!!!!! EU NÃO ACREDDITO QUE ISSO ACONTECEU DE NOVO!"
+			"text": "NÃÃÃÃÃÃÃÃÃÃÃÃÃÃÃÃÃOOOOOOOOOOOOOO!!!!!!! EU NÃO ACREDITO QUE ISSO ACONTECEU DE NOVO!"
 		},
 		{
-			"event_id": "dialogic_015",
-			"id": "anchor-1634488067",
-			"index": 0,
-			"name": "Fazer o Fake Ending 1 aqui ein"
+			"audio": "play",
+			"audio_bus": "Master",
+			"event_id": "dialogic_030",
+			"event_name": "AudioEvent",
+			"file": "res://_resources/_audio/sound_effects/fm_nitemare_scream.wav",
+			"volume": 4
+		},
+		{
+			"animation": "4-fade_out.gd",
+			"animation_length": 0.5,
+			"animation_wait": true,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1690744965.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 1,
+			"z_index": 0
+		},
+		{
+			"background": "res://_resources/backgrounds/white.png",
+			"event_id": "dialogic_021",
+			"fade_duration": 1
+		},
+		{
+			"event_id": "dialogic_023",
+			"hide_dialogbox": true,
+			"wait_seconds": 1.5
+		},
+		{
+			"change_timeline": "timeline-1692544601.json",
+			"event_id": "dialogic_020"
 		},
 		{
 			"event_id": "dialogic_013"

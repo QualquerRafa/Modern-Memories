@@ -1,0 +1,39 @@
+{
+	"events": [
+		{
+			"call_node": {
+				"arguments": [
+
+				],
+				"method_name": "clear_player_campaign_history",
+				"target_node_path": "game_dialog"
+			},
+			"event_id": "dialogic_042"
+		},
+		{
+			"call_node": {
+				"arguments": [
+
+				],
+				"method_name": "save_game",
+				"target_node_path": "game_dialog"
+			},
+			"event_id": "dialogic_042"
+		},
+		{
+			"call_node": {
+				"arguments": [
+					"credits_scene"
+				],
+				"method_name": "scene_transition",
+				"target_node_path": "game_dialog/scene_transitioner"
+			},
+			"event_id": "dialogic_042"
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.4.5",
+		"file": "timeline-1692380881.json",
+		"name": "dlg_044"
+	}
+}

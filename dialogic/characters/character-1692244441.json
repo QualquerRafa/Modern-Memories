@@ -9,7 +9,7 @@
 	"nickname": "",
 	"nickname_bool": false,
 	"offset_x": 0,
-	"offset_y": -140,
+	"offset_y": -160,
 	"portraits": [
 		{
 			"name": "Default",
@@ -40,6 +40,6 @@
 			"path": "res://_resources/character_bodys/jaden_smile.png"
 		}
 	],
-	"scale": 60,
+	"scale": 55,
 	"theme": ""
 }

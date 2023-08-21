@@ -13,7 +13,7 @@
 		{
 			"call_node": {
 				"arguments": [
-					"lohweo_forest_shrine"
+					"tagforce_shadow_game"
 				],
 				"method_name": "change_background_music",
 				"target_node_path": "game_dialog"
@@ -374,7 +374,7 @@
 			"text": "Quer dizer que você está do nosso lado dessa vez?"
 		},
 		{
-			"animation": "slide_in_right.gd",
+			"animation": "1-fade_in.gd",
 			"animation_length": 0.5,
 			"change_mirror_portrait": false,
 			"change_z_index": false,

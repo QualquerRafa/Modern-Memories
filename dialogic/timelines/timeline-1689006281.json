@@ -134,7 +134,7 @@
 		{
 			"animation": "[Default]",
 			"animation_length": 0.5,
-			"animation_wait": true,
+			"animation_wait": false,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1688959133.json",
@@ -247,7 +247,7 @@
 		{
 			"animation": "[Default]",
 			"animation_length": 0,
-			"animation_wait": false,
+			"animation_wait": true,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1688959154.json",
@@ -274,7 +274,7 @@
 		{
 			"animation": "slide_in_right.gd",
 			"animation_length": 0.5,
-			"animation_wait": false,
+			"animation_wait": true,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1688959089.json",
@@ -549,7 +549,7 @@
 		{
 			"animation": "[Default]",
 			"animation_length": 0,
-			"animation_wait": false,
+			"animation_wait": true,
 			"change_mirror_portrait": false,
 			"change_z_index": false,
 			"character": "character-1688959089.json",

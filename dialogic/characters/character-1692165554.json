@@ -9,7 +9,7 @@
 	"nickname": "",
 	"nickname_bool": false,
 	"offset_x": 0,
-	"offset_y": -140,
+	"offset_y": -160,
 	"portraits": [
 		{
 			"name": "Default",
@@ -32,6 +32,6 @@
 			"path": "res://_resources/character_bodys/alexis_surprise.png"
 		}
 	],
-	"scale": 75,
+	"scale": 65,
 	"theme": ""
 }
