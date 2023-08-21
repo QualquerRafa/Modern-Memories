@@ -873,6 +873,7 @@ flat = true
 [node name="UI_tween" type="Tween" parent="user_interface"]
 
 [node name="DebugAddAll" type="Button" parent="."]
+visible = false
 margin_left = 62.0
 margin_top = 5.0
 margin_right = 193.0
@@ -1283,10 +1284,10 @@ scale = Vector2( 10, 5.63281 )
 texture = ExtResource( 3 )
 
 [node name="ColorPicker" type="ColorPicker" parent="customize_deckbox/panel/color_label/color_pick_window"]
-margin_left = 54.0
-margin_top = 47.0
-margin_right = 362.0
-margin_bottom = 459.0
+margin_left = 23.0
+margin_top = 19.0
+margin_right = 331.0
+margin_bottom = 431.0
 edit_alpha = false
 presets_enabled = false
 presets_visible = false

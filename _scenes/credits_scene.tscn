@@ -1,0 +1,238 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://_resources/fonts/BankGothic Md BT.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://_resources/fonts/Yu-Gi-Oh! Matrix Regular Small Caps 2.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://_scripts/credits_scene.gd" type="Script" id=3]
+[ext_resource path="res://_resources/credits/decall.png" type="Texture" id=4]
+[ext_resource path="res://_scenes/scene_transitioner.tscn" type="PackedScene" id=5]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 38
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 50
+extra_spacing_top = -8
+font_data = ExtResource( 2 )
+
+[node name="credits_scene" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="speed_up" type="Button" parent="."]
+margin_right = 1280.0
+margin_bottom = 720.0
+
+[node name="Panel" type="Panel" parent="."]
+margin_right = 1280.0
+margin_bottom = 720.0
+mouse_filter = 2
+custom_styles/panel = SubResource( 1 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 2
+custom_constants/separation = 50
+alignment = 1
+
+[node name="created_by" type="Label" parent="VBoxContainer"]
+margin_right = 1280.0
+margin_bottom = 90.0
+rect_min_size = Vector2( 1280, 90 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 2 )
+text = "CREATED BY"
+align = 1
+uppercase = true
+
+[node name="credit" type="Label" parent="VBoxContainer/created_by"]
+margin_top = 48.0
+margin_right = 1277.0
+margin_bottom = 99.0
+custom_fonts/font = SubResource( 3 )
+text = "Rafa_SCN"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="concept_programming_design" type="Label" parent="VBoxContainer"]
+margin_top = 140.0
+margin_right = 1280.0
+margin_bottom = 230.0
+rect_min_size = Vector2( 1280, 90 )
+custom_fonts/font = SubResource( 2 )
+text = "CONCEPT, PROGRAMMING, DESIGN"
+align = 1
+uppercase = true
+
+[node name="credit" type="Label" parent="VBoxContainer/concept_programming_design"]
+margin_top = 48.0
+margin_right = 1277.0
+margin_bottom = 99.0
+custom_fonts/font = SubResource( 3 )
+text = "Rafa_SCN"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="english_portuguese_translation" type="Label" parent="VBoxContainer"]
+margin_top = 280.0
+margin_right = 1280.0
+margin_bottom = 370.0
+rect_min_size = Vector2( 1280, 90 )
+custom_fonts/font = SubResource( 2 )
+text = "ENGLISH-PORTUGUESE TRANSLATION"
+align = 1
+uppercase = true
+
+[node name="credit" type="Label" parent="VBoxContainer/english_portuguese_translation"]
+margin_top = 48.0
+margin_right = 1277.0
+margin_bottom = 99.0
+custom_fonts/font = SubResource( 3 )
+text = "Rafa_SCN"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="forbidden_memories_ost" type="Label" parent="VBoxContainer"]
+margin_top = 420.0
+margin_right = 1280.0
+margin_bottom = 510.0
+rect_min_size = Vector2( 1280, 90 )
+custom_fonts/font = SubResource( 2 )
+text = "FORBIDDEN MEMORIES OST REMAKES"
+align = 1
+uppercase = true
+
+[node name="credit" type="Label" parent="VBoxContainer/forbidden_memories_ost"]
+margin_top = 48.0
+margin_right = 1277.0
+margin_bottom = 99.0
+custom_fonts/font = SubResource( 3 )
+text = "youtube.com/Lohweo"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="legacy_of_the_duelist" type="Label" parent="VBoxContainer"]
+margin_top = 560.0
+margin_right = 1280.0
+margin_bottom = 650.0
+rect_min_size = Vector2( 1280, 90 )
+custom_fonts/font = SubResource( 2 )
+text = "LEGACY OF THE DUELIST IMAGE RIPS"
+align = 1
+uppercase = true
+
+[node name="credit" type="Label" parent="VBoxContainer/legacy_of_the_duelist"]
+margin_top = 48.0
+margin_right = 1277.0
+margin_bottom = 99.0
+custom_fonts/font = SubResource( 3 )
+text = "deviantart.com/maxiuchiha22"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="game_made_with" type="Label" parent="VBoxContainer"]
+margin_top = 700.0
+margin_right = 1280.0
+margin_bottom = 790.0
+rect_min_size = Vector2( 1280, 90 )
+custom_fonts/font = SubResource( 2 )
+text = "GAME MADE WITH"
+align = 1
+uppercase = true
+
+[node name="credit" type="Label" parent="VBoxContainer/game_made_with"]
+margin_top = 48.0
+margin_right = 1277.0
+margin_bottom = 99.0
+custom_fonts/font = SubResource( 3 )
+text = "Godot Engine 3.5"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="testing_and_report" type="Label" parent="VBoxContainer"]
+margin_top = 840.0
+margin_right = 1280.0
+margin_bottom = 930.0
+rect_min_size = Vector2( 1280, 90 )
+custom_fonts/font = SubResource( 2 )
+text = "TESTING AND BUG REPORTING"
+align = 1
+uppercase = true
+
+[node name="credit" type="Label" parent="VBoxContainer/testing_and_report"]
+margin_top = 48.0
+margin_right = 1277.0
+margin_bottom = 99.0
+custom_fonts/font = SubResource( 3 )
+text = "You"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="espacinho" type="Label" parent="VBoxContainer"]
+margin_top = 980.0
+margin_right = 1280.0
+margin_bottom = 1020.0
+rect_min_size = Vector2( 1280, 0 )
+custom_fonts/font = SubResource( 2 )
+align = 1
+uppercase = true
+
+[node name="sr_adevogado" type="Label" parent="VBoxContainer"]
+margin_top = 1070.0
+margin_right = 1280.0
+margin_bottom = 1160.0
+rect_min_size = Vector2( 1280, 90 )
+custom_fonts/font = SubResource( 2 )
+text = " ALL ARTWORKS, NAMES, CHARACTERS
+BELONG TO THEIR ORIGINAL CREATORS"
+align = 1
+uppercase = true
+
+[node name="espacinho2" type="Label" parent="VBoxContainer"]
+margin_top = 1210.0
+margin_right = 1280.0
+margin_bottom = 1250.0
+rect_min_size = Vector2( 1280, 0 )
+custom_fonts/font = SubResource( 2 )
+align = 1
+uppercase = true
+
+[node name="takahashi" type="Label" parent="VBoxContainer"]
+margin_top = 1300.0
+margin_right = 1280.0
+margin_bottom = 1390.0
+rect_min_size = Vector2( 1280, 90 )
+custom_fonts/font = SubResource( 2 )
+text = "Rest in Peace Mr. Kazuki Takahashi"
+align = 1
+uppercase = true
+
+[node name="Decall" type="Sprite" parent="VBoxContainer/takahashi"]
+position = Vector2( 640, 95 )
+scale = Vector2( 0.15, 0.15 )
+texture = ExtResource( 4 )
+
+[node name="scene_transitioner" parent="." instance=ExtResource( 5 )]
+visible = false
+
+[connection signal="button_down" from="speed_up" to="." method="_on_speed_up_button_down"]
+[connection signal="button_up" from="speed_up" to="." method="_on_speed_up_button_up"]
