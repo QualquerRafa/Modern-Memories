@@ -82,7 +82,7 @@ _global_script_class_icons={
 
 config/name="Permitted Memories"
 config/description="Yu-Gi-Oh Permitted Memories IS NOT a Remake or Remaster! It's Rafa's interpretation of what a Modern version of Forbidden Memories would be like."
-run/main_scene="res://_scenes/main_menu.tscn"
+run/main_scene="res://_scenes/splash_screen.tscn"
 boot_splash/show_image=false
 boot_splash/bg_color=Color( 0, 0, 0, 1 )
 config/icon="res://icon.png"
