@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://_resources/character_bodys/editor_holder0.png" type="Texture" id=1]
+[ext_resource path="res://_resources/character_bodys/jaden.png" type="Texture" id=1]
 [ext_resource path="res://_resources/tournament/dialogue_box.png" type="Texture" id=2]
 [ext_resource path="res://_resources/fonts/BankGothic Md BT.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://_scripts/characters_dialogs.gd" type="Script" id=4]
@@ -89,7 +89,6 @@ position = Vector2( 602, 83 )
 scale = Vector2( 2.5, 2.5 )
 frames = SubResource( 6 )
 animation = "button_press"
-frame = 1
 playing = true
 
 [connection signal="button_up" from="dialogue_box/dialogue_button" to="." method="_on_dialogue_button_button_up"]
