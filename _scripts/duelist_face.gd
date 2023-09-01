@@ -7,11 +7,13 @@ func _ready():
 	duelist_name = self.get_name().split("_")[1]
 	get_node("visuals/face").texture = load("res://_resources/character_faces/" + duelist_name + "0.png")
 	
-	#Only show the duelist button IF the player has fought it in the campaign mode
-	var is_debug = false
-	$visuals.hide()
-	if is_debug or PlayerData.recorded_campaign_defeats.has("campaign_defeat_" + duelist_name.to_upper()) or duelist_name == "shadi":
-		$visuals.show()
+#	#Only show the duelist button IF the player has fought it in the campaign mode
+#	var is_debug = false
+#	$visuals.hide()
+#	if is_debug or PlayerData.recorded_campaign_defeats.has("campaign_defeat_" + duelist_name.to_upper()) or duelist_name == "shadi":
+#		$visuals.show()
+#	if duelist_name in ["Nitemare", "Tenma"] and PlayerData.recorded_campaign_defeats.has("campaign_defeat_KAIBA") and PlayerData.recorded_campaign_defeats.has("campaign_defeat_PEGASUS"):
+#		$visuals.show()
 
 func _on_duelist_face_button_up():
 	#Animate the button click

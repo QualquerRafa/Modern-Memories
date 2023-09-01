@@ -1,6 +1,7 @@
 extends Node2D
 
 signal dialog_scene_initialized
+var language_tag = ""
 
 func _ready():
 	#Animate the transition when starting this scene
@@ -8,9 +9,8 @@ func _ready():
 	$general_timer.start(0.8); yield($general_timer, "timeout")
 	
 	#For game languages other than Brazilian Portuguese, fetch the translated version of Dialogs from Dialogic. I hate how redundant that is...
-	var language_tag = ""
 	if PlayerData.game_language in ["en"]:
-		language_tag = PlayerData.game_language
+		language_tag = "_" + PlayerData.game_language
 	
 	#When entering this scene, check which is the Dialog to load
 	if PlayerData.recorded_dialogs.size() == 0:
@@ -28,14 +28,33 @@ func _ready():
 func load_dialog_timeline(timeline_name : String):
 	var dialog_node = Dialogic.start(timeline_name)
 	self.add_child(dialog_node)
+	
+	if Dialogic.get_variable("Player Name") != PlayerData.player_name:
+		Dialogic.set_variable('Player Name', PlayerData.player_name)
+	
+	if PlayerData.game_language == "en":
+		Dialogic.set_variable('grandpa_name_translation', 'Grandpa')
+	
+	for recorded in PlayerData.recorded_campaign_defeats:
+		Dialogic.set_variable(recorded, 'true')
+	
+	#This is to prevent the dissonance if the player decides to close the game after act_016 and it wipes the temp variable set by dialogic
+	if PlayerData.recorded_dialogs.size() == 0 or int(PlayerData.recorded_dialogs[-1].split("_")[1]) <= 16:
+		if not PlayerData.recorded_campaign_defeats.has("campaign_defeat_YUGI"):
+			Dialogic.set_variable('campaign_defeat_YUGI', 'false')
+			Dialogic.set_variable('act_3_pick_local', 'Industrial Illusions')
+		else:
+			Dialogic.set_variable('campaign_defeat_YUGI', 'true')
+			Dialogic.set_variable('act_3_pick_local', 'Kaiba Corp')
 
 func enter_new_dialog_from_fade(timeline_name : String, fade_or_not = "fade"):
 	if fade_or_not == "fade":
 		fade_screen("black")
 		$general_timer.start(1.6); yield($general_timer, "timeout")
 	
-	#fake_box_moving_up()
-	#yield(self, "dialog_scene_initialized")
+	#Bug prevention. Add language tag only if the timeline_name doesnt have it already
+	if language_tag != "" and timeline_name.find(language_tag) == -1:
+		timeline_name = timeline_name + language_tag
 	
 	load_dialog_timeline(timeline_name)
 
@@ -57,6 +76,14 @@ func call_game_over():
 func clear_player_campaign_history():
 	print("Player has finished the campaign, resetting the flags so it can be played from start again.")
 	PlayerData.recorded_dialogs.clear()
+	PlayerData.recorded_campaign_defeats.clear()
+	
+	#Dialogic variables, how I hate this piece of shit addon
+	Dialogic.set_variable('act2_tea', 'false')
+	Dialogic.set_variable('act2_tristan', 'false')
+	Dialogic.set_variable('act2_bakura', 'false')
+	Dialogic.set_variable('act2_duke', 'false')
+	Dialogic.set_variable('act2_grandpa', 'false')
 
 #---- Player Name Stuff ----#
 func player_input_name():
@@ -88,7 +115,7 @@ func _on_Button_button_up():
 	
 	$general_timer.start(0.2); yield($general_timer, "timeout")
 	$additional_screen_elements/player_name_box.hide()
-	load_dialog_timeline("dlg_002")
+	load_dialog_timeline("dlg_002" + language_tag)
 
 #---- Pop up Save stuff ----#
 func pop_up_save():

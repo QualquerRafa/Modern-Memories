@@ -253,8 +253,11 @@ func generic_fusion(card_1: String, card_2 : String):
 				var resulting_fusion_id = generic_fusion_list[combination][i]
 				
 				if card_1_atk < CardList.card_list[resulting_fusion_id].atk and card_2_atk < CardList.card_list[resulting_fusion_id].atk:
-						fusion_result = [resulting_fusion_id, true] #[ID:STRING, Success = true]
-						return fusion_result
+					fusion_result = [resulting_fusion_id, true] #[ID:STRING, Success = true]
+					return fusion_result
+				if CardList.card_list[resulting_fusion_id].atk == 0:
+					fusion_result = [resulting_fusion_id, true] #[ID:STRING, Success = true]
+					return fusion_result
 	
 	fusion_result = [card_2, false] #failsafe result for failed fusion. Return second card and success = false
 	return fusion_result #[monster_card_id, is_fusion_success]

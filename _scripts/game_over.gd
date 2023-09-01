@@ -25,12 +25,15 @@ func reset_player_data_to_empty_status():
 	PlayerData.password_bought_cards = []
 	PlayerData.recorded_duels = {}
 	PlayerData.last_reward_cards = []
+	PlayerData.list_of_player_decks = {}
+	PlayerData.active_deck_name = ""
+	PlayerData.registered_freeduel_speed = 1.0
 	
+	PlayerData.recorded_campaign_defeats = []
 	PlayerData.recorded_dialogs = []
 
 	PlayerData.game_loaded = false
 	
-	PlayerData.last_reward_cards = []
 	PlayerData.scene_to_return_after_duel = ""
 	PlayerData.going_to_duel = ""
 	PlayerData.last_duel_result = ""
@@ -38,3 +41,10 @@ func reset_player_data_to_empty_status():
 	PlayerData.tournament_last_progression_saved = ""
 	PlayerData.tournament_competitors_saved = {"green" : [], "blue" : [], "purple" : [], "red" : [], "gold" : []}
 	PlayerData.tournament_last_duelist_saved = ""
+	
+	#Dialogic variables, how I hate this piece of shit addon
+	Dialogic.set_variable('act2_tea', 'false')
+	Dialogic.set_variable('act2_tristan', 'false')
+	Dialogic.set_variable('act2_bakura', 'false')
+	Dialogic.set_variable('act2_duke', 'false')
+	Dialogic.set_variable('act2_grandpa', 'false')

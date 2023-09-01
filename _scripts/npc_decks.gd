@@ -233,13 +233,13 @@ func get_a_deck(npc_name):
 		rarity_counter = {"UR":0, "SR":1, "R":12, "C":27}
 	if player_card_count >= 40:
 		rarity_counter = {"UR":0, "SR":2, "R":20, "C":18}
-	if player_card_count >= 55:
+	if player_card_count >= 60:
 		rarity_counter = {"UR":0, "SR":3, "R":32, "C":5}
-	if player_card_count >= 80:
+	if player_card_count >= 90:
 		rarity_counter = {"UR":1, "SR":6, "R":30, "C":3}
-	if player_card_count >= 150:
+	if player_card_count >= 175:
 		rarity_counter = {"UR":5, "SR":10, "R":25, "C":0}
-	if player_card_count >= 200:
+	if player_card_count >= 250:
 		rarity_counter = {"UR":10, "SR":15, "R":15, "C":0}
 	if player_card_count >= 300:
 		rarity_counter = {"UR":15, "SR":15, "R":10, "C":0}
@@ -249,14 +249,10 @@ func get_a_deck(npc_name):
 	#Some fixed NPCs will have a 'lowest difficulty' higher than normal, unless player general difficulty is already bigger than that
 	if rarity_counter.UR < 1 and npc_name in ["kaiba", "pegasus", "crowler"]:
 		rarity_counter = {"UR":1, "SR":6, "R":30, "C":3}
-		
 	if rarity_counter.UR < 5 and npc_name in ["atticus", "zane", "aster", "jesse", "jaden", "nightshroud"]:
-		rarity_counter = {"UR":5, "SR":10, "R":25, "C":0}
-		
-	if npc_name in ["nitemare", "tenma"]:
-		rarity_counter = {"UR":30, "SR":10, "R":0, "C":0}
-	
-	#print(rarity_counter)
+		rarity_counter = {"UR":3, "SR":10, "R":27, "C":0}
+	if rarity_counter.UR < 15 and npc_name in ["nitemare", "tenma"]:
+		rarity_counter = {"UR":15, "SR":15, "R":10, "C":0}
 	
 	#Generate the actual deck
 	randomize()

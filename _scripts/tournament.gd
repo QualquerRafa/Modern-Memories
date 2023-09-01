@@ -23,7 +23,7 @@ func _ready():
 func get_tournament_competitors(color_tier : String):
 	var npc_decks_gd = preload("res://_scripts/npc_decks.gd").new()
 	var pool_of_npcs : Array = npc_decks_gd.list_of_decks.keys()
-	var prohibited_duelists = ["tenma", "nitemare"]
+	var prohibited_duelists = ["tenma", "nitemare", "nightshroud"]
 	
 	#Remove some unwanted duelists from the tournament
 	for prohibited in prohibited_duelists:
@@ -158,7 +158,7 @@ func _on_dialogue_scene_dialogue_box_clicked():
 
 func tournament_flow():
 	#Catch when player loses a duel
-	if PlayerData.last_duel_result == "lose" and tournament_progression[-1] != "next_click_returns_to_main_screen":
+	if PlayerData.last_duel_result == "lose" and tournament_progression.size() > 0 and tournament_progression[-1] != "next_click_returns_to_main_screen":
 		var dialogue_to_show = $dialogue_scene.get_dialog("generic", "duel_victorious")
 		$dialogue_scene.update_screen_dialog(PlayerData.tournament_last_duelist_saved, dialogue_to_show[1])
 		tournament_progression.append("next_click_returns_to_main_screen")

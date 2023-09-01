@@ -591,7 +591,7 @@ var description_error = {
 	"pt" : "Texto da Carta não encontrado."
 }
 var type_can_fuse_with = {
-	"en" : " can do a Fusion with ",
+	"en" : " can make a Fusion with ",
 	"pt" : " pode fazer Fusão com "
 }
 

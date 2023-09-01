@@ -41,41 +41,41 @@ func duelist_face_clicked(duelist_name):
 			$duelist_focus/duelist_body.position = Vector2(280, 385)
 			$duelist_focus/duelist_body.scale = Vector2(1.0, 1.0)
 		"crowler":
-			$duelist_focus/duelist_body.position = Vector2(160, 270)
-			$duelist_focus/duelist_body.scale = Vector2(0.8, 0.8)
+			$duelist_focus/duelist_body.position = Vector2(250, 380)
+			$duelist_focus/duelist_body.scale = Vector2(1, 1)
 		"chazz":
 			$duelist_focus/duelist_body.position = Vector2(185, 220)
 			$duelist_focus/duelist_body.scale = Vector2(0.85, 0.85)
 		"blair":
-			$duelist_focus/duelist_body.position = Vector2(220, 150)
+			$duelist_focus/duelist_body.position = Vector2(270, 300)
 			$duelist_focus/duelist_body.scale = Vector2(0.9, 0.9)
 		"hassleberry":
-			$duelist_focus/duelist_body.position = Vector2(200, 190)
+			$duelist_focus/duelist_body.position = Vector2(270, 340)
 			$duelist_focus/duelist_body.scale = Vector2(0.9, 0.9)
 		"bastion":
-			$duelist_focus/duelist_body.position = Vector2(200, 220)
+			$duelist_focus/duelist_body.position = Vector2(250, 320)
 			$duelist_focus/duelist_body.scale = Vector2(0.85, 0.85)
 		"syrus":
-			$duelist_focus/duelist_body.position = Vector2(200, 170)
+			$duelist_focus/duelist_body.position = Vector2(250, 350)
 			$duelist_focus/duelist_body.scale = Vector2(0.85, 0.85)
 		"alexis":
-			$duelist_focus/duelist_body.position = Vector2(200, 220)
+			$duelist_focus/duelist_body.position = Vector2(310, 310)
 			$duelist_focus/duelist_body.scale = Vector2(0.85, 0.85)
 		"jesse":
-			$duelist_focus/duelist_body.position = Vector2(200, 220)
+			$duelist_focus/duelist_body.position = Vector2(260, 330)
 			$duelist_focus/duelist_body.scale = Vector2(0.85, 0.85)
 		"zane":
-			$duelist_focus/duelist_body.position = Vector2(210, 320)
-			$duelist_focus/duelist_body.scale = Vector2(0.6, 0.6)
+			$duelist_focus/duelist_body.position = Vector2(260, 320)
+			$duelist_focus/duelist_body.scale = Vector2(0.9, 0.9)
 		"atticus":
-			$duelist_focus/duelist_body.position = Vector2(210, 230)
+			$duelist_focus/duelist_body.position = Vector2(270, 330)
 			$duelist_focus/duelist_body.scale = Vector2(0.85, 0.85)
 		"aster":
-			$duelist_focus/duelist_body.position = Vector2(210, 220)
+			$duelist_focus/duelist_body.position = Vector2(290, 360)
 			$duelist_focus/duelist_body.scale = Vector2(0.85, 0.85)
 		"jaden":
-			$duelist_focus/duelist_body.position = Vector2(220, 320)
-			$duelist_focus/duelist_body.scale = Vector2(0.65, 0.65)
+			$duelist_focus/duelist_body.position = Vector2(280, 340)
+			$duelist_focus/duelist_body.scale = Vector2(0.9, 0.9)
 		"nightshroud":
 			$duelist_focus/duelist_body.position = Vector2(210, 330)
 			$duelist_focus/duelist_body.scale = Vector2(0.85, 0.85)

@@ -39,10 +39,10 @@ func update_screen_dialog(to_show_character_name : String, to_show_dialog : Stri
 		$character_body.show()
 	
 	#Animate the Character moving in if it's a differente character than the one currently being shown
-	var current_character_name_from_resource = $character_body.texture.resource_path.split("/")[-1].trim_suffix("0.png")
+	var current_character_name_from_resource = $character_body.texture.resource_path.split("/")[-1].trim_suffix(".png")
 	if current_character_name_from_resource != to_show_character_name:
-		if ResourceLoader.exists("res://_resources/character_bodys/" + to_show_character_name + "0.png"):
-			$character_body.texture = load("res://_resources/character_bodys/" + to_show_character_name + "0.png")
+		if ResourceLoader.exists("res://_resources/character_bodys/" + to_show_character_name + ".png"):
+			$character_body.texture = load("res://_resources/character_bodys/" + to_show_character_name + ".png")
 		var animation_speed : float = 0.2
 		$character_body/body_tween.interpolate_property($character_body, "position:x", out_screen_x, on_screen_x, animation_speed, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 		$character_body/body_tween.start()

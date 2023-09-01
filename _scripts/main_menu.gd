@@ -1,7 +1,7 @@
 extends Node2D
 
 #Easy acess to game version text indicator
-var GAME_VERSION_TEXT = "0.1.100"
+var GAME_VERSION_TEXT = "0.1.116"
 var site_version = "k" #set by "http request"
 
 func _ready():

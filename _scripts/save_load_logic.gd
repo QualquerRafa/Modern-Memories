@@ -1,5 +1,7 @@
 extends Node
 
+var save_key = "permittedmemories123"
+
 func save_game():
 	#Get from 'PlayerData' the info that will be stored in a savefile
 	var info_to_save = {
@@ -22,6 +24,7 @@ func save_game():
 	
 	#Start the file to be written
 	var save_file = File.new()
+	#save_file.open_encrypted_with_pass("user://savegame.save", File.WRITE, save_key) #ENCRYPTED
 	save_file.open_encrypted_with_pass("user://savegame.save", File.WRITE, OS.get_unique_id()) #ENCRYPTED
 	
 	#Write info to save_file
@@ -36,7 +39,11 @@ func load_game():
 	if not save_file.file_exists("user://savegame.save"):
 		return
 	
-	#Load the file if one was found
+	#for keys in [save_key, OS.get_unique_id()]:
+	#	var get = save_file.open_encrypted_with_pass("user://savegame.save", File.READ, keys) #ENCRYPTED
+	#	if get != null:
+	#		break
+	
 	save_file.open_encrypted_with_pass("user://savegame.save", File.READ, OS.get_unique_id()) #ENCRYPTED
 	
 	var info_to_load = { } #start as empty dictionary and will be loaded key by key
@@ -56,8 +63,16 @@ func load_game():
 		["registered_freeduel_speed", "float"],
 		["recorded_campaign_defeats", "array"],
 		["recorded_dialogs", "array"],
-		
 	]
+	
+	#Safely create the player's first deck slot if the save doesn't have it
+	if not info_to_load.has("list_of_player_decks"):
+		info_to_load.list_of_player_decks = {"01022" : {
+													"color":"1,1,1,1",
+													"deck" : info_to_load.player_deck
+														}
+											}
+		info_to_load.active_deck_name = "01022"
 	
 	for i in range(saved_info.size()):
 		if info_to_load.has(saved_info[i][0]):
@@ -76,11 +91,3 @@ func load_game():
 			print("savefile didnt have '", saved_info[i][0], "'. This is just a warning, no problem with it.")
 	
 	return "sucess"
-
-
-
-
-
-
-
-

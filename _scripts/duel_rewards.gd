@@ -109,7 +109,7 @@ func get_duel_rank():
 		"F" : ["b8b8b8", "4f4f4f"], #cinza
 	}
 	
-	var final_duel_score : int = 100 #Debug value is 100, for release is 0
+	var final_duel_score : int = 0 #Debug value is 100, for release is 0
 	
 	#For deck count
 	if duel_deck_count >= 32: final_duel_score += 4
@@ -125,14 +125,14 @@ func get_duel_rank():
 	else: final_duel_score += 1
 	
 	#For effect count, the more the better
-	if duel_effect_count >= 7: final_duel_score += 4
-	elif duel_effect_count >= 5: final_duel_score += 3
+	if duel_effect_count >= 9: final_duel_score += 4
+	elif duel_effect_count >= 6: final_duel_score += 3
 	elif duel_effect_count >= 3: final_duel_score += 2
 	else: final_duel_score += 1
 	
 	#For spelltrap count, the more the better
-	if duel_spelltrap_count >= 7: final_duel_score += 4
-	elif duel_spelltrap_count >= 5: final_duel_score += 3
+	if duel_spelltrap_count >= 9: final_duel_score += 4
+	elif duel_spelltrap_count >= 6: final_duel_score += 3
 	elif duel_spelltrap_count >= 3: final_duel_score += 2
 	else: final_duel_score += 1
 	
@@ -196,6 +196,7 @@ func get_card_rewards():
 	pool_for_reward_1 = CardList.general_card_pool + npc_card_pool.C
 	if $rank_info/rank_letter.text == "S": pool_for_reward_1 = pool_for_reward_1 + npc_card_pool.R
 	
+	randomize()
 	var random_card_index_1 = randi()%pool_for_reward_1.size()
 	reward_1 = pool_for_reward_1[random_card_index_1].pad_zeros(5)
 	$cards_reward/HBoxContainer/reward_1.update_card_information(reward_1)
@@ -213,9 +214,11 @@ func get_card_rewards():
 			pool_for_reward_2 = npc_card_pool.C + npc_card_pool.R
 		"S":
 			pool_for_reward_2 = npc_card_pool.R 
-			var chance_for_SR = 0.5
-			if randi() <= chance_for_SR:
+			var chance_for_SR = 0.8
+			randomize()
+			if randf() <= chance_for_SR:
 				pool_for_reward_2 = pool_for_reward_2 + npc_card_pool.SR
+	randomize()
 	var random_card_index_2 = randi()%pool_for_reward_2.size()
 	reward_2 = pool_for_reward_2[random_card_index_2].pad_zeros(5)
 	$cards_reward/HBoxContainer/reward_2.update_card_information(reward_2)
@@ -232,13 +235,16 @@ func get_card_rewards():
 		"A":
 			pool_for_reward_3 = npc_card_pool.R
 			var chance_for_SR = 0.8
-			if randi() <= chance_for_SR:
-				pool_for_reward_3 = pool_for_reward_3 + npc_card_pool.SR
+			randomize()
+			if randf() <= chance_for_SR:
+				pool_for_reward_3 = npc_card_pool.SR
 		"S":
 			pool_for_reward_3 = npc_card_pool.R + npc_card_pool.SR + npc_card_pool.SR
-			var chance_for_UR = 0.4
-			if randi() <= chance_for_UR:
-				pool_for_reward_3 = pool_for_reward_3 + npc_card_pool.UR
+			var chance_for_UR = 0.8
+			randomize()
+			if randf() <= chance_for_UR:
+				pool_for_reward_3 = npc_card_pool.SR + npc_card_pool.UR
+	randomize()
 	var random_card_index_3 = randi()%pool_for_reward_3.size()
 	reward_3 = pool_for_reward_3[random_card_index_3].pad_zeros(5)
 	$cards_reward/HBoxContainer/reward_3.update_card_information(reward_3)
@@ -396,7 +402,8 @@ func remove_reward_scene_from_tree():
 	#if PlayerData.scene_to_return_after_duel == "free_duel":
 		#PlayerData.scene_to_return_after_duel = ""
 	PlayerData.going_to_duel = ""
-	PlayerData.last_duel_result = ""
+	if PlayerData.scene_to_return_after_duel != "tournament_scene":
+		PlayerData.last_duel_result = ""
 	
 	#As the last thing to do, call the auto_save function (it does all the needed checks)
 	auto_save()

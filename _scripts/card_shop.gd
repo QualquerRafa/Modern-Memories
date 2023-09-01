@@ -46,7 +46,7 @@ func _on_player_input_text_changed(input_password):
 
 #---------------------------------------------------------------------------------------------------
 func get_card_price(card_id):
-	var base_price = 5 #A perfect duel wields a max of 5 starchips
+	var base_price = 8 #A perfect duel wields a max of 10 starchips
 	var final_price : int
 	
 	match CardList.card_list[card_id].type:

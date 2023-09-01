@@ -1838,7 +1838,17 @@ func monster_on_attack(card_node : Node):
 			match value:
 				"enemy_atk":
 					var get_attacked_monster = GAME_LOGIC.card_ready_to_defend
-					if get_attacked_monster != null:
+					var found_attacked_on_field = false
+					
+					var target_side_of_field = GAME_LOGIC.get_parent().get_node("duel_field/" + caller_and_target[1] + "_side_zones")
+					for i in range(5):
+						var card_being_checked = target_side_of_field.get_node("monster_" + String(i))
+						print(card_being_checked, " and ", get_attacked_monster)
+						if card_being_checked == get_attacked_monster:
+							found_attacked_on_field = true
+							break
+					
+					if get_attacked_monster != null and found_attacked_on_field == true:
 						final_value = int(CardList.card_list[get_attacked_monster.this_card_id].atk)
 					else:
 						final_value = 0
