@@ -1,0 +1,3 @@
+When you download all files, extract '_CARD_ARTWORK.ZIP' to create a new folder '_card_artwork'. You don't have to do anything else.
+
+Quando você baixar todos os arquivos, extraia '_CARD_ARTWORK.ZIP' para criar uma pasta '_card_artwork'. Você não precisa fazer mais nada depois disso.
