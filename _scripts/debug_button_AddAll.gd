@@ -4,9 +4,9 @@ func _on_DebugAddAll_button_up():
 	for i in range(CardList.card_list.size()):
 		var id_as_padded_string = String(i).pad_zeros(5)
 		if id_as_padded_string in PlayerData.player_trunk:
-			PlayerData.player_trunk[id_as_padded_string] += 1 #register another copy of the card to the already existing id key
+			PlayerData.player_trunk[id_as_padded_string] += 3 #register another copy of the card to the already existing id key
 		else: 
-			PlayerData.player_trunk[id_as_padded_string] = 1 #card is not in trunk, so add it's key:value pair as id:count
+			PlayerData.player_trunk[id_as_padded_string] = 3 #card is not in trunk, so add it's key:value pair as id:count
 	
 	update_panels()
 
