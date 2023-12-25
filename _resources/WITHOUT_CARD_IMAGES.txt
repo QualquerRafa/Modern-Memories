@@ -1,8 +1,0 @@
-DOWNLOAD THE CARD ARTWORKS (file is too big for github, 205 mb)
-BAIXE AS ARTES DAS CARTAS (o arquivo é grande demais pro github, 205 mb)
-
-LINK: https://drive.google.com/file/d/1Zdzyu_ClX40ofwReJzizEd_-yEhJrXIa/view?usp=sharing
-
-When you download all files, extract '_CARD_ARTWORK.ZIP' to create a new folder at '_resources/_card_artwork/'. You don't have to do anything else.
-
-Quando você baixar todos os arquivos, extraia '_CARD_ARTWORK.ZIP' para criar uma pasta em '_resources/_card_artwork/'. Você não precisa fazer mais nada.
