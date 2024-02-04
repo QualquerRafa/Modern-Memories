@@ -46,21 +46,21 @@ func _on_player_input_text_changed(input_password):
 
 #---------------------------------------------------------------------------------------------------
 func get_card_price(card_id):
-	var base_price = 8 #A perfect duel wields a max of 10 starchips
+	var base_price = 1 #A perfect duel wields a max of 10 starchips
 	var final_price : int
 	
 	match CardList.card_list[card_id].type:
 		"equip": #Stat Boost divided by 100 times a multiplier
 			var equip_bonus = ceil(CardList.card_list[card_id].effect[1] /100)
-			final_price = equip_bonus * 4
+			final_price = equip_bonus * 1
 		
-		"field": final_price = 30
+		"field": final_price = 1
 		
-		"spell": final_price = 25
+		"spell": final_price = 1
 		
-		"ritual": final_price = 25
+		"ritual": final_price = 1
 		
-		"trap":  final_price = 40
+		"trap":  final_price = 1
 		
 		_: #monsters are more complicated
 			var monster_level = CardList.card_list[card_id].level
@@ -68,11 +68,11 @@ func get_card_price(card_id):
 			var monster_def = ceil(CardList.card_list[card_id].def /100)
 			var effect_multiplier = 1
 			if CardList.card_list[card_id].effect.size() > 0:
-				effect_multiplier = 1.5
+				effect_multiplier = 0
 				if monster_atk == 0:
-					monster_atk = 25
+					monster_atk = 0
 				if monster_def == 0:
-					monster_def = 25
+					monster_def = 0
 			
 			final_price = ceil((monster_level + monster_atk + monster_def) * effect_multiplier)
 	
