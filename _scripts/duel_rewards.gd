@@ -8,9 +8,9 @@ var exiting_reward = false #prevent multiple clicking
 #These are passed by the Duel Logic
 var duel_winner : String
 
-var duel_deck_count :int #= 33
-var duel_fusion_count :int #= 22
-var duel_effect_count : int #= 22
+var duel_deck_count :int #= 25
+var duel_fusion_count :int #= 20
+var duel_effect_count : int #= 15
 var duel_spelltrap_count : int #= 5
 var defeated_duelist : String #= PlayerData.going_to_duel
 
@@ -112,45 +112,45 @@ func get_duel_rank():
 	var final_duel_score : int = 0 #Debug value is 100, for release is 0
 	
 	#For deck count
-	if duel_deck_count >= 32: final_duel_score += 4
-	elif duel_deck_count >= 27: final_duel_score += 3
-	elif duel_deck_count >= 16: final_duel_score += 2
-	elif duel_deck_count >= 3: final_duel_score += 1
+	if duel_deck_count >= 29: final_duel_score += 1000
+	elif duel_deck_count >= 27: final_duel_score += 500
+	elif duel_deck_count >= 16: final_duel_score += 100
+	elif duel_deck_count >= 3: final_duel_score += 10
 	else: final_duel_score += 3
 	
 	#For fusion count, the more the better
-	if duel_fusion_count >= 11: final_duel_score += 4
-	elif duel_fusion_count >= 8: final_duel_score += 3
-	elif duel_fusion_count >= 4: final_duel_score += 2
-	else: final_duel_score += 1
+	if duel_fusion_count >= 11: final_duel_score += 1000
+	elif duel_fusion_count >= 8: final_duel_score += 500
+	elif duel_fusion_count >= 4: final_duel_score += 100
+	else: final_duel_score += 10
 	
 	#For effect count, the more the better
-	if duel_effect_count >= 9: final_duel_score += 4
-	elif duel_effect_count >= 6: final_duel_score += 3
-	elif duel_effect_count >= 3: final_duel_score += 2
-	else: final_duel_score += 1
+	if duel_effect_count >= 9: final_duel_score += 1000
+	elif duel_effect_count >= 6: final_duel_score += 500
+	elif duel_effect_count >= 3: final_duel_score += 100
+	else: final_duel_score += 10
 	
 	#For spelltrap count, the more the better
-	if duel_spelltrap_count >= 9: final_duel_score += 4
-	elif duel_spelltrap_count >= 6: final_duel_score += 3
-	elif duel_spelltrap_count >= 3: final_duel_score += 2
-	else: final_duel_score += 1
+	if duel_spelltrap_count >= 9: final_duel_score += 1000
+	elif duel_spelltrap_count >= 6: final_duel_score += 500
+	elif duel_spelltrap_count >= 3: final_duel_score += 100
+	else: final_duel_score += 10
 	
 	#Extra points
-	if final_turn_count <= 2: final_duel_score += 4
-	elif final_turn_count <= 4: final_duel_score += 3
-	elif final_turn_count <= 6: final_duel_score += 2
-	elif final_turn_count >= 7: final_duel_score += 1
+	if final_turn_count <= 2: final_duel_score += 1000
+	elif final_turn_count <= 4: final_duel_score += 500
+	elif final_turn_count <= 6: final_duel_score += 200
+	elif final_turn_count >= 7: final_duel_score += 100
 	if final_turn_count >= 33: final_duel_score += 2
+	0
+	if final_player_LP >= 8000: final_duel_score += 3000
+	elif final_player_LP >= 6000: final_duel_score += 2000
+	elif final_player_LP >= 4000: final_duel_score += 1000
+	if final_player_LP < 1000: final_duel_score += 200
 	
-	if final_player_LP >= 8000: final_duel_score += 3
-	elif final_player_LP >= 6000: final_duel_score += 2
-	elif final_player_LP >= 4000: final_duel_score += 1
-	if final_player_LP < 1000: final_duel_score += 2
-	
-	if final_field_atk > 9000: final_duel_score += 4
-	elif final_field_atk >= 5500: final_duel_score += 3
-	elif final_field_atk >= 4500: final_duel_score += 2
+	if final_field_atk > 9000: final_duel_score += 4000
+	elif final_field_atk >= 5500: final_duel_score += 3000
+	elif final_field_atk >= 4500: final_duel_score += 2000
 	
 	#Get a letter from the score
 	var final_rank_letter : String = ""
@@ -171,13 +171,13 @@ func get_duel_rank():
 func get_starchips_reward():
 	var final_stars : int
 	match $rank_info/rank_letter.text:
-		"S": final_stars = 10
-		"A": final_stars = 5
-		"B": final_stars = 4
-		"C": final_stars = 3
-		"D": final_stars = 2
-		"E": final_stars = 1
-		"F": final_stars = 1
+		"S": final_stars = 10000
+		"A": final_stars = 5000
+		"B": final_stars = 4000
+		"C": final_stars = 3000
+		"D": final_stars = 2000
+		"E": final_stars = 1000
+		"F": final_stars = 1000
 	
 	$starchip_reward/number.text = String(final_stars)
 	return final_stars
