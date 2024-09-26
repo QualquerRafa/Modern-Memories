@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/tagforce_ra.mp3-cf3de600d09fad96025c6eb8f9ef19d3.mp3str"
+
+[deps]
+
+source_file="res://_resources/_audio/music/tagforce_ra.mp3"
+dest_files=[ "res://.import/tagforce_ra.mp3-cf3de600d09fad96025c6eb8f9ef19d3.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

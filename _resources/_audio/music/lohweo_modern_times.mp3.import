@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/lohweo_modern_times.mp3-c94476aa9df87035d7c54525be7e3200.mp3str"
+
+[deps]
+
+source_file="res://_resources/_audio/music/lohweo_modern_times.mp3"
+dest_files=[ "res://.import/lohweo_modern_times.mp3-c94476aa9df87035d7c54525be7e3200.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

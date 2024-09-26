@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/tagforce_slifer.mp3-9d7f49d798d16361facf60ae7eb7603a.mp3str"
+
+[deps]
+
+source_file="res://_resources/_audio/music/tagforce_slifer.mp3"
+dest_files=[ "res://.import/tagforce_slifer.mp3-9d7f49d798d16361facf60ae7eb7603a.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

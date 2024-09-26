@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/lohweo_credits_scene.mp3-38d483dc6b54d4100c34f40451f5ef7e.mp3str"
+
+[deps]
+
+source_file="res://_resources/_audio/music/lohweo_credits_scene.mp3"
+dest_files=[ "res://.import/lohweo_credits_scene.mp3-38d483dc6b54d4100c34f40451f5ef7e.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

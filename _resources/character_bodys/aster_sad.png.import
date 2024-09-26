@@ -1,0 +1,35 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path="res://.import/aster_sad.png-e61725e6a52a0190bb4a5dcc6327cf64.stex"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://_resources/character_bodys/aster_sad.png"
+dest_files=[ "res://.import/aster_sad.png-e61725e6a52a0190bb4a5dcc6327cf64.stex" ]
+
+[params]
+
+compress/mode=0
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/bptc_ldr=0
+compress/normal_map=0
+flags/repeat=0
+flags/filter=true
+flags/mipmaps=false
+flags/anisotropic=false
+flags/srgb=2
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+process/invert_color=false
+process/normal_map_invert_y=false
+stream=false
+size_limit=0
+detect_3d=false
+svg/scale=1.0

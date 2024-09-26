@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/lohweo_water_shrine.mp3-ee6616f78f2dab2dbaa78d4d517a0762.mp3str"
+
+[deps]
+
+source_file="res://_resources/_audio/music/lohweo_water_shrine.mp3"
+dest_files=[ "res://.import/lohweo_water_shrine.mp3-ee6616f78f2dab2dbaa78d4d517a0762.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

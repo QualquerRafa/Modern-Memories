@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/lohweo_destroy_the_puzzle.mp3-24e3c9c7b28d19311d7f20eba5856993.mp3str"
+
+[deps]
+
+source_file="res://_resources/_audio/music/lohweo_destroy_the_puzzle.mp3"
+dest_files=[ "res://.import/lohweo_destroy_the_puzzle.mp3-24e3c9c7b28d19311d7f20eba5856993.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

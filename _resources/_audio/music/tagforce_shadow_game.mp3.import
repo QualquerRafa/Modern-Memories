@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/tagforce_shadow_game.mp3-bc5b653cce07ec3b4be044c0c0305948.mp3str"
+
+[deps]
+
+source_file="res://_resources/_audio/music/tagforce_shadow_game.mp3"
+dest_files=[ "res://.import/tagforce_shadow_game.mp3-bc5b653cce07ec3b4be044c0c0305948.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/lohweo_metropolis.mp3-fdbef267c70cc33e1f97ada96013f0de.mp3str"
+
+[deps]
+
+source_file="res://_resources/_audio/music/lohweo_metropolis.mp3"
+dest_files=[ "res://.import/lohweo_metropolis.mp3-fdbef267c70cc33e1f97ada96013f0de.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

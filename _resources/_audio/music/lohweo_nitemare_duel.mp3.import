@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/lohweo_nitemare_duel.mp3-46b8daceddd66bae6ffb5f4afd7804a3.mp3str"
+
+[deps]
+
+source_file="res://_resources/_audio/music/lohweo_nitemare_duel.mp3"
+dest_files=[ "res://.import/lohweo_nitemare_duel.mp3-46b8daceddd66bae6ffb5f4afd7804a3.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

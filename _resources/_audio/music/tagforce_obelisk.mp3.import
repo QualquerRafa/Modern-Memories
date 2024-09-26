@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/tagforce_obelisk.mp3-e779830080a63984cfa5a27e3088a05c.mp3str"
+
+[deps]
+
+source_file="res://_resources/_audio/music/tagforce_obelisk.mp3"
+dest_files=[ "res://.import/tagforce_obelisk.mp3-e779830080a63984cfa5a27e3088a05c.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
